@@ -2,7 +2,7 @@
 
 ## Current Branch
 
-No git branch at workspace root.
+`feature/t0012-accessibility-keyboard`
 
 ## Completed Tickets
 
@@ -52,8 +52,8 @@ None.
 - Lint: Not run, no lint system.
 - Typecheck: Not run, no type system.
 - Syntax: Pass, `node --check src/app.js`.
-- Git: Local repository initialized on `main`; local `HEAD` is `5b0aa3d66083a6dc72241f08076cc43c26bc16b2`.
-- GitHub: Remote `origin` points to `https://github.com/KJisback/civic-issue-reporter.git`; GitHub API confirms remote `main` at `5b0aa3d66083a6dc72241f08076cc43c26bc16b2`.
+- Git: Local repository initialized; current ticket branch is `feature/t0012-accessibility-keyboard`.
+- GitHub: Remote `origin` points to `https://github.com/KJisback/civic-issue-reporter.git`; the T0012 ticket branch is pushed and tracking `origin/feature/t0012-accessibility-keyboard`.
 
 ## Known Issues
 

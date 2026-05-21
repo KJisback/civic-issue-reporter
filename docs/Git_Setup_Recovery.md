@@ -12,9 +12,10 @@ What succeeded:
 - `docs/Manual_UI_Checks.md` was created.
 - The project is a local git repository on `main`.
 - Initial commit exists: `ed25f63 chore: initial civic issue reporter project`.
-- Latest documented remote-matched commit before T0012 work: `5b0aa3d66083a6dc72241f08076cc43c26bc16b2`.
+- Latest documented `main` commit before T0012 work: `5b0aa3d66083a6dc72241f08076cc43c26bc16b2`.
 - Remote exists: `https://github.com/KJisback/civic-issue-reporter.git`.
 - GitHub API confirmed remote `main` at `5b0aa3d66083a6dc72241f08076cc43c26bc16b2` during the T0012 preflight.
+- The T0012 branch `feature/t0012-accessibility-keyboard` was pushed after the accessibility pass.
 - Git safe-directory config includes this project path.
 - Git write operations work outside the Codex filesystem sandbox; sandboxed Git writes may still require escalation on this host.
 
