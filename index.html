@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Civic Issue Reporter</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Civic Issue Reporter</p>
+        <h1>Report civic issues in minutes. Track resolution without noise.</h1>
+      </div>
+      <nav aria-label="Primary navigation">
+        <a href="#report">Report</a>
+        <a href="#issues">Issues</a>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#summary">Summary</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero-shell" aria-labelledby="intro-title">
+        <div>
+          <h2 id="intro-title">A month-long build for transparent civic response</h2>
+          <p>
+            A calm local-first prototype for citizen reporting, duplicate hints,
+            triage queues, and map-ready issue context.
+          </p>
+        </div>
+        <div class="hero-card" aria-label="Project status">
+          <span>Local-first MVP</span>
+          <strong>No backend, no map API, no auth yet.</strong>
+          <p>Every workflow on this page runs in your browser storage.</p>
+        </div>
+      </section>
+
+      <div class="app-grid">
+        <aside class="sidebar" aria-label="Workspace sections">
+          <a href="#report" class="active-link">Report issue</a>
+          <a href="#issues">Open reports</a>
+          <a href="#dashboard">Dashboard</a>
+          <a href="#dashboard">Triage</a>
+          <a href="#issues">Watchlist</a>
+          <a href="#summary">Summary</a>
+        </aside>
+
+        <div class="workspace">
+          <section id="report" class="panel report-panel" aria-labelledby="report-title">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Citizen intake</p>
+                <h2 id="report-title">Report issue</h2>
+              </div>
+              <span class="soft-chip">Private draft</span>
+            </div>
+
+            <form class="report-form" id="reportForm" novalidate>
+              <label>
+                Issue title
+                <input id="issueTitle" name="title" type="text" placeholder="Streetlight not working near bus stop" required>
+                <span class="field-error" id="titleError"></span>
+              </label>
+
+              <label>
+                Category
+                <select id="issueCategory" name="category" required>
+                  <option>Streetlight</option>
+                  <option>Road damage</option>
+                  <option>Garbage collection</option>
+                  <option>Drainage</option>
+                  <option>Water leakage</option>
+                  <option>Public safety</option>
+                </select>
+              </label>
+
+              <label>
+                Location summary
+                <input id="issueLocation" name="location" type="text" placeholder="Ward 12, MG Road bus stop" required>
+                <span class="field-error" id="locationError"></span>
+              </label>
+
+              <label>
+                Ward or area
+                <input id="issueWard" name="ward" type="text" placeholder="Ward 12">
+              </label>
+
+              <label>
+                Nearby landmark
+                <input id="issueLandmark" name="landmark" type="text" placeholder="Opposite city bus stop">
+              </label>
+
+              <label class="wide">
+                Description
+                <textarea id="issueDescription" name="description" placeholder="Describe what happened, where it is, and why it needs attention." required></textarea>
+                <span class="field-error" id="descriptionError"></span>
+              </label>
+
+              <fieldset class="coordinate-fields wide">
+                <legend>Optional map-ready coordinates</legend>
+                <label>
+                  Latitude
+                  <input id="issueLatitude" name="latitude" type="number" min="-90" max="90" step="0.000001" placeholder="12.971599">
+                  <span class="field-error" id="latitudeError"></span>
+                </label>
+                <label>
+                  Longitude
+                  <input id="issueLongitude" name="longitude" type="number" min="-180" max="180" step="0.000001" placeholder="77.594566">
+                  <span class="field-error" id="longitudeError"></span>
+                </label>
+                <p>Coordinates are optional and manually entered for now. No map service or device location permission is used.</p>
+              </fieldset>
+
+              <div class="form-note wide">
+                Photo upload and real map pinning are planned for later tickets after privacy decisions.
+              </div>
+
+              <div class="assist-panel wide" id="assistPanel" aria-live="polite"></div>
+
+              <div class="form-actions wide">
+                <button type="submit">Submit report</button>
+                <button class="secondary-button" type="button" id="resetDemoData">Reset demo data</button>
+              </div>
+              <p class="form-status wide" id="formStatus" role="status" aria-live="polite"></p>
+            </form>
+          </section>
+
+          <section id="dashboard" class="panel dashboard" aria-labelledby="dashboard-title">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Admin overview</p>
+                <h2 id="dashboard-title">Triage snapshot</h2>
+              </div>
+              <span class="soft-chip">Local data</span>
+            </div>
+            <div class="metrics" id="metrics"></div>
+            <div class="dashboard-grid">
+              <div class="location-preview" id="locationPreview" aria-label="Location readiness preview"></div>
+              <div class="workflow-board" id="workflowBoard" aria-label="Status workflow summary"></div>
+            </div>
+          </section>
+
+          <section id="summary" class="panel summary-panel" aria-labelledby="summary-title">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Municipal review</p>
+                <h2 id="summary-title">Export and print summary</h2>
+              </div>
+              <span class="soft-chip">Local snapshot</span>
+            </div>
+            <div class="summary-actions">
+              <button type="button" id="printSummary">Print summary</button>
+              <button class="secondary-button" type="button" id="exportSummary">Export JSON</button>
+            </div>
+            <p class="form-status is-success" id="summaryStatus" role="status" aria-live="polite"></p>
+            <div id="summaryPreview" class="summary-preview" aria-label="Printable municipal summary"></div>
+          </section>
+
+          <section id="issues" class="panel" aria-labelledby="issues-title">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Public queue</p>
+                <h2 id="issues-title">Open reports</h2>
+              </div>
+              <span class="queue-count" id="queueCount"></span>
+            </div>
+            <div class="filter-bar" aria-label="Issue filters">
+              <label>
+                Category
+                <select id="categoryFilter">
+                  <option value="All">All categories</option>
+                </select>
+              </label>
+              <label>
+                Status
+                <select id="statusFilter">
+                  <option value="All">All statuses</option>
+                </select>
+              </label>
+              <label>
+                Priority
+                <select id="priorityFilter">
+                  <option value="All">All priorities</option>
+                </select>
+              </label>
+            </div>
+            <div class="issue-list" id="issueList"></div>
+          </section>
+
+          <section id="issueDetail" class="panel detail-panel" aria-live="polite" hidden></section>
+        </div>
+      </div>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
