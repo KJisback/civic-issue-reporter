@@ -44,8 +44,7 @@ The current app already implements the concept direction at a broad level:
 Remaining snapshot-aligned work should be incremental:
 
 1. Complete the remaining human browser checks for keyboard, focus, labels, responsive behavior, and UI snapshot comparison before accepting the next UI milestone.
-2. Improve the admin dashboard with richer but still local-only analytics.
-3. Add a local audit/history surface for status, priority, duplicate review, and assignment changes.
+2. Add a local audit/history surface for status, priority, duplicate review, and assignment changes.
 
 ## Next Development Sequence
 
@@ -99,7 +98,7 @@ Issues can be assigned to a small fixed set of municipal teams in local state, w
 
 ### T0016 - Admin Analytics Snapshot
 
-Status: Ready for Agent
+Status: Done
 
 Purpose:
 
@@ -107,11 +106,11 @@ Expand the dashboard toward the concept sheet with local-only operational summar
 
 Expected result:
 
-Dashboard shows priority queue, status distribution, category distribution, and stale/open issue indicators using existing local data.
+Dashboard shows priority queue, status distribution, category distribution, team load, and stale/open issue indicators using existing local data.
 
 ### T0017 - Local Activity Timeline
 
-Status: Planned
+Status: Ready for Agent
 
 Purpose:
 
@@ -176,4 +175,4 @@ Backend, database, auth, and deployment decisions require explicit approval befo
 
 ## Recommended Immediate Action
 
-Proceed with T0016 only after reviewing the T0015 completion report and keeping analytics local-only.
+Proceed with T0017 only after reviewing the T0016 completion report and keeping timeline events local-only.

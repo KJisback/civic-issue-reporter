@@ -19,6 +19,7 @@ Use this checklist after UI tickets and before accepting a milestone. Check item
 - [ ] Compare the citizen guidance cards, report form, public report rows, dashboard, and detail header against the saved concept sheet.
 - [ ] Confirm the citizen report form fits without clipped labels or controls.
 - [ ] Confirm the admin dashboard metrics and workflow summary are readable.
+- [ ] Confirm the admin analytics snapshot is readable: priority queue, status mix, category load, team load, and stale open reports.
 - [ ] Confirm the issue queue cards are compact, readable, and not overlapping.
 - [ ] Confirm the local ward map-preview rail is readable and does not imply a real map provider.
 - [ ] Confirm the detail panel opens below the issue queue.
@@ -33,6 +34,7 @@ Use this checklist after UI tickets and before accepting a milestone. Check item
 - [ ] Confirm issue cards stack cleanly and preserve readable controls.
 - [ ] Confirm the detail panel stacks cleanly.
 - [ ] Confirm duplicate review controls fit within the viewport.
+- [ ] Confirm dashboard analytics stack without clipped bars or labels.
 - [ ] Confirm summary stat blocks and table rows do not clip text.
 - [ ] Confirm navigation remains usable without horizontal page overflow.
 
@@ -69,6 +71,7 @@ Use this checklist after UI tickets and before accepting a milestone. Check item
 - [ ] Reload and confirm status and priority persist.
 - [ ] Reload and confirm assigned team persists.
 - [ ] Confirm metrics and workflow summary update after changes.
+- [ ] Confirm dashboard analytics update after status, priority, and assignment changes.
 
 ## Filters
 

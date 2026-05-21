@@ -362,6 +362,16 @@ function countBy(collection, values, key) {
   }));
 }
 
+function percentOfTotal(count, total) {
+  return total > 0 ? Math.round((count / total) * 100) : 0;
+}
+
+function openAgeDays(issue) {
+  const referenceDate = new Date(issue.updatedAt || issue.createdAt);
+  const ageMs = Date.now() - referenceDate.getTime();
+  return Math.max(0, Math.floor(ageMs / 86400000));
+}
+
 function createMunicipalSummary() {
   const openIssues = issues.filter((issue) => issue.status !== "Resolved");
   const highPriority = issues.filter((issue) => issue.priority === "High");
@@ -745,6 +755,93 @@ function renderWorkflowBoard() {
   }).join("");
 }
 
+function analyticsBarMarkup(items, total) {
+  return items
+    .map((item) => {
+      const percent = percentOfTotal(item.count, total);
+
+      return `
+        <div class="analytics-bar-row">
+          <span>${escapeHtml(item.label)}</span>
+          <div class="analytics-bar" aria-hidden="true"><span style="width: ${percent}%"></span></div>
+          <strong>${item.count}</strong>
+        </div>
+      `;
+    })
+    .join("");
+}
+
+function renderAnalyticsSnapshot() {
+  const totalIssues = issues.length;
+  const openIssues = issues.filter((issue) => issue.status !== "Resolved");
+  const staleOpenIssues = openIssues.filter((issue) => openAgeDays(issue) >= 1);
+  const priorityQueue = [...openIssues]
+    .sort((left, right) => {
+      const priorityDelta = PRIORITIES.indexOf(right.priority) - PRIORITIES.indexOf(left.priority);
+      return priorityDelta || new Date(left.updatedAt) - new Date(right.updatedAt);
+    })
+    .slice(0, 5);
+  const assignmentCounts = countBy(issues, ASSIGNMENT_TEAMS, "assignedTeam").filter(
+    (item) => item.count > 0 || item.label === "Unassigned"
+  );
+  const statusCounts = countBy(issues, STATUSES, "status");
+  const categoryCounts = countBy(issues, CATEGORIES, "category").filter((item) => item.count > 0);
+
+  document.querySelector("#analyticsSnapshot").innerHTML = `
+    <section class="analytics-panel analytics-priority">
+      <div class="analytics-heading">
+        <h3>Priority queue</h3>
+        <span>${openIssues.length} open</span>
+      </div>
+      ${
+        priorityQueue.length > 0
+          ? `<ol class="analytics-list">
+              ${priorityQueue
+                .map(
+                  (issue) => `
+                    <li>
+                      <strong>${escapeHtml(issue.title)}</strong>
+                      <span>${escapeHtml(issue.priority)} &middot; ${escapeHtml(assignmentLabel(issue))} &middot; ${openAgeDays(issue)}d open</span>
+                    </li>
+                  `
+                )
+                .join("")}
+            </ol>`
+          : `<p class="analytics-empty">No open reports in the local queue.</p>`
+      }
+    </section>
+    <section class="analytics-panel">
+      <div class="analytics-heading">
+        <h3>Status mix</h3>
+        <span>Local data</span>
+      </div>
+      ${analyticsBarMarkup(statusCounts, totalIssues)}
+    </section>
+    <section class="analytics-panel">
+      <div class="analytics-heading">
+        <h3>Category load</h3>
+        <span>${categoryCounts.length} active</span>
+      </div>
+      ${analyticsBarMarkup(categoryCounts, totalIssues)}
+    </section>
+    <section class="analytics-panel">
+      <div class="analytics-heading">
+        <h3>Team load</h3>
+        <span>Local labels</span>
+      </div>
+      ${analyticsBarMarkup(assignmentCounts, totalIssues)}
+    </section>
+    <section class="analytics-panel analytics-stale">
+      <div class="analytics-heading">
+        <h3>Stale open reports</h3>
+        <span>${staleOpenIssues.length} need review</span>
+      </div>
+      <p>${staleOpenIssues.length} open report${staleOpenIssues.length === 1 ? "" : "s"} have not changed in at least one day.</p>
+      <span class="tag tag-warning">Local indicator only</span>
+    </section>
+  `;
+}
+
 function renderLocationPreview() {
   const issuesWithCoordinates = issues.filter((issue) => issue.coordinates).length;
   const issuesWithLandmarks = issues.filter((issue) => issue.landmark).length;
@@ -802,6 +899,7 @@ function renderApp() {
   renderMetrics();
   renderLocationPreview();
   renderWorkflowBoard();
+  renderAnalyticsSnapshot();
   renderIssueDetail();
   renderSummaryPreview();
   restorePendingFocus();

@@ -212,8 +212,17 @@ Use this before larger design, data, or release changes.
 ## T0016 - Admin Analytics Snapshot
 
 1. Open `src/index.html`.
-2. Confirm the dashboard includes local-only operational summaries after the ticket is implemented.
+2. Confirm the dashboard includes priority queue, status mix, category load, team load, and stale open reports.
 3. Confirm status, priority, category, assignment, and stale/open indicators use existing local data only.
 4. Confirm no external charting dependency or backend is added.
 5. Confirm reporting, triage, assignment, duplicate review, detail, export, and print workflows still work.
+6. Check browser console for errors.
+
+## T0017 - Local Activity Timeline
+
+1. Open `src/index.html`.
+2. Change issue status, priority, duplicate review, and assigned team after the ticket is implemented.
+3. Confirm each change appends a local timeline event in issue detail.
+4. Reload and confirm local timeline events persist.
+5. Confirm timeline copy does not imply real staff identity or backend audit logging.
 6. Check browser console for errors.

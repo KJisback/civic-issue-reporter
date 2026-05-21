@@ -786,7 +786,7 @@ Completion notes:
 
 ## T0016 - Admin Analytics Snapshot
 
-Status: Ready for Agent
+Status: Done
 
 Priority: Medium
 
@@ -794,9 +794,39 @@ Goal:
 
 Expand the dashboard toward the concept sheet with local-only operational summaries and no external charting dependency.
 
+Acceptance criteria:
+
+- Dashboard includes a priority queue generated from local issue data.
+- Dashboard includes status, category, and assignment/team load summaries.
+- Dashboard includes stale/open issue indicators using existing local timestamps.
+- Analytics use simple local markup/CSS, not an external charting dependency.
+- Existing reporting, triage, assignment, duplicate review, detail, export, and print behaviors continue to work.
+- No dependency, backend, auth, deployment, or external service is added.
+
+Automated checks:
+
+- `node --check src/app.js`
+
+Manual verification:
+
+1. Open `src/index.html`.
+2. Confirm the dashboard shows priority queue, status mix, category load, team load, and stale open reports.
+3. Change issue status, priority, and assigned team, then confirm dashboard analytics update.
+4. Confirm mobile-width dashboard analytics do not overlap or clip.
+5. Confirm reporting, triage, assignment, duplicate review, detail, export, and print workflows still work.
+6. Check browser console for errors.
+
+Completion notes:
+
+- T0016 added a local analytics snapshot to the admin dashboard.
+- Analytics include priority queue, status mix, category load, team load, and stale open report indicators.
+- Charts are CSS/HTML only and use existing browser-local issue data.
+- No dependency, backend, auth, deployment, or external service was added.
+- `node --check src/app.js` and `git diff --check` passed.
+
 ## T0017 - Local Activity Timeline
 
-Status: Planned
+Status: Ready for Agent
 
 Priority: Medium
 

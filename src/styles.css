@@ -1016,6 +1016,104 @@ button {
   font-weight: 800;
 }
 
+.analytics-snapshot {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) repeat(2, minmax(220px, 0.75fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.analytics-panel {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-soft);
+}
+
+.analytics-priority {
+  grid-row: span 2;
+}
+
+.analytics-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: baseline;
+}
+
+.analytics-heading h3,
+.analytics-empty,
+.analytics-stale p {
+  margin: 0;
+}
+
+.analytics-heading h3 {
+  font-size: 16px;
+}
+
+.analytics-heading span,
+.analytics-list span,
+.analytics-empty,
+.analytics-stale p {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.analytics-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.analytics-list li {
+  display: grid;
+  gap: 3px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.analytics-list strong {
+  font-size: 14px;
+}
+
+.analytics-bar-row {
+  display: grid;
+  grid-template-columns: minmax(90px, 0.8fr) minmax(80px, 1fr) 34px;
+  gap: 8px;
+  align-items: center;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.analytics-bar {
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e9eee7;
+}
+
+.analytics-bar span {
+  display: block;
+  height: 100%;
+  min-width: 4px;
+  border-radius: inherit;
+  background: var(--green);
+}
+
+.analytics-stale {
+  background: var(--amber-soft);
+}
+
 .summary-panel {
   display: grid;
   gap: 14px;
@@ -1282,6 +1380,7 @@ button {
   .app-grid,
   .hero-shell,
   .dashboard-grid,
+  .analytics-snapshot,
   .issue-card,
   .detail-grid,
   .issue-feed-layout {
@@ -1316,6 +1415,7 @@ button {
   fieldset,
   .location-preview,
   .workflow-board,
+  .analytics-bar-row,
   .summary-stat-grid,
   .summary-breakdown,
   .summary-row,

@@ -17,7 +17,7 @@ Primary inferred MVP:
 
 Current next ticket:
 
-T0016 - Admin Analytics Snapshot
+T0017 - Local Activity Timeline
 
 Completed tickets:
 
@@ -37,6 +37,7 @@ Completed tickets:
 - T0013 - UI Snapshot Fidelity Pass
 - T0014 - Photo Evidence Placeholder and Privacy Copy
 - T0015 - Local Assignment Prototype
+- T0016 - Admin Analytics Snapshot
 
 Current implementation state:
 
@@ -54,6 +55,7 @@ Current implementation state:
 - UI snapshot fidelity refinements for citizen guidance, denser public issue rows, local map-preview context, category markers, dashboard stat treatment, and detail header composition.
 - Photo evidence placeholders and privacy copy without upload, storage, backend, or export behavior.
 - Local-only municipal team assignment labels and controls without staff identity or authentication.
+- Local-only dashboard analytics for priority queue, status mix, category load, team load, and stale open reports without external charting.
 - Minimal civic UI direction applied from saved concept sheet.
 
 Saved UI/UX direction:
@@ -64,11 +66,10 @@ Saved UI/UX direction:
 
 Next handoff focus:
 
-Expand the dashboard toward the concept sheet with local-only operational summaries and no external charting dependency.
+Append local timeline events for status, priority, duplicate review, and assignment changes.
 
-Next sequence after T0016:
+Next sequence after T0017:
 
-- T0017 - Local Activity Timeline
 - T0018 - Local Backup and Restore
 - T0019 - Test Harness Decision and First Logic Tests
 - T0020 - Backend Readiness Design
