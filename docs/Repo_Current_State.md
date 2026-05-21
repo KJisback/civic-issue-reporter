@@ -17,7 +17,7 @@ No git branch at workspace root.
 - T0009 - Duplicate Review Actions
 - T0010 - Export and Print Summary
 - T0011 - Backlog Refresh and Next Handoff
-- T0011A - Git Repository Initialization and Manual UI Checklist: partially complete / blocked
+- T0011A - Git Repository Initialization and Manual UI Checklist
 
 ## Current App Status
 
@@ -50,7 +50,8 @@ None.
 - Lint: Not run, no lint system.
 - Typecheck: Not run, no type system.
 - Syntax: Pass, `node --check src/app.js`.
-- Git: Blocked. A partial `.git` directory exists, but Windows ACLs prevent Git from writing `.git/config` and `.git/index.lock`.
+- Git: Local repository initialized on `main` with initial commit `ed25f63`.
+- GitHub: Remote `origin` points to `https://github.com/KJisback/civic-issue-reporter.git`; GitHub API confirms `main` at commit `ed25f63a4bfa564b52d9664f3cdf4ad79cb6d561`.
 
 ## Known Issues
 
@@ -65,8 +66,9 @@ None.
 ## Current Risks
 
 - Future real map, geolocation, image upload, and notification features may create privacy concerns and need explicit product decisions.
-- Branch-per-ticket workflow is still blocked locally until the partial `.git` directory is recreated or its ACLs are fixed.
-- Remote push is blocked until local git is healthy and GitHub CLI is re-authenticated or a remote URL is provided.
+- Branch-per-ticket workflow is enforceable locally.
+- GitHub CLI works when the dead proxy environment variables are cleared for network commands.
+- Direct Git HTTPS remote commands may need `GIT_EXEC_PATH=F:\Kuku\Workspace\.codex-tools\mingit\mingw64\bin` and cleared proxy variables in this Codex shell.
 - Browser-based manual verification remains a human activity after implementation tickets.
 
 ## Next Recommended Ticket

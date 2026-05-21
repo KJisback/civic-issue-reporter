@@ -50,4 +50,4 @@ See `docs/Development_Plan.md` for the process coverage review and next ticket s
 
 ## Git Status
 
-Git setup is currently blocked by Windows ACLs on a partial `.git` directory and invalid GitHub CLI authentication. See `docs/Git_Setup_Recovery.md`.
+Git is initialized locally and connected to GitHub. See `docs/Git_Setup_Recovery.md` for host-specific Git/GitHub command notes.

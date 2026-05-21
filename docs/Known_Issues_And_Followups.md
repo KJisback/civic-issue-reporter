@@ -120,13 +120,13 @@ Type: tooling / workflow
 
 Description:
 
-`git init` created a partial `.git` directory, but Windows ACLs prevented Git from writing `.git/config` and `.git/index.lock`. The approval layer rejected removing the partial `.git` directory from inside Codex, so the local repository could not be completed in this run.
+Git setup initially failed because Windows ACLs prevented Git from writing `.git/config` and `.git/index.lock`. The project was later recovered into a usable local repository and pushed to GitHub.
 
 Recommended action:
 
-Manually remove or repair the partial `.git` directory from a normal elevated PowerShell session, then rerun `git init -b main`, `git add .`, and the initial commit. Re-authenticate GitHub CLI before pushing.
+Use `docs/Git_Setup_Recovery.md` for host-specific GitHub CLI and direct Git HTTPS command notes.
 
-Status: Open
+Status: Closed after recovery
 
 ## Closed Followups
 
