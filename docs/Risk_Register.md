@@ -10,7 +10,7 @@ Civic reports may contain precise location data, photos, and contextual clues ab
 
 Mitigation:
 
-Start with plain location text, optional manual coordinates, and avoid external maps or device geolocation until a privacy decision is made.
+Start with plain location text, optional manual coordinates, non-uploading photo placeholders, and avoid external maps, device geolocation, or real photo storage until privacy decisions are made.
 
 Status: Open
 

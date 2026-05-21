@@ -44,10 +44,9 @@ The current app already implements the concept direction at a broad level:
 Remaining snapshot-aligned work should be incremental:
 
 1. Complete the remaining human browser checks for keyboard, focus, labels, responsive behavior, and UI snapshot comparison before accepting the next UI milestone.
-2. Add photo-evidence placeholders and privacy language without storing files.
-3. Add local-only staff/team assignment labels without identity, auth, or backend.
-4. Improve the admin dashboard with richer but still local-only analytics.
-5. Add a local audit/history surface for status, priority, duplicate review, and assignment changes.
+2. Add local-only staff/team assignment labels without identity, auth, or backend.
+3. Improve the admin dashboard with richer but still local-only analytics.
+4. Add a local audit/history surface for status, priority, duplicate review, and assignment changes.
 
 ## Next Development Sequence
 
@@ -77,7 +76,7 @@ The citizen report, public feed, dashboard, and detail views better match the vi
 
 ### T0014 - Photo Evidence Placeholder and Privacy Copy
 
-Status: Ready for Agent
+Status: Done
 
 Purpose:
 
@@ -85,11 +84,11 @@ Clarify the photo evidence path before real file upload.
 
 Expected result:
 
-The form and issue detail surfaces explain that photo evidence is planned, privacy-sensitive, and not stored yet.
+The form, issue cards, and issue detail surfaces explain that photo evidence is planned, privacy-sensitive, and not stored yet.
 
 ### T0015 - Local Assignment Prototype
 
-Status: Planned
+Status: Ready for Agent
 
 Purpose:
 
@@ -178,4 +177,4 @@ Backend, database, auth, and deployment decisions require explicit approval befo
 
 ## Recommended Immediate Action
 
-Proceed with T0014 only after reviewing the T0013 completion report and, ideally, completing the remaining human keyboard/mobile visual checks.
+Proceed with T0015 only after reviewing the T0014 completion report and keeping staff identity/auth decisions out of scope.

@@ -92,6 +92,24 @@ Before any production reporting workflow, decide export retention, official reco
 
 Status: Open
 
+### F0013 - Decide Photo Evidence Policy
+
+Source ticket: T0014
+
+Severity: Medium
+
+Type: privacy / product
+
+Description:
+
+The app now clearly shows photo evidence as a future placeholder, but real uploads remain unapproved because photos may include faces, private property, license plates, or other sensitive context.
+
+Recommended action:
+
+Before adding real photo upload or storage, decide redaction expectations, allowed content, retention, public visibility, export behavior, and whether staff must review images before publication.
+
+Status: Open
+
 ### F0011 - Complete Human Browser Accessibility Run
 
 Source ticket: T0012

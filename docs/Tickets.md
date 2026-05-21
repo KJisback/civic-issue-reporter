@@ -707,7 +707,7 @@ Completion notes:
 
 ## T0014 - Photo Evidence Placeholder and Privacy Copy
 
-Status: Ready for Agent
+Status: Done
 
 Priority: Medium
 
@@ -715,9 +715,37 @@ Goal:
 
 Clarify the future photo evidence workflow without storing files yet, including privacy-safe copy and report-card placeholders.
 
+Acceptance criteria:
+
+- Report form explains photo evidence is planned but not stored in the MVP.
+- Issue cards show a non-uploading photo evidence placeholder.
+- Issue detail shows privacy-safe photo evidence status and future storage requirements.
+- No file picker, file storage, backend, auth, deployment, or external service is added.
+- Existing reporting, triage, duplicate review, detail, export, and print behaviors continue to work.
+
+Automated checks:
+
+- `node --check src/app.js`
+
+Manual verification:
+
+1. Open `src/index.html`.
+2. Confirm the report form explains photos are not uploaded, stored, exported, or sent anywhere.
+3. Confirm issue cards show a photo evidence placeholder and do not expose an upload control.
+4. Confirm issue detail shows the same non-storage privacy language.
+5. Confirm reporting, detail, export, and print workflows still work.
+6. Check browser console for errors.
+
+Completion notes:
+
+- T0014 added non-interactive photo evidence placeholders to intake, issue cards, and issue detail.
+- Privacy copy now calls out faces, private property, license plates, retention, and public visibility decisions before real photo evidence.
+- No file input, file storage, backend, dependency, auth, deployment, or external service was added.
+- `node --check src/app.js` and `git diff --check` passed.
+
 ## T0015 - Local Assignment Prototype
 
-Status: Planned
+Status: Ready for Agent
 
 Priority: Medium
 

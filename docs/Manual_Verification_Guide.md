@@ -198,3 +198,12 @@ Use this before larger design, data, or release changes.
 4. Confirm no file picker, file storage, backend, or external service is added.
 5. Confirm reporting, detail, export, and print workflows still work.
 6. Check browser console for errors.
+
+## T0015 - Local Assignment Prototype
+
+1. Open `src/index.html`.
+2. Confirm each issue can show local-only municipal team ownership after the ticket is implemented.
+3. Confirm assignment labels remain local and do not imply real staff identity or authentication.
+4. Reload and confirm any local assignment state persists if assignment editing is implemented.
+5. Confirm reporting, triage, duplicate review, detail, export, and print workflows still work.
+6. Check browser console for errors.

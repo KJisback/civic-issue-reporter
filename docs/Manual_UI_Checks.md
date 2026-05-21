@@ -40,6 +40,8 @@ Use this checklist after UI tickets and before accepting a milestone. Check item
 
 - [ ] Submit with blank required fields.
 - [ ] Confirm title, location, and description validation messages are readable.
+- [ ] Confirm the photo evidence placeholder states photos are not uploaded, stored, exported, or sent anywhere.
+- [ ] Confirm there is no file picker or upload button.
 - [ ] Enter invalid latitude outside `-90` to `90`.
 - [ ] Enter invalid longitude outside `-180` to `180`.
 - [ ] Confirm coordinate validation messages are readable.
@@ -78,6 +80,7 @@ Use this checklist after UI tickets and before accepting a milestone. Check item
 
 - [ ] Open an issue with `View details`.
 - [ ] Confirm title, category, status, priority, description, location, reported date, and updated date render.
+- [ ] Confirm the photo evidence placeholder remains non-uploading and privacy-safe.
 - [ ] Confirm the status timeline highlights the current status.
 - [ ] Change status and priority from the detail panel.
 - [ ] Confirm the issue card and detail panel stay in sync.

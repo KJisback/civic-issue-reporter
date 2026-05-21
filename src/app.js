@@ -303,6 +303,14 @@ function formatCoordinates(coordinates) {
   return `${coordinates.latitude.toFixed(6)}, ${coordinates.longitude.toFixed(6)}`;
 }
 
+function photoEvidenceLabel(issue) {
+  return issue.photo ? "Photo evidence attached" : "Photo evidence not stored";
+}
+
+function photoEvidenceNote() {
+  return "Photo uploads are planned for a later privacy-approved ticket.";
+}
+
 function formatDateTime(isoDate) {
   return new Intl.DateTimeFormat("en", {
     year: "numeric",
@@ -486,6 +494,13 @@ function renderIssues() {
             <button class="secondary-button details-button" type="button" data-action="view-detail" data-issue-id="${escapeHtml(issue.id)}" aria-label="View details for ${escapeHtml(issue.title)}">View details</button>
           </div>
           <div class="issue-side">
+            <div class="evidence-block">
+              <div class="evidence-thumbnail" aria-hidden="true"></div>
+              <div>
+                <strong>${escapeHtml(photoEvidenceLabel(issue))}</strong>
+                <p>${escapeHtml(photoEvidenceNote())}</p>
+              </div>
+            </div>
             <div class="location-block">
               <p><strong>Location:</strong> ${escapeHtml(issue.location)}</p>
               <span class="location-detail">Area: ${escapeHtml(issue.ward || "Not specified")}</span>
@@ -606,6 +621,13 @@ function renderIssueDetail() {
           <span class="location-detail">Area: ${escapeHtml(issue.ward || "Not specified")}</span>
           <span class="location-detail">Landmark: ${escapeHtml(issue.landmark || "Not specified")}</span>
           <span class="location-detail">Map-ready: ${escapeHtml(formatCoordinates(issue.coordinates))}</span>
+        </div>
+        <div class="evidence-block evidence-block-detail">
+          <div class="evidence-thumbnail" aria-hidden="true"></div>
+          <div>
+            <strong>${escapeHtml(photoEvidenceLabel(issue))}</strong>
+            <p>${escapeHtml(photoEvidenceNote())} Future storage must define redaction, retention, and visibility rules first.</p>
+          </div>
         </div>
         <p><strong>Reported:</strong> ${formatDate(issue.createdAt)}</p>
         <p><strong>Last updated:</strong> ${formatDate(issue.updatedAt)}</p>
