@@ -638,7 +638,7 @@ Completion notes:
 
 ## T0013 - UI Snapshot Fidelity Pass
 
-Status: Ready for Agent
+Status: Done
 
 Priority: High
 
@@ -697,9 +697,17 @@ Manual verification:
 4. Check desktop and mobile-width layouts.
 5. Check browser console for errors.
 
+Completion notes:
+
+- T0013 refined the citizen report surface with concept-style guidance cards.
+- Public report rows now use denser composition, category visual markers, row metadata, and a local ward map-preview rail.
+- Dashboard and detail surfaces received tighter panel, stat, status, and header styling without changing workflows.
+- `node --check src/app.js` and `git diff --check` passed.
+- Browser automation was unavailable during verification, so desktop/mobile visual comparison remains a human browser check.
+
 ## T0014 - Photo Evidence Placeholder and Privacy Copy
 
-Status: Planned
+Status: Ready for Agent
 
 Priority: Medium
 

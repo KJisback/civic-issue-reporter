@@ -189,3 +189,12 @@ Use this before larger design, data, or release changes.
 3. Confirm reporting, triage, duplicate review, detail, export, and print workflows still work.
 4. Check desktop and mobile-width layouts.
 5. Confirm no text overlap, clipped controls, or console errors.
+
+## T0014 - Photo Evidence Placeholder and Privacy Copy
+
+1. Open `src/index.html`.
+2. Confirm the report form explains photo evidence is planned but not stored yet.
+3. Confirm issue cards or detail surfaces show any photo evidence placeholder as non-uploading and privacy-safe.
+4. Confirm no file picker, file storage, backend, or external service is added.
+5. Confirm reporting, detail, export, and print workflows still work.
+6. Check browser console for errors.

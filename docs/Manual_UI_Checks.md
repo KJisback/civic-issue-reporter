@@ -16,9 +16,11 @@ Use this checklist after UI tickets and before accepting a milestone. Check item
 
 - [ ] Confirm top navigation links work: `Report`, `Issues`, `Dashboard`, `Summary`.
 - [ ] Confirm sidebar links work: `Report issue`, `Open reports`, `Dashboard`, `Triage`, `Watchlist`, `Summary`.
+- [ ] Compare the citizen guidance cards, report form, public report rows, dashboard, and detail header against the saved concept sheet.
 - [ ] Confirm the citizen report form fits without clipped labels or controls.
 - [ ] Confirm the admin dashboard metrics and workflow summary are readable.
 - [ ] Confirm the issue queue cards are compact, readable, and not overlapping.
+- [ ] Confirm the local ward map-preview rail is readable and does not imply a real map provider.
 - [ ] Confirm the detail panel opens below the issue queue.
 - [ ] Confirm the municipal review summary is readable.
 - [ ] Confirm no page section uses card-inside-card styling in a way that hurts scanning.

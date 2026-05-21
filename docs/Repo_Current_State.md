@@ -2,7 +2,7 @@
 
 ## Current Branch
 
-`feature/t0012-accessibility-keyboard`
+`feature/t0013-ui-snapshot-fidelity`
 
 ## Completed Tickets
 
@@ -19,10 +19,11 @@
 - T0011 - Backlog Refresh and Next Handoff
 - T0011A - Git Repository Initialization and Manual UI Checklist
 - T0012 - Accessibility and Keyboard Verification Pass
+- T0013 - UI Snapshot Fidelity Pass
 
 ## Current App Status
 
-The project has a no-dependency static app with a refined minimal civic UI, citizen report form, local issue records, browser persistence through `localStorage`, sample issue cards, admin-style metrics, category/status/priority filters, local status and priority controls, map-ready location fields, a non-interactive location readiness preview, explainable local duplicate hints, local duplicate review actions, local priority assistance, a compact workflow summary, a focused issue detail panel with status timeline, and a municipal review summary with print and JSON export actions. T0012 added a first accessibility and keyboard hardening pass with skip navigation, stronger focus states, more specific control names, field error associations, live-region improvements, focus restoration for detail interactions, and responsive text containment safeguards.
+The project has a no-dependency static app with a refined minimal civic UI, citizen report form, local issue records, browser persistence through `localStorage`, sample issue cards, admin-style metrics, category/status/priority filters, local status and priority controls, map-ready location fields, a non-interactive location readiness preview, explainable local duplicate hints, local duplicate review actions, local priority assistance, a compact workflow summary, a focused issue detail panel with status timeline, and a municipal review summary with print and JSON export actions. T0012 added a first accessibility and keyboard hardening pass with skip navigation, stronger focus states, more specific control names, field error associations, live-region improvements, focus restoration for detail interactions, and responsive text containment safeguards. T0013 tightened the UI toward the saved concept sheet with report guidance cards, denser public report rows, category visual markers, a local map-preview rail, rounded civic panels, stronger dashboard stat treatments, and a more composed detail header.
 
 A generated UI/UX concept sheet has been saved as the design reference for future UI implementation.
 
@@ -52,8 +53,8 @@ None.
 - Lint: Not run, no lint system.
 - Typecheck: Not run, no type system.
 - Syntax: Pass, `node --check src/app.js`.
-- Git: Local repository initialized; current ticket branch is `feature/t0012-accessibility-keyboard`.
-- GitHub: Remote `origin` points to `https://github.com/KJisback/civic-issue-reporter.git`; the T0012 ticket branch is pushed and tracking `origin/feature/t0012-accessibility-keyboard`.
+- Git: Local repository initialized; current ticket branch is `feature/t0013-ui-snapshot-fidelity`.
+- GitHub: Remote `origin` points to `https://github.com/KJisback/civic-issue-reporter.git`; the previous T0012 ticket branch is pushed and the T0013 branch is ready to push after this ticket commit.
 
 ## Known Issues
 
@@ -63,7 +64,7 @@ None.
 - Visual verification should still be done manually in a browser at desktop and mobile widths.
 - Duplicate review actions are local-only and do not merge records or record real staff identity.
 - JSON export is a browser-generated local file and is not a secure official record.
-- Browser runtime automation was unavailable during the T0012 pass, so the manual keyboard/accessibility checklist still needs a human browser run before milestone acceptance.
+- Browser runtime automation was unavailable during the T0012 and T0013 passes, so the manual keyboard/accessibility and visual snapshot checklists still need a human browser run before milestone acceptance.
 
 ## Current Risks
 
@@ -75,7 +76,7 @@ None.
 
 ## Next Recommended Ticket
 
-T0013 - UI Snapshot Fidelity Pass
+T0014 - Photo Evidence Placeholder and Privacy Copy
 
 ## Last Updated
 

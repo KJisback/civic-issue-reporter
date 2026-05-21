@@ -43,12 +43,11 @@ The current app already implements the concept direction at a broad level:
 
 Remaining snapshot-aligned work should be incremental:
 
-1. Complete the remaining human browser check for keyboard, focus, labels, and responsive behavior before accepting the next UI milestone.
-2. Tighten the public issue feed toward the concept sheet, including clearer row density and stronger issue metadata.
-3. Improve the admin dashboard toward the concept sheet with richer but still local-only analytics.
-4. Add photo-evidence placeholders and privacy language without storing files.
-5. Add local-only staff/team assignment labels without identity, auth, or backend.
-6. Add a local audit/history surface for status, priority, duplicate review, and assignment changes.
+1. Complete the remaining human browser checks for keyboard, focus, labels, responsive behavior, and UI snapshot comparison before accepting the next UI milestone.
+2. Add photo-evidence placeholders and privacy language without storing files.
+3. Add local-only staff/team assignment labels without identity, auth, or backend.
+4. Improve the admin dashboard with richer but still local-only analytics.
+5. Add a local audit/history surface for status, priority, duplicate review, and assignment changes.
 
 ## Next Development Sequence
 
@@ -66,7 +65,7 @@ Keyboard navigation, focus states, labels, live regions, and mobile text contain
 
 ### T0013 - UI Snapshot Fidelity Pass
 
-Status: Ready for Agent
+Status: Done
 
 Purpose:
 
@@ -74,11 +73,11 @@ Bring the current UI closer to the saved concept sheet without adding new produc
 
 Expected result:
 
-The citizen report, public feed, dashboard, and detail views better match the visual rhythm, density, and hierarchy of the reference snapshot.
+The citizen report, public feed, dashboard, and detail views better match the visual rhythm, density, and hierarchy of the reference snapshot. Human browser visual comparison remains listed in `docs/Manual_UI_Checks.md`.
 
 ### T0014 - Photo Evidence Placeholder and Privacy Copy
 
-Status: Planned
+Status: Ready for Agent
 
 Purpose:
 
@@ -179,4 +178,4 @@ Backend, database, auth, and deployment decisions require explicit approval befo
 
 ## Recommended Immediate Action
 
-Proceed with T0013 only after reviewing the T0012 completion report and, ideally, completing the remaining human keyboard/mobile browser checks.
+Proceed with T0014 only after reviewing the T0013 completion report and, ideally, completing the remaining human keyboard/mobile visual checks.

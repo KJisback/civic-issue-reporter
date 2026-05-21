@@ -57,6 +57,24 @@
               <span class="soft-chip">Private draft</span>
             </div>
 
+            <div class="report-guidance" aria-label="Report workflow benefits">
+              <div>
+                <span class="guidance-icon" aria-hidden="true"></span>
+                <strong>Easy reporting</strong>
+                <p>Share the issue, location, and context in a few focused fields.</p>
+              </div>
+              <div>
+                <span class="guidance-icon" aria-hidden="true"></span>
+                <strong>Accurate location</strong>
+                <p>Ward, landmark, and optional coordinates keep reports map-ready.</p>
+              </div>
+              <div>
+                <span class="guidance-icon" aria-hidden="true"></span>
+                <strong>Private by design</strong>
+                <p>No account, map API, or device location permission is used yet.</p>
+              </div>
+            </div>
+
             <form class="report-form" id="reportForm" novalidate>
               <label>
                 Issue title
@@ -186,7 +204,17 @@
                 </select>
               </label>
             </div>
-            <div class="issue-list" id="issueList" aria-live="polite"></div>
+            <div class="issue-feed-layout">
+              <div class="issue-list" id="issueList" aria-live="polite"></div>
+              <aside class="queue-map" aria-label="Ward issue map preview">
+                <div class="map-toolbar">
+                  <strong>Ward view</strong>
+                  <span>Manual preview</span>
+                </div>
+                <div class="map-placeholder map-placeholder-large" aria-hidden="true"></div>
+                <p>Location context stays local until a map provider and privacy policy are approved.</p>
+              </aside>
+            </div>
           </section>
 
           <section id="issueDetail" class="panel detail-panel" aria-live="polite" tabindex="-1" hidden></section>

@@ -17,7 +17,7 @@ Primary inferred MVP:
 
 Current next ticket:
 
-T0013 - UI Snapshot Fidelity Pass
+T0014 - Photo Evidence Placeholder and Privacy Copy
 
 Completed tickets:
 
@@ -34,6 +34,7 @@ Completed tickets:
 - T0011 - Backlog Refresh and Next Handoff
 - T0011A - Git Repository Initialization and Manual UI Checklist
 - T0012 - Accessibility and Keyboard Verification Pass
+- T0013 - UI Snapshot Fidelity Pass
 
 Current implementation state:
 
@@ -48,6 +49,7 @@ Current implementation state:
 - Focused issue detail panel with local status timeline.
 - Municipal review summary with print and JSON export actions.
 - Accessibility and keyboard hardening for skip navigation, focus states, live regions, validation associations, detail focus restoration, and responsive text containment.
+- UI snapshot fidelity refinements for citizen guidance, denser public issue rows, local map-preview context, category markers, dashboard stat treatment, and detail header composition.
 - Minimal civic UI direction applied from saved concept sheet.
 
 Saved UI/UX direction:
@@ -58,11 +60,10 @@ Saved UI/UX direction:
 
 Next handoff focus:
 
-Bring the current UI closer to the saved concept sheet without adding new product behavior.
+Clarify the future photo evidence workflow without storing files yet, including privacy-safe copy and report-card placeholders.
 
-Next sequence after T0013:
+Next sequence after T0014:
 
-- T0014 - Photo Evidence Placeholder and Privacy Copy
 - T0015 - Local Assignment Prototype
 - T0016 - Admin Analytics Snapshot
 - T0017 - Local Activity Timeline

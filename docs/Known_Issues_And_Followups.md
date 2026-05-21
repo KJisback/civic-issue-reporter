@@ -110,6 +110,24 @@ Run the T0012 keyboard and mobile-width checklist manually in a browser before a
 
 Status: Open
 
+### F0012 - Complete Human UI Snapshot Browser Run
+
+Source ticket: T0013
+
+Severity: Low
+
+Type: design / verification
+
+Description:
+
+T0013 tightened the UI toward the saved concept sheet, but the in-app browser automation runtime was unavailable during verification.
+
+Recommended action:
+
+Run the desktop and mobile visual comparison checklist in `docs/Manual_UI_Checks.md` before accepting the UI milestone.
+
+Status: Open
+
 ## Closed Followups
 
 ### F0010 - Repair Git Repository Initialization

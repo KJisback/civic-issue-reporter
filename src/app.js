@@ -240,6 +240,10 @@ function priorityClass(priority) {
   return `priority-${priority.toLowerCase()}`;
 }
 
+function categoryClass(category) {
+  return `category-${category.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`;
+}
+
 function statusClass(status) {
   return status.toLowerCase().replace(/\s+/g, "-");
 }
@@ -470,9 +474,15 @@ function renderIssues() {
               <span class="tag status-${statusClass(issue.status)}">${escapeHtml(issue.status)}</span>
               ${issue.duplicateHints.length > 0 ? `<span class="tag tag-warning">${escapeHtml(duplicateReviewSummary(issue))}</span>` : ""}
             </div>
-            <h3>${escapeHtml(issue.title)}</h3>
+            <div class="issue-title-row">
+              <span class="issue-symbol ${categoryClass(issue.category)}" aria-hidden="true"></span>
+              <h3>${escapeHtml(issue.title)}</h3>
+            </div>
             <p>${escapeHtml(issue.description)}</p>
-            <time datetime="${issue.createdAt}">Reported ${formatDate(issue.createdAt)}</time>
+            <div class="issue-row-footer">
+              <time datetime="${issue.createdAt}">Reported ${formatDate(issue.createdAt)}</time>
+              <span>${escapeHtml(issue.ward || "Ward not specified")}</span>
+            </div>
             <button class="secondary-button details-button" type="button" data-action="view-detail" data-issue-id="${escapeHtml(issue.id)}" aria-label="View details for ${escapeHtml(issue.title)}">View details</button>
           </div>
           <div class="issue-side">
@@ -486,6 +496,7 @@ function renderIssues() {
             ${issue.duplicateHints.length > 0 ? `<p><strong>Duplicate hint:</strong> ${escapeHtml(duplicateReviewSummary(issue))}. Closest match: ${escapeHtml(issue.duplicateHints[0].title)} near ${escapeHtml(issue.duplicateHints[0].location)}.</p>` : ""}
           </div>
           <div class="triage-controls" aria-label="Triage controls for ${escapeHtml(issue.title)}">
+            <span class="bookmark-mark" aria-hidden="true"></span>
             <label>
               Status
               <select data-action="status" data-issue-id="${escapeHtml(issue.id)}" aria-label="Status for ${escapeHtml(issue.title)}">
@@ -573,7 +584,10 @@ function renderIssueDetail() {
     <div class="detail-header">
       <div>
         <p class="eyebrow">Issue detail</p>
-        <h2 id="issueDetailTitle">${escapeHtml(issue.title)}</h2>
+        <div class="detail-title-row">
+          <span class="issue-symbol ${categoryClass(issue.category)}" aria-hidden="true"></span>
+          <h2 id="issueDetailTitle">${escapeHtml(issue.title)}</h2>
+        </div>
         <div class="card-meta">
           <span class="tag">${escapeHtml(issue.category)}</span>
           <span class="tag ${priorityClass(issue.priority)}">${escapeHtml(issue.priority)}</span>
