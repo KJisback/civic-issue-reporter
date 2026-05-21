@@ -105,12 +105,16 @@ Use this checklist after UI tickets and before accepting a milestone. Check item
 
 ## Keyboard and Accessibility
 
+- [ ] Press `Tab` from the address bar and confirm the skip link appears before the main navigation.
 - [ ] Use only the keyboard to move from the top navigation through the report form.
 - [ ] Continue keyboard navigation through dashboard, summary, filters, issue cards, detail panel, duplicate review controls, and export/print actions.
 - [ ] Confirm focus is visible on links, buttons, fields, and select controls.
 - [ ] Confirm controls have clear visible labels.
 - [ ] Confirm dynamic status text is close to the control that triggered it.
 - [ ] Confirm validation messages are not color-only.
+- [ ] Submit the blank report form and confirm focus moves to the first invalid field.
+- [ ] Open issue detail with the keyboard and confirm focus moves to the detail panel.
+- [ ] Press `Escape` in the detail panel and confirm focus returns to the original `View details` button.
 
 ## Final Pass
 

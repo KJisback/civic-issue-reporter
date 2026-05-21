@@ -17,7 +17,7 @@ The project is following the standalone agentic development model:
 
 Current caveats:
 
-- The project folder is not a git repository, so branch-per-ticket workflow is documented but not enforceable locally yet.
+- The project is now a local git repository connected to GitHub; Codex may still need sandbox escalation for Git write commands on this host.
 - Browser-based manual verification is documented but not fully completed for every recent UI ticket.
 - T0003 through T0006 were early concise tickets and do not contain the same full handoff detail as later tickets.
 - Auth, backend, database, external maps, deployment, and real photo storage remain intentionally unapproved and out of scope.
@@ -43,7 +43,7 @@ The current app already implements the concept direction at a broad level:
 
 Remaining snapshot-aligned work should be incremental:
 
-1. Confirm keyboard, focus, labels, and responsive behavior before adding more screens.
+1. Complete the remaining human browser check for keyboard, focus, labels, and responsive behavior before accepting the next UI milestone.
 2. Tighten the public issue feed toward the concept sheet, including clearer row density and stronger issue metadata.
 3. Improve the admin dashboard toward the concept sheet with richer but still local-only analytics.
 4. Add photo-evidence placeholders and privacy language without storing files.
@@ -54,7 +54,7 @@ Remaining snapshot-aligned work should be incremental:
 
 ### T0012 - Accessibility and Keyboard Verification Pass
 
-Status: Ready for Agent
+Status: Done
 
 Purpose:
 
@@ -62,11 +62,11 @@ Harden the current static MVP before more UI work. This addresses the biggest cu
 
 Expected result:
 
-Keyboard navigation, focus states, labels, live regions, and mobile text containment are verified and improved.
+Keyboard navigation, focus states, labels, live regions, and mobile text containment are improved. Human browser verification remains listed in `docs/Manual_UI_Checks.md`.
 
 ### T0013 - UI Snapshot Fidelity Pass
 
-Status: Planned
+Status: Ready for Agent
 
 Purpose:
 
@@ -176,8 +176,7 @@ Backend, database, auth, and deployment decisions require explicit approval befo
 - Photo upload storage, retention, and public visibility.
 - Whether local JSON exports can ever become official records.
 - Whether to introduce dependencies for tests or framework migration.
-- Whether and when to initialize this project as a git repository.
 
 ## Recommended Immediate Action
 
-Proceed with T0012 only. After T0012, provide a completion report, update state/follow-ups, then prepare T0013 as the next UI snapshot fidelity ticket.
+Proceed with T0013 only after reviewing the T0012 completion report and, ideally, completing the remaining human keyboard/mobile browser checks.

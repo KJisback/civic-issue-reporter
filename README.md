@@ -6,9 +6,9 @@ The MVP will let citizens report local issues with category, location, descripti
 
 ## Current Status
 
-T0001 through T0010 are complete.
+T0001 through T0012 are complete.
 
-The current version is a no-dependency static prototype with local browser storage, citizen reporting, triage controls, duplicate review actions, issue details, dashboard summaries, and local export/print summary support.
+The current version is a no-dependency static prototype with local browser storage, citizen reporting, triage controls, duplicate review actions, issue details, dashboard summaries, local export/print summary support, and a first accessibility/keyboard hardening pass.
 
 ## Run Locally
 
@@ -35,6 +35,7 @@ civic-issue-reporter/
 - Open `src/index.html`.
 - Confirm the report form, issue cards, and metrics render.
 - Confirm the summary section renders.
+- Confirm keyboard focus is visible across navigation, forms, buttons, selects, issue detail, and export/print controls.
 - Use `Export JSON` to download a local summary.
 - Use `Print summary` to open the browser print dialog.
 - Use `docs/Manual_UI_Checks.md` for the full browser/manual UI checklist.
@@ -42,7 +43,7 @@ civic-issue-reporter/
 
 ## Next Ticket
 
-T0012 - Accessibility and Keyboard Verification Pass
+T0013 - UI Snapshot Fidelity Pass
 
 ## Development Plan
 

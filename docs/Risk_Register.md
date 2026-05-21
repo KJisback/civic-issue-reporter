@@ -66,6 +66,6 @@ The app has several interactive controls and dynamic regions that may have keybo
 
 Mitigation:
 
-Run T0012 as a dedicated accessibility and keyboard verification pass before adding heavier workflows.
+T0012 added skip navigation, stronger visible focus, clearer control names, error associations, live-region improvements, focus restoration, and text containment rules. Complete the remaining manual browser checklist before accepting the next UI milestone.
 
-Status: Open
+Status: Reduced after T0012; manual browser verification remains open

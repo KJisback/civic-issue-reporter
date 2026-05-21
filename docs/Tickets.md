@@ -498,7 +498,7 @@ Manual verification:
 
 ## T0011A - Git Repository Initialization and Manual UI Checklist
 
-Status: Partially Complete / Blocked
+Status: Done
 
 Priority: High
 
@@ -539,11 +539,11 @@ Non-goals:
 
 Acceptance criteria:
 
-- Local git repository is initialized. Blocked: a partial `.git` directory exists, but Windows ACLs prevent Git from writing `.git/config` and `.git/index.lock`.
+- Local git repository is initialized on `main`.
 - `.gitignore` exists and excludes local secrets, generated data, dependency folders, and exported JSON summaries.
-- Initial project commit exists locally. Blocked until `.git` ACLs are fixed or the partial `.git` directory is recreated.
+- Initial project commit exists locally.
 - Manual browser/UI checks are documented as a checklist.
-- Remote push status is reported clearly. Blocked until local git is healthy and GitHub CLI is re-authenticated or a remote URL is provided.
+- Remote push status is reported clearly. GitHub `main` matched local `HEAD` at `5b0aa3d66083a6dc72241f08076cc43c26bc16b2` during the T0012 preflight.
 
 Automated checks:
 
@@ -567,7 +567,7 @@ Human review triggers:
 
 ## T0012 - Accessibility and Keyboard Verification Pass
 
-Status: Ready for Agent
+Status: Done
 
 Priority: High
 
@@ -630,9 +630,15 @@ Manual verification:
 7. Run the T0010 export/print smoke steps.
 8. Check browser console for errors.
 
+Completion notes:
+
+- T0012 added skip navigation, stronger visible focus, clearer dynamic control names, field error associations, live-region/status improvements, issue detail focus restoration, Escape-to-close support, and responsive text containment safeguards.
+- `node --check src/app.js` passed.
+- In-app browser automation was unavailable during verification, so the full human keyboard/mobile browser checklist remains listed in `docs/Manual_UI_Checks.md`.
+
 ## T0013 - UI Snapshot Fidelity Pass
 
-Status: Planned
+Status: Ready for Agent
 
 Priority: High
 

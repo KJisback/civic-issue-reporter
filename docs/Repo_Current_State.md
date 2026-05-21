@@ -18,10 +18,11 @@ No git branch at workspace root.
 - T0010 - Export and Print Summary
 - T0011 - Backlog Refresh and Next Handoff
 - T0011A - Git Repository Initialization and Manual UI Checklist
+- T0012 - Accessibility and Keyboard Verification Pass
 
 ## Current App Status
 
-The project has a no-dependency static app with a refined minimal civic UI, citizen report form, local issue records, browser persistence through `localStorage`, sample issue cards, admin-style metrics, category/status/priority filters, local status and priority controls, map-ready location fields, a non-interactive location readiness preview, explainable local duplicate hints, local duplicate review actions, local priority assistance, a compact workflow summary, a focused issue detail panel with status timeline, and a municipal review summary with print and JSON export actions.
+The project has a no-dependency static app with a refined minimal civic UI, citizen report form, local issue records, browser persistence through `localStorage`, sample issue cards, admin-style metrics, category/status/priority filters, local status and priority controls, map-ready location fields, a non-interactive location readiness preview, explainable local duplicate hints, local duplicate review actions, local priority assistance, a compact workflow summary, a focused issue detail panel with status timeline, and a municipal review summary with print and JSON export actions. T0012 added a first accessibility and keyboard hardening pass with skip navigation, stronger focus states, more specific control names, field error associations, live-region improvements, focus restoration for detail interactions, and responsive text containment safeguards.
 
 A generated UI/UX concept sheet has been saved as the design reference for future UI implementation.
 
@@ -42,6 +43,7 @@ None.
 - Open `src/index.html` directly in a browser.
 - `node --check src/app.js`
 - `git status --short`
+- Git write commands may need sandbox escalation in Codex because sandboxed writes to `.git/index.lock` are blocked by host policy.
 
 ## Latest Check Results
 
@@ -50,8 +52,8 @@ None.
 - Lint: Not run, no lint system.
 - Typecheck: Not run, no type system.
 - Syntax: Pass, `node --check src/app.js`.
-- Git: Local repository initialized on `main` with initial commit `ed25f63`.
-- GitHub: Remote `origin` points to `https://github.com/KJisback/civic-issue-reporter.git`; GitHub API confirms `main` at commit `ed25f63a4bfa564b52d9664f3cdf4ad79cb6d561`.
+- Git: Local repository initialized on `main`; local `HEAD` is `5b0aa3d66083a6dc72241f08076cc43c26bc16b2`.
+- GitHub: Remote `origin` points to `https://github.com/KJisback/civic-issue-reporter.git`; GitHub API confirms remote `main` at `5b0aa3d66083a6dc72241f08076cc43c26bc16b2`.
 
 ## Known Issues
 
@@ -61,19 +63,19 @@ None.
 - Visual verification should still be done manually in a browser at desktop and mobile widths.
 - Duplicate review actions are local-only and do not merge records or record real staff identity.
 - JSON export is a browser-generated local file and is not a secure official record.
-- Keyboard and accessibility behavior has not yet had a dedicated pass across all controls.
+- Browser runtime automation was unavailable during the T0012 pass, so the manual keyboard/accessibility checklist still needs a human browser run before milestone acceptance.
 
 ## Current Risks
 
 - Future real map, geolocation, image upload, and notification features may create privacy concerns and need explicit product decisions.
-- Branch-per-ticket workflow is enforceable locally.
+- Branch-per-ticket workflow is enforceable locally. In Codex, Git write commands may need sandbox escalation on this host, while normal Git reads and GitHub API checks work.
 - GitHub CLI works when the dead proxy environment variables are cleared for network commands.
 - Direct Git HTTPS remote commands may need `GIT_EXEC_PATH=F:\Kuku\Workspace\.codex-tools\mingit\mingw64\bin` and cleared proxy variables in this Codex shell.
 - Browser-based manual verification remains a human activity after implementation tickets.
 
 ## Next Recommended Ticket
 
-T0012 - Accessibility and Keyboard Verification Pass
+T0013 - UI Snapshot Fidelity Pass
 
 ## Last Updated
 

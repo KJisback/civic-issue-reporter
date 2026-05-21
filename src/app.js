@@ -76,6 +76,8 @@ let filters = {
   priority: "All"
 };
 let selectedIssueId = null;
+let lastDetailTriggerIssueId = null;
+let pendingFocusTarget = null;
 
 function createIssue({ title, category, location, ward, landmark, description, coordinates }) {
   const now = new Date().toISOString();
@@ -471,7 +473,7 @@ function renderIssues() {
             <h3>${escapeHtml(issue.title)}</h3>
             <p>${escapeHtml(issue.description)}</p>
             <time datetime="${issue.createdAt}">Reported ${formatDate(issue.createdAt)}</time>
-            <button class="secondary-button details-button" type="button" data-action="view-detail" data-issue-id="${escapeHtml(issue.id)}">View details</button>
+            <button class="secondary-button details-button" type="button" data-action="view-detail" data-issue-id="${escapeHtml(issue.id)}" aria-label="View details for ${escapeHtml(issue.title)}">View details</button>
           </div>
           <div class="issue-side">
             <div class="location-block">
@@ -486,13 +488,13 @@ function renderIssues() {
           <div class="triage-controls" aria-label="Triage controls for ${escapeHtml(issue.title)}">
             <label>
               Status
-              <select data-action="status" data-issue-id="${escapeHtml(issue.id)}">
+              <select data-action="status" data-issue-id="${escapeHtml(issue.id)}" aria-label="Status for ${escapeHtml(issue.title)}">
                 ${optionMarkup(STATUSES, issue.status)}
               </select>
             </label>
             <label>
               Priority
-              <select data-action="priority" data-issue-id="${escapeHtml(issue.id)}">
+              <select data-action="priority" data-issue-id="${escapeHtml(issue.id)}" aria-label="Priority for ${escapeHtml(issue.title)}">
                 ${optionMarkup(PRIORITIES, issue.priority)}
               </select>
             </label>
@@ -512,7 +514,7 @@ function timelineMarkup(issue) {
 
     return `
       <li class="${isComplete ? "is-complete" : ""} ${isCurrent ? "is-current" : ""}">
-        <span></span>
+        <span aria-hidden="true"></span>
         <div>
           <strong>${escapeHtml(status)}</strong>
           <p>${isCurrent ? `Current status, updated ${formatDate(issue.updatedAt)}` : isComplete ? "Completed in local workflow" : "Pending"}</p>
@@ -541,7 +543,7 @@ function duplicateListMarkup(issue) {
               </div>
               <label>
                 Review action
-                <select data-action="duplicate-review" data-issue-id="${escapeHtml(issue.id)}" data-duplicate-id="${escapeHtml(hint.id)}">
+                <select data-action="duplicate-review" data-issue-id="${escapeHtml(issue.id)}" data-duplicate-id="${escapeHtml(hint.id)}" aria-label="Review action for possible duplicate ${escapeHtml(hint.title)}">
                   ${optionMarkup(DUPLICATE_REVIEW_STATUSES, hint.reviewStatus)}
                 </select>
               </label>
@@ -560,23 +562,25 @@ function renderIssueDetail() {
 
   if (!issue) {
     panel.hidden = true;
+    panel.removeAttribute("aria-labelledby");
     panel.innerHTML = "";
     return;
   }
 
   panel.hidden = false;
+  panel.setAttribute("aria-labelledby", "issueDetailTitle");
   panel.innerHTML = `
     <div class="detail-header">
       <div>
         <p class="eyebrow">Issue detail</p>
-        <h2>${escapeHtml(issue.title)}</h2>
+        <h2 id="issueDetailTitle">${escapeHtml(issue.title)}</h2>
         <div class="card-meta">
           <span class="tag">${escapeHtml(issue.category)}</span>
           <span class="tag ${priorityClass(issue.priority)}">${escapeHtml(issue.priority)}</span>
           <span class="tag status-${statusClass(issue.status)}">${escapeHtml(issue.status)}</span>
         </div>
       </div>
-      <button class="secondary-button" type="button" data-action="close-detail">Close</button>
+      <button class="secondary-button" type="button" data-action="close-detail" aria-label="Close issue detail for ${escapeHtml(issue.title)}">Close</button>
     </div>
 
     <div class="detail-grid">
@@ -611,13 +615,13 @@ function renderIssueDetail() {
         <h3>Triage controls</h3>
         <label>
           Status
-          <select data-action="status" data-issue-id="${escapeHtml(issue.id)}">
+          <select data-action="status" data-issue-id="${escapeHtml(issue.id)}" aria-label="Status for ${escapeHtml(issue.title)}">
             ${optionMarkup(STATUSES, issue.status)}
           </select>
         </label>
         <label>
           Priority
-          <select data-action="priority" data-issue-id="${escapeHtml(issue.id)}">
+          <select data-action="priority" data-issue-id="${escapeHtml(issue.id)}" aria-label="Priority for ${escapeHtml(issue.title)}">
             ${optionMarkup(PRIORITIES, issue.priority)}
           </select>
         </label>
@@ -731,11 +735,13 @@ function renderApp() {
   renderWorkflowBoard();
   renderIssueDetail();
   renderSummaryPreview();
+  restorePendingFocus();
 }
 
 function clearValidation() {
   ["issueTitle", "issueLocation", "issueDescription", "issueLatitude", "issueLongitude"].forEach((fieldId) => {
     document.querySelector(`#${fieldId}`).removeAttribute("aria-invalid");
+    document.querySelector(`#${fieldId}`).removeAttribute("aria-errormessage");
   });
 
   ["titleError", "locationError", "descriptionError", "latitudeError", "longitudeError"].forEach((errorId) => {
@@ -784,7 +790,9 @@ function validateForm(formData) {
   }
 
   Object.entries(errors).forEach(([field, message]) => {
-    document.querySelector(`#issue${field.charAt(0).toUpperCase()}${field.slice(1)}`).setAttribute("aria-invalid", "true");
+    const fieldControl = document.querySelector(`#issue${field.charAt(0).toUpperCase()}${field.slice(1)}`);
+    fieldControl.setAttribute("aria-invalid", "true");
+    fieldControl.setAttribute("aria-errormessage", `${field}Error`);
     document.querySelector(`#${field}Error`).textContent = message;
   });
 
@@ -815,6 +823,7 @@ function handleSubmit(event) {
 
   if (!validateForm(formData)) {
     setStatus("Please complete the highlighted fields.");
+    focusFirstInvalidField();
     return;
   }
 
@@ -892,6 +901,11 @@ function handleTriageChange(event) {
   }
 
   const { issueId, action } = control.dataset;
+  pendingFocusTarget = {
+    action,
+    issueId,
+    duplicateId: control.dataset.duplicateId || null
+  };
 
   if (action === "status") {
     updateIssue(issueId, { status: control.value });
@@ -915,7 +929,9 @@ function handleIssueClick(event) {
 
   if (control.dataset.action === "view-detail") {
     selectedIssueId = control.dataset.issueId;
+    lastDetailTriggerIssueId = selectedIssueId;
     renderIssueDetail();
+    document.querySelector("#issueDetail").focus({ preventScroll: true });
     document.querySelector("#issueDetail").scrollIntoView({ behavior: "smooth", block: "start" });
   }
 }
@@ -930,6 +946,15 @@ function handleDetailClick(event) {
   if (control.dataset.action === "close-detail") {
     selectedIssueId = null;
     renderIssueDetail();
+    focusLastDetailTrigger();
+  }
+}
+
+function handleDetailKeydown(event) {
+  if (event.key === "Escape" && selectedIssueId) {
+    selectedIssueId = null;
+    renderIssueDetail();
+    focusLastDetailTrigger();
   }
 }
 
@@ -971,6 +996,48 @@ function exportSummary() {
   setSummaryStatus("JSON summary exported from local browser data.");
 }
 
+function focusFirstInvalidField() {
+  const invalidField = document.querySelector("[aria-invalid='true']");
+
+  if (invalidField) {
+    invalidField.focus();
+  }
+}
+
+function findControlByTarget(target) {
+  if (!target) {
+    return null;
+  }
+
+  return Array.from(document.querySelectorAll(`[data-action="${target.action}"]`)).find((control) => {
+    const duplicateMatches = target.duplicateId ? control.dataset.duplicateId === target.duplicateId : true;
+    return control.dataset.issueId === target.issueId && duplicateMatches;
+  });
+}
+
+function restorePendingFocus() {
+  const control = findControlByTarget(pendingFocusTarget);
+  pendingFocusTarget = null;
+
+  if (control) {
+    control.focus();
+  }
+}
+
+function focusLastDetailTrigger() {
+  if (!lastDetailTriggerIssueId) {
+    return;
+  }
+
+  const trigger = Array.from(document.querySelectorAll("[data-action='view-detail']")).find(
+    (control) => control.dataset.issueId === lastDetailTriggerIssueId
+  );
+
+  if (trigger) {
+    trigger.focus();
+  }
+}
+
 document.querySelector("#reportForm").addEventListener("submit", handleSubmit);
 document.querySelector("#resetDemoData").addEventListener("click", resetDemoData);
 document.querySelector("#printSummary").addEventListener("click", printSummary);
@@ -979,6 +1046,7 @@ document.querySelector("#issueList").addEventListener("change", handleTriageChan
 document.querySelector("#issueList").addEventListener("click", handleIssueClick);
 document.querySelector("#issueDetail").addEventListener("change", handleTriageChange);
 document.querySelector("#issueDetail").addEventListener("click", handleDetailClick);
+document.querySelector("#issueDetail").addEventListener("keydown", handleDetailKeydown);
 document.querySelector("#categoryFilter").addEventListener("change", handleFilterChange);
 document.querySelector("#statusFilter").addEventListener("change", handleFilterChange);
 document.querySelector("#priorityFilter").addEventListener("change", handleFilterChange);

@@ -168,8 +168,8 @@ Use this before larger design, data, or release changes.
 4. Run `git status --short`.
 5. Confirm the working tree is clean after the local commit.
 6. Run `git log --oneline -1`.
-7. Confirm the latest commit is the initial project commit.
-8. Confirm GitHub CLI is authenticated before attempting a remote push.
+7. Confirm GitHub `main` matches local `HEAD`.
+8. Confirm GitHub CLI is authenticated before attempting future remote pushes.
 
 ## T0012 - Accessibility and Keyboard Verification Pass
 
@@ -177,7 +177,15 @@ Use this before larger design, data, or release changes.
 2. Use only keyboard navigation from the top of the page through report form, dashboard, summary, issue filters, issue cards, detail panel, duplicate review controls, and export/print actions.
 3. Confirm focus is visible at every step.
 4. Submit invalid form data and confirm validation messages are readable and associated with the affected fields.
-5. Open and close an issue detail panel by keyboard.
+5. Open and close an issue detail panel by keyboard, including `Escape` while detail focus is inside the panel.
 6. At a mobile-width viewport, confirm controls and text do not overlap or clip.
 7. Run the T0010 export/print smoke steps.
 8. Check browser console for errors.
+
+## T0013 - UI Snapshot Fidelity Pass
+
+1. Open `src/index.html`.
+2. Compare the citizen report, public feed, dashboard, summary, and issue detail surfaces against `docs/design-references/ui-ux-concept-sheet-001.png`.
+3. Confirm reporting, triage, duplicate review, detail, export, and print workflows still work.
+4. Check desktop and mobile-width layouts.
+5. Confirm no text overlap, clipped controls, or console errors.

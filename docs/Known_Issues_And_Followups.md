@@ -92,23 +92,25 @@ Before any production reporting workflow, decide export retention, official reco
 
 Status: Open
 
-### F0009 - Run Dedicated Accessibility Pass
+### F0011 - Complete Human Browser Accessibility Run
 
-Source ticket: T0011
+Source ticket: T0012
 
-Severity: Medium
+Severity: Low
 
-Type: accessibility / quality
+Type: accessibility / verification
 
 Description:
 
-The MVP now has forms, filters, detail panels, duplicate review controls, and export/print actions, but keyboard and accessibility behavior has not had a dedicated pass.
+T0012 implemented the accessibility and keyboard hardening pass and passed syntax/static checks, but the in-app browser automation runtime was unavailable during verification.
 
 Recommended action:
 
-Handle in T0012 before adding heavier workflows.
+Run the T0012 keyboard and mobile-width checklist manually in a browser before accepting the next UI milestone.
 
 Status: Open
+
+## Closed Followups
 
 ### F0010 - Repair Git Repository Initialization
 
@@ -128,7 +130,23 @@ Use `docs/Git_Setup_Recovery.md` for host-specific GitHub CLI and direct Git HTT
 
 Status: Closed after recovery
 
-## Closed Followups
+### F0009 - Run Dedicated Accessibility Pass
+
+Source ticket: T0011
+
+Severity: Medium
+
+Type: accessibility / quality
+
+Description:
+
+The MVP had forms, filters, detail panels, duplicate review controls, and export/print actions, but keyboard and accessibility behavior had not had a dedicated pass.
+
+Recommended action:
+
+Handled in T0012 with skip navigation, visible focus styling, live-region/status improvements, field error associations, more specific dynamic control names, detail focus restoration, Escape-to-close support, and responsive text containment rules.
+
+Status: Closed in T0012
 
 ### F0007 - Add Issue Detail Timeline
 
