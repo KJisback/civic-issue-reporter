@@ -1,0 +1,27 @@
+# Local OS/editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+
+# Local environment and secrets
+.env
+.env.*
+
+# Logs and temporary output
+*.log
+tmp/
+temp/
+
+# Dependencies and generated build output for future tooling
+node_modules/
+dist/
+build/
+coverage/
+
+# Local data exports
+*.db
+*.sqlite
+*.sqlite3
+civic-issue-summary-*.json

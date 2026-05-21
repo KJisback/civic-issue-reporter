@@ -1,0 +1,53 @@
+# Civic Issue Reporter
+
+A civic issue reporting and resolution platform for citizens and municipal teams.
+
+The MVP will let citizens report local issues with category, location, description, and photo evidence, then let administrators triage, prioritize, assign, and resolve those reports through a dashboard.
+
+## Current Status
+
+T0001 through T0010 are complete.
+
+The current version is a no-dependency static prototype with local browser storage, citizen reporting, triage controls, duplicate review actions, issue details, dashboard summaries, and local export/print summary support.
+
+## Run Locally
+
+Open `src/index.html` in a browser.
+
+No install step is required for T0001.
+
+## Project Structure
+
+```text
+civic-issue-reporter/
+  AGENTS.md
+  WORKFLOW.md
+  README.md
+  docs/
+  src/
+    index.html
+    styles.css
+    app.js
+```
+
+## Verification
+
+- Open `src/index.html`.
+- Confirm the report form, issue cards, and metrics render.
+- Confirm the summary section renders.
+- Use `Export JSON` to download a local summary.
+- Use `Print summary` to open the browser print dialog.
+- Use `docs/Manual_UI_Checks.md` for the full browser/manual UI checklist.
+- Confirm the browser console has no errors.
+
+## Next Ticket
+
+T0012 - Accessibility and Keyboard Verification Pass
+
+## Development Plan
+
+See `docs/Development_Plan.md` for the process coverage review and next ticket sequence.
+
+## Git Status
+
+Git setup is currently blocked by Windows ACLs on a partial `.git` directory and invalid GitHub CLI authentication. See `docs/Git_Setup_Recovery.md`.
