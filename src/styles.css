@@ -791,6 +791,11 @@ button {
   background: var(--teal-soft);
 }
 
+.tag-assignment {
+  color: var(--green);
+  background: var(--green-soft);
+}
+
 .duplicate-linked {
   color: var(--green);
   background: var(--green-soft);
@@ -1122,7 +1127,7 @@ button {
 
 .summary-row {
   display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(100px, 0.55fr) minmax(100px, 0.55fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.25fr) minmax(92px, 0.5fr) minmax(92px, 0.5fr) minmax(120px, 0.65fr) minmax(0, 1fr);
   gap: 10px;
   padding: 10px 12px;
   border-top: 1px solid var(--line);

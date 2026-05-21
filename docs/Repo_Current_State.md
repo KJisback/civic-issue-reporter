@@ -2,7 +2,7 @@
 
 ## Current Branch
 
-`feature/t0014-photo-evidence-placeholder`
+`feature/t0015-local-assignment-prototype`
 
 ## Completed Tickets
 
@@ -21,17 +21,18 @@
 - T0012 - Accessibility and Keyboard Verification Pass
 - T0013 - UI Snapshot Fidelity Pass
 - T0014 - Photo Evidence Placeholder and Privacy Copy
+- T0015 - Local Assignment Prototype
 
 ## Current App Status
 
-The project has a no-dependency static app with a refined minimal civic UI, citizen report form, local issue records, browser persistence through `localStorage`, sample issue cards, admin-style metrics, category/status/priority filters, local status and priority controls, map-ready location fields, a non-interactive location readiness preview, explainable local duplicate hints, local duplicate review actions, local priority assistance, a compact workflow summary, a focused issue detail panel with status timeline, and a municipal review summary with print and JSON export actions. T0012 added a first accessibility and keyboard hardening pass with skip navigation, stronger focus states, more specific control names, field error associations, live-region improvements, focus restoration for detail interactions, and responsive text containment safeguards. T0013 tightened the UI toward the saved concept sheet with report guidance cards, denser public report rows, category visual markers, a local map-preview rail, rounded civic panels, stronger dashboard stat treatments, and a more composed detail header. T0014 added privacy-safe photo evidence placeholders in intake, issue cards, and detail without adding file pickers, uploads, storage, backend, or export behavior.
+The project has a no-dependency static app with a refined minimal civic UI, citizen report form, local issue records, browser persistence through `localStorage`, sample issue cards, admin-style metrics, category/status/priority filters, local status, priority, and municipal team assignment controls, map-ready location fields, a non-interactive location readiness preview, explainable local duplicate hints, local duplicate review actions, local priority assistance, a compact workflow summary, a focused issue detail panel with status timeline, and a municipal review summary with print and JSON export actions. T0012 added a first accessibility and keyboard hardening pass with skip navigation, stronger focus states, more specific control names, field error associations, live-region improvements, focus restoration for detail interactions, and responsive text containment safeguards. T0013 tightened the UI toward the saved concept sheet with report guidance cards, denser public report rows, category visual markers, a local map-preview rail, rounded civic panels, stronger dashboard stat treatments, and a more composed detail header. T0014 added privacy-safe photo evidence placeholders in intake, issue cards, and detail without adding file pickers, uploads, storage, backend, or export behavior. T0015 added local-only team assignment labels and controls without staff identity or authentication.
 
 A generated UI/UX concept sheet has been saved as the design reference for future UI implementation.
 
 ## Folder Structure Summary
 
 - `src/` contains the static app shell.
-- `src/app.js` defines the local issue object shape, form submission behavior, validation, sample data, map-ready location metadata, privacy-safe photo evidence placeholder display, filters, triage controls, local duplicate/priority assistance, duplicate review actions, metrics, workflow summary, issue detail panel, export/print summary, and browser storage.
+- `src/app.js` defines the local issue object shape, form submission behavior, validation, sample data, map-ready location metadata, privacy-safe photo evidence placeholder display, filters, triage and assignment controls, local duplicate/priority assistance, duplicate review actions, metrics, workflow summary, issue detail panel, export/print summary, and browser storage.
 - `docs/` contains planning, ticket, verification, state, risk, review, manual UI checklist, and development plan documents.
 - `docs/design-references/` contains saved visual references for UI implementation.
 - `README.md`, `AGENTS.md`, and `WORKFLOW.md` define setup and project rules.
@@ -54,13 +55,13 @@ None.
 - Lint: Not run, no lint system.
 - Typecheck: Not run, no type system.
 - Syntax: Pass, `node --check src/app.js`.
-- Git: Local repository initialized; current ticket branch is `feature/t0014-photo-evidence-placeholder`.
-- GitHub: Remote `origin` points to `https://github.com/KJisback/civic-issue-reporter.git`; previous ticket branches are pushed and T0014 will be pushed during ticket closeout.
+- Git: Local repository initialized; current ticket branch is `feature/t0015-local-assignment-prototype`.
+- GitHub: Remote `origin` points to `https://github.com/KJisback/civic-issue-reporter.git`; previous ticket branches are pushed and T0015 will be pushed during ticket closeout.
 
 ## Known Issues
 
 - Real map integration and photo upload are placeholders; T0014 clarifies that photos are not stored in the MVP.
-- Triage controls are local-only and do not include real staff identity or assignment.
+- Triage and assignment controls are local-only and do not include real staff identity.
 - Duplicate detection is a simple local heuristic and may miss real duplicates or flag weak matches.
 - Visual verification should still be done manually in a browser at desktop and mobile widths.
 - Duplicate review actions are local-only and do not merge records or record real staff identity.
@@ -77,7 +78,7 @@ None.
 
 ## Next Recommended Ticket
 
-T0015 - Local Assignment Prototype
+T0016 - Admin Analytics Snapshot
 
 ## Last Updated
 

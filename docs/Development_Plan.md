@@ -44,9 +44,8 @@ The current app already implements the concept direction at a broad level:
 Remaining snapshot-aligned work should be incremental:
 
 1. Complete the remaining human browser checks for keyboard, focus, labels, responsive behavior, and UI snapshot comparison before accepting the next UI milestone.
-2. Add local-only staff/team assignment labels without identity, auth, or backend.
-3. Improve the admin dashboard with richer but still local-only analytics.
-4. Add a local audit/history surface for status, priority, duplicate review, and assignment changes.
+2. Improve the admin dashboard with richer but still local-only analytics.
+3. Add a local audit/history surface for status, priority, duplicate review, and assignment changes.
 
 ## Next Development Sequence
 
@@ -88,7 +87,7 @@ The form, issue cards, and issue detail surfaces explain that photo evidence is 
 
 ### T0015 - Local Assignment Prototype
 
-Status: Ready for Agent
+Status: Done
 
 Purpose:
 
@@ -100,7 +99,7 @@ Issues can be assigned to a small fixed set of municipal teams in local state, w
 
 ### T0016 - Admin Analytics Snapshot
 
-Status: Planned
+Status: Ready for Agent
 
 Purpose:
 
@@ -177,4 +176,4 @@ Backend, database, auth, and deployment decisions require explicit approval befo
 
 ## Recommended Immediate Action
 
-Proceed with T0015 only after reviewing the T0014 completion report and keeping staff identity/auth decisions out of scope.
+Proceed with T0016 only after reviewing the T0015 completion report and keeping analytics local-only.

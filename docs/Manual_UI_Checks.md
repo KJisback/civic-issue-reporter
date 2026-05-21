@@ -63,8 +63,11 @@ Use this checklist after UI tickets and before accepting a milestone. Check item
 - [ ] Change issue status to `In progress`.
 - [ ] Change issue status to `Resolved`.
 - [ ] Change priority to `High`, `Medium`, and `Low`.
+- [ ] Change assigned team from `Unassigned` to a municipal team.
 - [ ] Confirm status and priority chips update immediately.
+- [ ] Confirm assigned team labels update in the issue card and detail panel.
 - [ ] Reload and confirm status and priority persist.
+- [ ] Reload and confirm assigned team persists.
 - [ ] Confirm metrics and workflow summary update after changes.
 
 ## Filters
@@ -101,9 +104,10 @@ Use this checklist after UI tickets and before accepting a milestone. Check item
 - [ ] Open the `Summary` section.
 - [ ] Confirm total reports, open reports, high priority reports, map-ready reports, and duplicate hints needing review render.
 - [ ] Change an issue status or priority.
+- [ ] Change an issue assigned team.
 - [ ] Confirm the summary updates.
 - [ ] Click `Export JSON`.
-- [ ] Confirm a local JSON file downloads.
+- [ ] Confirm a local JSON file downloads and includes assigned team labels.
 - [ ] Click `Print summary`.
 - [ ] Confirm the browser print dialog opens.
 - [ ] Confirm print preview focuses on the municipal summary rather than the full working UI.

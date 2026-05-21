@@ -17,7 +17,7 @@ Primary inferred MVP:
 
 Current next ticket:
 
-T0015 - Local Assignment Prototype
+T0016 - Admin Analytics Snapshot
 
 Completed tickets:
 
@@ -36,6 +36,7 @@ Completed tickets:
 - T0012 - Accessibility and Keyboard Verification Pass
 - T0013 - UI Snapshot Fidelity Pass
 - T0014 - Photo Evidence Placeholder and Privacy Copy
+- T0015 - Local Assignment Prototype
 
 Current implementation state:
 
@@ -52,6 +53,7 @@ Current implementation state:
 - Accessibility and keyboard hardening for skip navigation, focus states, live regions, validation associations, detail focus restoration, and responsive text containment.
 - UI snapshot fidelity refinements for citizen guidance, denser public issue rows, local map-preview context, category markers, dashboard stat treatment, and detail header composition.
 - Photo evidence placeholders and privacy copy without upload, storage, backend, or export behavior.
+- Local-only municipal team assignment labels and controls without staff identity or authentication.
 - Minimal civic UI direction applied from saved concept sheet.
 
 Saved UI/UX direction:
@@ -62,11 +64,10 @@ Saved UI/UX direction:
 
 Next handoff focus:
 
-Add local-only assignment labels for municipal team ownership after staff identity decisions remain explicitly out of scope.
+Expand the dashboard toward the concept sheet with local-only operational summaries and no external charting dependency.
 
-Next sequence after T0015:
+Next sequence after T0016:
 
-- T0016 - Admin Analytics Snapshot
 - T0017 - Local Activity Timeline
 - T0018 - Local Backup and Restore
 - T0019 - Test Harness Decision and First Logic Tests

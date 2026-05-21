@@ -202,8 +202,18 @@ Use this before larger design, data, or release changes.
 ## T0015 - Local Assignment Prototype
 
 1. Open `src/index.html`.
-2. Confirm each issue can show local-only municipal team ownership after the ticket is implemented.
+2. Change an issue assigned team from `Unassigned` to a municipal team.
 3. Confirm assignment labels remain local and do not imply real staff identity or authentication.
-4. Reload and confirm any local assignment state persists if assignment editing is implemented.
+4. Reload and confirm assignment state persists.
 5. Confirm reporting, triage, duplicate review, detail, export, and print workflows still work.
+6. Export JSON and confirm assigned team labels are included.
+7. Check browser console for errors.
+
+## T0016 - Admin Analytics Snapshot
+
+1. Open `src/index.html`.
+2. Confirm the dashboard includes local-only operational summaries after the ticket is implemented.
+3. Confirm status, priority, category, assignment, and stale/open indicators use existing local data only.
+4. Confirm no external charting dependency or backend is added.
+5. Confirm reporting, triage, assignment, duplicate review, detail, export, and print workflows still work.
 6. Check browser console for errors.

@@ -1,6 +1,14 @@
 const STORAGE_KEY = "civicIssueReporter.issues.v1";
 const STATUSES = ["Submitted", "Triaged", "In progress", "Resolved"];
 const PRIORITIES = ["Low", "Medium", "High"];
+const ASSIGNMENT_TEAMS = [
+  "Unassigned",
+  "Roads maintenance",
+  "Sanitation crew",
+  "Water services",
+  "Lighting team",
+  "Public safety desk"
+];
 const DUPLICATE_REVIEW_STATUSES = ["Needs review", "Linked", "Dismissed"];
 const DEFAULT_DUPLICATE_REVIEW_STATUS = "Needs review";
 const CATEGORIES = [
@@ -204,6 +212,7 @@ function saveIssues(nextIssues) {
 
 function normalizeIssue(issue) {
   const duplicateHints = normalizeDuplicateHints(issue.duplicateHints);
+  const assignedTeam = ASSIGNMENT_TEAMS.includes(issue.assignedTeam) ? issue.assignedTeam : "Unassigned";
 
   return {
     ward: "",
@@ -211,6 +220,7 @@ function normalizeIssue(issue) {
     coordinates: null,
     priorityReason: "",
     ...issue,
+    assignedTeam,
     duplicateHints
   };
 }
@@ -311,6 +321,10 @@ function photoEvidenceNote() {
   return "Photo uploads are planned for a later privacy-approved ticket.";
 }
 
+function assignmentLabel(issue) {
+  return issue.assignedTeam || "Unassigned";
+}
+
 function formatDateTime(isoDate) {
   return new Intl.DateTimeFormat("en", {
     year: "numeric",
@@ -383,6 +397,7 @@ function createMunicipalSummary() {
       ward: issue.ward || "Not specified",
       landmark: issue.landmark || "Not specified",
       coordinates: formatCoordinates(issue.coordinates),
+      assignedTeam: assignmentLabel(issue),
       duplicateReview: duplicateReviewSummary(issue) || "No duplicate hints",
       reportedAt: issue.createdAt,
       updatedAt: issue.updatedAt
@@ -439,6 +454,7 @@ function renderSummaryPreview() {
         <span role="columnheader">Issue</span>
         <span role="columnheader">Status</span>
         <span role="columnheader">Priority</span>
+        <span role="columnheader">Team</span>
         <span role="columnheader">Location</span>
       </div>
       ${
@@ -450,6 +466,7 @@ function renderSummaryPreview() {
                     <span role="cell">${escapeHtml(issue.title)}</span>
                     <span role="cell">${escapeHtml(issue.status)}</span>
                     <span role="cell">${escapeHtml(issue.priority)}</span>
+                    <span role="cell">${escapeHtml(issue.assignedTeam)}</span>
                     <span role="cell">${escapeHtml(issue.location)}</span>
                   </div>
                 `
@@ -480,6 +497,7 @@ function renderIssues() {
               <span class="tag">${escapeHtml(issue.category)}</span>
               <span class="tag ${priorityClass(issue.priority)}">${escapeHtml(issue.priority)}</span>
               <span class="tag status-${statusClass(issue.status)}">${escapeHtml(issue.status)}</span>
+              <span class="tag tag-assignment">${escapeHtml(assignmentLabel(issue))}</span>
               ${issue.duplicateHints.length > 0 ? `<span class="tag tag-warning">${escapeHtml(duplicateReviewSummary(issue))}</span>` : ""}
             </div>
             <div class="issue-title-row">
@@ -508,6 +526,7 @@ function renderIssues() {
               <span class="location-detail">Map-ready: ${escapeHtml(formatCoordinates(issue.coordinates))}</span>
             </div>
             <p><strong>Priority note:</strong> ${escapeHtml(issue.priorityReason || "Priority can be adjusted by staff.")}</p>
+            <p><strong>Assigned team:</strong> ${escapeHtml(assignmentLabel(issue))}. Local label only, no staff identity.</p>
             ${issue.duplicateHints.length > 0 ? `<p><strong>Duplicate hint:</strong> ${escapeHtml(duplicateReviewSummary(issue))}. Closest match: ${escapeHtml(issue.duplicateHints[0].title)} near ${escapeHtml(issue.duplicateHints[0].location)}.</p>` : ""}
           </div>
           <div class="triage-controls" aria-label="Triage controls for ${escapeHtml(issue.title)}">
@@ -522,6 +541,12 @@ function renderIssues() {
               Priority
               <select data-action="priority" data-issue-id="${escapeHtml(issue.id)}" aria-label="Priority for ${escapeHtml(issue.title)}">
                 ${optionMarkup(PRIORITIES, issue.priority)}
+              </select>
+            </label>
+            <label>
+              Assigned team
+              <select data-action="assignment" data-issue-id="${escapeHtml(issue.id)}" aria-label="Assigned team for ${escapeHtml(issue.title)}">
+                ${optionMarkup(ASSIGNMENT_TEAMS, assignmentLabel(issue))}
               </select>
             </label>
           </div>
@@ -607,6 +632,7 @@ function renderIssueDetail() {
           <span class="tag">${escapeHtml(issue.category)}</span>
           <span class="tag ${priorityClass(issue.priority)}">${escapeHtml(issue.priority)}</span>
           <span class="tag status-${statusClass(issue.status)}">${escapeHtml(issue.status)}</span>
+          <span class="tag tag-assignment">${escapeHtml(assignmentLabel(issue))}</span>
         </div>
       </div>
       <button class="secondary-button" type="button" data-action="close-detail" aria-label="Close issue detail for ${escapeHtml(issue.title)}">Close</button>
@@ -643,6 +669,7 @@ function renderIssueDetail() {
       <div class="detail-section">
         <h3>Review signals</h3>
         <p><strong>Priority:</strong> ${escapeHtml(issue.priorityReason || "Priority can be adjusted by staff.")}</p>
+        <p><strong>Assigned team:</strong> ${escapeHtml(assignmentLabel(issue))}. This is a local routing label only and does not identify a staff member.</p>
         <p><strong>Duplicate review:</strong></p>
         ${duplicateListMarkup(issue)}
       </div>
@@ -659,6 +686,12 @@ function renderIssueDetail() {
           Priority
           <select data-action="priority" data-issue-id="${escapeHtml(issue.id)}" aria-label="Priority for ${escapeHtml(issue.title)}">
             ${optionMarkup(PRIORITIES, issue.priority)}
+          </select>
+        </label>
+        <label>
+          Assigned team
+          <select data-action="assignment" data-issue-id="${escapeHtml(issue.id)}" aria-label="Assigned team for ${escapeHtml(issue.title)}">
+            ${optionMarkup(ASSIGNMENT_TEAMS, assignmentLabel(issue))}
           </select>
         </label>
       </div>
@@ -949,6 +982,10 @@ function handleTriageChange(event) {
 
   if (action === "priority") {
     updateIssue(issueId, { priority: control.value });
+  }
+
+  if (action === "assignment") {
+    updateIssue(issueId, { assignedTeam: control.value });
   }
 
   if (action === "duplicate-review") {

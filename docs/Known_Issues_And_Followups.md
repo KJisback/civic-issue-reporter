@@ -56,24 +56,6 @@ Before adding an interactive map, decide provider, API-key handling, privacy lan
 
 Status: Open
 
-### F0004 - Add Staff Assignment Later
-
-Source ticket: T0003
-
-Severity: Low
-
-Type: feature
-
-Description:
-
-Status and priority can now be changed locally, but issues cannot yet be assigned to a team or staff member.
-
-Recommended action:
-
-Add assignment only after the admin workflow and identity policy are clearer.
-
-Status: Open
-
 ### F0008 - Clarify Export Record Policy
 
 Source ticket: T0010
@@ -147,6 +129,24 @@ Run the desktop and mobile visual comparison checklist in `docs/Manual_UI_Checks
 Status: Open
 
 ## Closed Followups
+
+### F0004 - Add Staff Assignment Later
+
+Source ticket: T0003
+
+Severity: Low
+
+Type: feature
+
+Description:
+
+Status and priority could be changed locally, but issues could not yet be assigned to a municipal team.
+
+Recommended action:
+
+Handled in T0015 with fixed local team labels only. Real staff identity, authentication, and official routing remain out of scope.
+
+Status: Closed in T0015
 
 ### F0010 - Repair Git Repository Initialization
 

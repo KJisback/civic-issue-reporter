@@ -745,7 +745,7 @@ Completion notes:
 
 ## T0015 - Local Assignment Prototype
 
-Status: Ready for Agent
+Status: Done
 
 Priority: Medium
 
@@ -753,9 +753,40 @@ Goal:
 
 Add local-only assignment labels for municipal team ownership after staff identity decisions remain explicitly out of scope.
 
+Acceptance criteria:
+
+- Issues can display a local assigned team label.
+- Issue cards and issue detail expose an assigned team control.
+- Assignment changes persist through browser storage after reload.
+- Municipal summary/export includes the assigned team label.
+- Assignment copy makes clear there is no staff identity, auth, backend, or official routing.
+- No dependency, backend, auth, deployment, or external service is added.
+
+Automated checks:
+
+- `node --check src/app.js`
+
+Manual verification:
+
+1. Open `src/index.html`.
+2. Change an issue assigned team from `Unassigned` to a municipal team.
+3. Confirm the issue card, detail panel, and municipal summary update.
+4. Reload and confirm the assignment persists.
+5. Export JSON and confirm the assigned team is included.
+6. Confirm copy does not imply staff identity or authenticated routing.
+7. Check browser console for errors.
+
+Completion notes:
+
+- T0015 added a fixed local team list and assignment controls to cards and detail.
+- Older records normalize safely to `Unassigned`.
+- Summary/JSON export now includes assigned team labels.
+- Assignment remains local-only and does not add staff identity, auth, backend, deployment, dependencies, or external services.
+- `node --check src/app.js` and `git diff --check` passed.
+
 ## T0016 - Admin Analytics Snapshot
 
-Status: Planned
+Status: Ready for Agent
 
 Priority: Medium
 
