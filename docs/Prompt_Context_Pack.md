@@ -17,7 +17,7 @@ Primary inferred MVP:
 
 Current next ticket:
 
-T0017 - Local Activity Timeline
+T0018 - Local Backup and Restore
 
 Completed tickets:
 
@@ -38,6 +38,7 @@ Completed tickets:
 - T0014 - Photo Evidence Placeholder and Privacy Copy
 - T0015 - Local Assignment Prototype
 - T0016 - Admin Analytics Snapshot
+- T0017 - Local Activity Timeline
 
 Current implementation state:
 
@@ -56,6 +57,7 @@ Current implementation state:
 - Photo evidence placeholders and privacy copy without upload, storage, backend, or export behavior.
 - Local-only municipal team assignment labels and controls without staff identity or authentication.
 - Local-only dashboard analytics for priority queue, status mix, category load, team load, and stale open reports without external charting.
+- Local activity events for status, priority, assigned team, and duplicate review changes, stored only in browser storage.
 - Minimal civic UI direction applied from saved concept sheet.
 
 Saved UI/UX direction:
@@ -66,11 +68,10 @@ Saved UI/UX direction:
 
 Next handoff focus:
 
-Append local timeline events for status, priority, duplicate review, and assignment changes.
+Add local full-data export and import with validation and clear overwrite warnings.
 
-Next sequence after T0017:
+Next sequence after T0018:
 
-- T0018 - Local Backup and Restore
 - T0019 - Test Harness Decision and First Logic Tests
 - T0020 - Backend Readiness Design
 

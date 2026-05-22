@@ -36,6 +36,7 @@ const sampleIssues = [
     coordinates: { latitude: 12.971599, longitude: 77.594566 },
     photo: null,
     assignedTeam: null,
+    activityTimeline: [],
     reporterContactOptional: null,
     isSample: true
   },
@@ -54,6 +55,7 @@ const sampleIssues = [
     coordinates: null,
     photo: null,
     assignedTeam: null,
+    activityTimeline: [],
     reporterContactOptional: null,
     isSample: true
   },
@@ -72,6 +74,7 @@ const sampleIssues = [
     coordinates: { latitude: 12.975221, longitude: 77.603287 },
     photo: null,
     assignedTeam: null,
+    activityTimeline: [],
     reporterContactOptional: null,
     isSample: true
   }
@@ -109,6 +112,15 @@ function createIssue({ title, category, location, ward, landmark, description, c
     coordinates,
     photo: null,
     assignedTeam: null,
+    activityTimeline: [
+      createActivityEvent({
+        type: "created",
+        label: "Report submitted",
+        to: "Submitted",
+        happenedAt: now,
+        note: "Created in local browser storage."
+      })
+    ],
     reporterContactOptional: null,
     isSample: false
   };
@@ -213,6 +225,7 @@ function saveIssues(nextIssues) {
 function normalizeIssue(issue) {
   const duplicateHints = normalizeDuplicateHints(issue.duplicateHints);
   const assignedTeam = ASSIGNMENT_TEAMS.includes(issue.assignedTeam) ? issue.assignedTeam : "Unassigned";
+  const activityTimeline = normalizeActivityTimeline(issue.activityTimeline);
 
   return {
     ward: "",
@@ -221,7 +234,8 @@ function normalizeIssue(issue) {
     priorityReason: "",
     ...issue,
     assignedTeam,
-    duplicateHints
+    duplicateHints,
+    activityTimeline
   };
 }
 
@@ -244,6 +258,38 @@ function normalizeDuplicateHints(duplicateHints) {
       reviewedAt: hint.reviewedAt || null
     };
   });
+}
+
+function normalizeActivityTimeline(activityTimeline) {
+  if (!Array.isArray(activityTimeline)) {
+    return [];
+  }
+
+  return activityTimeline
+    .map((event) => ({
+      id: event.id || `activity-${Date.now()}-${Math.random().toString(16).slice(2)}`,
+      type: event.type || "change",
+      label: event.label || "Local change recorded",
+      from: event.from || null,
+      to: event.to || null,
+      happenedAt: event.happenedAt || event.createdAt || new Date().toISOString(),
+      note: event.note || "Recorded locally in this browser."
+    }))
+    .filter((event) => !Number.isNaN(new Date(event.happenedAt).getTime()));
+}
+
+function createActivityEvent({ type, label, from = null, to = null, happenedAt, note }) {
+  const timestamp = happenedAt || new Date().toISOString();
+
+  return {
+    id: `activity-${timestamp}-${Math.random().toString(16).slice(2)}`,
+    type,
+    label,
+    from,
+    to,
+    happenedAt: timestamp,
+    note
+  };
 }
 
 function priorityClass(priority) {
@@ -585,6 +631,33 @@ function timelineMarkup(issue) {
   }).join("");
 }
 
+function activityTimelineMarkup(issue) {
+  if (issue.activityTimeline.length === 0) {
+    return `<p>No local activity changes have been recorded for this report yet.</p>`;
+  }
+
+  return `
+    <ol class="activity-timeline">
+      ${issue.activityTimeline
+        .slice()
+        .sort((left, right) => new Date(right.happenedAt) - new Date(left.happenedAt))
+        .map(
+          (event) => `
+            <li>
+              <div>
+                <strong>${escapeHtml(event.label)}</strong>
+                <time datetime="${escapeHtml(event.happenedAt)}">${formatDate(event.happenedAt)}</time>
+              </div>
+              ${event.from || event.to ? `<p>${event.from ? `From ${escapeHtml(event.from)} ` : ""}${event.to ? `to ${escapeHtml(event.to)}` : ""}</p>` : ""}
+              <span>${escapeHtml(event.note)}</span>
+            </li>
+          `
+        )
+        .join("")}
+    </ol>
+  `;
+}
+
 function duplicateListMarkup(issue) {
   if (issue.duplicateHints.length === 0) {
     return `<p>No possible duplicates are currently attached to this report.</p>`;
@@ -674,6 +747,12 @@ function renderIssueDetail() {
         <ol class="timeline">
           ${timelineMarkup(issue)}
         </ol>
+      </div>
+
+      <div class="detail-section">
+        <h3>Local activity</h3>
+        <p>These events are stored only in this browser and are not an official staff audit log.</p>
+        ${activityTimelineMarkup(issue)}
       </div>
 
       <div class="detail-section">
@@ -1024,40 +1103,109 @@ function updateIssue(issueId, patch) {
   const now = new Date().toISOString();
   issues = issues.map((issue) =>
     issue.id === issueId
-      ? {
-          ...issue,
-          ...patch,
-          priorityReason: patch.priority ? "Priority was manually adjusted by staff." : issue.priorityReason,
-          updatedAt: now
-        }
+      ? applyIssuePatch(issue, patch, now)
       : issue
   );
   saveIssues(issues);
   renderApp();
 }
 
+function applyIssuePatch(issue, patch, now) {
+  const activityEvents = [];
+
+  if (patch.status && patch.status !== issue.status) {
+    activityEvents.push(
+      createActivityEvent({
+        type: "status",
+        label: "Status changed",
+        from: issue.status,
+        to: patch.status,
+        happenedAt: now,
+        note: "Local workflow status updated in this browser."
+      })
+    );
+  }
+
+  if (patch.priority && patch.priority !== issue.priority) {
+    activityEvents.push(
+      createActivityEvent({
+        type: "priority",
+        label: "Priority changed",
+        from: issue.priority,
+        to: patch.priority,
+        happenedAt: now,
+        note: "Local priority adjusted without backend review."
+      })
+    );
+  }
+
+  if (Object.prototype.hasOwnProperty.call(patch, "assignedTeam") && patch.assignedTeam !== assignmentLabel(issue)) {
+    activityEvents.push(
+      createActivityEvent({
+        type: "assignment",
+        label: "Assigned team changed",
+        from: assignmentLabel(issue),
+        to: patch.assignedTeam,
+        happenedAt: now,
+        note: "Local routing label changed; no staff identity is attached."
+      })
+    );
+  }
+
+  if (activityEvents.length === 0) {
+    return issue;
+  }
+
+  return {
+    ...issue,
+    ...patch,
+    priorityReason: patch.priority ? "Priority was manually adjusted by staff." : issue.priorityReason,
+    activityTimeline: [...issue.activityTimeline, ...activityEvents],
+    updatedAt: now
+  };
+}
+
 function updateDuplicateHintReview(issueId, duplicateId, reviewStatus) {
   const now = new Date().toISOString();
 
   issues = issues.map((issue) =>
-    issue.id === issueId
-      ? {
-          ...issue,
-          duplicateHints: issue.duplicateHints.map((hint) =>
-            hint.id === duplicateId
-              ? {
-                  ...hint,
-                  reviewStatus,
-                  reviewedAt: now
-                }
-              : hint
-          ),
-          updatedAt: now
-        }
-      : issue
+    issue.id === issueId ? applyDuplicateReviewPatch(issue, duplicateId, reviewStatus, now) : issue
   );
   saveIssues(issues);
   renderApp();
+}
+
+function applyDuplicateReviewPatch(issue, duplicateId, reviewStatus, now) {
+  const matchingHint = issue.duplicateHints.find((hint) => hint.id === duplicateId);
+
+  if (!matchingHint || matchingHint.reviewStatus === reviewStatus) {
+    return issue;
+  }
+
+  return {
+    ...issue,
+    duplicateHints: issue.duplicateHints.map((hint) =>
+      hint.id === duplicateId
+        ? {
+            ...hint,
+            reviewStatus,
+            reviewedAt: now
+          }
+        : hint
+    ),
+    activityTimeline: [
+      ...issue.activityTimeline,
+      createActivityEvent({
+        type: "duplicate-review",
+        label: "Duplicate review changed",
+        from: matchingHint.reviewStatus,
+        to: reviewStatus,
+        happenedAt: now,
+        note: `Local duplicate hint reviewed for "${matchingHint.title}".`
+      })
+    ],
+    updatedAt: now
+  };
 }
 
 function handleTriageChange(event) {

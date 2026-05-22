@@ -1358,6 +1358,41 @@ button {
   font-size: 13px;
 }
 
+.activity-timeline {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.activity-timeline li {
+  display: grid;
+  gap: 6px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.activity-timeline li > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.activity-timeline time,
+.activity-timeline span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.activity-timeline p {
+  margin: 0;
+  color: var(--ink);
+  font-size: 13px;
+}
+
 .detail-list li {
   padding: 10px;
   border: 1px solid var(--line);
@@ -1446,6 +1481,10 @@ button {
 
   .duplicate-review-list li {
     grid-template-columns: 1fr;
+  }
+
+  .activity-timeline li > div {
+    display: grid;
   }
 
   .topbar h1 {

@@ -6,9 +6,9 @@ The MVP will let citizens report local issues with category, location, descripti
 
 ## Current Status
 
-T0001 through T0016 are complete.
+T0001 through T0017 are complete.
 
-The current version is a no-dependency static prototype with local browser storage, citizen reporting, triage controls, local municipal team assignment labels, duplicate review actions, issue details, dashboard operational analytics, local export/print summary support, a first accessibility/keyboard hardening pass, a UI snapshot fidelity pass against the saved concept sheet, and privacy-safe photo evidence placeholders without upload or storage.
+The current version is a no-dependency static prototype with local browser storage, citizen reporting, triage controls, local municipal team assignment labels, duplicate review actions, issue details with local activity events, dashboard operational analytics, local export/print summary support, a first accessibility/keyboard hardening pass, a UI snapshot fidelity pass against the saved concept sheet, and privacy-safe photo evidence placeholders without upload or storage.
 
 ## Run Locally
 
@@ -43,7 +43,7 @@ civic-issue-reporter/
 
 ## Next Ticket
 
-T0017 - Local Activity Timeline
+T0018 - Local Backup and Restore
 
 ## Development Plan
 

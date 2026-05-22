@@ -827,7 +827,7 @@ Completion notes:
 
 ## T0017 - Local Activity Timeline
 
-Status: Ready for Agent
+Status: Done
 
 Priority: Medium
 
@@ -835,9 +835,69 @@ Goal:
 
 Append local timeline events for status, priority, duplicate review, and assignment changes.
 
+Branch:
+
+`feature/t0017-local-activity-timeline`
+
+Dependencies:
+
+- T0008 - Issue Detail and Timeline View
+- T0009 - Duplicate Review Actions
+- T0015 - Local Assignment Prototype
+
+Allowed areas:
+
+- `src/app.js`
+- `src/styles.css`
+- ticket, state, and verification docs
+
+Do not touch:
+
+- Do not add backend, auth, database, external services, analytics services, or staff identity.
+- Do not implement backup/restore from T0018.
+- Do not change photo evidence, map provider, or export record policy.
+
+Requirements:
+
+- Normalize a local `activityTimeline` array on issue records.
+- Append local events when status, priority, assigned team, or duplicate review state changes.
+- Do not append duplicate events when a control value is unchanged.
+- Show activity events in issue detail.
+- Keep copy clear that events are browser-local and not an official staff audit log.
+
+Acceptance criteria:
+
+- Status changes append visible local activity events.
+- Priority changes append visible local activity events.
+- Assigned team changes append visible local activity events.
+- Duplicate review changes append visible local activity events.
+- Activity events persist through existing browser storage.
+- No dependency, backend, auth, deployment, external service, or official audit claim is added.
+
+Automated checks:
+
+- `node --check src/app.js`
+- `git diff --check`
+
+Manual verification:
+
+1. Open `src/index.html`.
+2. Change issue status, priority, duplicate review, and assigned team.
+3. Confirm each change appends a local timeline event in issue detail.
+4. Reload and confirm local timeline events persist.
+5. Confirm timeline copy does not imply real staff identity or backend audit logging.
+6. Check browser console for errors.
+
+Completion notes:
+
+- T0017 added normalized local activity events to issue records.
+- Status, priority, assigned team, and duplicate review changes now append local events.
+- Issue detail now shows a local activity section with explicit browser-local audit copy.
+- No dependency, backend, auth, deployment, external service, or official audit system was added.
+
 ## T0018 - Local Backup and Restore
 
-Status: Planned
+Status: Ready for Agent
 
 Priority: Medium
 

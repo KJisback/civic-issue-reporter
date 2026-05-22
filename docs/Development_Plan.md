@@ -110,7 +110,7 @@ Dashboard shows priority queue, status distribution, category distribution, team
 
 ### T0017 - Local Activity Timeline
 
-Status: Ready for Agent
+Status: Done
 
 Purpose:
 
@@ -122,7 +122,7 @@ Status, priority, duplicate review, and assignment changes append local timeline
 
 ### T0018 - Local Backup and Restore
 
-Status: Planned
+Status: Ready for Agent
 
 Purpose:
 
