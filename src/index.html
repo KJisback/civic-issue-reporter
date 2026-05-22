@@ -182,7 +182,11 @@
             <div class="summary-actions">
               <button type="button" id="printSummary">Print summary</button>
               <button class="secondary-button" type="button" id="exportSummary">Export JSON</button>
+              <button class="secondary-button" type="button" id="exportBackup">Export backup</button>
+              <button class="secondary-button" type="button" id="importBackup">Import backup</button>
             </div>
+            <input class="file-input" id="backupFileInput" type="file" accept="application/json,.json" aria-label="Import local civic issue backup JSON">
+            <p class="backup-note">Backup import replaces local browser data after confirmation. It does not upload files or create an official municipal record.</p>
             <p class="form-status is-success" id="summaryStatus" role="status" aria-live="polite"></p>
             <div id="summaryPreview" class="summary-preview" aria-label="Printable municipal summary"></div>
           </section>

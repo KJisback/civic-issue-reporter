@@ -2,7 +2,7 @@
 
 ## Current Branch
 
-`feature/t0017-local-activity-timeline`
+`feature/t0018-local-backup-restore`
 
 ## Completed Tickets
 
@@ -24,17 +24,18 @@
 - T0015 - Local Assignment Prototype
 - T0016 - Admin Analytics Snapshot
 - T0017 - Local Activity Timeline
+- T0018 - Local Backup and Restore
 
 ## Current App Status
 
-The project has a no-dependency static app with a refined minimal civic UI, citizen report form, local issue records, browser persistence through `localStorage`, sample issue cards, admin-style metrics, category/status/priority filters, local status, priority, and municipal team assignment controls, map-ready location fields, a non-interactive location readiness preview, explainable local duplicate hints, local duplicate review actions, local priority assistance, a compact workflow summary, local operational analytics, a focused issue detail panel with status timeline and local activity events, and a municipal review summary with print and JSON export actions. T0012 added a first accessibility and keyboard hardening pass with skip navigation, stronger focus states, more specific control names, field error associations, live-region improvements, focus restoration for detail interactions, and responsive text containment safeguards. T0013 tightened the UI toward the saved concept sheet with report guidance cards, denser public report rows, category visual markers, a local map-preview rail, rounded civic panels, stronger dashboard stat treatments, and a more composed detail header. T0014 added privacy-safe photo evidence placeholders in intake, issue cards, and detail without adding file pickers, uploads, storage, backend, or export behavior. T0015 added local-only team assignment labels and controls without staff identity or authentication. T0016 added dashboard analytics for priority queue, status mix, category load, team load, and stale open reports without external charting. T0017 added browser-local activity events for status, priority, assigned team, and duplicate review changes without adding official staff audit logging.
+The project has a no-dependency static app with a refined minimal civic UI, citizen report form, local issue records, browser persistence through `localStorage`, sample issue cards, admin-style metrics, category/status/priority filters, local status, priority, and municipal team assignment controls, map-ready location fields, a non-interactive location readiness preview, explainable local duplicate hints, local duplicate review actions, local priority assistance, a compact workflow summary, local operational analytics, a focused issue detail panel with status timeline and local activity events, a municipal review summary with print and JSON export actions, and full local backup/restore. T0012 added a first accessibility and keyboard hardening pass with skip navigation, stronger focus states, more specific control names, field error associations, live-region improvements, focus restoration for detail interactions, and responsive text containment safeguards. T0013 tightened the UI toward the saved concept sheet with report guidance cards, denser public report rows, category visual markers, a local map-preview rail, rounded civic panels, stronger dashboard stat treatments, and a more composed detail header. T0014 added privacy-safe photo evidence placeholders in intake, issue cards, and detail without adding photo file pickers, uploads, storage, backend, or export behavior. T0015 added local-only team assignment labels without staff identity or authentication. T0016 added dashboard analytics for priority queue, status mix, category load, team load, and stale open reports without external charting. T0017 added browser-local activity events for status, priority, assigned team, and duplicate review changes without adding official staff audit logging. T0018 added validated JSON backup export/import for local demo data without backend storage or official-record claims.
 
 A generated UI/UX concept sheet has been saved as the design reference for future UI implementation.
 
 ## Folder Structure Summary
 
 - `src/` contains the static app shell.
-- `src/app.js` defines the local issue object shape, form submission behavior, validation, sample data, map-ready location metadata, privacy-safe photo evidence placeholder display, filters, triage and assignment controls, local duplicate/priority assistance, duplicate review actions, local activity events, metrics, workflow summary, local operational analytics, issue detail panel, export/print summary, and browser storage.
+- `src/app.js` defines the local issue object shape, form submission behavior, validation, sample data, map-ready location metadata, privacy-safe photo evidence placeholder display, filters, triage and assignment controls, local duplicate/priority assistance, duplicate review actions, local activity events, metrics, workflow summary, local operational analytics, issue detail panel, export/print summary, full backup/restore, and browser storage.
 - `docs/` contains planning, ticket, verification, state, risk, review, manual UI checklist, and development plan documents.
 - `docs/Full_System_Test_Report.md` records the latest local full-system test and follow-up review.
 - `docs/design-references/` contains saved visual references for UI implementation.
@@ -59,8 +60,8 @@ None.
 - Typecheck: Not run, no type system.
 - Syntax: Pass, `node --check src/app.js`.
 - Full system test: Local automated/static checks passed; browser manual checks remain open. See `docs/Full_System_Test_Report.md`.
-- Git: Local repository initialized; current ticket branch is `feature/t0017-local-activity-timeline`.
-- GitHub: Remote `origin` points to `https://github.com/KJisback/civic-issue-reporter.git`; previous ticket branches are pushed and T0017 will be pushed during ticket closeout.
+- Git: Local repository initialized; current ticket branch is `feature/t0018-local-backup-restore`.
+- GitHub: Remote `origin` points to `https://github.com/KJisback/civic-issue-reporter.git`; previous ticket branches are pushed and T0018 will be pushed during ticket closeout.
 
 ## Known Issues
 
@@ -70,7 +71,7 @@ None.
 - Visual verification should still be done manually in a browser at desktop and mobile widths.
 - Duplicate review actions are local-only and do not merge records or record real staff identity.
 - Local activity events are browser-local and are not an official staff audit log.
-- JSON export is a browser-generated local file and is not a secure official record.
+- JSON summary export and full backup files are browser-generated local files and are not secure official records.
 - Browser runtime automation was unavailable during the T0012 and T0013 passes, so the manual keyboard/accessibility and visual snapshot checklists still need a human browser run before milestone acceptance.
 
 ## Current Risks
@@ -83,7 +84,7 @@ None.
 
 ## Next Recommended Ticket
 
-T0018 - Local Backup and Restore
+T0019 - Test Harness Decision and First Logic Tests
 
 ## Last Updated
 

@@ -17,7 +17,7 @@ Primary inferred MVP:
 
 Current next ticket:
 
-T0018 - Local Backup and Restore
+T0019 - Test Harness Decision and First Logic Tests
 
 Completed tickets:
 
@@ -39,6 +39,7 @@ Completed tickets:
 - T0015 - Local Assignment Prototype
 - T0016 - Admin Analytics Snapshot
 - T0017 - Local Activity Timeline
+- T0018 - Local Backup and Restore
 
 Current implementation state:
 
@@ -58,6 +59,7 @@ Current implementation state:
 - Local-only municipal team assignment labels and controls without staff identity or authentication.
 - Local-only dashboard analytics for priority queue, status mix, category load, team load, and stale open reports without external charting.
 - Local activity events for status, priority, assigned team, and duplicate review changes, stored only in browser storage.
+- Full local backup export and restore through validated JSON files with overwrite confirmation.
 - Minimal civic UI direction applied from saved concept sheet.
 
 Saved UI/UX direction:
@@ -68,11 +70,10 @@ Saved UI/UX direction:
 
 Next handoff focus:
 
-Add local full-data export and import with validation and clear overwrite warnings.
+Decide whether to introduce a small test dependency and add first focused tests for core local logic if approved.
 
-Next sequence after T0018:
+Next sequence after T0019:
 
-- T0019 - Test Harness Decision and First Logic Tests
 - T0020 - Backend Readiness Design
 
 Human-gated decisions:

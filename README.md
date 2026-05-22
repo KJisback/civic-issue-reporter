@@ -6,9 +6,9 @@ The MVP will let citizens report local issues with category, location, descripti
 
 ## Current Status
 
-T0001 through T0017 are complete.
+T0001 through T0018 are complete.
 
-The current version is a no-dependency static prototype with local browser storage, citizen reporting, triage controls, local municipal team assignment labels, duplicate review actions, issue details with local activity events, dashboard operational analytics, local export/print summary support, a first accessibility/keyboard hardening pass, a UI snapshot fidelity pass against the saved concept sheet, and privacy-safe photo evidence placeholders without upload or storage.
+The current version is a no-dependency static prototype with local browser storage, citizen reporting, triage controls, local municipal team assignment labels, duplicate review actions, issue details with local activity events, dashboard operational analytics, local export/print summary support, full local backup/restore, a first accessibility/keyboard hardening pass, a UI snapshot fidelity pass against the saved concept sheet, and privacy-safe photo evidence placeholders without upload or storage.
 
 ## Run Locally
 
@@ -37,13 +37,14 @@ civic-issue-reporter/
 - Confirm the summary section renders.
 - Confirm keyboard focus is visible across navigation, forms, buttons, selects, issue detail, and export/print controls.
 - Use `Export JSON` to download a local summary.
+- Use `Export backup` and `Import backup` to test full local data portability.
 - Use `Print summary` to open the browser print dialog.
 - Use `docs/Manual_UI_Checks.md` for the full browser/manual UI checklist.
 - Confirm the browser console has no errors.
 
 ## Next Ticket
 
-T0018 - Local Backup and Restore
+T0019 - Test Harness Decision and First Logic Tests
 
 ## Development Plan
 

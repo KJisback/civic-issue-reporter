@@ -226,3 +226,16 @@ Use this before larger design, data, or release changes.
 4. Reload and confirm local timeline events persist.
 5. Confirm timeline copy does not imply real staff identity or backend audit logging.
 6. Check browser console for errors.
+
+## T0018 - Local Backup and Restore
+
+1. Open `src/index.html`.
+2. Click `Export backup`.
+3. Confirm a local JSON backup downloads.
+4. Change at least one issue status, priority, assigned team, or duplicate review state.
+5. Click `Import backup` and select the exported backup file.
+6. Confirm the overwrite warning.
+7. Confirm the issue list, detail panel, dashboard, summary, and local activity events render from restored data.
+8. Try importing invalid JSON and confirm a readable error appears without replacing local data.
+9. Confirm backup copy does not imply backend upload, official municipal record status, or photo evidence storage.
+10. Check browser console for errors.

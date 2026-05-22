@@ -897,7 +897,7 @@ Completion notes:
 
 ## T0018 - Local Backup and Restore
 
-Status: Ready for Agent
+Status: Done
 
 Priority: Medium
 
@@ -905,9 +905,72 @@ Goal:
 
 Add local full-data export and import with validation and clear overwrite warnings.
 
+Branch:
+
+`feature/t0018-local-backup-restore`
+
+Dependencies:
+
+- T0002 - Local Issue Data Model and Browser Storage
+- T0010 - Export and Print Summary
+- T0017 - Local Activity Timeline
+
+Allowed areas:
+
+- `src/index.html`
+- `src/app.js`
+- `src/styles.css`
+- ticket, state, and verification docs
+
+Do not touch:
+
+- Do not add backend, auth, database, deployment, or external services.
+- Do not make JSON backups official municipal records.
+- Do not add photo upload or media storage.
+- Do not implement the test harness from T0019.
+
+Requirements:
+
+- Add a full local backup export separate from the existing municipal summary export.
+- Add local JSON import through a browser file picker.
+- Validate backup envelope, version, issue records, coordinates, dates, enums, and duplicate ids before restore.
+- Confirm before overwriting existing local browser data.
+- Restore through the existing normalization and local storage path.
+- Make UI copy clear that import/export stays local and is not an official record.
+
+Acceptance criteria:
+
+- Full backup export downloads JSON with issue records.
+- Import accepts a supported backup and replaces local data only after confirmation.
+- Invalid JSON or unsupported backup files show a readable error and do not replace data.
+- Imported records render through existing issue list, detail, dashboard, summary, and activity timeline views.
+- No dependency, backend, auth, deployment, external service, photo upload, or official-record claim is added.
+
+Automated checks:
+
+- `node --check src/app.js`
+- `git diff --check`
+
+Manual verification:
+
+1. Open `src/index.html`.
+2. Click `Export backup` and confirm a local backup JSON downloads.
+3. Change local data, then click `Import backup`.
+4. Select the exported backup and confirm the overwrite warning.
+5. Confirm issue list, detail, dashboard, summary, and local activity events render from the restored data.
+6. Try an invalid JSON file and confirm local data is not replaced.
+7. Check browser console for errors.
+
+Completion notes:
+
+- T0018 added full local backup export and JSON import controls.
+- Import validates the backup envelope, version, issue records, coordinates, timestamps, enum fields, and duplicate ids before restore.
+- Import requires a browser confirmation before replacing local data.
+- No dependency, backend, auth, deployment, external service, photo upload, or official-record workflow was added.
+
 ## T0019 - Test Harness Decision and First Logic Tests
 
-Status: Planned
+Status: Ready for Agent
 
 Priority: Medium
 

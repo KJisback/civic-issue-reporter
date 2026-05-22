@@ -122,7 +122,7 @@ Status, priority, duplicate review, and assignment changes append local timeline
 
 ### T0018 - Local Backup and Restore
 
-Status: Ready for Agent
+Status: Done
 
 Purpose:
 
@@ -134,7 +134,7 @@ Staff can export full local issue data and import it back into the browser with 
 
 ### T0019 - Test Harness Decision and First Logic Tests
 
-Status: Planned
+Status: Ready for Agent
 
 Purpose:
 
@@ -175,4 +175,4 @@ Backend, database, auth, and deployment decisions require explicit approval befo
 
 ## Recommended Immediate Action
 
-Proceed with T0017 only after reviewing the T0016 completion report and keeping timeline events local-only.
+Proceed with T0019 only after deciding whether a small test dependency is approved, or explicitly choosing to keep no-dependency checks.

@@ -1,4 +1,6 @@
 const STORAGE_KEY = "civicIssueReporter.issues.v1";
+const BACKUP_TYPE = "civicIssueReporter.fullBackup";
+const BACKUP_VERSION = 1;
 const STATUSES = ["Submitted", "Triaged", "In progress", "Resolved"];
 const PRIORITIES = ["Low", "Medium", "High"];
 const ASSIGNMENT_TEAMS = [
@@ -459,6 +461,91 @@ function createMunicipalSummary() {
       updatedAt: issue.updatedAt
     }))
   };
+}
+
+function createFullBackup() {
+  return {
+    backupType: BACKUP_TYPE,
+    version: BACKUP_VERSION,
+    exportedAt: new Date().toISOString(),
+    source: "Civic Issue Reporter local browser backup",
+    warning: "This backup is browser-local demo data and is not an official municipal record.",
+    issues: issues.map(normalizeIssue)
+  };
+}
+
+function isPlainObject(value) {
+  return Boolean(value) && typeof value === "object" && !Array.isArray(value);
+}
+
+function isValidIsoDate(value) {
+  return typeof value === "string" && !Number.isNaN(new Date(value).getTime());
+}
+
+function isValidCoordinates(coordinates) {
+  if (coordinates === null || coordinates === undefined) {
+    return true;
+  }
+
+  return (
+    isPlainObject(coordinates) &&
+    typeof coordinates.latitude === "number" &&
+    typeof coordinates.longitude === "number" &&
+    coordinates.latitude >= -90 &&
+    coordinates.latitude <= 90 &&
+    coordinates.longitude >= -180 &&
+    coordinates.longitude <= 180
+  );
+}
+
+function validateBackupIssue(issue) {
+  return (
+    isPlainObject(issue) &&
+    typeof issue.id === "string" &&
+    typeof issue.title === "string" &&
+    CATEGORIES.includes(issue.category) &&
+    typeof issue.location === "string" &&
+    typeof issue.description === "string" &&
+    STATUSES.includes(issue.status) &&
+    PRIORITIES.includes(issue.priority) &&
+    isValidIsoDate(issue.createdAt) &&
+    isValidIsoDate(issue.updatedAt) &&
+    isValidCoordinates(issue.coordinates)
+  );
+}
+
+function parseBackupPayload(text) {
+  let payload;
+
+  try {
+    payload = JSON.parse(text);
+  } catch {
+    throw new Error("Backup file must be valid JSON.");
+  }
+
+  if (!isPlainObject(payload) || payload.backupType !== BACKUP_TYPE || payload.version !== BACKUP_VERSION) {
+    throw new Error("Backup file is not a supported Civic Issue Reporter backup.");
+  }
+
+  if (!Array.isArray(payload.issues) || payload.issues.length === 0) {
+    throw new Error("Backup file must include at least one issue.");
+  }
+
+  const ids = new Set();
+  const invalidIssue = payload.issues.find((issue) => {
+    if (!validateBackupIssue(issue) || ids.has(issue.id)) {
+      return true;
+    }
+
+    ids.add(issue.id);
+    return false;
+  });
+
+  if (invalidIssue) {
+    throw new Error("Backup file contains invalid or duplicate issue records.");
+  }
+
+  return payload.issues.map(normalizeIssue);
 }
 
 function summaryCountMarkup(items) {
@@ -1001,8 +1088,10 @@ function setStatus(message, type = "error") {
   status.classList.toggle("is-success", type === "success");
 }
 
-function setSummaryStatus(message) {
-  document.querySelector("#summaryStatus").textContent = message;
+function setSummaryStatus(message, type = "success") {
+  const status = document.querySelector("#summaryStatus");
+  status.textContent = message;
+  status.classList.toggle("is-success", type === "success");
 }
 
 function validateForm(formData) {
@@ -1298,21 +1387,86 @@ function printSummary() {
   setSummaryStatus("Print dialog opened for the local summary.");
 }
 
-function exportSummary() {
-  const summary = createMunicipalSummary();
-  const payload = JSON.stringify(summary, null, 2);
+function downloadJsonFile(fileName, data) {
+  const payload = JSON.stringify(data, null, 2);
   const blob = new Blob([payload], { type: "application/json" });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
-  const date = new Date().toISOString().slice(0, 10);
 
   link.href = url;
-  link.download = `civic-issue-summary-${date}.json`;
+  link.download = fileName;
   document.body.appendChild(link);
   link.click();
   link.remove();
   URL.revokeObjectURL(url);
+}
+
+function exportSummary() {
+  const summary = createMunicipalSummary();
+  const date = new Date().toISOString().slice(0, 10);
+
+  downloadJsonFile(`civic-issue-summary-${date}.json`, summary);
   setSummaryStatus("JSON summary exported from local browser data.");
+}
+
+function exportBackup() {
+  const backup = createFullBackup();
+  const date = new Date().toISOString().slice(0, 10);
+
+  downloadJsonFile(`civic-issue-backup-${date}.json`, backup);
+  setSummaryStatus("Full local backup exported. Keep it private because it contains report details.");
+}
+
+function requestBackupImport() {
+  document.querySelector("#backupFileInput").click();
+}
+
+function restoreIssuesFromBackup(restoredIssues) {
+  issues = restoredIssues;
+  selectedIssueId = null;
+  filters = {
+    category: "All",
+    status: "All",
+    priority: "All"
+  };
+  saveIssues(issues);
+  renderApp();
+}
+
+function handleBackupFileSelected(event) {
+  const file = event.target.files[0];
+  event.target.value = "";
+
+  if (!file) {
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.addEventListener("load", () => {
+    try {
+      const restoredIssues = parseBackupPayload(String(reader.result || ""));
+      const confirmed = window.confirm(
+        `Import ${restoredIssues.length} issues from this backup? This will replace the current local browser data.`
+      );
+
+      if (!confirmed) {
+        setSummaryStatus("Backup import cancelled.");
+        return;
+      }
+
+      restoreIssuesFromBackup(restoredIssues);
+      setSummaryStatus(`Backup imported. ${restoredIssues.length} local issue records restored.`);
+    } catch (error) {
+      setSummaryStatus(error.message, "error");
+    }
+  });
+
+  reader.addEventListener("error", () => {
+    setSummaryStatus("Backup file could not be read.", "error");
+  });
+
+  reader.readAsText(file);
 }
 
 function focusFirstInvalidField() {
@@ -1361,6 +1515,9 @@ document.querySelector("#reportForm").addEventListener("submit", handleSubmit);
 document.querySelector("#resetDemoData").addEventListener("click", resetDemoData);
 document.querySelector("#printSummary").addEventListener("click", printSummary);
 document.querySelector("#exportSummary").addEventListener("click", exportSummary);
+document.querySelector("#exportBackup").addEventListener("click", exportBackup);
+document.querySelector("#importBackup").addEventListener("click", requestBackupImport);
+document.querySelector("#backupFileInput").addEventListener("change", handleBackupFileSelected);
 document.querySelector("#issueList").addEventListener("change", handleTriageChange);
 document.querySelector("#issueList").addEventListener("click", handleIssueClick);
 document.querySelector("#issueDetail").addEventListener("change", handleTriageChange);
