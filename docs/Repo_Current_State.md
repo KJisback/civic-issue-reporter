@@ -35,6 +35,7 @@ A generated UI/UX concept sheet has been saved as the design reference for futur
 - `src/` contains the static app shell.
 - `src/app.js` defines the local issue object shape, form submission behavior, validation, sample data, map-ready location metadata, privacy-safe photo evidence placeholder display, filters, triage and assignment controls, local duplicate/priority assistance, duplicate review actions, metrics, workflow summary, local operational analytics, issue detail panel, export/print summary, and browser storage.
 - `docs/` contains planning, ticket, verification, state, risk, review, manual UI checklist, and development plan documents.
+- `docs/Full_System_Test_Report.md` records the latest local full-system test and follow-up review.
 - `docs/design-references/` contains saved visual references for UI implementation.
 - `README.md`, `AGENTS.md`, and `WORKFLOW.md` define setup and project rules.
 
@@ -56,6 +57,7 @@ None.
 - Lint: Not run, no lint system.
 - Typecheck: Not run, no type system.
 - Syntax: Pass, `node --check src/app.js`.
+- Full system test: Local automated/static checks passed; browser manual checks remain open. See `docs/Full_System_Test_Report.md`.
 - Git: Local repository initialized; current ticket branch is `feature/t0016-admin-analytics-snapshot`.
 - GitHub: Remote `origin` points to `https://github.com/KJisback/civic-issue-reporter.git`; previous ticket branches are pushed and T0016 will be pushed during ticket closeout.
 

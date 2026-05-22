@@ -823,6 +823,7 @@ Completion notes:
 - Charts are CSS/HTML only and use existing browser-local issue data.
 - No dependency, backend, auth, deployment, or external service was added.
 - `node --check src/app.js` and `git diff --check` passed.
+- Full local automated/static system test passed after T0016; browser manual checks remain open in `docs/Full_System_Test_Report.md`.
 
 ## T0017 - Local Activity Timeline
 

@@ -1,5 +1,11 @@
 # Known Issues And Followups
 
+Last reviewed: 2026-05-22 during the full system test pass recorded in `docs/Full_System_Test_Report.md`.
+
+Review result:
+
+No open follow-up can be closed by code alone at this point. Remaining open items are either product-owner decisions or human browser verification tasks.
+
 ## Open Followups
 
 ### F0001 - Decide Citizen Identity Policy
