@@ -970,13 +970,69 @@ Completion notes:
 
 ## T0019 - Test Harness Decision and First Logic Tests
 
-Status: Ready for Agent
+Status: Done
 
 Priority: Medium
 
 Goal:
 
 Decide whether to introduce a small test dependency and add first focused tests for core local logic if approved.
+
+Branch:
+
+`feature/t0019-no-dependency-logic-tests`
+
+Dependencies:
+
+- T0018 - Local Backup and Restore
+- T0018B - Reference UI Clone Pass
+
+Allowed areas:
+
+- `src/app.js`
+- `tests/`
+- ticket, state, and decision docs
+
+Do not touch:
+
+- Do not add dependencies without explicit approval.
+- Do not add backend, auth, database, deployment, or external services.
+- Do not refactor UI layout or product behavior beyond testability guards.
+
+Requirements:
+
+- Decide whether to add a test dependency.
+- Add first focused tests for core local logic without changing browser behavior.
+- Cover priority suggestion, duplicate scoring, normalization, backup validation, and municipal summary counts.
+- Keep checks runnable with a simple command and no install step.
+
+Acceptance criteria:
+
+- Dependency decision is documented.
+- First focused logic tests exist and run locally.
+- Browser initialization remains guarded so `src/app.js` can be loaded in Node tests.
+- No dependency, backend, auth, deployment, or external service is added.
+
+Automated checks:
+
+- `node --check src/app.js`
+- `node tests/app.test.js`
+- `git diff --check`
+
+Manual verification:
+
+1. Open `src/index.html`.
+2. Confirm normal browser rendering still starts.
+3. Run `node tests/app.test.js`.
+4. Confirm all tests pass.
+
+Completion notes:
+
+- T0019 chose the no-dependency path because new package dependencies were not explicitly approved.
+- Added `tests/app.test.js` using Node's built-in `node:assert/strict`.
+- Added a document guard and CommonJS exports for selected core logic in `src/app.js`.
+- Tests cover priority suggestion, duplicate scoring, issue normalization, backup validation, and municipal summary counts.
+- No dependency, backend, auth, deployment, or external service was added.
 
 ## T0018A - Indian Civic Panel UI Refresh
 
@@ -1114,7 +1170,7 @@ Completion notes:
 
 ## T0020 - Backend Readiness Design
 
-Status: Planned
+Status: Ready for Agent
 
 Priority: High
 

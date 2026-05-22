@@ -2,7 +2,7 @@
 
 ## Current Branch
 
-`feature/t0018b-reference-ui-clone`
+`feature/t0019-no-dependency-logic-tests`
 
 ## Completed Tickets
 
@@ -27,10 +27,11 @@
 - T0018 - Local Backup and Restore
 - T0018A - Indian Civic Panel UI Refresh
 - T0018B - Reference UI Clone Pass
+- T0019 - Test Harness Decision and First Logic Tests
 
 ## Current App Status
 
-The project has a no-dependency static app with a screenshot-matched Indian civic operations desk UI, citizen report form, local issue records, browser persistence through `localStorage`, sample issue cards, admin-style metrics, category/status/priority filters, local status, priority, and municipal team assignment controls, map-ready location fields, explainable local duplicate hints, local duplicate review actions, local priority assistance, local operational analytics, a focused issue detail panel with status timeline and local activity events, a municipal review summary with print and JSON export actions, and full local backup/restore. T0018B reworked the app shell to closely follow the supplied civic dashboard reference with compact top chrome, ward selector, skyline strip, operator card, left navigation, three work panels, compact open issue cards, triage overview metrics, and a bottom quick actions dock while preserving local-only functionality.
+The project has a no-dependency static app with a screenshot-matched Indian civic operations desk UI, citizen report form, local issue records, browser persistence through `localStorage`, sample issue cards, admin-style metrics, category/status/priority filters, local status, priority, and municipal team assignment controls, map-ready location fields, explainable local duplicate hints, local duplicate review actions, local priority assistance, local operational analytics, a focused issue detail panel with status timeline and local activity events, a municipal review summary with print and JSON export actions, full local backup/restore, and first no-dependency Node logic tests. T0018B reworked the app shell to closely follow the supplied civic dashboard reference while preserving local-only functionality. T0019 added dependency-free tests for core local logic.
 
 Generated UI/UX concept sheets are saved as design references, with the Indian civic panel refresh now serving as the current direction.
 
@@ -38,6 +39,7 @@ Generated UI/UX concept sheets are saved as design references, with the Indian c
 
 - `src/` contains the static app shell.
 - `src/app.js` defines the local issue object shape, form submission behavior, validation, sample data, map-ready location metadata, privacy-safe photo evidence placeholder display, filters, triage and assignment controls, local duplicate/priority assistance, duplicate review actions, local activity events, metrics, workflow summary, local operational analytics, issue detail panel, export/print summary, full backup/restore, and browser storage.
+- `tests/app.test.js` contains the first no-dependency Node logic tests.
 - `docs/` contains planning, ticket, verification, state, risk, review, manual UI checklist, and development plan documents.
 - `docs/Full_System_Test_Report.md` records the latest local full-system test and follow-up review.
 - `docs/design-references/` contains saved visual references for UI implementation.
@@ -52,19 +54,20 @@ None.
 
 - Open `src/index.html` directly in a browser.
 - `node --check src/app.js`
+- `node tests/app.test.js`
 - `git status --short`
 - Git write commands may need sandbox escalation in Codex because sandboxed writes to `.git/index.lock` are blocked by host policy.
 
 ## Latest Check Results
 
 - Build: Not run, no build system.
-- Tests: Not run, no test system.
+- Tests: Pass, `node tests/app.test.js`.
 - Lint: Not run, no lint system.
 - Typecheck: Not run, no type system.
 - Syntax: Pass, `node --check src/app.js`.
 - Full system test: Local automated/static checks passed; browser manual checks remain open. See `docs/Full_System_Test_Report.md`.
-- Git: Local repository initialized; current ticket branch is `feature/t0018b-reference-ui-clone`.
-- GitHub: Remote `origin` points to `https://github.com/KJisback/civic-issue-reporter.git`; previous ticket branches are pushed and T0018B will be pushed during ticket closeout.
+- Git: Local repository initialized; current ticket branch is `feature/t0019-no-dependency-logic-tests`.
+- GitHub: Remote `origin` points to `https://github.com/KJisback/civic-issue-reporter.git`; previous ticket branches are pushed and T0019 will be pushed during ticket closeout.
 
 ## Known Issues
 
@@ -87,7 +90,7 @@ None.
 
 ## Next Recommended Ticket
 
-T0019 - Test Harness Decision and First Logic Tests
+T0020 - Backend Readiness Design
 
 ## Last Updated
 

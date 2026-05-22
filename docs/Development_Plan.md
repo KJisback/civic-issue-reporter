@@ -158,7 +158,7 @@ The app presents compact top chrome, ward selector, operator card, sidebar navig
 
 ### T0019 - Test Harness Decision and First Logic Tests
 
-Status: Ready for Agent
+Status: Done
 
 Purpose:
 
@@ -166,7 +166,7 @@ Decide whether to introduce a small test dependency for core logic, or keep no-d
 
 Expected result:
 
-If approved, add focused tests for priority suggestion, duplicate scoring, normalization, and summary generation. If not approved, document why and keep syntax/manual verification only.
+No new dependency was added. Focused tests now cover priority suggestion, duplicate scoring, normalization, backup validation, and summary generation through Node's built-in assertion module.
 
 Human review trigger:
 
@@ -174,7 +174,7 @@ This ticket may require approval for a new dependency.
 
 ### T0020 - Backend Readiness Design
 
-Status: Planned
+Status: Ready for Agent
 
 Purpose:
 
@@ -199,4 +199,4 @@ Backend, database, auth, and deployment decisions require explicit approval befo
 
 ## Recommended Immediate Action
 
-Proceed with T0019 only after deciding whether a small test dependency is approved, or explicitly choosing to keep no-dependency checks.
+Proceed with T0020 as a design-only ticket. Backend, database, auth, and deployment implementation remain human-gated.

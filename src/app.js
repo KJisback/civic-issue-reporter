@@ -1484,21 +1484,51 @@ function focusLastDetailTrigger() {
   }
 }
 
-document.querySelector("#reportForm").addEventListener("submit", handleSubmit);
-document.querySelector("#resetDemoData").addEventListener("click", resetDemoData);
-document.querySelector("#printSummary").addEventListener("click", printSummary);
-document.querySelector("#exportSummary").addEventListener("click", exportSummary);
-document.querySelector("#exportBackup").addEventListener("click", exportBackup);
-document.querySelector("#importBackup").addEventListener("click", requestBackupImport);
-document.querySelector("#backupFileInput").addEventListener("change", handleBackupFileSelected);
-document.querySelector("#issueList").addEventListener("change", handleTriageChange);
-document.querySelector("#issueList").addEventListener("click", handleIssueClick);
-document.querySelector("#issueDetail").addEventListener("change", handleTriageChange);
-document.querySelector("#issueDetail").addEventListener("click", handleDetailClick);
-document.querySelector("#issueDetail").addEventListener("keydown", handleDetailKeydown);
-document.querySelector("#categoryFilter").addEventListener("change", handleFilterChange);
-document.querySelector("#statusFilter").addEventListener("change", handleFilterChange);
-document.querySelector("#priorityFilter").addEventListener("change", handleFilterChange);
-document.querySelector("#reportForm").addEventListener("input", renderAssistance);
+if (typeof document !== "undefined") {
+  document.querySelector("#reportForm").addEventListener("submit", handleSubmit);
+  document.querySelector("#resetDemoData").addEventListener("click", resetDemoData);
+  document.querySelector("#printSummary").addEventListener("click", printSummary);
+  document.querySelector("#exportSummary").addEventListener("click", exportSummary);
+  document.querySelector("#exportBackup").addEventListener("click", exportBackup);
+  document.querySelector("#importBackup").addEventListener("click", requestBackupImport);
+  document.querySelector("#backupFileInput").addEventListener("change", handleBackupFileSelected);
+  document.querySelector("#issueList").addEventListener("change", handleTriageChange);
+  document.querySelector("#issueList").addEventListener("click", handleIssueClick);
+  document.querySelector("#issueDetail").addEventListener("change", handleTriageChange);
+  document.querySelector("#issueDetail").addEventListener("click", handleDetailClick);
+  document.querySelector("#issueDetail").addEventListener("keydown", handleDetailKeydown);
+  document.querySelector("#categoryFilter").addEventListener("change", handleFilterChange);
+  document.querySelector("#statusFilter").addEventListener("change", handleFilterChange);
+  document.querySelector("#priorityFilter").addEventListener("change", handleFilterChange);
+  document.querySelector("#reportForm").addEventListener("input", renderAssistance);
 
-renderApp();
+  renderApp();
+}
+
+if (typeof module !== "undefined") {
+  module.exports = {
+    BACKUP_TYPE,
+    BACKUP_VERSION,
+    STATUSES,
+    PRIORITIES,
+    ASSIGNMENT_TEAMS,
+    CATEGORIES,
+    createActivityEvent,
+    createFullBackup,
+    createIssue,
+    createMunicipalSummaryFrom(nextIssues) {
+      const previousIssues = issues;
+      issues = nextIssues.map(normalizeIssue);
+      const summary = createMunicipalSummary();
+      issues = previousIssues;
+      return summary;
+    },
+    duplicateScore,
+    findPotentialDuplicates,
+    inferPriority,
+    normalizeIssue,
+    parseBackupPayload,
+    suggestPriority,
+    validateBackupIssue
+  };
+}

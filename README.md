@@ -6,7 +6,7 @@ The MVP will let citizens report local issues with category, location, descripti
 
 ## Current Status
 
-T0001 through T0018B are complete.
+T0001 through T0019 are complete.
 
 The current version is a no-dependency static prototype with a screenshot-matched Indian civic operations desk UI, local browser storage, citizen reporting, triage controls, local municipal team assignment labels, duplicate review actions, issue details with local activity events, dashboard operational analytics, local export/print summary support, full local backup/restore, a first accessibility/keyboard hardening pass, and privacy-safe photo evidence placeholders without upload or storage.
 
@@ -28,6 +28,8 @@ civic-issue-reporter/
     index.html
     styles.css
     app.js
+  tests/
+    app.test.js
 ```
 
 ## Verification
@@ -41,10 +43,11 @@ civic-issue-reporter/
 - Use `Print summary` to open the browser print dialog.
 - Use `docs/Manual_UI_Checks.md` for the full browser/manual UI checklist.
 - Confirm the browser console has no errors.
+- Run `node tests/app.test.js` for the no-dependency logic test suite.
 
 ## Next Ticket
 
-T0019 - Test Harness Decision and First Logic Tests
+T0020 - Backend Readiness Design
 
 ## Development Plan
 

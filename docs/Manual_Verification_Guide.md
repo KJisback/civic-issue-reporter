@@ -257,3 +257,12 @@ Use this before larger design, data, or release changes.
 4. Confirm report, issue queue, dashboard metrics, issue detail, export, backup, and restore workflows remain usable.
 5. Resize to desktop and mobile widths and confirm no visible overlap or clipped controls.
 6. Check browser console for errors.
+
+## T0019 - Test Harness Decision and First Logic Tests
+
+1. Run `node tests/app.test.js`.
+2. Confirm all no-dependency logic tests pass.
+3. Run `node --check src/app.js`.
+4. Open `src/index.html`.
+5. Confirm the browser app still renders normally after the Node testability guard.
+6. Check browser console for errors.

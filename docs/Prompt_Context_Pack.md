@@ -17,7 +17,7 @@ Primary inferred MVP:
 
 Current next ticket:
 
-T0019 - Test Harness Decision and First Logic Tests
+T0020 - Backend Readiness Design
 
 Completed tickets:
 
@@ -42,6 +42,7 @@ Completed tickets:
 - T0018 - Local Backup and Restore
 - T0018A - Indian Civic Panel UI Refresh
 - T0018B - Reference UI Clone Pass
+- T0019 - Test Harness Decision and First Logic Tests
 
 Current implementation state:
 
@@ -63,6 +64,7 @@ Current implementation state:
 - Local activity events for status, priority, assigned team, and duplicate review changes, stored only in browser storage.
 - Full local backup export and restore through validated JSON files with overwrite confirmation.
 - Screenshot-matched Indian civic operations desk UI with top chrome, ward selector, left nav, three work panels, triage overview, and bottom quick actions dock.
+- No-dependency Node logic tests for priority suggestion, duplicate scoring, normalization, backup validation, and summary counts.
 
 Saved UI/UX direction:
 
@@ -73,11 +75,11 @@ Saved UI/UX direction:
 
 Next handoff focus:
 
-Decide whether to introduce a small test dependency and add first focused tests for core local logic if approved.
+Prepare backend, data, audit, auth-assumption, and API boundary design without implementing backend code.
 
-Next sequence after T0019:
+Next sequence after T0020:
 
-- T0020 - Backend Readiness Design
+- Later implementation tickets only after backend/auth/database decisions are approved.
 
 Human-gated decisions:
 
