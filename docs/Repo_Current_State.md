@@ -2,7 +2,7 @@
 
 ## Current Branch
 
-`feature/t0018-local-backup-restore`
+`feature/t0018a-indian-civic-ui-refresh`
 
 ## Completed Tickets
 
@@ -25,12 +25,13 @@
 - T0016 - Admin Analytics Snapshot
 - T0017 - Local Activity Timeline
 - T0018 - Local Backup and Restore
+- T0018A - Indian Civic Panel UI Refresh
 
 ## Current App Status
 
-The project has a no-dependency static app with a refined minimal civic UI, citizen report form, local issue records, browser persistence through `localStorage`, sample issue cards, admin-style metrics, category/status/priority filters, local status, priority, and municipal team assignment controls, map-ready location fields, a non-interactive location readiness preview, explainable local duplicate hints, local duplicate review actions, local priority assistance, a compact workflow summary, local operational analytics, a focused issue detail panel with status timeline and local activity events, a municipal review summary with print and JSON export actions, and full local backup/restore. T0012 added a first accessibility and keyboard hardening pass with skip navigation, stronger focus states, more specific control names, field error associations, live-region improvements, focus restoration for detail interactions, and responsive text containment safeguards. T0013 tightened the UI toward the saved concept sheet with report guidance cards, denser public report rows, category visual markers, a local map-preview rail, rounded civic panels, stronger dashboard stat treatments, and a more composed detail header. T0014 added privacy-safe photo evidence placeholders in intake, issue cards, and detail without adding photo file pickers, uploads, storage, backend, or export behavior. T0015 added local-only team assignment labels without staff identity or authentication. T0016 added dashboard analytics for priority queue, status mix, category load, team load, and stale open reports without external charting. T0017 added browser-local activity events for status, priority, assigned team, and duplicate review changes without adding official staff audit logging. T0018 added validated JSON backup export/import for local demo data without backend storage or official-record claims.
+The project has a no-dependency static app with a modern Indian civic panel UI, citizen report form, local issue records, browser persistence through `localStorage`, sample issue cards, admin-style metrics, category/status/priority filters, local status, priority, and municipal team assignment controls, map-ready location fields, a non-interactive location readiness preview, explainable local duplicate hints, local duplicate review actions, local priority assistance, a compact workflow summary, local operational analytics, a focused issue detail panel with status timeline and local activity events, a municipal review summary with print and JSON export actions, and full local backup/restore. T0012 added a first accessibility and keyboard hardening pass with skip navigation, stronger focus states, more specific control names, field error associations, live-region improvements, focus restoration for detail interactions, and responsive text containment safeguards. T0013 tightened the UI toward the saved concept sheet with report guidance cards, denser public report rows, local map-preview context, category markers, dashboard stat treatment, and detail header composition. T0014 added privacy-safe photo evidence placeholders without adding photo file pickers, uploads, storage, backend, or export behavior. T0015 added local-only team assignment labels without staff identity or authentication. T0016 added dashboard analytics without external charting. T0017 added browser-local activity events without official staff audit logging. T0018 added validated JSON backup export/import without backend storage or official-record claims. T0018A refreshed the app shell with a ward-desk header, quick action panels, warmer civic palette, and no fake official marks.
 
-A generated UI/UX concept sheet has been saved as the design reference for future UI implementation.
+Generated UI/UX concept sheets are saved as design references, with the Indian civic panel refresh now serving as the current direction.
 
 ## Folder Structure Summary
 
@@ -39,6 +40,7 @@ A generated UI/UX concept sheet has been saved as the design reference for futur
 - `docs/` contains planning, ticket, verification, state, risk, review, manual UI checklist, and development plan documents.
 - `docs/Full_System_Test_Report.md` records the latest local full-system test and follow-up review.
 - `docs/design-references/` contains saved visual references for UI implementation.
+- `docs/design-references/ui-ux-indian-civic-panel-refresh-001.png` is the current UI refresh reference.
 - `README.md`, `AGENTS.md`, and `WORKFLOW.md` define setup and project rules.
 
 ## Installed Dependencies
@@ -60,8 +62,8 @@ None.
 - Typecheck: Not run, no type system.
 - Syntax: Pass, `node --check src/app.js`.
 - Full system test: Local automated/static checks passed; browser manual checks remain open. See `docs/Full_System_Test_Report.md`.
-- Git: Local repository initialized; current ticket branch is `feature/t0018-local-backup-restore`.
-- GitHub: Remote `origin` points to `https://github.com/KJisback/civic-issue-reporter.git`; previous ticket branches are pushed and T0018 will be pushed during ticket closeout.
+- Git: Local repository initialized; current ticket branch is `feature/t0018a-indian-civic-ui-refresh`.
+- GitHub: Remote `origin` points to `https://github.com/KJisback/civic-issue-reporter.git`; previous ticket branches are pushed and T0018A will be pushed during ticket closeout.
 
 ## Known Issues
 

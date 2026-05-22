@@ -40,6 +40,7 @@ Completed tickets:
 - T0016 - Admin Analytics Snapshot
 - T0017 - Local Activity Timeline
 - T0018 - Local Backup and Restore
+- T0018A - Indian Civic Panel UI Refresh
 
 Current implementation state:
 
@@ -60,12 +61,13 @@ Current implementation state:
 - Local-only dashboard analytics for priority queue, status mix, category load, team load, and stale open reports without external charting.
 - Local activity events for status, priority, assigned team, and duplicate review changes, stored only in browser storage.
 - Full local backup export and restore through validated JSON files with overwrite confirmation.
-- Minimal civic UI direction applied from saved concept sheet.
+- Modern Indian civic panel UI with ward-desk header, quick action panels, warmer civic palette, and no fake official marks.
 
 Saved UI/UX direction:
 
 - `docs/UI_UX_Design_Direction.md`
 - `docs/design-references/ui-ux-concept-sheet-001.png`
+- `docs/design-references/ui-ux-indian-civic-panel-refresh-001.png`
 - `docs/Development_Plan.md`
 
 Next handoff focus:

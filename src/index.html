@@ -9,14 +9,17 @@
   <body>
     <a class="skip-link" href="#report">Skip to report form</a>
     <header class="topbar">
-      <div>
-        <p class="eyebrow">Civic Issue Reporter</p>
-        <h1>Report civic issues in minutes. Track resolution without noise.</h1>
+      <div class="brand-lockup">
+        <span class="brand-mark" aria-hidden="true">CR</span>
+        <div>
+          <p class="eyebrow">Ward Desk</p>
+          <h1>Civic Issue Reporter</h1>
+        </div>
       </div>
       <nav aria-label="Primary navigation">
         <a href="#report">Report</a>
-        <a href="#issues">Issues</a>
-        <a href="#dashboard">Dashboard</a>
+        <a href="#issues">Queue</a>
+        <a href="#dashboard">Triage</a>
         <a href="#summary">Summary</a>
       </nav>
     </header>
@@ -24,27 +27,50 @@
     <main>
       <section class="hero-shell" aria-labelledby="intro-title">
         <div>
-          <h2 id="intro-title">A month-long build for transparent civic response</h2>
+          <h2 id="intro-title">Fast ward-level reporting for streets, water, waste, and safety.</h2>
           <p>
-            A calm local-first prototype for citizen reporting, duplicate hints,
-            triage queues, and map-ready issue context.
+            A local-first civic desk for quick citizen intake, municipal triage,
+            ward context, and visible resolution flow.
           </p>
         </div>
         <div class="hero-card" aria-label="Project status">
-          <span>Local-first MVP</span>
-          <strong>No backend, no map API, no auth yet.</strong>
-          <p>Every workflow on this page runs in your browser storage.</p>
+          <span>Local ward mode</span>
+          <strong>No backend, map API, or auth yet.</strong>
+          <p>All reporting, backup, and triage data stays in this browser.</p>
         </div>
+      </section>
+
+      <section class="quick-panel-grid" aria-label="Quick civic actions">
+        <a class="quick-panel quick-panel-primary" href="#report">
+          <span>01</span>
+          <strong>New report</strong>
+          <p>Capture ward, landmark, issue type, and urgency.</p>
+        </a>
+        <a class="quick-panel" href="#issues">
+          <span>02</span>
+          <strong>Open queue</strong>
+          <p>Scan public reports by category, status, and priority.</p>
+        </a>
+        <a class="quick-panel" href="#dashboard">
+          <span>03</span>
+          <strong>Triage desk</strong>
+          <p>Review workload, team routing, and stale items.</p>
+        </a>
+        <a class="quick-panel" href="#summary">
+          <span>04</span>
+          <strong>Backup and summary</strong>
+          <p>Print, export, and restore local demo data.</p>
+        </a>
       </section>
 
       <div class="app-grid">
         <aside class="sidebar" aria-label="Workspace sections">
-          <a href="#report" class="active-link">Report issue</a>
-          <a href="#issues">Open reports</a>
-          <a href="#dashboard">Dashboard</a>
-          <a href="#dashboard">Triage</a>
+          <a href="#report" class="active-link">Ward intake</a>
+          <a href="#issues">Issue queue</a>
+          <a href="#dashboard">Triage desk</a>
+          <a href="#dashboard">Team load</a>
           <a href="#issues">Watchlist</a>
-          <a href="#summary">Summary</a>
+          <a href="#summary">Records</a>
         </aside>
 
         <div class="workspace">
@@ -52,9 +78,9 @@
             <div class="section-heading">
               <div>
                 <p class="eyebrow">Citizen intake</p>
-                <h2 id="report-title">Report issue</h2>
+                <h2 id="report-title">Ward issue intake</h2>
               </div>
-              <span class="soft-chip">Private draft</span>
+              <span class="soft-chip">Browser local</span>
             </div>
 
             <div class="report-guidance" aria-label="Report workflow benefits">
@@ -158,8 +184,8 @@
           <section id="dashboard" class="panel dashboard" aria-labelledby="dashboard-title">
             <div class="section-heading">
               <div>
-                <p class="eyebrow">Admin overview</p>
-                <h2 id="dashboard-title">Triage snapshot</h2>
+                <p class="eyebrow">Municipal desk</p>
+                <h2 id="dashboard-title">Triage desk</h2>
               </div>
               <span class="soft-chip">Local data</span>
             </div>
@@ -174,8 +200,8 @@
           <section id="summary" class="panel summary-panel" aria-labelledby="summary-title">
             <div class="section-heading">
               <div>
-                <p class="eyebrow">Municipal review</p>
-                <h2 id="summary-title">Export and print summary</h2>
+                <p class="eyebrow">Records desk</p>
+                <h2 id="summary-title">Summary and local backup</h2>
               </div>
               <span class="soft-chip">Local snapshot</span>
             </div>
@@ -194,8 +220,8 @@
           <section id="issues" class="panel" aria-labelledby="issues-title">
             <div class="section-heading">
               <div>
-                <p class="eyebrow">Public queue</p>
-                <h2 id="issues-title">Open reports</h2>
+                <p class="eyebrow">Ward queue</p>
+                <h2 id="issues-title">Open issue queue</h2>
               </div>
               <span class="queue-count" id="queueCount" role="status" aria-live="polite"></span>
             </div>

@@ -978,6 +978,74 @@ Goal:
 
 Decide whether to introduce a small test dependency and add first focused tests for core local logic if approved.
 
+## T0018A - Indian Civic Panel UI Refresh
+
+Status: Done
+
+Priority: High
+
+Goal:
+
+Refresh the UI/UX toward a modern, streamlined, quick-panel interface that feels associated with Indian civic bodies without using fake official marks.
+
+Branch:
+
+`feature/t0018a-indian-civic-ui-refresh`
+
+Dependencies:
+
+- T0018 - Local Backup and Restore
+
+Allowed areas:
+
+- `src/index.html`
+- `src/styles.css`
+- `docs/UI_UX_Design_Direction.md`
+- `docs/design-references/`
+- ticket, state, and verification docs
+
+Do not touch:
+
+- Do not add backend, auth, database, deployment, external services, or new dependencies.
+- Do not add fake government seals, Ashoka emblems, official logos, political symbols, or flag-as-logo treatment.
+- Do not change issue storage, import/export behavior, or triage business logic.
+
+Requirements:
+
+- Save the generated Indian civic panel UI concept into project design references.
+- Update design docs to make the new panel refresh the current visual direction.
+- Make the app feel more modern, streamlined, and panel-based.
+- Use tasteful Indian civic color cues: deep green, saffron/orange, teal, off-white, charcoal, and limited sky-blue accents.
+- Reduce the overfilled feeling through better section grouping, quick panels, and denser navigation.
+- Preserve existing workflows and controls.
+
+Acceptance criteria:
+
+- App opens with a more modern Indian civic panel aesthetic.
+- Header and quick panels communicate ward desk, reporting, triage, open issues, and backup/summary controls.
+- Existing report, issue queue, dashboard, detail, export, backup, and restore workflows remain present.
+- No official emblem, fake seal, political symbol, backend, dependency, or external service is added.
+
+Automated checks:
+
+- `node --check src/app.js`
+- `git diff --check`
+
+Manual verification:
+
+1. Open `src/index.html`.
+2. Confirm the UI reads as modern, streamlined, and Indian civic without fake official marks.
+3. Confirm report, issue queue, dashboard, summary, backup, and restore controls remain usable.
+4. Check desktop and mobile widths for no overlap or clipped controls.
+5. Check browser console for errors.
+
+Completion notes:
+
+- Saved the generated Indian civic panel UI concept as `docs/design-references/ui-ux-indian-civic-panel-refresh-001.png`.
+- Updated `docs/UI_UX_Design_Direction.md` to make the panel refresh the current visual direction.
+- Refreshed the app shell with a ward-desk header, quick action panels, warmer civic colors, rounded panel treatments, and clearer municipal language.
+- Preserved existing workflows and did not add dependencies, backend, official marks, fake seals, or external services.
+
 ## T0020 - Backend Readiness Design
 
 Status: Planned

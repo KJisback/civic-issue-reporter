@@ -132,6 +132,18 @@ Expected result:
 
 Staff can export full local issue data and import it back into the browser with validation and clear overwrite warnings.
 
+### T0018A - Indian Civic Panel UI Refresh
+
+Status: Done
+
+Purpose:
+
+Refresh the UI toward a modern, quick-panel Indian civic body association without fake official marks.
+
+Expected result:
+
+The app opens with a ward-desk header, quick action panels, warmer civic palette, and less overfilled visual density while preserving existing workflows.
+
 ### T0019 - Test Harness Decision and First Logic Tests
 
 Status: Ready for Agent

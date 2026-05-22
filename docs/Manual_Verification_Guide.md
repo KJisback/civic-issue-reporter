@@ -239,3 +239,12 @@ Use this before larger design, data, or release changes.
 8. Try importing invalid JSON and confirm a readable error appears without replacing local data.
 9. Confirm backup copy does not imply backend upload, official municipal record status, or photo evidence storage.
 10. Check browser console for errors.
+
+## T0018A - Indian Civic Panel UI Refresh
+
+1. Open `src/index.html`.
+2. Confirm the header, quick panels, and section labels feel modern, streamlined, and aligned with Indian civic workflows.
+3. Confirm there are no fake government seals, Ashoka emblems, political marks, or official logo claims.
+4. Confirm report, issue queue, dashboard, summary, backup, and restore controls remain visible and usable.
+5. Resize to desktop and mobile widths and confirm no text, buttons, panels, or controls overlap or clip.
+6. Check browser console for errors.
