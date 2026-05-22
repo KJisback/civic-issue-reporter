@@ -1170,10 +1170,93 @@ Completion notes:
 
 ## T0020 - Backend Readiness Design
 
-Status: Ready for Agent
+Status: Done
 
 Priority: High
 
 Goal:
 
 Prepare backend, data, audit, auth-assumption, and API boundary design without implementing backend code.
+
+Branch:
+
+`feature/t0020-backend-readiness-design`
+
+Dependencies:
+
+- T0019 - Test Harness Decision and First Logic Tests
+
+Allowed areas:
+
+- `docs/Backend_Readiness_Design.md`
+- architecture, ticket, risk, state, and handoff docs
+
+Do not touch:
+
+- Do not implement backend code.
+- Do not add database, auth, deployment, external services, secrets, dependencies, or migrations.
+- Do not change current local app behavior.
+
+Requirements:
+
+- Document backend responsibility boundaries.
+- Document data ownership and proposed entities.
+- Document auth assumptions and unresolved identity decisions.
+- Document API boundary draft.
+- Document audit, privacy, storage, migration, and implementation risks.
+- List future human-gated implementation tickets.
+
+Acceptance criteria:
+
+- Backend readiness design exists.
+- Design clearly states that no backend implementation is included.
+- Auth, database, deployment, maps, photo evidence, official exports, and audit logging remain human-gated.
+- T0021+ follow-up tickets are identified for future planning.
+
+Automated checks:
+
+- `node --check src/app.js`
+- `node tests/app.test.js`
+- `git diff --check`
+
+Manual verification:
+
+1. Read `docs/Backend_Readiness_Design.md`.
+2. Confirm it contains no implementation instructions that bypass human approval.
+3. Confirm future backend/auth/database/deployment work is explicitly gated.
+
+Completion notes:
+
+- Added `docs/Backend_Readiness_Design.md`.
+- Documented proposed backend responsibilities, data ownership, API boundaries, validation, audit design, privacy rules, storage options, migration path, risks, human review triggers, and follow-up tickets.
+- No backend code, database, auth, deployment, external service, dependency, secret, or migration was added.
+
+## T0021 - Backend Architecture Decision Record
+
+Status: Ready for Agent
+
+Priority: High
+
+Goal:
+
+Create an architecture decision record for backend direction, options, trade-offs, and required product-owner decisions before implementation.
+
+## T0022 - Citizen Identity Policy Decision
+
+Status: Planned
+
+Priority: High
+
+Goal:
+
+Decide whether citizen reporting remains anonymous, contact-optional, or account-based.
+
+## T0023 - Staff Role And Permission Model
+
+Status: Planned
+
+Priority: High
+
+Goal:
+
+Define municipal staff roles, permissions, and audit identity expectations before backend implementation.

@@ -174,7 +174,7 @@ This ticket may require approval for a new dependency.
 
 ### T0020 - Backend Readiness Design
 
-Status: Ready for Agent
+Status: Done
 
 Purpose:
 
@@ -182,11 +182,23 @@ Prepare the backend/data plan without implementing it.
 
 Expected result:
 
-Document API boundaries, data ownership, auth assumptions, storage model, audit needs, and migration risks.
+Documented API boundaries, data ownership, auth assumptions, storage model, audit needs, privacy risks, migration path, and gated follow-up tickets in `docs/Backend_Readiness_Design.md`.
 
 Human review trigger:
 
 Backend, database, auth, and deployment decisions require explicit approval before implementation tickets are created.
+
+### T0021 - Backend Architecture Decision Record
+
+Status: Ready for Agent
+
+Purpose:
+
+Choose or defer backend architecture direction through an explicit decision record.
+
+Expected result:
+
+Architecture options, trade-offs, recommended direction, approval needs, and rollback considerations are documented without implementation.
 
 ## Human Decisions Needed Before Later Phases
 
@@ -199,4 +211,4 @@ Backend, database, auth, and deployment decisions require explicit approval befo
 
 ## Recommended Immediate Action
 
-Proceed with T0020 as a design-only ticket. Backend, database, auth, and deployment implementation remain human-gated.
+Proceed with T0021 as a decision-record ticket. Backend, database, auth, and deployment implementation remain human-gated.

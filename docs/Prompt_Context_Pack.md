@@ -17,7 +17,7 @@ Primary inferred MVP:
 
 Current next ticket:
 
-T0020 - Backend Readiness Design
+T0021 - Backend Architecture Decision Record
 
 Completed tickets:
 
@@ -43,6 +43,7 @@ Completed tickets:
 - T0018A - Indian Civic Panel UI Refresh
 - T0018B - Reference UI Clone Pass
 - T0019 - Test Harness Decision and First Logic Tests
+- T0020 - Backend Readiness Design
 
 Current implementation state:
 
@@ -65,6 +66,7 @@ Current implementation state:
 - Full local backup export and restore through validated JSON files with overwrite confirmation.
 - Screenshot-matched Indian civic operations desk UI with top chrome, ward selector, left nav, three work panels, triage overview, and bottom quick actions dock.
 - No-dependency Node logic tests for priority suggestion, duplicate scoring, normalization, backup validation, and summary counts.
+- Backend readiness design covering proposed entities, API boundaries, validation, audit, privacy, storage, migration path, risks, and human-gated follow-ups.
 
 Saved UI/UX direction:
 
@@ -77,8 +79,10 @@ Next handoff focus:
 
 Prepare backend, data, audit, auth-assumption, and API boundary design without implementing backend code.
 
-Next sequence after T0020:
+Next sequence after T0021:
 
+- T0022 - Citizen Identity Policy Decision
+- T0023 - Staff Role And Permission Model
 - Later implementation tickets only after backend/auth/database decisions are approved.
 
 Human-gated decisions:

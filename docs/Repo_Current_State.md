@@ -2,7 +2,7 @@
 
 ## Current Branch
 
-`feature/t0019-no-dependency-logic-tests`
+`feature/t0020-backend-readiness-design`
 
 ## Completed Tickets
 
@@ -28,10 +28,11 @@
 - T0018A - Indian Civic Panel UI Refresh
 - T0018B - Reference UI Clone Pass
 - T0019 - Test Harness Decision and First Logic Tests
+- T0020 - Backend Readiness Design
 
 ## Current App Status
 
-The project has a no-dependency static app with a screenshot-matched Indian civic operations desk UI, citizen report form, local issue records, browser persistence through `localStorage`, sample issue cards, admin-style metrics, category/status/priority filters, local status, priority, and municipal team assignment controls, map-ready location fields, explainable local duplicate hints, local duplicate review actions, local priority assistance, local operational analytics, a focused issue detail panel with status timeline and local activity events, a municipal review summary with print and JSON export actions, full local backup/restore, and first no-dependency Node logic tests. T0018B reworked the app shell to closely follow the supplied civic dashboard reference while preserving local-only functionality. T0019 added dependency-free tests for core local logic.
+The project has a no-dependency static app with a screenshot-matched Indian civic operations desk UI, citizen report form, local issue records, browser persistence through `localStorage`, sample issue cards, admin-style metrics, category/status/priority filters, local status, priority, and municipal team assignment controls, map-ready location fields, explainable local duplicate hints, local duplicate review actions, local priority assistance, local operational analytics, a focused issue detail panel with status timeline and local activity events, a municipal review summary with print and JSON export actions, full local backup/restore, and first no-dependency Node logic tests. T0018B reworked the app shell to closely follow the supplied civic dashboard reference while preserving local-only functionality. T0019 added dependency-free tests for core local logic. T0020 added backend readiness design only; no backend implementation exists.
 
 Generated UI/UX concept sheets are saved as design references, with the Indian civic panel refresh now serving as the current direction.
 
@@ -42,6 +43,7 @@ Generated UI/UX concept sheets are saved as design references, with the Indian c
 - `tests/app.test.js` contains the first no-dependency Node logic tests.
 - `docs/` contains planning, ticket, verification, state, risk, review, manual UI checklist, and development plan documents.
 - `docs/Full_System_Test_Report.md` records the latest local full-system test and follow-up review.
+- `docs/Backend_Readiness_Design.md` documents future backend boundaries, entities, API draft, audit/privacy/storage risks, migration path, and gated follow-up tickets.
 - `docs/design-references/` contains saved visual references for UI implementation.
 - `docs/design-references/ui-ux-indian-civic-panel-refresh-001.png` is the current UI refresh reference.
 - `README.md`, `AGENTS.md`, and `WORKFLOW.md` define setup and project rules.
@@ -66,8 +68,8 @@ None.
 - Typecheck: Not run, no type system.
 - Syntax: Pass, `node --check src/app.js`.
 - Full system test: Local automated/static checks passed; browser manual checks remain open. See `docs/Full_System_Test_Report.md`.
-- Git: Local repository initialized; current ticket branch is `feature/t0019-no-dependency-logic-tests`.
-- GitHub: Remote `origin` points to `https://github.com/KJisback/civic-issue-reporter.git`; previous ticket branches are pushed and T0019 will be pushed during ticket closeout.
+- Git: Local repository initialized; current ticket branch is `feature/t0020-backend-readiness-design`.
+- GitHub: Remote `origin` points to `https://github.com/KJisback/civic-issue-reporter.git`; previous ticket branches are pushed and T0020 will be pushed during ticket closeout.
 
 ## Known Issues
 
@@ -90,7 +92,7 @@ None.
 
 ## Next Recommended Ticket
 
-T0020 - Backend Readiness Design
+T0021 - Backend Architecture Decision Record
 
 ## Last Updated
 

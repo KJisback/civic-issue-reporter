@@ -69,3 +69,26 @@ Mitigation:
 T0012 added skip navigation, stronger visible focus, clearer control names, error associations, live-region improvements, focus restoration, and text containment rules. Complete the remaining manual browser checklist before accepting the next UI milestone.
 
 Status: Reduced after T0012; manual browser verification remains open
+# Risk Register
+
+## R0001 - Backend Decisions May Expose Privacy And Audit Risk
+
+Status: Open
+
+Severity: High
+
+Description:
+
+Future backend implementation could accidentally turn browser-local demo behavior into official persistence, audit logging, or public records before product-owner policies are approved.
+
+Mitigation:
+
+Use `docs/Backend_Readiness_Design.md` as the gate for backend planning. Require explicit approval before auth, database, deployment, official exports, map providers, photo storage, or audit logging implementation.
+
+Owner:
+
+Product owner
+
+Decision needed by:
+
+Before any backend implementation ticket.

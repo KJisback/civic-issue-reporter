@@ -53,6 +53,7 @@ Later statuses may include duplicate, rejected, blocked, or needs_more_info.
 - Lightweight backend only after the workflow is proven locally.
 - Map provider only after human approval for external services.
 - Authentication only after a product decision on citizen/admin roles.
+- Backend readiness planning is documented in `docs/Backend_Readiness_Design.md`.
 
 ## Non-Goals
 

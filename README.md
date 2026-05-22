@@ -6,9 +6,9 @@ The MVP will let citizens report local issues with category, location, descripti
 
 ## Current Status
 
-T0001 through T0019 are complete.
+T0001 through T0020 are complete.
 
-The current version is a no-dependency static prototype with a screenshot-matched Indian civic operations desk UI, local browser storage, citizen reporting, triage controls, local municipal team assignment labels, duplicate review actions, issue details with local activity events, dashboard operational analytics, local export/print summary support, full local backup/restore, a first accessibility/keyboard hardening pass, and privacy-safe photo evidence placeholders without upload or storage.
+The current version is a no-dependency static prototype with a screenshot-matched Indian civic operations desk UI, local browser storage, citizen reporting, triage controls, local municipal team assignment labels, duplicate review actions, issue details with local activity events, dashboard operational analytics, local export/print summary support, full local backup/restore, a first accessibility/keyboard hardening pass, no-dependency logic tests, and backend readiness design docs. There is still no backend, auth, database, deployment, or photo upload.
 
 ## Run Locally
 
@@ -47,7 +47,7 @@ civic-issue-reporter/
 
 ## Next Ticket
 
-T0020 - Backend Readiness Design
+T0021 - Backend Architecture Decision Record
 
 ## Development Plan
 
