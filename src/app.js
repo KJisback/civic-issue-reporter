@@ -624,7 +624,7 @@ function renderSummaryPreview() {
 function renderIssues() {
   const list = document.querySelector("#issueList");
   const filteredIssues = getFilteredIssues();
-  document.querySelector("#queueCount").textContent = `${filteredIssues.length} of ${issues.length} shown`;
+  document.querySelector("#queueCount").textContent = "View All";
 
   if (filteredIssues.length === 0) {
     list.innerHTML = `<div class="empty-state">No reports match the current filters.</div>`;
@@ -632,48 +632,25 @@ function renderIssues() {
   }
 
   list.innerHTML = filteredIssues
+    .slice(0, 5)
     .map(
       (issue) => `
         <article class="issue-card" data-issue-id="${escapeHtml(issue.id)}">
+          <span class="issue-symbol ${categoryClass(issue.category)}" aria-hidden="true"></span>
           <div class="issue-main">
+            <div class="issue-number-row">
+              <span>#${escapeHtml(issue.id.replace("sample-", "ISS-").replace("issue-", "ISS-").slice(0, 8))}</span>
+              <time datetime="${issue.createdAt}">${openAgeDays(issue)}d ago</time>
+            </div>
+            <h3>${escapeHtml(issue.title)}</h3>
+            <p>${escapeHtml(issue.location)}</p>
             <div class="card-meta">
-              <span class="tag">${escapeHtml(issue.category)}</span>
-              <span class="tag ${priorityClass(issue.priority)}">${escapeHtml(issue.priority)}</span>
+              <span class="tag ${priorityClass(issue.priority)}">${escapeHtml(issue.priority)} Priority</span>
               <span class="tag status-${statusClass(issue.status)}">${escapeHtml(issue.status)}</span>
-              <span class="tag tag-assignment">${escapeHtml(assignmentLabel(issue))}</span>
-              ${issue.duplicateHints.length > 0 ? `<span class="tag tag-warning">${escapeHtml(duplicateReviewSummary(issue))}</span>` : ""}
             </div>
-            <div class="issue-title-row">
-              <span class="issue-symbol ${categoryClass(issue.category)}" aria-hidden="true"></span>
-              <h3>${escapeHtml(issue.title)}</h3>
-            </div>
-            <p>${escapeHtml(issue.description)}</p>
-            <div class="issue-row-footer">
-              <time datetime="${issue.createdAt}">Reported ${formatDate(issue.createdAt)}</time>
-              <span>${escapeHtml(issue.ward || "Ward not specified")}</span>
-            </div>
-            <button class="secondary-button details-button" type="button" data-action="view-detail" data-issue-id="${escapeHtml(issue.id)}" aria-label="View details for ${escapeHtml(issue.title)}">View details</button>
-          </div>
-          <div class="issue-side">
-            <div class="evidence-block">
-              <div class="evidence-thumbnail" aria-hidden="true"></div>
-              <div>
-                <strong>${escapeHtml(photoEvidenceLabel(issue))}</strong>
-                <p>${escapeHtml(photoEvidenceNote())}</p>
-              </div>
-            </div>
-            <div class="location-block">
-              <p><strong>Location:</strong> ${escapeHtml(issue.location)}</p>
-              <span class="location-detail">Area: ${escapeHtml(issue.ward || "Not specified")}</span>
-              <span class="location-detail">Landmark: ${escapeHtml(issue.landmark || "Not specified")}</span>
-              <span class="location-detail">Map-ready: ${escapeHtml(formatCoordinates(issue.coordinates))}</span>
-            </div>
-            <p><strong>Priority note:</strong> ${escapeHtml(issue.priorityReason || "Priority can be adjusted by staff.")}</p>
-            <p><strong>Assigned team:</strong> ${escapeHtml(assignmentLabel(issue))}. Local label only, no staff identity.</p>
-            ${issue.duplicateHints.length > 0 ? `<p><strong>Duplicate hint:</strong> ${escapeHtml(duplicateReviewSummary(issue))}. Closest match: ${escapeHtml(issue.duplicateHints[0].title)} near ${escapeHtml(issue.duplicateHints[0].location)}.</p>` : ""}
           </div>
           <div class="triage-controls" aria-label="Triage controls for ${escapeHtml(issue.title)}">
-            <span class="bookmark-mark" aria-hidden="true"></span>
+            <button class="secondary-button details-button" type="button" data-action="view-detail" data-issue-id="${escapeHtml(issue.id)}" aria-label="View details for ${escapeHtml(issue.title)}">View</button>
             <label>
               Status
               <select data-action="status" data-issue-id="${escapeHtml(issue.id)}" aria-label="Status for ${escapeHtml(issue.title)}">
@@ -877,19 +854,15 @@ function renderIssueDetail() {
 
 function renderMetrics() {
   const openIssues = issues.filter((issue) => issue.status !== "Resolved").length;
-  const highPriority = issues.filter((issue) => issue.priority === "High").length;
-  const categories = new Set(issues.map((issue) => issue.category)).size;
-  const submittedToday = issues.filter((issue) => {
-    const created = new Date(issue.createdAt);
-    const today = new Date();
-    return created.toDateString() === today.toDateString();
-  }).length;
+  const triaged = issues.filter((issue) => issue.status === "Triaged").length;
+  const inProgress = issues.filter((issue) => issue.status === "In progress").length;
+  const resolved = issues.filter((issue) => issue.status === "Resolved").length;
 
   const metrics = [
     [String(openIssues), "Open issues"],
-    [String(highPriority), "High priority"],
-    [String(categories), "Categories"],
-    [String(submittedToday), "Submitted today"]
+    [String(triaged), "Triage"],
+    [String(inProgress), "In Progress"],
+    [String(resolved), "Resolved"]
   ];
 
   document.querySelector("#metrics").innerHTML = metrics

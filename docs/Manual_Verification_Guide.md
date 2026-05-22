@@ -248,3 +248,12 @@ Use this before larger design, data, or release changes.
 4. Confirm report, issue queue, dashboard, summary, backup, and restore controls remain visible and usable.
 5. Resize to desktop and mobile widths and confirm no text, buttons, panels, or controls overlap or clip.
 6. Check browser console for errors.
+
+## T0018B - Reference UI Clone Pass
+
+1. Open `src/index.html`.
+2. Compare the app against the supplied Indian civic dashboard screenshot.
+3. Confirm the top chrome, hamburger control, brand/title, ward selector, operator card, sidebar, three work panels, and bottom quick action bar are present.
+4. Confirm report, issue queue, dashboard metrics, issue detail, export, backup, and restore workflows remain usable.
+5. Resize to desktop and mobile widths and confirm no visible overlap or clipped controls.
+6. Check browser console for errors.

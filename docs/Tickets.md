@@ -1046,6 +1046,71 @@ Completion notes:
 - Refreshed the app shell with a ward-desk header, quick action panels, warmer civic colors, rounded panel treatments, and clearer municipal language.
 - Preserved existing workflows and did not add dependencies, backend, official marks, fake seals, or external services.
 
+## T0018B - Reference UI Clone Pass
+
+Status: Done
+
+Priority: High
+
+Goal:
+
+Make the app UI closely match the user-provided Indian civic dashboard screenshot while preserving the local prototype functionality.
+
+Branch:
+
+`feature/t0018b-reference-ui-clone`
+
+Dependencies:
+
+- T0018A - Indian Civic Panel UI Refresh
+
+Allowed areas:
+
+- `src/index.html`
+- `src/app.js`
+- `src/styles.css`
+- ticket, state, and verification docs
+
+Do not touch:
+
+- Do not add backend, auth, database, deployment, external services, or new dependencies.
+- Do not add fake government seals, official logos, political symbols, or official-record claims.
+- Do not remove report, queue, dashboard, detail, export, backup, or restore workflows.
+
+Requirements:
+
+- Match the screenshot's compact top chrome, hamburger control, brand title, ward selector, operator card, left navigation, three-column operations desk, and bottom quick actions bar.
+- Map screenshot controls onto existing local functionality.
+- Keep the UI panel-based and avoid overfilled sections.
+- Preserve existing JavaScript behavior and local-only constraints.
+
+Acceptance criteria:
+
+- App layout strongly resembles the supplied screenshot.
+- Report form, open issues, triage overview, detail, backup/import, and summary/export controls remain available.
+- No dependency, backend, auth, external service, official emblem, or fake official identity is added.
+
+Automated checks:
+
+- `node --check src/app.js`
+- `git diff --check`
+- Static reference UI selector check.
+
+Manual verification:
+
+1. Open `src/index.html`.
+2. Compare the layout against the supplied screenshot.
+3. Confirm the top chrome, left sidebar, three work panels, and bottom quick actions are present.
+4. Confirm report, queue, dashboard, detail, export, backup, and restore workflows still work.
+5. Check desktop and mobile widths for no overlap or clipped controls.
+6. Check browser console for errors.
+
+Completion notes:
+
+- Reworked the app shell to closely follow the supplied reference screenshot.
+- Added screenshot-like top chrome, ward selector, skyline strip, operator card, left sidebar, three-column operations workspace, compact open issue cards, triage overview metrics, and bottom quick actions dock.
+- Existing local workflows remain mapped into the cloned layout.
+
 ## T0020 - Backend Readiness Design
 
 Status: Planned

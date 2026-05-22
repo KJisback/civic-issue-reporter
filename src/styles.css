@@ -1535,6 +1535,461 @@ button {
   min-width: 0;
 }
 
+/* Screenshot reference layout: compact Indian civic operations desk. */
+.app-chrome {
+  min-height: 86px;
+  padding: 10px 12px 10px 28px;
+  border: 1px solid #cfcfcf;
+  border-radius: 14px 14px 0 0;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.9)),
+    var(--surface);
+}
+
+.menu-button,
+.icon-button {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  min-height: 42px;
+  max-width: 42px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #222222;
+  box-shadow: none;
+  font-size: 32px;
+  line-height: 1;
+}
+
+.brand-lockup h1 {
+  font-size: 29px;
+  line-height: 1;
+  color: #064734;
+}
+
+.brand-lockup h1 span {
+  color: #e85d04;
+}
+
+.brand-lockup p,
+.ward-selector p,
+.operator-card p {
+  margin: 0;
+  color: #1d1d1d;
+}
+
+.ward-selector {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 270px;
+}
+
+.ward-selector > span {
+  font-size: 36px;
+}
+
+.ward-selector strong {
+  color: #064734;
+}
+
+.civic-skyline {
+  flex: 1 1 360px;
+  align-self: stretch;
+  min-height: 58px;
+  opacity: 0.88;
+  background:
+    linear-gradient(to top, rgba(255, 255, 255, 0.75), transparent 52%),
+    linear-gradient(90deg, transparent 0 22%, #f97316 22% 26%, transparent 26% 29%, #f97316 29% 33%, transparent 33% 37%, #f97316 37% 42%, transparent 42% 46%, #eab308 46% 51%, transparent 51% 57%, #8fbf88 57% 100%);
+  clip-path: polygon(0 100%, 0 78%, 18% 78%, 18% 62%, 22% 62%, 22% 42%, 24% 42%, 24% 62%, 28% 62%, 28% 74%, 31% 74%, 31% 44%, 35% 44%, 35% 74%, 38% 74%, 38% 30%, 42% 30%, 42% 74%, 46% 74%, 46% 20%, 50% 20%, 50% 74%, 54% 74%, 54% 36%, 58% 36%, 58% 74%, 64% 74%, 64% 54%, 70% 54%, 70% 78%, 100% 78%, 100% 100%);
+}
+
+.operator-card {
+  display: grid;
+  grid-template-columns: 46px minmax(120px, 1fr);
+  align-items: center;
+  min-width: 198px;
+  border: 1px solid #d8d8d8;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.operator-card > span {
+  display: grid;
+  place-items: center;
+  min-height: 54px;
+  border-right: 1px solid #d8d8d8;
+  font-size: 30px;
+}
+
+.dashboard-shell {
+  width: 100%;
+  max-width: none;
+  padding: 8px 0 0;
+}
+
+.app-grid {
+  grid-template-columns: 196px minmax(0, 1fr);
+  gap: 0;
+  min-height: calc(100vh - 190px);
+  border-left: 1px solid #d5d5d5;
+  border-right: 1px solid #d5d5d5;
+}
+
+.sidebar {
+  position: static;
+  align-content: start;
+  gap: 8px;
+  padding: 20px 12px;
+  border: 0;
+  border-right: 1px solid #e0e0e0;
+  border-radius: 0;
+  background: #fbfbfb;
+  box-shadow: none;
+}
+
+.sidebar a {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  align-items: center;
+  min-height: 48px;
+  padding: 8px 12px;
+  border-radius: 9px;
+  background: transparent;
+  color: #141414;
+}
+
+.sidebar a span {
+  font-size: 24px;
+}
+
+.sidebar .active-link,
+.sidebar a:hover {
+  background: linear-gradient(135deg, #00875a, #006846);
+  color: #ffffff;
+  box-shadow: 0 12px 24px rgba(0, 104, 70, 0.2);
+}
+
+.sidebar-backup {
+  display: grid;
+  gap: 8px;
+  margin-top: 22px;
+  padding: 14px;
+  border: 1px solid #9bceb9;
+  border-radius: 9px;
+  background: #f3fff9;
+  color: #064734;
+}
+
+.sidebar-backup p {
+  margin: 0;
+  color: #24352e;
+  line-height: 1.35;
+}
+
+.sidebar-backup span {
+  color: #098f5f;
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.workspace {
+  grid-template-columns: minmax(330px, 0.95fr) minmax(320px, 0.9fr) minmax(360px, 1fr);
+  gap: 12px;
+  padding: 16px 12px;
+  background: #fafafa;
+}
+
+.panel {
+  padding: 22px;
+  border: 1px solid #dedede;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: none;
+}
+
+.report-panel {
+  grid-column: 1;
+  border-top: 1px solid #dedede;
+}
+
+.issues-panel {
+  grid-column: 2;
+}
+
+.dashboard {
+  grid-column: 3;
+}
+
+.detail-panel {
+  grid-column: 1 / -1;
+}
+
+.section-heading {
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.section-heading h2 {
+  color: #064734;
+  font-size: 21px;
+}
+
+.section-heading h2::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 3px;
+  margin-top: 7px;
+  background: #f97316;
+}
+
+.compact-button {
+  max-width: 130px;
+  min-height: 36px;
+  padding: 7px 10px;
+  font-size: 12px;
+}
+
+.report-guidance {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.report-guidance div {
+  min-height: 70px;
+  padding: 9px;
+  border-color: #d8d8d8;
+  background: #ffffff;
+}
+
+.report-guidance div:first-child {
+  border-color: #ff7a1a;
+  box-shadow: inset 0 0 0 1px rgba(255, 122, 26, 0.12);
+}
+
+.report-form {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px;
+}
+
+.report-form label:first-child,
+.report-form label:nth-child(2),
+.wide {
+  grid-column: 1 / -1;
+}
+
+.compact-advanced {
+  display: none;
+}
+
+input,
+select,
+textarea {
+  border-radius: 7px;
+  border-color: #dedede;
+  background: #ffffff;
+}
+
+textarea {
+  min-height: 92px;
+}
+
+.form-actions {
+  justify-content: end;
+}
+
+button,
+.ward-map-button {
+  min-height: 48px;
+  border-radius: 8px;
+}
+
+.issue-list {
+  gap: 0;
+  overflow: hidden;
+  border: 1px solid #e2e2e2;
+  border-radius: 10px;
+}
+
+.issue-card {
+  grid-template-columns: 54px minmax(0, 1fr) minmax(120px, 0.42fr);
+  gap: 12px;
+  min-height: 128px;
+  padding: 18px 14px;
+  border: 0;
+  border-bottom: 1px solid #eeeeee;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.issue-card:last-child {
+  border-bottom: 0;
+}
+
+.issue-card > .issue-symbol {
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: 0;
+}
+
+.issue-number-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: #5d6360;
+  font-size: 13px;
+}
+
+.issue-number-row time {
+  color: #6b6b6b;
+}
+
+.issue-main h3 {
+  margin: 2px 0 2px;
+  font-size: 16px;
+}
+
+.issue-main p {
+  font-size: 13px;
+}
+
+.issue-card .triage-controls {
+  gap: 7px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.issue-card .triage-controls label {
+  display: none;
+}
+
+.details-button {
+  justify-self: end;
+  min-height: 34px;
+  max-width: 72px;
+  padding: 6px 10px;
+}
+
+.view-all-link {
+  display: block;
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px solid #e3e3e3;
+  border-radius: 9px;
+  color: #006846;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 850;
+}
+
+.filter-bar {
+  display: none;
+}
+
+.metrics {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.metric {
+  min-height: 104px;
+  place-items: center;
+  padding: 12px;
+  border-color: #b9d9cb;
+  background: #f5fffa;
+  text-align: center;
+}
+
+.metric:nth-child(2) {
+  border-color: #f3c99b;
+  background: #fff9f1;
+}
+
+.metric:nth-child(3) {
+  border-color: #9bd4ef;
+  background: #f1fbff;
+}
+
+.metric::before {
+  display: none;
+}
+
+.metric strong {
+  color: #007247;
+  font-size: 35px;
+}
+
+.metric:nth-child(2) strong {
+  color: #f05a1a;
+}
+
+.metric:nth-child(3) strong {
+  color: #0a77b8;
+}
+
+.dashboard-grid {
+  display: none;
+}
+
+.analytics-snapshot {
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+.analytics-panel {
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.analytics-panel:not(.analytics-priority):not(.analytics-stale) {
+  display: none;
+}
+
+.analytics-priority {
+  grid-row: auto;
+}
+
+.quick-actions-dock {
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+  padding: 18px 28px;
+  border: 1px solid #d5d5d5;
+  border-radius: 0 0 14px 14px;
+  background: #ffffff;
+}
+
+.quick-actions-dock h2 {
+  margin: 0;
+  color: #064734;
+  font-size: 22px;
+}
+
+.quick-actions-dock .summary-actions {
+  gap: 14px;
+}
+
+.quick-actions-dock .summary-preview,
+.quick-actions-dock .backup-note {
+  display: none;
+}
+
+.ward-map-button {
+  display: grid;
+  place-items: center;
+  min-width: 188px;
+  padding: 0 18px;
+  background: linear-gradient(135deg, #00875a, #006846);
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 900;
+}
+
 @media (max-width: 1080px) {
   .app-grid,
   .hero-shell,

@@ -144,6 +144,18 @@ Expected result:
 
 The app opens with a ward-desk header, quick action panels, warmer civic palette, and less overfilled visual density while preserving existing workflows.
 
+### T0018B - Reference UI Clone Pass
+
+Status: Done
+
+Purpose:
+
+Match the supplied Indian civic dashboard screenshot as closely as possible while preserving local prototype workflows.
+
+Expected result:
+
+The app presents compact top chrome, ward selector, operator card, sidebar navigation, three operations panels, and bottom quick actions mapped to existing local functionality.
+
 ### T0019 - Test Harness Decision and First Logic Tests
 
 Status: Ready for Agent

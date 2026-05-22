@@ -8,79 +8,58 @@
   </head>
   <body>
     <a class="skip-link" href="#report">Skip to report form</a>
-    <header class="topbar">
+    <header class="topbar app-chrome">
+      <button class="icon-button menu-button" type="button" aria-label="Open navigation menu">☰</button>
       <div class="brand-lockup">
-        <span class="brand-mark" aria-hidden="true">CR</span>
         <div>
-          <p class="eyebrow">Ward Desk</p>
-          <h1>Civic Issue Reporter</h1>
+          <h1><span>Civic</span> Issue Reporter</h1>
+          <p>Your City • Your Responsibility</p>
         </div>
       </div>
-      <nav aria-label="Primary navigation">
-        <a href="#report">Report</a>
-        <a href="#issues">Queue</a>
-        <a href="#dashboard">Triage</a>
-        <a href="#summary">Summary</a>
-      </nav>
+      <div class="ward-selector" aria-label="Current ward desk">
+        <span aria-hidden="true">⌖</span>
+        <div>
+          <strong>Ward Desk</strong>
+          <p>Ward 27 - Shanti Nagar⌄</p>
+        </div>
+      </div>
+      <div class="civic-skyline" aria-hidden="true"></div>
+      <div class="operator-card" aria-label="Current operator">
+        <span aria-hidden="true">☼</span>
+        <div>
+          <strong>Ward Operator</strong>
+          <p>Desk Staff⌄</p>
+        </div>
+      </div>
     </header>
 
-    <main>
-      <section class="hero-shell" aria-labelledby="intro-title">
-        <div>
-          <h2 id="intro-title">Fast ward-level reporting for streets, water, waste, and safety.</h2>
-          <p>
-            A local-first civic desk for quick citizen intake, municipal triage,
-            ward context, and visible resolution flow.
-          </p>
-        </div>
-        <div class="hero-card" aria-label="Project status">
-          <span>Local ward mode</span>
-          <strong>No backend, map API, or auth yet.</strong>
-          <p>All reporting, backup, and triage data stays in this browser.</p>
-        </div>
-      </section>
-
-      <section class="quick-panel-grid" aria-label="Quick civic actions">
-        <a class="quick-panel quick-panel-primary" href="#report">
-          <span>01</span>
-          <strong>New report</strong>
-          <p>Capture ward, landmark, issue type, and urgency.</p>
-        </a>
-        <a class="quick-panel" href="#issues">
-          <span>02</span>
-          <strong>Open queue</strong>
-          <p>Scan public reports by category, status, and priority.</p>
-        </a>
-        <a class="quick-panel" href="#dashboard">
-          <span>03</span>
-          <strong>Triage desk</strong>
-          <p>Review workload, team routing, and stale items.</p>
-        </a>
-        <a class="quick-panel" href="#summary">
-          <span>04</span>
-          <strong>Backup and summary</strong>
-          <p>Print, export, and restore local demo data.</p>
-        </a>
-      </section>
-
+    <main class="dashboard-shell">
       <div class="app-grid">
         <aside class="sidebar" aria-label="Workspace sections">
-          <a href="#report" class="active-link">Ward intake</a>
-          <a href="#issues">Issue queue</a>
-          <a href="#dashboard">Triage desk</a>
-          <a href="#dashboard">Team load</a>
-          <a href="#issues">Watchlist</a>
-          <a href="#summary">Records</a>
+          <a href="#dashboard" class="active-link"><span aria-hidden="true">⌂</span>Dashboard</a>
+          <a href="#report"><span aria-hidden="true">✎</span>Report Issue</a>
+          <a href="#issues"><span aria-hidden="true">☷</span>Open Issues</a>
+          <a href="#dashboard"><span aria-hidden="true">♟</span>Triage</a>
+          <a href="#issues"><span aria-hidden="true">✓</span>Resolved</a>
+          <a href="#dashboard"><span aria-hidden="true">☑</span>My Tasks</a>
+          <a href="#issues"><span aria-hidden="true">⌖</span>Ward Map</a>
+          <a href="#report"><span aria-hidden="true">♧</span>Citizens</a>
+          <a href="#dashboard"><span aria-hidden="true">▥</span>Analytics</a>
+          <a href="#summary"><span aria-hidden="true">⚙</span>Settings</a>
+          <div class="sidebar-backup">
+            <strong>Local Backup</strong>
+            <p>Always On. Always Available.</p>
+            <span>● Backup ready</span>
+          </div>
         </aside>
 
         <div class="workspace">
           <section id="report" class="panel report-panel" aria-labelledby="report-title">
             <div class="section-heading">
               <div>
-                <p class="eyebrow">Citizen intake</p>
-                <h2 id="report-title">Ward issue intake</h2>
+                <h2 id="report-title">Report New Issue</h2>
               </div>
-              <span class="soft-chip">Browser local</span>
+              <button class="secondary-button compact-button" type="button">⌖ Use My Location</button>
             </div>
 
             <div class="report-guidance" aria-label="Report workflow benefits">
@@ -109,7 +88,7 @@
               </label>
 
               <label>
-                Category
+                Issue Category
                 <select id="issueCategory" name="category" required>
                   <option>Streetlight</option>
                   <option>Road damage</option>
@@ -121,28 +100,28 @@
               </label>
 
               <label>
-                Location summary
-                <input id="issueLocation" name="location" type="text" placeholder="Ward 12, MG Road bus stop" required aria-describedby="locationError">
+                Location
+                <input id="issueLocation" name="location" type="text" placeholder="Shanti Nagar, Near Community Hall" required aria-describedby="locationError">
                 <span class="field-error" id="locationError" role="alert"></span>
               </label>
 
               <label>
                 Ward or area
-                <input id="issueWard" name="ward" type="text" placeholder="Ward 12">
+                <input id="issueWard" name="ward" type="text" placeholder="Shanti Nagar">
               </label>
 
               <label>
-                Nearby landmark
-                <input id="issueLandmark" name="landmark" type="text" placeholder="Opposite city bus stop">
+                Landmark
+                <input id="issueLandmark" name="landmark" type="text" placeholder="Community Hall">
               </label>
 
               <label class="wide">
                 Description
-                <textarea id="issueDescription" name="description" placeholder="Describe what happened, where it is, and why it needs attention." required aria-describedby="descriptionError"></textarea>
+                <textarea id="issueDescription" name="description" maxlength="300" placeholder="Garbage not collected since 3 days. Overflowing near the community hall." required aria-describedby="descriptionError"></textarea>
                 <span class="field-error" id="descriptionError" role="alert"></span>
               </label>
 
-              <fieldset class="coordinate-fields wide">
+              <fieldset class="coordinate-fields wide compact-advanced">
                 <legend>Optional map-ready coordinates</legend>
                 <label>
                   Latitude
@@ -157,7 +136,7 @@
                 <p id="coordinateHelp">Coordinates are optional and manually entered for now. No map service or device location permission is used.</p>
               </fieldset>
 
-              <div class="photo-evidence-panel wide" aria-labelledby="photo-evidence-title">
+              <div class="photo-evidence-panel wide compact-advanced" aria-labelledby="photo-evidence-title">
                 <div>
                   <p class="eyebrow">Future evidence</p>
                   <h3 id="photo-evidence-title">Photo evidence placeholder</h3>
@@ -174,54 +153,17 @@
               <div class="assist-panel wide" id="assistPanel" role="status" aria-live="polite"></div>
 
               <div class="form-actions wide">
-                <button type="submit">Submit report</button>
+                <button type="submit">Submit Issue ✈</button>
                 <button class="secondary-button" type="button" id="resetDemoData">Reset demo data</button>
               </div>
               <p class="form-status wide" id="formStatus" role="status" aria-live="polite"></p>
             </form>
           </section>
 
-          <section id="dashboard" class="panel dashboard" aria-labelledby="dashboard-title">
+          <section id="issues" class="panel issues-panel" aria-labelledby="issues-title">
             <div class="section-heading">
               <div>
-                <p class="eyebrow">Municipal desk</p>
-                <h2 id="dashboard-title">Triage desk</h2>
-              </div>
-              <span class="soft-chip">Local data</span>
-            </div>
-            <div class="metrics" id="metrics"></div>
-            <div class="dashboard-grid">
-              <div class="location-preview" id="locationPreview" aria-label="Location readiness preview"></div>
-              <div class="workflow-board" id="workflowBoard" aria-label="Status workflow summary"></div>
-            </div>
-            <div class="analytics-snapshot" id="analyticsSnapshot" aria-label="Local analytics snapshot"></div>
-          </section>
-
-          <section id="summary" class="panel summary-panel" aria-labelledby="summary-title">
-            <div class="section-heading">
-              <div>
-                <p class="eyebrow">Records desk</p>
-                <h2 id="summary-title">Summary and local backup</h2>
-              </div>
-              <span class="soft-chip">Local snapshot</span>
-            </div>
-            <div class="summary-actions">
-              <button type="button" id="printSummary">Print summary</button>
-              <button class="secondary-button" type="button" id="exportSummary">Export JSON</button>
-              <button class="secondary-button" type="button" id="exportBackup">Export backup</button>
-              <button class="secondary-button" type="button" id="importBackup">Import backup</button>
-            </div>
-            <input class="file-input" id="backupFileInput" type="file" accept="application/json,.json" aria-label="Import local civic issue backup JSON">
-            <p class="backup-note">Backup import replaces local browser data after confirmation. It does not upload files or create an official municipal record.</p>
-            <p class="form-status is-success" id="summaryStatus" role="status" aria-live="polite"></p>
-            <div id="summaryPreview" class="summary-preview" aria-label="Printable municipal summary"></div>
-          </section>
-
-          <section id="issues" class="panel" aria-labelledby="issues-title">
-            <div class="section-heading">
-              <div>
-                <p class="eyebrow">Ward queue</p>
-                <h2 id="issues-title">Open issue queue</h2>
+                <h2 id="issues-title">Open Issues</h2>
               </div>
               <span class="queue-count" id="queueCount" role="status" aria-live="polite"></span>
             </div>
@@ -245,22 +187,43 @@
                 </select>
               </label>
             </div>
-            <div class="issue-feed-layout">
-              <div class="issue-list" id="issueList" aria-live="polite"></div>
-              <aside class="queue-map" aria-label="Ward issue map preview">
-                <div class="map-toolbar">
-                  <strong>Ward view</strong>
-                  <span>Manual preview</span>
-                </div>
-                <div class="map-placeholder map-placeholder-large" aria-hidden="true"></div>
-                <p>Location context stays local until a map provider and privacy policy are approved.</p>
-              </aside>
+            <div class="issue-list" id="issueList" aria-live="polite"></div>
+            <a class="view-all-link" href="#issues">View All Open Issues →</a>
+          </section>
+
+          <section id="dashboard" class="panel dashboard" aria-labelledby="dashboard-title">
+            <div class="section-heading">
+              <div>
+                <h2 id="dashboard-title">Triage / Status Overview</h2>
+              </div>
+              <span class="soft-chip">View All</span>
             </div>
+            <div class="metrics" id="metrics"></div>
+            <div class="dashboard-grid">
+              <div class="location-preview" id="locationPreview" aria-label="Location readiness preview"></div>
+              <div class="workflow-board" id="workflowBoard" aria-label="Status workflow summary"></div>
+            </div>
+            <div class="analytics-snapshot" id="analyticsSnapshot" aria-label="Local analytics snapshot"></div>
           </section>
 
           <section id="issueDetail" class="panel detail-panel" aria-live="polite" tabindex="-1" hidden></section>
         </div>
       </div>
+
+      <section id="summary" class="quick-actions-dock" aria-labelledby="summary-title">
+        <h2 id="summary-title">Quick Actions</h2>
+        <div class="summary-actions">
+          <button class="secondary-button" type="button" id="exportBackup">⬇ Export Backup</button>
+          <button class="secondary-button" type="button" id="importBackup">⬆ Import Backup</button>
+          <button class="secondary-button" type="button" id="exportSummary">☷ Bulk Update</button>
+          <button class="secondary-button" type="button" id="printSummary">✎ Add Note</button>
+          <a class="ward-map-button" href="#issues">▱ View Ward Map</a>
+        </div>
+        <input class="file-input" id="backupFileInput" type="file" accept="application/json,.json" aria-label="Import local civic issue backup JSON">
+        <p class="backup-note">Backup import replaces local browser data after confirmation. It does not upload files or create an official municipal record.</p>
+        <p class="form-status is-success" id="summaryStatus" role="status" aria-live="polite"></p>
+        <div id="summaryPreview" class="summary-preview" aria-label="Printable municipal summary"></div>
+      </section>
     </main>
 
     <script src="app.js"></script>
