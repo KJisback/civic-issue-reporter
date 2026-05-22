@@ -1110,6 +1110,7 @@ Completion notes:
 - Reworked the app shell to closely follow the supplied reference screenshot.
 - Added screenshot-like top chrome, ward selector, skyline strip, operator card, left sidebar, three-column operations workspace, compact open issue cards, triage overview metrics, and bottom quick actions dock.
 - Existing local workflows remain mapped into the cloned layout.
+- Corrective pass fixed narrow-width panel squeezing by adding safer breakpoints and compact report guidance tiles.
 
 ## T0020 - Backend Readiness Design
 
