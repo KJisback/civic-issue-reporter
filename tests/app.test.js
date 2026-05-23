@@ -67,6 +67,29 @@ test("normalizeIssue supplies assignment, duplicate, and activity defaults", () 
   assert.deepEqual(normalized.activityTimeline, []);
 });
 
+test("normalizeIssue repairs malformed stored records", () => {
+  const normalized = app.normalizeIssue({
+    id: "",
+    title: "",
+    category: "Legacy unknown category",
+    location: "",
+    description: "",
+    status: "Waiting",
+    priority: "Urgent",
+    createdAt: "not-a-date",
+    updatedAt: "not-a-date",
+    coordinates: { latitude: 900, longitude: 900 }
+  });
+
+  assert.match(normalized.id, /^issue-/);
+  assert.equal(normalized.title, "Untitled civic report");
+  assert.equal(normalized.category, "Other civic issue");
+  assert.equal(normalized.location, "Location not specified");
+  assert.equal(normalized.description, "No description supplied.");
+  assert.equal(normalized.status, "Submitted");
+  assert.equal(normalized.coordinates, null);
+});
+
 test("parseBackupPayload accepts valid backups and rejects duplicate ids", () => {
   const issue = app.normalizeIssue({
     id: "issue-backup",

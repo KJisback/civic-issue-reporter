@@ -1231,6 +1231,84 @@ Completion notes:
 - Documented proposed backend responsibilities, data ownership, API boundaries, validation, audit design, privacy rules, storage options, migration path, risks, human review triggers, and follow-up tickets.
 - No backend code, database, auth, deployment, external service, dependency, secret, or migration was added.
 
+## T0020A - UI Functionality Repair After Human Browser Check
+
+Status: Done
+
+Priority: High
+
+Goal:
+
+Repair the UI regressions found during human browser verification before moving to backend planning.
+
+Branch:
+
+`feature/t0020a-ui-functionality-repair`
+
+Dependencies:
+
+- T0018B - Reference UI Clone Pass
+- T0020 - Backend Readiness Design
+
+Allowed areas:
+
+- `src/app.js`
+- `src/styles.css`
+- ticket, state, verification, and follow-up docs
+
+Do not touch:
+
+- Do not add backend, auth, database, deployment, dependencies, secrets, or external services.
+- Do not integrate Google Maps until API-key ownership, billing, privacy, and provider policy are approved.
+- Do not change the accepted Indian civic visual direction unless needed to restore usability.
+
+Requirements:
+
+- Ensure malformed or old browser storage cannot stop the app from booting.
+- Restore visible issue list, status controls, issue detail access, validation feedback, and confirmation messages.
+- Make menu, location, quick actions, and ward map controls do something understandable.
+- Expand civic issue categories.
+- Keep the background and neutral greys lighter while preserving the accepted palette.
+- Record Google Maps as a gated follow-up rather than adding an unapproved external service.
+
+Acceptance criteria:
+
+- Blank submissions show validation instead of creating/query-submitting a report.
+- Valid submissions show confirmation and appear in Open Issues.
+- Open Issues, issue detail, status, priority, and assignment controls remain accessible.
+- Menu, Use My Location, export/import/summary/print, and ward map controls provide visible feedback.
+- Corrupt local storage falls back to valid demo data instead of breaking startup.
+- No dependency, backend, auth, deployment, secret, or external map provider is added.
+
+Automated checks:
+
+- `node --check src/app.js`
+- `node tests/app.test.js`
+- `git diff --check`
+
+Manual verification:
+
+1. Open `src/index.html`.
+2. Confirm no console errors.
+3. Submit a blank report and confirm visible validation.
+4. Submit a valid report and confirm a toast/status message plus a visible Open Issues row.
+5. Open issue detail and change status, priority, and assignment.
+6. Use the menu button, Use My Location, quick actions, and Ward Map controls.
+7. Reload and confirm data persists.
+
+Human review triggers:
+
+- Any real Google Maps integration, API key, billing setup, external service, or precise-location publication policy.
+
+Completion notes:
+
+- Hardened startup and normalization so malformed or old local storage records no longer break app boot.
+- Added visible toast/status feedback for submit, validation, reset, export, import, print, location, and menu actions.
+- Expanded issue categories and restored visible category/filter population from the canonical category list.
+- Added a local interactive ward-map preview with clickable issue markers; Google Maps remains a human-gated external-service follow-up.
+- Made the neutral background and grey treatment lighter while preserving the accepted Indian civic palette.
+- No dependency, backend, auth, deployment, secret, or external map provider was added.
+
 ## T0021 - Backend Architecture Decision Record
 
 Status: Ready for Agent

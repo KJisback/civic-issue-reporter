@@ -266,3 +266,17 @@ Use this before larger design, data, or release changes.
 4. Open `src/index.html`.
 5. Confirm the browser app still renders normally after the Node testability guard.
 6. Check browser console for errors.
+
+## T0020A - UI Functionality Repair After Human Browser Check
+
+1. Open `src/index.html`.
+2. Confirm the browser console has no startup errors.
+3. Click `Submit Issue` with blank required fields and confirm validation appears with a visible error toast/status message.
+4. Submit a complete issue and confirm a success toast/status message appears.
+5. Confirm the new report appears in Open Issues and can be opened through `View`.
+6. Change status, priority, and assigned team from the issue card or detail panel and confirm the UI updates.
+7. Click the menu button and confirm navigation collapses/expands.
+8. Click `Use My Location`; approve or deny the browser prompt and confirm the app shows a clear local-only success or fallback message.
+9. Click Export Backup, Import Backup, Export Summary, Print Summary, and View Ward Map; confirm each action gives visible feedback or navigates to the relevant section.
+10. Reload and confirm reports persist.
+11. Confirm Google Maps is not loaded and no external map/API key is required.

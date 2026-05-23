@@ -1,11 +1,11 @@
 :root {
   color-scheme: light;
-  --bg: #f7f3e8;
+  --bg: #fbf8ef;
   --surface: #ffffff;
   --surface-soft: #fffaf0;
   --text: #162018;
-  --muted: #68715f;
-  --line: #e3d8c5;
+  --muted: #586457;
+  --line: #ebe4d8;
   --green: #0f6b3f;
   --green-soft: #e3f2e5;
   --teal: #08787d;
@@ -61,6 +61,34 @@ body {
 
 .skip-link:focus-visible {
   transform: translateY(0);
+}
+
+.toast-region {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 20;
+  display: grid;
+  gap: 10px;
+  width: min(360px, calc(100vw - 32px));
+  pointer-events: none;
+}
+
+.toast {
+  padding: 12px 14px;
+  border: 1px solid #99cdb8;
+  border-radius: 8px;
+  background: #f3fff9;
+  color: #064734;
+  font-size: 14px;
+  font-weight: 850;
+  box-shadow: 0 16px 30px rgba(22, 32, 24, 0.14);
+}
+
+.toast-error {
+  border-color: #e5aaa2;
+  background: #fff4f2;
+  color: #8c2f27;
 }
 
 .topbar {
@@ -1093,6 +1121,85 @@ button {
   min-height: 320px;
 }
 
+.ward-map-panel {
+  display: grid;
+  gap: 12px;
+  margin-top: 12px;
+  padding: 14px;
+  border: 1px solid #dedede;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.ward-map-panel h3,
+.ward-map-panel p {
+  margin: 0;
+}
+
+.ward-map-panel p {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.interactive-map {
+  position: relative;
+  min-height: 230px;
+  overflow: hidden;
+  border: 1px solid #d8e5dd;
+  border-radius: 10px;
+  background:
+    linear-gradient(90deg, rgba(8, 120, 125, 0.1) 1px, transparent 1px),
+    linear-gradient(rgba(8, 120, 125, 0.1) 1px, transparent 1px),
+    linear-gradient(135deg, #f8fff9, #fff8ef);
+  background-size: 32px 32px, 32px 32px, auto;
+}
+
+.interactive-map::before {
+  content: "";
+  position: absolute;
+  inset: 22% 8% auto 10%;
+  height: 48%;
+  border: 3px solid rgba(15, 107, 63, 0.24);
+  border-left: 0;
+  border-radius: 0 70% 70% 0;
+  transform: rotate(-8deg);
+}
+
+.map-marker {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  min-height: 30px;
+  max-width: 30px;
+  padding: 0;
+  border-radius: 999px;
+  color: #ffffff;
+  font-size: 12px;
+  box-shadow: 0 8px 18px rgba(22, 32, 24, 0.22);
+  transform: translate(-50%, -50%);
+}
+
+.map-marker.priority-high,
+.map-marker.priority-medium,
+.map-marker.priority-low {
+  color: #ffffff;
+}
+
+.map-marker.priority-high {
+  background: var(--red);
+}
+
+.map-marker.priority-medium {
+  background: var(--amber);
+}
+
+.map-marker.priority-low {
+  background: var(--green);
+}
+
 .map-placeholder::before,
 .map-placeholder::after {
   content: "";
@@ -1693,6 +1800,10 @@ button {
   color: #098f5f;
   font-size: 13px;
   font-weight: 850;
+}
+
+.sidebar.is-collapsed {
+  display: none;
 }
 
 .workspace {

@@ -19,7 +19,17 @@ const CATEGORIES = [
   "Garbage collection",
   "Drainage",
   "Water leakage",
-  "Public safety"
+  "Public safety",
+  "Sewage overflow",
+  "Footpath obstruction",
+  "Illegal dumping",
+  "Traffic signal",
+  "Tree hazard",
+  "Public toilet",
+  "Park maintenance",
+  "Stray animal concern",
+  "Noise complaint",
+  "Other civic issue"
 ];
 
 const sampleIssues = [
@@ -134,7 +144,15 @@ function inferPriority(category, description) {
 
 function suggestPriority(category, description, location) {
   const highSignals = ["danger", "unsafe", "school", "leak", "accident", "blocked", "injury", "fire", "collapse"];
-  const mediumCategories = ["Garbage collection", "Drainage", "Water leakage"];
+  const mediumCategories = [
+    "Garbage collection",
+    "Drainage",
+    "Water leakage",
+    "Sewage overflow",
+    "Illegal dumping",
+    "Public toilet",
+    "Tree hazard"
+  ];
   const text = `${category} ${description} ${location}`.toLowerCase();
   const matchedSignal = highSignals.find((word) => text.includes(word));
 
@@ -212,7 +230,18 @@ function loadIssues() {
 
   try {
     const parsed = JSON.parse(stored);
-    return Array.isArray(parsed) && parsed.length > 0 ? parsed.map(normalizeIssue) : sampleIssues.map(normalizeIssue);
+    const normalized = Array.isArray(parsed)
+      ? parsed.map(normalizeIssue).filter(Boolean)
+      : [];
+
+    if (normalized.length > 0) {
+      saveIssues(normalized);
+      return normalized;
+    }
+
+    const normalizedSamples = sampleIssues.map(normalizeIssue);
+    saveIssues(normalizedSamples);
+    return normalizedSamples;
   } catch {
     const normalizedSamples = sampleIssues.map(normalizeIssue);
     saveIssues(normalizedSamples);
@@ -225,16 +254,34 @@ function saveIssues(nextIssues) {
 }
 
 function normalizeIssue(issue) {
+  if (!isPlainObject(issue)) {
+    return null;
+  }
+
+  const fallbackNow = new Date().toISOString();
   const duplicateHints = normalizeDuplicateHints(issue.duplicateHints);
   const assignedTeam = ASSIGNMENT_TEAMS.includes(issue.assignedTeam) ? issue.assignedTeam : "Unassigned";
   const activityTimeline = normalizeActivityTimeline(issue.activityTimeline);
+  const category = CATEGORIES.includes(issue.category) ? issue.category : "Other civic issue";
+  const status = STATUSES.includes(issue.status) ? issue.status : "Submitted";
+  const priority = PRIORITIES.includes(issue.priority) ? issue.priority : inferPriority(category, issue.description || "");
+  const coordinates = isValidCoordinates(issue.coordinates) ? issue.coordinates || null : null;
 
   return {
-    ward: "",
-    landmark: "",
-    coordinates: null,
-    priorityReason: "",
     ...issue,
+    id: typeof issue.id === "string" && issue.id.trim() ? issue.id : `issue-${Date.now()}-${Math.random().toString(16).slice(2)}`,
+    title: typeof issue.title === "string" && issue.title.trim() ? issue.title : "Untitled civic report",
+    category,
+    location: typeof issue.location === "string" && issue.location.trim() ? issue.location : "Location not specified",
+    description: typeof issue.description === "string" && issue.description.trim() ? issue.description : "No description supplied.",
+    status,
+    priority,
+    createdAt: isValidIsoDate(issue.createdAt) ? issue.createdAt : fallbackNow,
+    updatedAt: isValidIsoDate(issue.updatedAt) ? issue.updatedAt : fallbackNow,
+    ward: typeof issue.ward === "string" ? issue.ward : "",
+    landmark: typeof issue.landmark === "string" ? issue.landmark : "",
+    coordinates,
+    priorityReason: "",
     assignedTeam,
     duplicateHints,
     activityTimeline
@@ -331,7 +378,7 @@ function optionMarkup(options, selectedValue) {
 }
 
 function escapeHtml(value) {
-  return value.replace(/[&<>"']/g, (character) => {
+  return String(value ?? "").replace(/[&<>"']/g, (character) => {
     const entities = {
       "&": "&amp;",
       "<": "&lt;",
@@ -995,6 +1042,45 @@ function renderLocationPreview() {
   `;
 }
 
+function renderWardMap() {
+  const dashboard = document.querySelector("#dashboard");
+  let mapPanel = document.querySelector("#wardMap");
+
+  if (!mapPanel && dashboard) {
+    mapPanel = document.createElement("div");
+    mapPanel.id = "wardMap";
+    mapPanel.className = "ward-map-panel";
+    mapPanel.setAttribute("aria-label", "Interactive local ward map");
+    dashboard.insertBefore(mapPanel, document.querySelector("#analyticsSnapshot"));
+  }
+
+  if (!mapPanel) {
+    return;
+  }
+
+  const mappedIssues = issues.filter((issue) => issue.coordinates).slice(0, 8);
+
+  mapPanel.innerHTML = `
+    <div class="map-toolbar">
+      <div>
+        <p class="eyebrow">Ward map</p>
+        <h3>Local map preview</h3>
+      </div>
+      <span>${mappedIssues.length} coordinate-ready</span>
+    </div>
+    <div class="interactive-map" role="img" aria-label="Local ward map preview with issue markers">
+      ${mappedIssues
+        .map((issue, index) => {
+          const left = 18 + ((index * 17) % 66);
+          const top = 20 + ((index * 23) % 58);
+          return `<button class="map-marker ${priorityClass(issue.priority)}" type="button" style="left: ${left}%; top: ${top}%;" data-action="view-detail" data-issue-id="${escapeHtml(issue.id)}" aria-label="Open ${escapeHtml(issue.title)} on map">${index + 1}</button>`;
+        })
+        .join("")}
+    </div>
+    <p>Google Maps integration needs an approved API key, billing/project owner, and privacy policy. This preview stays local and uses stored report coordinates only.</p>
+  `;
+}
+
 function renderAssistance() {
   const formData = readForm();
   const panel = document.querySelector("#assistPanel");
@@ -1032,12 +1118,22 @@ function renderFilters() {
   document.querySelector("#priorityFilter").innerHTML = `<option value="All">All priorities</option>${optionMarkup(PRIORITIES, filters.priority)}`;
 }
 
+function renderCategorySelect() {
+  const categorySelect = document.querySelector("#issueCategory");
+
+  if (categorySelect) {
+    categorySelect.innerHTML = optionMarkup(CATEGORIES, categorySelect.value || CATEGORIES[0]);
+  }
+}
+
 function renderApp() {
+  renderCategorySelect();
   renderFilters();
   renderIssues();
   renderMetrics();
   renderLocationPreview();
   renderWorkflowBoard();
+  renderWardMap();
   renderAnalyticsSnapshot();
   renderIssueDetail();
   renderSummaryPreview();
@@ -1059,12 +1155,43 @@ function setStatus(message, type = "error") {
   const status = document.querySelector("#formStatus");
   status.textContent = message;
   status.classList.toggle("is-success", type === "success");
+  showToast(message, type);
 }
 
 function setSummaryStatus(message, type = "success") {
   const status = document.querySelector("#summaryStatus");
   status.textContent = message;
   status.classList.toggle("is-success", type === "success");
+
+  if (message) {
+    showToast(message, type);
+  }
+}
+
+function showToast(message, type = "success") {
+  if (!message || typeof document === "undefined") {
+    return;
+  }
+
+  let region = document.querySelector("#toastRegion");
+
+  if (!region) {
+    region = document.createElement("div");
+    region.id = "toastRegion";
+    region.className = "toast-region";
+    region.setAttribute("aria-live", "polite");
+    region.setAttribute("aria-atomic", "true");
+    document.body.appendChild(region);
+  }
+
+  const toast = document.createElement("div");
+  toast.className = `toast toast-${type === "error" ? "error" : "success"}`;
+  toast.textContent = message;
+  region.appendChild(toast);
+
+  window.setTimeout(() => {
+    toast.remove();
+  }, 4200);
 }
 
 function validateForm(formData) {
@@ -1142,7 +1269,9 @@ function handleSubmit(event) {
   event.target.reset();
   clearValidation();
   renderAssistance();
-  setStatus("Report submitted and saved in this browser.", "success");
+  selectedIssueId = issue.id;
+  renderIssueDetail();
+  setStatus("Report submitted and saved in this browser. It is now visible in Open Issues.", "success");
 }
 
 function resetDemoData() {
@@ -1394,6 +1523,67 @@ function requestBackupImport() {
   document.querySelector("#backupFileInput").click();
 }
 
+function useBrowserLocation() {
+  if (!navigator.geolocation) {
+    setStatus("This browser does not support device location. You can still enter location details manually.");
+    return;
+  }
+
+  setStatus("Requesting browser location permission...", "success");
+
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      document.querySelector("#issueLatitude").value = position.coords.latitude.toFixed(6);
+      document.querySelector("#issueLongitude").value = position.coords.longitude.toFixed(6);
+
+      if (!document.querySelector("#issueLocation").value.trim()) {
+        document.querySelector("#issueLocation").value = "Current device location";
+      }
+
+      clearValidation();
+      renderAssistance();
+      setStatus("Location captured locally. Coordinates are not sent anywhere.", "success");
+    },
+    () => {
+      setStatus("Location permission was denied or unavailable. Manual location entry is still available.");
+    },
+    {
+      enableHighAccuracy: true,
+      timeout: 10000,
+      maximumAge: 60000
+    }
+  );
+}
+
+function toggleNavigation() {
+  const sidebar = document.querySelector(".sidebar");
+  const menuButton = document.querySelector(".menu-button");
+
+  if (!sidebar || !menuButton) {
+    return;
+  }
+
+  const collapsed = sidebar.classList.toggle("is-collapsed");
+  menuButton.setAttribute("aria-expanded", String(!collapsed));
+  showToast(collapsed ? "Navigation collapsed." : "Navigation expanded.");
+}
+
+function relabelQuickActions() {
+  const quickLabels = [
+    ["#exportSummary", "Export Summary"],
+    ["#printSummary", "Print Summary"],
+    [".ward-map-button", "View Ward Map"]
+  ];
+
+  quickLabels.forEach(([selector, label]) => {
+    const control = document.querySelector(selector);
+
+    if (control) {
+      control.textContent = label;
+    }
+  });
+}
+
 function restoreIssuesFromBackup(restoredIssues) {
   issues = restoredIssues;
   selectedIssueId = null;
@@ -1485,8 +1675,11 @@ function focusLastDetailTrigger() {
 }
 
 if (typeof document !== "undefined") {
+  relabelQuickActions();
   document.querySelector("#reportForm").addEventListener("submit", handleSubmit);
   document.querySelector("#resetDemoData").addEventListener("click", resetDemoData);
+  document.querySelector(".menu-button").addEventListener("click", toggleNavigation);
+  document.querySelector(".compact-button").addEventListener("click", useBrowserLocation);
   document.querySelector("#printSummary").addEventListener("click", printSummary);
   document.querySelector("#exportSummary").addEventListener("click", exportSummary);
   document.querySelector("#exportBackup").addEventListener("click", exportBackup);
@@ -1494,6 +1687,7 @@ if (typeof document !== "undefined") {
   document.querySelector("#backupFileInput").addEventListener("change", handleBackupFileSelected);
   document.querySelector("#issueList").addEventListener("change", handleTriageChange);
   document.querySelector("#issueList").addEventListener("click", handleIssueClick);
+  document.querySelector("#dashboard").addEventListener("click", handleIssueClick);
   document.querySelector("#issueDetail").addEventListener("change", handleTriageChange);
   document.querySelector("#issueDetail").addEventListener("click", handleDetailClick);
   document.querySelector("#issueDetail").addEventListener("keydown", handleDetailKeydown);

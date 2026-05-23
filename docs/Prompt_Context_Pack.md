@@ -44,6 +44,7 @@ Completed tickets:
 - T0018B - Reference UI Clone Pass
 - T0019 - Test Harness Decision and First Logic Tests
 - T0020 - Backend Readiness Design
+- T0020A - UI Functionality Repair After Human Browser Check
 
 Current implementation state:
 
@@ -67,6 +68,7 @@ Current implementation state:
 - Screenshot-matched Indian civic operations desk UI with top chrome, ward selector, left nav, three work panels, triage overview, and bottom quick actions dock.
 - No-dependency Node logic tests for priority suggestion, duplicate scoring, normalization, backup validation, and summary counts.
 - Backend readiness design covering proposed entities, API boundaries, validation, audit, privacy, storage, migration path, risks, and human-gated follow-ups.
+- T0020A repaired human-browser-check regressions: malformed local storage no longer breaks boot, visible toast/status feedback is available, categories are broader, local ward-map preview is clickable, menu/location controls respond, and Google Maps remains human-gated.
 
 Saved UI/UX direction:
 
@@ -77,7 +79,7 @@ Saved UI/UX direction:
 
 Next handoff focus:
 
-Prepare backend, data, audit, auth-assumption, and API boundary design without implementing backend code.
+Create the backend architecture decision record without implementing backend code.
 
 Next sequence after T0021:
 

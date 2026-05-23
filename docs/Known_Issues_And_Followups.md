@@ -60,6 +60,24 @@ Recommended action:
 
 Before adding an interactive map, decide provider, API-key handling, privacy language, and whether precise coordinates are appropriate for public display.
 
+Status: Open; T0020A added a local clickable ward-map preview only, without Google Maps or any external map provider.
+
+### F0014 - Decide Google Maps Integration Details
+
+Source ticket: T0020A
+
+Severity: Medium
+
+Type: external service / privacy / architecture
+
+Description:
+
+Human browser verification requested Google Maps to make location capture more interactive. The current project rules require approval before adding external services, API keys, billing, or precise-location publication behavior.
+
+Recommended action:
+
+Before implementation, decide Google Cloud project ownership, API key storage, billing limits, allowed map APIs, geolocation consent copy, coordinate precision, public/private location display, and fallback behavior when maps fail.
+
 Status: Open
 
 ### F0008 - Clarify Export Record Policy
@@ -135,6 +153,24 @@ Run the desktop and mobile visual comparison checklist in `docs/Manual_UI_Checks
 Status: Open
 
 ## Closed Followups
+
+### F0015 - Repair UI Browser Regressions From Reference Clone
+
+Source ticket: T0020A
+
+Severity: High
+
+Type: usability / verification
+
+Description:
+
+Human browser verification found that the menu, location, issue submission feedback, open issue visibility, validation, issue detail/status access, quick actions, and map affordance were not usable enough after the reference clone pass.
+
+Recommended action:
+
+Handled in T0020A by hardening local storage boot, adding toast/status feedback, restoring visible controls, expanding categories, adding a local ward-map preview, and keeping Google Maps gated.
+
+Status: Closed in T0020A
 
 ### F0004 - Add Staff Assignment Later
 
