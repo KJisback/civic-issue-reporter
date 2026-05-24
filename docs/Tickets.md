@@ -1394,6 +1394,8 @@ Completion notes:
 - Report submission now feeds issue list, detail, metrics, analytics, map preview, summary, activity timeline, and backup/export paths.
 - Added local quick actions for bulk triage, category-based reassignment, local queue note, summary export, backup import/export, print, reset, and ward map focus.
 - Issue detail now supports local desk notes and visible workflow controls.
+- Fix pass made form submission safe even if JavaScript startup is interrupted and hardened event binding so one stale selector cannot disable all controls.
+- Fix pass also prevented sidebar navigation text from wrapping into vertical letter stacks at tablet/desktop breakpoints.
 - Expanded no-dependency tests for local notes, routing logic, and summary note export.
 - No dependency, backend, auth, database, deployment, secret, Google Maps, or external service was added.
 

@@ -1966,38 +1966,49 @@ function focusLastDetailTrigger() {
   }
 }
 
+function bind(selector, eventName, handler) {
+  const element = document.querySelector(selector);
+
+  if (!element) {
+    showToast(`Local UI control ${selector} is unavailable in this browser view.`, "error");
+    return;
+  }
+
+  element.addEventListener(eventName, handler);
+}
+
 if (typeof document !== "undefined") {
   relabelQuickActions();
-  document.querySelector(".topbar").addEventListener("click", handleNavigationAction);
-  document.querySelector("#sidebarNav").addEventListener("click", handleNavigationAction);
-  document.querySelector("#reportForm").addEventListener("submit", handleSubmit);
-  document.querySelector("#resetDemoData").addEventListener("click", resetDemoData);
-  document.querySelector(".menu-button").addEventListener("click", toggleNavigation);
-  document.querySelector(".compact-button").addEventListener("click", useBrowserLocation);
-  document.querySelector("#printSummary").addEventListener("click", printSummary);
-  document.querySelector("#exportSummary").addEventListener("click", exportSummary);
-  document.querySelector("#exportBackup").addEventListener("click", exportBackup);
-  document.querySelector("#importBackup").addEventListener("click", requestBackupImport);
-  document.querySelector("#bulkTriage").addEventListener("click", bulkTriageSubmitted);
-  document.querySelector("#reassignQueue").addEventListener("click", reassignOpenQueue);
-  document.querySelector("#addQueueNote").addEventListener("click", addQueueNote);
-  document.querySelector("#viewWardMap").addEventListener("click", () => {
+  bind(".topbar", "click", handleNavigationAction);
+  bind("#sidebarNav", "click", handleNavigationAction);
+  bind("#reportForm", "submit", handleSubmit);
+  bind("#resetDemoData", "click", resetDemoData);
+  bind(".menu-button", "click", toggleNavigation);
+  bind(".compact-button", "click", useBrowserLocation);
+  bind("#printSummary", "click", printSummary);
+  bind("#exportSummary", "click", exportSummary);
+  bind("#exportBackup", "click", exportBackup);
+  bind("#importBackup", "click", requestBackupImport);
+  bind("#bulkTriage", "click", bulkTriageSubmitted);
+  bind("#reassignQueue", "click", reassignOpenQueue);
+  bind("#addQueueNote", "click", addQueueNote);
+  bind("#viewWardMap", "click", () => {
     focusSection("#wardMap");
     setSummaryStatus("Ward map focused. Click a marker to open issue detail.");
   });
-  document.querySelector("#viewAllIssues").addEventListener("click", viewAllIssues);
-  document.querySelector("#showAllDashboard").addEventListener("click", viewAllIssues);
-  document.querySelector("#backupFileInput").addEventListener("change", handleBackupFileSelected);
-  document.querySelector("#issueList").addEventListener("change", handleTriageChange);
-  document.querySelector("#issueList").addEventListener("click", handleIssueClick);
-  document.querySelector("#dashboard").addEventListener("click", handleIssueClick);
-  document.querySelector("#issueDetail").addEventListener("change", handleTriageChange);
-  document.querySelector("#issueDetail").addEventListener("click", handleDetailClick);
-  document.querySelector("#issueDetail").addEventListener("keydown", handleDetailKeydown);
-  document.querySelector("#categoryFilter").addEventListener("change", handleFilterChange);
-  document.querySelector("#statusFilter").addEventListener("change", handleFilterChange);
-  document.querySelector("#priorityFilter").addEventListener("change", handleFilterChange);
-  document.querySelector("#reportForm").addEventListener("input", renderAssistance);
+  bind("#viewAllIssues", "click", viewAllIssues);
+  bind("#showAllDashboard", "click", viewAllIssues);
+  bind("#backupFileInput", "change", handleBackupFileSelected);
+  bind("#issueList", "change", handleTriageChange);
+  bind("#issueList", "click", handleIssueClick);
+  bind("#dashboard", "click", handleIssueClick);
+  bind("#issueDetail", "change", handleTriageChange);
+  bind("#issueDetail", "click", handleDetailClick);
+  bind("#issueDetail", "keydown", handleDetailKeydown);
+  bind("#categoryFilter", "change", handleFilterChange);
+  bind("#statusFilter", "change", handleFilterChange);
+  bind("#priorityFilter", "change", handleFilterChange);
+  bind("#reportForm", "input", renderAssistance);
 
   renderApp();
 }
