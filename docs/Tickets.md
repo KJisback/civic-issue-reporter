@@ -1627,6 +1627,83 @@ Completion notes:
 - Blank and valid submit clicks now trigger browser alerts in addition to toast/status feedback.
 - Kept the existing submit handler and non-navigating form fallback.
 
+## T0021E - Stable Deployable Static Rebuild
+
+Status: Done
+
+Priority: Critical
+
+Goal:
+
+Replace the brittle screenshot-derived prototype with a stable, deployment-ready static civic issue reporter where all visible workflows work reliably without a build step.
+
+Branch:
+
+`feature/t0021e-stable-static-rebuild`
+
+Dependencies:
+
+- T0021D - Visible Submit Feedback
+
+Allowed areas:
+
+- `src/index.html`
+- `src/app.js`
+- `src/styles.css`
+- `tests/`
+- ticket, state, verification, and follow-up docs
+
+Do not touch:
+
+- Do not add backend, auth, database, deployment secrets, Google Maps, paid services, or external network integrations.
+- Do not add dependencies unless absolutely necessary.
+
+Requirements:
+
+- Replace brittle UI wiring with a simpler, robust static app.
+- Every visible control must work or be explicitly marked local-only.
+- Report submission, validation, list rendering, status/priority/team updates, notes, dashboard counts, filters, map preview, export summary, backup export/import, print, reset, and persistence must work.
+- Keep Indian civic body visual association without fake official marks.
+- Keep the app deployable by serving `src/index.html` as static files.
+- Keep automated no-dependency checks.
+
+Acceptance criteria:
+
+- Blank submit visibly blocks with validation.
+- Valid submit creates an issue, updates counts, list, map, summary, and persists after reload.
+- All buttons and filters perform visible actions.
+- No browser URL query-string submit behavior occurs.
+- Automated checks pass.
+- No dependency, backend, auth, database, deployment secret, Google Maps, or external service is added.
+
+Automated checks:
+
+- `node --check src/app.js`
+- `node tests/app.test.js`
+- `git diff --check`
+
+Manual verification:
+
+1. Open `src/index.html`.
+2. Submit blank and valid reports.
+3. Use every filter and action button.
+4. Change status, priority, team, and add notes.
+5. Export summary, export backup, import backup, print, reset, and reload.
+6. Confirm console has no errors.
+
+Human review triggers:
+
+- Backend, database, auth, production deployment, external maps, file uploads, secrets, or official municipal record claims.
+
+Completion notes:
+
+- Rebuilt the app as a smaller, stable, deployment-ready static application with no build step.
+- Replaced brittle screenshot-derived event wiring with direct, predictable form handling, event delegation, local state, and render functions.
+- Confirmed blank submit blocks visibly, valid submit creates reports, and the app updates dashboard, queue, detail, map, summary, local storage, exports, and backups.
+- Kept Indian civic visual direction without fake official marks.
+- Updated tests to cover stable priority, routing, normalization, and summary logic.
+- No dependency, backend, auth, database, deployment secret, Google Maps, or external service was added.
+
 ## T0022 - Backend Architecture Decision Record
 
 Status: Ready for Agent

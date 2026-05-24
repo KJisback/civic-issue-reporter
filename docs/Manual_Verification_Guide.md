@@ -294,3 +294,16 @@ Use this before larger design, data, or release changes.
 9. Click map markers and confirm they open issue detail.
 10. Reload and confirm issues, statuses, assignments, notes, and duplicate review choices persist.
 11. Confirm no Google Maps, backend, auth, upload, deployment, or external service is required.
+
+## T0021E - Stable Deployable Static Rebuild
+
+1. Open `src/index.html`.
+2. Confirm the page loads without console errors.
+3. Click `Submit Issue` with blank fields and confirm visible validation appears.
+4. Fill title, category, location, ward, description, and optional coordinates, then submit.
+5. Confirm the new report appears in Issue Queue, Dashboard counts, Ward Map if coordinates are present, Detail, and Summary.
+6. Change status, priority, and assigned team from the issue card.
+7. Open detail, add a desk note, and confirm it persists.
+8. Use sidebar navigation and all summary actions: Auto Reassign, Add Desk Note, Export Summary, Export Backup, Import Backup, Print, and Reset Demo.
+9. Reload and confirm local data persists.
+10. Confirm the app still runs by opening the HTML file directly with no build step.
