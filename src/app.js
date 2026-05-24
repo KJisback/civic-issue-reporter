@@ -104,6 +104,26 @@ let selectedIssueId = null;
 let lastDetailTriggerIssueId = null;
 let pendingFocusTarget = null;
 
+function cleanupEmptyFormQueryString() {
+  if (typeof window === "undefined" || !window.location.search) {
+    return false;
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  const knownFormFields = ["title", "category", "location", "ward", "landmark", "description", "latitude", "longitude"];
+  const queryKeys = Array.from(params.keys());
+  const hasOnlyKnownFormFields = queryKeys.length > 0 && queryKeys.every((key) => knownFormFields.includes(key));
+  const hasOnlyEmptyValues = queryKeys.every((key) => !params.get(key));
+
+  if (!hasOnlyKnownFormFields || !hasOnlyEmptyValues) {
+    return false;
+  }
+
+  const cleanUrl = `${window.location.pathname}${window.location.hash || ""}`;
+  window.history.replaceState({}, document.title, cleanUrl);
+  return true;
+}
+
 function createIssue({ title, category, location, ward, landmark, description, coordinates }) {
   const now = new Date().toISOString();
   const priorityAssistance = suggestPriority(category, description, location);
@@ -1978,6 +1998,7 @@ function bind(selector, eventName, handler) {
 }
 
 if (typeof document !== "undefined") {
+  cleanupEmptyFormQueryString();
   relabelQuickActions();
   bind(".topbar", "click", handleNavigationAction);
   bind("#sidebarNav", "click", handleNavigationAction);
@@ -2021,6 +2042,7 @@ if (typeof module !== "undefined") {
     PRIORITIES,
     ASSIGNMENT_TEAMS,
     CATEGORIES,
+    cleanupEmptyFormQueryString,
     createActivityEvent,
     createFullBackup,
     createIssue,

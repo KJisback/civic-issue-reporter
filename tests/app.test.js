@@ -127,6 +127,35 @@ test("teamForCategory routes common civic categories", () => {
   assert.equal(app.teamForCategory("Public safety"), "Public safety desk");
 });
 
+test("cleanupEmptyFormQueryString removes only empty report query params", () => {
+  const previousWindow = global.window;
+  const previousDocument = global.document;
+  let replacedUrl = "";
+
+  global.document = { title: "Civic Issue Reporter" };
+  global.window = {
+    location: {
+      search: "?title=&location=&ward=&landmark=&description=&latitude=&longitude=",
+      pathname: "/src/index.html",
+      hash: ""
+    },
+    history: {
+      replaceState(_state, _title, url) {
+        replacedUrl = url;
+      }
+    }
+  };
+
+  assert.equal(app.cleanupEmptyFormQueryString(), true);
+  assert.equal(replacedUrl, "/src/index.html");
+
+  global.window.location.search = "?title=Road";
+  assert.equal(app.cleanupEmptyFormQueryString(), false);
+
+  global.window = previousWindow;
+  global.document = previousDocument;
+});
+
 test("parseBackupPayload accepts valid backups and rejects duplicate ids", () => {
   const issue = app.normalizeIssue({
     id: "issue-backup",

@@ -46,6 +46,7 @@ Generated UI/UX concept sheets are saved as design references, with the Indian c
 - `docs/` contains planning, ticket, verification, state, risk, review, manual UI checklist, and development plan documents.
 - `docs/Full_System_Test_Report.md` records the latest local full-system test and follow-up review.
 - `docs/Backend_Readiness_Design.md` documents future backend boundaries, entities, API draft, audit/privacy/storage risks, migration path, and gated follow-up tickets.
+- `docs/OMEGA_X_Compatibility_Profile.md` documents how OMEGA-X-style autonomy is incorporated without overriding the project ticket workflow or human-gated decisions.
 - `docs/design-references/` contains saved visual references for UI implementation.
 - `docs/design-references/ui-ux-indian-civic-panel-refresh-001.png` is the current UI refresh reference.
 - `README.md`, `AGENTS.md`, and `WORKFLOW.md` define setup and project rules.
@@ -92,6 +93,7 @@ None.
 - GitHub CLI works when the dead proxy environment variables are cleared for network commands.
 - Direct Git HTTPS remote commands may need `GIT_EXEC_PATH=F:\Kuku\Workspace\.codex-tools\mingit\mingw64\bin` and cleared proxy variables in this Codex shell.
 - Browser-based manual verification remains a human activity after implementation tickets.
+- OMEGA-X-style autonomy is now a compatibility overlay for stronger execution inside one-ticket-at-a-time development, not permission to bypass human gates.
 
 ## Next Recommended Ticket
 

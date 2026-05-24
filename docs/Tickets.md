@@ -1399,6 +1399,75 @@ Completion notes:
 - Expanded no-dependency tests for local notes, routing logic, and summary note export.
 - No dependency, backend, auth, database, deployment, secret, Google Maps, or external service was added.
 
+## T0021A - OMEGA-X Compatibility Overlay And URL Cleanup
+
+Status: Done
+
+Priority: High
+
+Goal:
+
+Incorporate the compatible parts of the user-provided OMEGA-X operating mode into project workflow documentation while preserving existing workspace, standalone agentic, and ticket-based development rules. Also clean stale empty form query strings from the static app URL.
+
+Branch:
+
+`feature/t0021a-protocol-and-url-cleanup`
+
+Dependencies:
+
+- T0021 - Functional Local Working Model
+
+Allowed areas:
+
+- `src/app.js`
+- `docs/`
+
+Do not touch:
+
+- Do not add backend, auth, database, deployment, dependencies, secrets, Google Maps, or external services.
+- Do not override workspace `AGENTS.md`, `STANDALONE_AGENTIC_DEVELOPMENT_SYSTEM.md`, or project `AGENTS.md`.
+- Do not replace ticket discipline with whole-app generation.
+
+Requirements:
+
+- Document an OMEGA-X compatibility profile for this project.
+- Preserve one-ticket-at-a-time development, completion reports, human gates, and branch-per-ticket workflow.
+- Adopt compatible autonomy improvements: infer safe defaults, self-check more deeply, validate visible flows, and reduce unnecessary questions.
+- Mark incompatible directives as gated or superseded by existing rules.
+- Remove stale empty static-form query strings from the browser URL on app startup.
+
+Acceptance criteria:
+
+- Documentation clearly explains how OMEGA-X-style autonomy fits inside the existing process.
+- The app cleans `?title=&location=&...` style empty form query strings without reloading.
+- No dependency, backend, auth, database, deployment, secret, Google Maps, or external service is added.
+- Automated checks pass.
+
+Automated checks:
+
+- `node --check src/app.js`
+- `node tests/app.test.js`
+- `git diff --check`
+
+Manual verification:
+
+1. Open `src/index.html?title=&location=&ward=&landmark=&description=&latitude=&longitude=`.
+2. Confirm the URL is cleaned back to `src/index.html` without a page reload loop.
+3. Submit a blank form and confirm validation blocks record creation.
+4. Confirm no console errors.
+
+Human review triggers:
+
+- Any attempt to introduce backend, database, auth, deployment, external services, production credentials, secrets, or non-ticketed whole-app rewrites.
+
+Completion notes:
+
+- Added `docs/OMEGA_X_Compatibility_Profile.md` to incorporate compatible OMEGA-X autonomy and quality behaviors inside the existing ticket workflow.
+- Documented which OMEGA-X directives are adopted, gated, or superseded by the workspace and project rules.
+- Added app startup cleanup for stale empty static form query strings such as `?title=&location=&ward=&landmark=&description=&latitude=&longitude=`.
+- Added a no-dependency test for query-string cleanup.
+- No dependency, backend, auth, database, deployment, secret, Google Maps, or external service was added.
+
 ## T0022 - Backend Architecture Decision Record
 
 Status: Ready for Agent

@@ -71,6 +71,7 @@ Current implementation state:
 - Backend readiness design covering proposed entities, API boundaries, validation, audit, privacy, storage, migration path, risks, and human-gated follow-ups.
 - T0020A repaired human-browser-check regressions: malformed local storage no longer breaks boot, visible toast/status feedback is available, categories are broader, local ward-map preview is clickable, menu/location controls respond, and Google Maps remains human-gated.
 - T0021 rewired the app into a functional local model: sidebar navigation filters/focuses panels, quick actions process local queue operations, issue detail supports desk notes, local reassignment and bulk triage work, and visible controls no longer behave as inert screenshot elements.
+- OMEGA-X-style autonomy is incorporated through `docs/OMEGA_X_Compatibility_Profile.md` as a quality and autonomy overlay inside the existing ticket-based workflow.
 
 Saved UI/UX direction:
 
