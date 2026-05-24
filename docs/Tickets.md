@@ -1519,6 +1519,57 @@ Completion notes:
 - Kept the existing canonical JavaScript category population behavior.
 - No dependency, backend, auth, database, deployment, secret, Google Maps, or external service was added.
 
+## T0021C - Submit Feedback Validation Fix
+
+Status: Done
+
+Priority: High
+
+Goal:
+
+Ensure clicking Submit Issue always routes through the app's custom validation and feedback instead of being silently blocked by native browser validation.
+
+Branch:
+
+`feature/t0021c-submit-feedback-fix`
+
+Dependencies:
+
+- T0021B - Category Dropdown Fallback
+
+Allowed areas:
+
+- `src/index.html`
+- ticket docs
+
+Do not touch:
+
+- Do not add dependencies, backend, auth, database, deployment, secrets, Google Maps, or external services.
+
+Acceptance criteria:
+
+- Blank submit triggers app validation/status/toast behavior.
+- The form still cannot navigate to a query-string URL.
+- Valid submit continues to use the JavaScript issue creation flow.
+
+Automated checks:
+
+- `node --check src/app.js`
+- `node tests/app.test.js`
+- `git diff --check`
+
+Manual verification:
+
+1. Open `src/index.html`.
+2. Click Submit Issue with blank fields.
+3. Confirm visible app validation and feedback appear.
+4. Fill a valid issue and confirm it appears in Open Issues.
+
+Completion notes:
+
+- Restored `novalidate` on the report form so the JavaScript submit handler can show the app's validation and toast/status feedback.
+- Kept the `javascript:void(0)` action fallback so the form does not navigate to an empty query string if JavaScript is interrupted.
+
 ## T0022 - Backend Architecture Decision Record
 
 Status: Ready for Agent
