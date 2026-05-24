@@ -1468,6 +1468,57 @@ Completion notes:
 - Added a no-dependency test for query-string cleanup.
 - No dependency, backend, auth, database, deployment, secret, Google Maps, or external service was added.
 
+## T0021B - Category Dropdown Fallback
+
+Status: Done
+
+Priority: High
+
+Goal:
+
+Ensure the issue category dropdown is usable immediately, even before JavaScript refreshes it from the canonical category list.
+
+Branch:
+
+`feature/t0021b-category-dropdown-fallback`
+
+Dependencies:
+
+- T0021A - OMEGA-X Compatibility Overlay And URL Cleanup
+
+Allowed areas:
+
+- `src/index.html`
+- ticket/state docs
+
+Do not touch:
+
+- Do not add dependencies, backend, auth, database, deployment, secrets, Google Maps, or external services.
+
+Acceptance criteria:
+
+- The issue category dropdown contains the full category list in static HTML.
+- Existing JavaScript may still refresh the dropdown from `CATEGORIES`.
+- Automated checks pass.
+
+Automated checks:
+
+- `node --check src/app.js`
+- `node tests/app.test.js`
+- `git diff --check`
+
+Manual verification:
+
+1. Open `src/index.html`.
+2. Confirm Issue Category dropdown shows all category options before submitting.
+3. Select a category and submit a valid report.
+
+Completion notes:
+
+- Added the full category list directly to the HTML select as a no-JavaScript fallback.
+- Kept the existing canonical JavaScript category population behavior.
+- No dependency, backend, auth, database, deployment, secret, Google Maps, or external service was added.
+
 ## T0022 - Backend Architecture Decision Record
 
 Status: Ready for Agent
