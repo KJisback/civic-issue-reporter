@@ -1309,7 +1309,95 @@ Completion notes:
 - Made the neutral background and grey treatment lighter while preserving the accepted Indian civic palette.
 - No dependency, backend, auth, deployment, secret, or external map provider was added.
 
-## T0021 - Backend Architecture Decision Record
+## T0021 - Functional Local Working Model
+
+Status: Done
+
+Priority: High
+
+Goal:
+
+Turn the current static civic issue reporter into a functional local working model where visible controls process local data, update the UI, and provide clear feedback.
+
+Branch:
+
+`feature/t0021-functional-local-model`
+
+Dependencies:
+
+- T0020A - UI Functionality Repair After Human Browser Check
+
+Allowed areas:
+
+- `src/index.html`
+- `src/app.js`
+- `src/styles.css`
+- `tests/`
+- ticket, state, verification, and follow-up docs
+
+Do not touch:
+
+- Do not add backend, auth, database, deployment, dependencies, secrets, or external services.
+- Do not integrate Google Maps until API-key ownership, billing, privacy, and provider policy are approved.
+- Do not collect sensitive personal data.
+
+Requirements:
+
+- Every visible navigation item, button, quick action, report control, issue action, and map affordance must either perform a local action or communicate why it is unavailable.
+- Form submission must process data into a persistent local issue record with validation, feedback, detail access, metrics, analytics, summary, map preview, and activity updates.
+- Add local workflow actions for common desk operations such as filtering, bulk triage, reassignment, notes, map focus, resolved/open views, and settings/export visibility.
+- Keep local-only limitations explicit and privacy-safe.
+- Add or update no-dependency tests for the functional local model logic.
+
+Non-goals:
+
+- No backend persistence.
+- No real staff identity or authentication.
+- No real Google Maps integration.
+- No photo upload or external notifications.
+- No official municipal record or audit-log claim.
+
+Acceptance criteria:
+
+- Blank and invalid reports show clear validation and do not create records.
+- Valid reports appear in Open Issues, dashboard metrics, analytics, summary, local map preview, and detail view.
+- Status, priority, assignment, notes, duplicate review, bulk triage, filtering, resolved/open navigation, map focus, export, import, print, and reset actions work locally with feedback.
+- Navigation items no longer feel dead; they change filters, focus panels, or explain local-only limitations.
+- Corrupt local storage still falls back safely.
+- No dependency, backend, auth, deployment, secret, or external service is added.
+
+Automated checks:
+
+- `node --check src/app.js`
+- `node tests/app.test.js`
+- `git diff --check`
+
+Manual verification:
+
+1. Open `src/index.html`.
+2. Confirm no console errors.
+3. Submit invalid and valid reports.
+4. Use every sidebar navigation item and bottom quick action.
+5. Change status, priority, assignment, duplicate review, and notes.
+6. Use open/resolved filters and map markers.
+7. Export summary, export backup, import backup, print summary, and reset demo data.
+8. Reload and confirm state persists.
+
+Human review triggers:
+
+- Any request to add Google Maps, backend, auth, staff identity, production deployment, secrets, database, or external services.
+
+Completion notes:
+
+- Replaced the brittle screenshot-only shell with a functional local operations desk while preserving the accepted Indian civic layout direction.
+- Sidebar navigation now applies local filters, focuses panels, or explains local-only limitations.
+- Report submission now feeds issue list, detail, metrics, analytics, map preview, summary, activity timeline, and backup/export paths.
+- Added local quick actions for bulk triage, category-based reassignment, local queue note, summary export, backup import/export, print, reset, and ward map focus.
+- Issue detail now supports local desk notes and visible workflow controls.
+- Expanded no-dependency tests for local notes, routing logic, and summary note export.
+- No dependency, backend, auth, database, deployment, secret, Google Maps, or external service was added.
+
+## T0022 - Backend Architecture Decision Record
 
 Status: Ready for Agent
 
@@ -1319,7 +1407,7 @@ Goal:
 
 Create an architecture decision record for backend direction, options, trade-offs, and required product-owner decisions before implementation.
 
-## T0022 - Citizen Identity Policy Decision
+## T0023 - Citizen Identity Policy Decision
 
 Status: Planned
 
@@ -1329,7 +1417,7 @@ Goal:
 
 Decide whether citizen reporting remains anonymous, contact-optional, or account-based.
 
-## T0023 - Staff Role And Permission Model
+## T0024 - Staff Role And Permission Model
 
 Status: Planned
 

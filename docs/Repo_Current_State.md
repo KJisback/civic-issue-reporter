@@ -2,7 +2,7 @@
 
 ## Current Branch
 
-`feature/t0020a-ui-functionality-repair`
+`feature/t0021-functional-local-model`
 
 ## Completed Tickets
 
@@ -30,17 +30,18 @@
 - T0019 - Test Harness Decision and First Logic Tests
 - T0020 - Backend Readiness Design
 - T0020A - UI Functionality Repair After Human Browser Check
+- T0021 - Functional Local Working Model
 
 ## Current App Status
 
-The project has a no-dependency static app with a screenshot-matched Indian civic operations desk UI, citizen report form, local issue records, browser persistence through `localStorage`, sample issue cards, admin-style metrics, category/status/priority filters, local status, priority, and municipal team assignment controls, map-ready location fields, explainable local duplicate hints, local duplicate review actions, local priority assistance, local operational analytics, a focused issue detail panel with status timeline and local activity events, a municipal review summary with print and JSON export actions, full local backup/restore, and first no-dependency Node logic tests. T0018B reworked the app shell to closely follow the supplied civic dashboard reference while preserving local-only functionality. T0019 added dependency-free tests for core local logic. T0020 added backend readiness design only; no backend implementation exists. T0020A repaired human-browser-check regressions by hardening malformed local storage startup, restoring visible feedback, adding a local ward-map preview, expanding categories, and wiring menu/location feedback without adding external services.
+The project has a no-dependency static app with a functional Indian civic operations desk UI, citizen report form, local issue records, browser persistence through `localStorage`, sample issue cards, admin-style metrics, category/status/priority filters, local status, priority, notes, and municipal team assignment controls, map-ready location fields, explainable local duplicate hints, local duplicate review actions, local priority assistance, local operational analytics, a focused issue detail panel with status timeline and local activity events, a municipal review summary with print and JSON export actions, full local backup/restore, and no-dependency Node logic tests. T0018B reworked the app shell to closely follow the supplied civic dashboard reference while preserving local-only functionality. T0019 added dependency-free tests for core local logic. T0020 added backend readiness design only; no backend implementation exists. T0020A repaired human-browser-check regressions. T0021 rewired the visible UI into a working local model: sidebar actions filter/focus panels, quick actions perform local operations, issue detail supports notes, and all visible controls either process local data or state a local-only limitation.
 
 Generated UI/UX concept sheets are saved as design references, with the Indian civic panel refresh now serving as the current direction.
 
 ## Folder Structure Summary
 
 - `src/` contains the static app shell.
-- `src/app.js` defines the local issue object shape, form submission behavior, validation, sample data, map-ready location metadata, privacy-safe photo evidence placeholder display, filters, triage and assignment controls, local duplicate/priority assistance, duplicate review actions, local activity events, metrics, workflow summary, local operational analytics, issue detail panel, local ward-map preview, export/print summary, full backup/restore, and browser storage.
+- `src/app.js` defines the local issue object shape, form submission behavior, validation, sample data, map-ready location metadata, filters, navigation actions, triage, assignment, local notes, quick actions, local duplicate/priority assistance, duplicate review actions, local activity events, metrics, workflow summary, local operational analytics, issue detail panel, local ward-map preview, export/print summary, full backup/restore, and browser storage.
 - `tests/app.test.js` contains the first no-dependency Node logic tests.
 - `docs/` contains planning, ticket, verification, state, risk, review, manual UI checklist, and development plan documents.
 - `docs/Full_System_Test_Report.md` records the latest local full-system test and follow-up review.
@@ -68,7 +69,7 @@ None.
 - Lint: Not run, no lint system.
 - Typecheck: Not run, no type system.
 - Syntax: Pass, `node --check src/app.js`.
-- Full system test: Local automated/static checks passed after T0020A; browser manual checks remain open for the repaired UI behavior.
+- Full system test: Local automated/static checks passed after T0021; browser manual checks remain open for the functional local model.
 - Git: Local repository initialized; current ticket branch is `feature/t0020-backend-readiness-design`.
 - GitHub: Remote `origin` points to `https://github.com/KJisback/civic-issue-reporter.git`; previous ticket branches are pushed and T0020 will be pushed during ticket closeout.
 
@@ -94,8 +95,8 @@ None.
 
 ## Next Recommended Ticket
 
-T0021 - Backend Architecture Decision Record
+T0022 - Backend Architecture Decision Record
 
 ## Last Updated
 
-2026-05-23
+2026-05-24

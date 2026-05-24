@@ -17,7 +17,7 @@ Primary inferred MVP:
 
 Current next ticket:
 
-T0021 - Backend Architecture Decision Record
+T0022 - Backend Architecture Decision Record
 
 Completed tickets:
 
@@ -45,6 +45,7 @@ Completed tickets:
 - T0019 - Test Harness Decision and First Logic Tests
 - T0020 - Backend Readiness Design
 - T0020A - UI Functionality Repair After Human Browser Check
+- T0021 - Functional Local Working Model
 
 Current implementation state:
 
@@ -69,6 +70,7 @@ Current implementation state:
 - No-dependency Node logic tests for priority suggestion, duplicate scoring, normalization, backup validation, and summary counts.
 - Backend readiness design covering proposed entities, API boundaries, validation, audit, privacy, storage, migration path, risks, and human-gated follow-ups.
 - T0020A repaired human-browser-check regressions: malformed local storage no longer breaks boot, visible toast/status feedback is available, categories are broader, local ward-map preview is clickable, menu/location controls respond, and Google Maps remains human-gated.
+- T0021 rewired the app into a functional local model: sidebar navigation filters/focuses panels, quick actions process local queue operations, issue detail supports desk notes, local reassignment and bulk triage work, and visible controls no longer behave as inert screenshot elements.
 
 Saved UI/UX direction:
 
@@ -83,8 +85,9 @@ Create the backend architecture decision record without implementing backend cod
 
 Next sequence after T0021:
 
-- T0022 - Citizen Identity Policy Decision
-- T0023 - Staff Role And Permission Model
+- T0022 - Backend Architecture Decision Record
+- T0023 - Citizen Identity Policy Decision
+- T0024 - Staff Role And Permission Model
 - Later implementation tickets only after backend/auth/database decisions are approved.
 
 Human-gated decisions:

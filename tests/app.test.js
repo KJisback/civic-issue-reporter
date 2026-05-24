@@ -90,6 +90,43 @@ test("normalizeIssue repairs malformed stored records", () => {
   assert.equal(normalized.coordinates, null);
 });
 
+test("normalizeIssue preserves local desk notes", () => {
+  const normalized = app.normalizeIssue({
+    id: "issue-note",
+    title: "Drain blocked",
+    category: "Drainage",
+    location: "Ward 27",
+    description: "Drain blocked near community hall",
+    status: "Triaged",
+    priority: "Medium",
+    createdAt: "2026-05-20T08:00:00.000Z",
+    updatedAt: "2026-05-20T08:00:00.000Z",
+    notes: [
+      {
+        id: "note-1",
+        text: "Assigned for morning inspection.",
+        createdAt: "2026-05-20T09:00:00.000Z"
+      },
+      {
+        id: "note-empty",
+        text: "",
+        createdAt: "2026-05-20T09:00:00.000Z"
+      }
+    ]
+  });
+
+  assert.equal(normalized.notes.length, 1);
+  assert.equal(normalized.notes[0].text, "Assigned for morning inspection.");
+});
+
+test("teamForCategory routes common civic categories", () => {
+  assert.equal(app.teamForCategory("Road damage"), "Roads maintenance");
+  assert.equal(app.teamForCategory("Illegal dumping"), "Sanitation crew");
+  assert.equal(app.teamForCategory("Water leakage"), "Water services");
+  assert.equal(app.teamForCategory("Traffic signal"), "Lighting team");
+  assert.equal(app.teamForCategory("Public safety"), "Public safety desk");
+});
+
 test("parseBackupPayload accepts valid backups and rejects duplicate ids", () => {
   const issue = app.normalizeIssue({
     id: "issue-backup",
@@ -129,7 +166,8 @@ test("createMunicipalSummaryFrom counts open and high-priority reports", () => {
       status: "Submitted",
       priority: "High",
       createdAt: "2026-05-20T08:00:00.000Z",
-      updatedAt: "2026-05-20T08:00:00.000Z"
+      updatedAt: "2026-05-20T08:00:00.000Z",
+      notes: [{ text: "Crew notified", createdAt: "2026-05-20T09:00:00.000Z" }]
     },
     {
       id: "issue-resolved",
@@ -147,4 +185,5 @@ test("createMunicipalSummaryFrom counts open and high-priority reports", () => {
   assert.equal(summary.totals.allIssues, 2);
   assert.equal(summary.totals.openIssues, 1);
   assert.equal(summary.totals.highPriority, 1);
+  assert.deepEqual(summary.issues[0].notes, ["Crew notified"]);
 });

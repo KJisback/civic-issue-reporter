@@ -154,6 +154,42 @@ Status: Open
 
 ## Closed Followups
 
+### F0016 - Replace Inert Screenshot Controls With Functional Local Actions
+
+Source ticket: T0021
+
+Severity: High
+
+Type: usability / product
+
+Description:
+
+The accepted reference-clone UI still felt like a data entry mockup because multiple visible controls were representational, mislabeled, or not connected to meaningful local data processing.
+
+Recommended action:
+
+Handled in T0021 by rewiring sidebar navigation, quick actions, issue status/priority/team controls, notes, filters, map markers, exports, backup/import, print, and reset into working local actions with visible feedback.
+
+Status: Closed in T0021
+
+### F0017 - Add Local Desk Notes
+
+Source ticket: T0021
+
+Severity: Medium
+
+Type: feature
+
+Description:
+
+Issue records needed a lightweight local processing artifact beyond raw intake and status changes.
+
+Recommended action:
+
+Handled in T0021 with browser-local desk notes stored on issue records, shown in detail, included in summary export, and logged into the local activity timeline.
+
+Status: Closed in T0021
+
 ### F0015 - Repair UI Browser Regressions From Reference Clone
 
 Source ticket: T0020A

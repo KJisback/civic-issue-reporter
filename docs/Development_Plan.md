@@ -188,7 +188,7 @@ Human review trigger:
 
 Backend, database, auth, and deployment decisions require explicit approval before implementation tickets are created.
 
-### T0021 - Backend Architecture Decision Record
+### T0022 - Backend Architecture Decision Record
 
 Status: Ready for Agent
 
@@ -211,4 +211,4 @@ Architecture options, trade-offs, recommended direction, approval needs, and rol
 
 ## Recommended Immediate Action
 
-Proceed with T0021 as a decision-record ticket. Backend, database, auth, and deployment implementation remain human-gated.
+Proceed with T0022 as a decision-record ticket. Backend, database, auth, and deployment implementation remain human-gated.

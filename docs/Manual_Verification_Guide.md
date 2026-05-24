@@ -280,3 +280,17 @@ Use this before larger design, data, or release changes.
 9. Click Export Backup, Import Backup, Export Summary, Print Summary, and View Ward Map; confirm each action gives visible feedback or navigates to the relevant section.
 10. Reload and confirm reports persist.
 11. Confirm Google Maps is not loaded and no external map/API key is required.
+
+## T0021 - Functional Local Working Model
+
+1. Open `src/index.html`.
+2. Confirm the browser console has no startup errors.
+3. Submit a blank report and confirm validation prevents record creation.
+4. Submit a complete report and confirm it appears in Open Issues, metrics, analytics, summary, detail, and map preview when coordinates are present.
+5. Use every sidebar action: Dashboard, Report Issue, Open Issues, Triage, Resolved, My Tasks, Ward Map, Citizens, Analytics, Settings, and Local Backup.
+6. Confirm sidebar actions either filter/focus local data or show an explicit local-only note.
+7. Change status, priority, assigned team, duplicate review, and local desk notes from issue cards or detail.
+8. Use Quick Actions: Export Backup, Import Backup, Bulk Triage, Reassign, Add Note, Export Summary, Print Summary, and View Ward Map.
+9. Click map markers and confirm they open issue detail.
+10. Reload and confirm issues, statuses, assignments, notes, and duplicate review choices persist.
+11. Confirm no Google Maps, backend, auth, upload, deployment, or external service is required.

@@ -8,49 +8,51 @@
   </head>
   <body>
     <a class="skip-link" href="#report">Skip to report form</a>
+    <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
+
     <header class="topbar app-chrome">
-      <button class="icon-button menu-button" type="button" aria-label="Open navigation menu">☰</button>
+      <button class="icon-button menu-button" type="button" aria-label="Toggle navigation menu" aria-expanded="true">☰</button>
       <div class="brand-lockup">
         <div>
           <h1><span>Civic</span> Issue Reporter</h1>
           <p>Your City • Your Responsibility</p>
         </div>
       </div>
-      <div class="ward-selector" aria-label="Current ward desk">
+      <button class="ward-selector chrome-button" type="button" data-nav-action="ward-desk" aria-label="Open ward desk filters">
         <span aria-hidden="true">⌖</span>
-        <div>
+        <span>
           <strong>Ward Desk</strong>
-          <p>Ward 27 - Shanti Nagar⌄</p>
-        </div>
-      </div>
+          <em>Ward 27 - Shanti Nagar</em>
+        </span>
+      </button>
       <div class="civic-skyline" aria-hidden="true"></div>
-      <div class="operator-card" aria-label="Current operator">
+      <button class="operator-card chrome-button" type="button" data-nav-action="operator" aria-label="Show local operator note">
         <span aria-hidden="true">☼</span>
-        <div>
+        <span>
           <strong>Ward Operator</strong>
-          <p>Desk Staff⌄</p>
-        </div>
-      </div>
+          <em>Desk Staff</em>
+        </span>
+      </button>
     </header>
 
     <main class="dashboard-shell">
       <div class="app-grid">
-        <aside class="sidebar" aria-label="Workspace sections">
-          <a href="#dashboard" class="active-link"><span aria-hidden="true">⌂</span>Dashboard</a>
-          <a href="#report"><span aria-hidden="true">✎</span>Report Issue</a>
-          <a href="#issues"><span aria-hidden="true">☷</span>Open Issues</a>
-          <a href="#dashboard"><span aria-hidden="true">♟</span>Triage</a>
-          <a href="#issues"><span aria-hidden="true">✓</span>Resolved</a>
-          <a href="#dashboard"><span aria-hidden="true">☑</span>My Tasks</a>
-          <a href="#issues"><span aria-hidden="true">⌖</span>Ward Map</a>
-          <a href="#report"><span aria-hidden="true">♧</span>Citizens</a>
-          <a href="#dashboard"><span aria-hidden="true">▥</span>Analytics</a>
-          <a href="#summary"><span aria-hidden="true">⚙</span>Settings</a>
-          <div class="sidebar-backup">
+        <aside class="sidebar" id="sidebarNav" aria-label="Workspace sections">
+          <button type="button" class="nav-action active-link" data-nav-action="dashboard"><span aria-hidden="true">⌂</span>Dashboard</button>
+          <button type="button" class="nav-action" data-nav-action="report"><span aria-hidden="true">✎</span>Report Issue</button>
+          <button type="button" class="nav-action" data-nav-action="open"><span aria-hidden="true">☷</span>Open Issues</button>
+          <button type="button" class="nav-action" data-nav-action="triage"><span aria-hidden="true">♟</span>Triage</button>
+          <button type="button" class="nav-action" data-nav-action="resolved"><span aria-hidden="true">✓</span>Resolved</button>
+          <button type="button" class="nav-action" data-nav-action="my-tasks"><span aria-hidden="true">☑</span>My Tasks</button>
+          <button type="button" class="nav-action" data-nav-action="ward-map"><span aria-hidden="true">⌖</span>Ward Map</button>
+          <button type="button" class="nav-action" data-nav-action="citizens"><span aria-hidden="true">♧</span>Citizens</button>
+          <button type="button" class="nav-action" data-nav-action="analytics"><span aria-hidden="true">▥</span>Analytics</button>
+          <button type="button" class="nav-action" data-nav-action="settings"><span aria-hidden="true">⚙</span>Settings</button>
+          <button class="sidebar-backup" type="button" data-nav-action="backup">
             <strong>Local Backup</strong>
-            <p>Always On. Always Available.</p>
-            <span>● Backup ready</span>
-          </div>
+            <span>Always On. Always Available.</span>
+            <small>● Backup ready</small>
+          </button>
         </aside>
 
         <div class="workspace">
@@ -59,7 +61,7 @@
               <div>
                 <h2 id="report-title">Report New Issue</h2>
               </div>
-              <button class="secondary-button compact-button" type="button">Use My Location</button>
+              <button class="secondary-button compact-button" id="useLocationButton" type="button">Use My Location</button>
             </div>
 
             <div class="report-guidance" aria-label="Report workflow benefits">
@@ -76,7 +78,7 @@
               <div>
                 <span class="guidance-icon" aria-hidden="true"></span>
                 <strong>Private by design</strong>
-                <p>No account, map API, or device location permission is used yet.</p>
+                <p>No account, map API, or external service is used in this local model.</p>
               </div>
             </div>
 
@@ -89,14 +91,7 @@
 
               <label>
                 Issue Category
-                <select id="issueCategory" name="category" required>
-                  <option>Streetlight</option>
-                  <option>Road damage</option>
-                  <option>Garbage collection</option>
-                  <option>Drainage</option>
-                  <option>Water leakage</option>
-                  <option>Public safety</option>
-                </select>
+                <select id="issueCategory" name="category" required></select>
               </label>
 
               <label>
@@ -107,7 +102,17 @@
 
               <label>
                 Ward or area
-                <input id="issueWard" name="ward" type="text" placeholder="Shanti Nagar">
+                <select id="issueWard" name="ward">
+                  <option value="">Select ward or area</option>
+                  <option>Ward 27 - Shanti Nagar</option>
+                  <option>Ward 12 - MG Road</option>
+                  <option>Central Market</option>
+                  <option>Lake Road</option>
+                  <option>Bus Stand Zone</option>
+                  <option>Primary School Zone</option>
+                  <option>Community Hall Zone</option>
+                  <option>Other / not sure</option>
+                </select>
               </label>
 
               <label>
@@ -121,8 +126,8 @@
                 <span class="field-error" id="descriptionError" role="alert"></span>
               </label>
 
-              <fieldset class="coordinate-fields wide compact-advanced">
-                <legend>Optional map-ready coordinates</legend>
+              <fieldset class="coordinate-fields wide">
+                <legend>Map-ready coordinates</legend>
                 <label>
                   Latitude
                   <input id="issueLatitude" name="latitude" type="number" min="-90" max="90" step="0.000001" placeholder="12.971599" aria-describedby="coordinateHelp latitudeError">
@@ -133,27 +138,27 @@
                   <input id="issueLongitude" name="longitude" type="number" min="-180" max="180" step="0.000001" placeholder="77.594566" aria-describedby="coordinateHelp longitudeError">
                   <span class="field-error" id="longitudeError" role="alert"></span>
                 </label>
-                <p id="coordinateHelp">Coordinates are optional and manually entered for now. No map service or device location permission is used.</p>
+                <p id="coordinateHelp">Coordinates stay in this browser. Google Maps needs a later approved API-key ticket.</p>
               </fieldset>
 
-              <div class="photo-evidence-panel wide compact-advanced" aria-labelledby="photo-evidence-title">
+              <div class="assist-panel wide" id="assistPanel" role="status" aria-live="polite"></div>
+
+              <div class="photo-evidence-panel wide" aria-labelledby="photo-evidence-title">
                 <div>
                   <p class="eyebrow">Future evidence</p>
                   <h3 id="photo-evidence-title">Photo evidence placeholder</h3>
-                  <p>Photos are not uploaded, stored, exported, or sent anywhere in this MVP.</p>
+                  <p>Photos are not uploaded, stored, exported, or sent anywhere in this local model.</p>
                 </div>
                 <div class="photo-placeholder-grid" aria-hidden="true">
                   <span></span>
                   <span></span>
                   <span></span>
                 </div>
-                <p class="privacy-note">Before photo evidence is enabled, the product needs clear rules for faces, private property, license plates, retention, and public visibility.</p>
+                <p class="privacy-note">Real photo evidence needs a later approved storage, redaction, retention, and public visibility policy.</p>
               </div>
 
-              <div class="assist-panel wide" id="assistPanel" role="status" aria-live="polite"></div>
-
               <div class="form-actions wide">
-                <button type="submit">Submit Issue ✈</button>
+                <button type="submit">Submit Issue</button>
                 <button class="secondary-button" type="button" id="resetDemoData">Reset demo data</button>
               </div>
               <p class="form-status wide" id="formStatus" role="status" aria-live="polite"></p>
@@ -188,7 +193,7 @@
               </label>
             </div>
             <div class="issue-list" id="issueList" aria-live="polite"></div>
-            <a class="view-all-link" href="#issues">View All Open Issues →</a>
+            <button class="view-all-link" type="button" id="viewAllIssues">View All Issues →</button>
           </section>
 
           <section id="dashboard" class="panel dashboard" aria-labelledby="dashboard-title">
@@ -196,13 +201,14 @@
               <div>
                 <h2 id="dashboard-title">Triage / Status Overview</h2>
               </div>
-              <span class="soft-chip">View All</span>
+              <button class="soft-chip" id="showAllDashboard" type="button">View All</button>
             </div>
             <div class="metrics" id="metrics"></div>
             <div class="dashboard-grid">
               <div class="location-preview" id="locationPreview" aria-label="Location readiness preview"></div>
               <div class="workflow-board" id="workflowBoard" aria-label="Status workflow summary"></div>
             </div>
+            <div class="ward-map-panel" id="wardMap" aria-label="Interactive local ward map"></div>
             <div class="analytics-snapshot" id="analyticsSnapshot" aria-label="Local analytics snapshot"></div>
           </section>
 
@@ -213,11 +219,14 @@
       <section id="summary" class="quick-actions-dock" aria-labelledby="summary-title">
         <h2 id="summary-title">Quick Actions</h2>
         <div class="summary-actions">
-          <button class="secondary-button" type="button" id="exportBackup">⬇ Export Backup</button>
-          <button class="secondary-button" type="button" id="importBackup">⬆ Import Backup</button>
-          <button class="secondary-button" type="button" id="exportSummary">☷ Bulk Update</button>
-          <button class="secondary-button" type="button" id="printSummary">✎ Add Note</button>
-          <a class="ward-map-button" href="#issues">▱ View Ward Map</a>
+          <button class="secondary-button" type="button" id="exportBackup">Export Backup</button>
+          <button class="secondary-button" type="button" id="importBackup">Import Backup</button>
+          <button class="secondary-button" type="button" id="bulkTriage">Bulk Triage</button>
+          <button class="secondary-button" type="button" id="reassignQueue">Reassign</button>
+          <button class="secondary-button" type="button" id="addQueueNote">Add Note</button>
+          <button class="secondary-button" type="button" id="exportSummary">Export Summary</button>
+          <button class="secondary-button" type="button" id="printSummary">Print Summary</button>
+          <button class="ward-map-button" type="button" id="viewWardMap">View Ward Map</button>
         </div>
         <input class="file-input" id="backupFileInput" type="file" accept="application/json,.json" aria-label="Import local civic issue backup JSON">
         <p class="backup-note">Backup import replaces local browser data after confirmation. It does not upload files or create an official municipal record.</p>

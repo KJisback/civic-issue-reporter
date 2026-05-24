@@ -2,6 +2,7 @@ const STORAGE_KEY = "civicIssueReporter.issues.v1";
 const BACKUP_TYPE = "civicIssueReporter.fullBackup";
 const BACKUP_VERSION = 1;
 const STATUSES = ["Submitted", "Triaged", "In progress", "Resolved"];
+const STATUS_FILTERS = ["Open", ...STATUSES];
 const PRIORITIES = ["Low", "Medium", "High"];
 const ASSIGNMENT_TEAMS = [
   "Unassigned",
@@ -13,6 +14,7 @@ const ASSIGNMENT_TEAMS = [
 ];
 const DUPLICATE_REVIEW_STATUSES = ["Needs review", "Linked", "Dismissed"];
 const DEFAULT_DUPLICATE_REVIEW_STATUS = "Needs review";
+const DEFAULT_QUEUE_NOTE = "Local desk note";
 const CATEGORIES = [
   "Streetlight",
   "Road damage",
@@ -124,6 +126,7 @@ function createIssue({ title, category, location, ward, landmark, description, c
     coordinates,
     photo: null,
     assignedTeam: null,
+    notes: [],
     activityTimeline: [
       createActivityEvent({
         type: "created",
@@ -262,6 +265,7 @@ function normalizeIssue(issue) {
   const duplicateHints = normalizeDuplicateHints(issue.duplicateHints);
   const assignedTeam = ASSIGNMENT_TEAMS.includes(issue.assignedTeam) ? issue.assignedTeam : "Unassigned";
   const activityTimeline = normalizeActivityTimeline(issue.activityTimeline);
+  const notes = normalizeNotes(issue.notes);
   const category = CATEGORIES.includes(issue.category) ? issue.category : "Other civic issue";
   const status = STATUSES.includes(issue.status) ? issue.status : "Submitted";
   const priority = PRIORITIES.includes(issue.priority) ? issue.priority : inferPriority(category, issue.description || "");
@@ -284,8 +288,23 @@ function normalizeIssue(issue) {
     priorityReason: "",
     assignedTeam,
     duplicateHints,
+    notes,
     activityTimeline
   };
+}
+
+function normalizeNotes(notes) {
+  if (!Array.isArray(notes)) {
+    return [];
+  }
+
+  return notes
+    .map((note) => ({
+      id: note.id || `note-${Date.now()}-${Math.random().toString(16).slice(2)}`,
+      text: typeof note.text === "string" && note.text.trim() ? note.text.trim() : "",
+      createdAt: isValidIsoDate(note.createdAt) ? note.createdAt : new Date().toISOString()
+    }))
+    .filter((note) => note.text);
 }
 
 function normalizeDuplicateHints(duplicateHints) {
@@ -364,7 +383,10 @@ function statusIndex(status) {
 function getFilteredIssues() {
   return issues.filter((issue) => {
     const categoryMatches = filters.category === "All" || issue.category === filters.category;
-    const statusMatches = filters.status === "All" || issue.status === filters.status;
+    const statusMatches =
+      filters.status === "All" ||
+      (filters.status === "Open" && issue.status !== "Resolved") ||
+      issue.status === filters.status;
     const priorityMatches = filters.priority === "All" || issue.priority === filters.priority;
 
     return categoryMatches && statusMatches && priorityMatches;
@@ -503,6 +525,7 @@ function createMunicipalSummary() {
       landmark: issue.landmark || "Not specified",
       coordinates: formatCoordinates(issue.coordinates),
       assignedTeam: assignmentLabel(issue),
+      notes: issue.notes.map((note) => note.text),
       duplicateReview: duplicateReviewSummary(issue) || "No duplicate hints",
       reportedAt: issue.createdAt,
       updatedAt: issue.updatedAt
@@ -671,15 +694,15 @@ function renderSummaryPreview() {
 function renderIssues() {
   const list = document.querySelector("#issueList");
   const filteredIssues = getFilteredIssues();
-  document.querySelector("#queueCount").textContent = "View All";
+  document.querySelector("#queueCount").textContent = `${filteredIssues.length} shown / ${issues.length} total`;
 
   if (filteredIssues.length === 0) {
-    list.innerHTML = `<div class="empty-state">No reports match the current filters.</div>`;
+    list.innerHTML = `<div class="empty-state">No reports match the current filters. Use View All Issues to reset the queue.</div>`;
     return;
   }
 
   list.innerHTML = filteredIssues
-    .slice(0, 5)
+    .slice(0, 8)
     .map(
       (issue) => `
         <article class="issue-card" data-issue-id="${escapeHtml(issue.id)}">
@@ -694,6 +717,7 @@ function renderIssues() {
             <div class="card-meta">
               <span class="tag ${priorityClass(issue.priority)}">${escapeHtml(issue.priority)} Priority</span>
               <span class="tag status-${statusClass(issue.status)}">${escapeHtml(issue.status)}</span>
+              <span class="tag tag-info">${issue.notes.length} note${issue.notes.length === 1 ? "" : "s"}</span>
             </div>
           </div>
           <div class="triage-controls" aria-label="Triage controls for ${escapeHtml(issue.title)}">
@@ -801,6 +825,29 @@ function duplicateListMarkup(issue) {
   `;
 }
 
+function notesMarkup(issue) {
+  if (issue.notes.length === 0) {
+    return `<p>No local desk notes have been added yet.</p>`;
+  }
+
+  return `
+    <ul class="detail-list">
+      ${issue.notes
+        .slice()
+        .sort((left, right) => new Date(right.createdAt) - new Date(left.createdAt))
+        .map(
+          (note) => `
+            <li>
+              <strong>${escapeHtml(note.text)}</strong>
+              <span>${formatDate(note.createdAt)}</span>
+            </li>
+          `
+        )
+        .join("")}
+    </ul>
+  `;
+}
+
 function renderIssueDetail() {
   const panel = document.querySelector("#issueDetail");
   const issue = issues.find((item) => item.id === selectedIssueId);
@@ -867,6 +914,11 @@ function renderIssueDetail() {
       </div>
 
       <div class="detail-section">
+        <h3>Desk notes</h3>
+        ${notesMarkup(issue)}
+      </div>
+
+      <div class="detail-section">
         <h3>Review signals</h3>
         <p><strong>Priority:</strong> ${escapeHtml(issue.priorityReason || "Priority can be adjusted by staff.")}</p>
         <p><strong>Assigned team:</strong> ${escapeHtml(assignmentLabel(issue))}. This is a local routing label only and does not identify a staff member.</p>
@@ -894,6 +946,11 @@ function renderIssueDetail() {
             ${optionMarkup(ASSIGNMENT_TEAMS, assignmentLabel(issue))}
           </select>
         </label>
+        <label>
+          Add local note
+          <textarea data-note-input="${escapeHtml(issue.id)}" rows="3" placeholder="Add a local desk note for this issue"></textarea>
+        </label>
+        <button class="secondary-button" type="button" data-action="add-note" data-issue-id="${escapeHtml(issue.id)}">Save Note</button>
       </div>
     </div>
   `;
@@ -1114,7 +1171,7 @@ function renderAssistance() {
 
 function renderFilters() {
   document.querySelector("#categoryFilter").innerHTML = `<option value="All">All categories</option>${optionMarkup(CATEGORIES, filters.category)}`;
-  document.querySelector("#statusFilter").innerHTML = `<option value="All">All statuses</option>${optionMarkup(STATUSES, filters.status)}`;
+  document.querySelector("#statusFilter").innerHTML = `<option value="All">All statuses</option>${optionMarkup(STATUS_FILTERS, filters.status)}`;
   document.querySelector("#priorityFilter").innerHTML = `<option value="All">All priorities</option>${optionMarkup(PRIORITIES, filters.priority)}`;
 }
 
@@ -1343,13 +1400,43 @@ function applyIssuePatch(issue, patch, now) {
     );
   }
 
+  if (Object.prototype.hasOwnProperty.call(patch, "note")) {
+    const noteText = String(patch.note || "").trim();
+
+    if (noteText) {
+      activityEvents.push(
+        createActivityEvent({
+          type: "note",
+          label: "Desk note added",
+          to: "Note",
+          happenedAt: now,
+          note: noteText
+        })
+      );
+    }
+  }
+
   if (activityEvents.length === 0) {
     return issue;
   }
 
+  const nextNotes = Object.prototype.hasOwnProperty.call(patch, "note") && String(patch.note || "").trim()
+    ? [
+        ...issue.notes,
+        {
+          id: `note-${now}-${Math.random().toString(16).slice(2)}`,
+          text: String(patch.note).trim(),
+          createdAt: now
+        }
+      ]
+    : issue.notes;
+
+  const { note, ...persistedPatch } = patch;
+
   return {
     ...issue,
-    ...patch,
+    ...persistedPatch,
+    notes: nextNotes,
     priorityReason: patch.priority ? "Priority was manually adjusted by staff." : issue.priorityReason,
     activityTimeline: [...issue.activityTimeline, ...activityEvents],
     updatedAt: now
@@ -1415,18 +1502,22 @@ function handleTriageChange(event) {
 
   if (action === "status") {
     updateIssue(issueId, { status: control.value });
+    setSummaryStatus(`Status updated to ${control.value}.`);
   }
 
   if (action === "priority") {
     updateIssue(issueId, { priority: control.value });
+    setSummaryStatus(`Priority updated to ${control.value}.`);
   }
 
   if (action === "assignment") {
     updateIssue(issueId, { assignedTeam: control.value });
+    setSummaryStatus(`Assigned team updated to ${control.value}.`);
   }
 
   if (action === "duplicate-review") {
     updateDuplicateHintReview(issueId, control.dataset.duplicateId, control.value);
+    setSummaryStatus(`Duplicate review marked ${control.value}.`);
   }
 }
 
@@ -1458,6 +1549,20 @@ function handleDetailClick(event) {
     renderIssueDetail();
     focusLastDetailTrigger();
   }
+
+  if (control.dataset.action === "add-note") {
+    const input = document.querySelector(`[data-note-input="${control.dataset.issueId}"]`);
+    const note = input ? input.value.trim() : "";
+
+    if (!note) {
+      setSummaryStatus("Add note text before saving.", "error");
+      input?.focus();
+      return;
+    }
+
+    updateIssue(control.dataset.issueId, { note });
+    setSummaryStatus("Local desk note saved.");
+  }
 }
 
 function handleDetailKeydown(event) {
@@ -1482,6 +1587,191 @@ function handleFilterChange(event) {
   }
 
   renderIssues();
+  renderSummaryPreview();
+}
+
+function setFilters(nextFilters) {
+  filters = {
+    ...filters,
+    ...nextFilters
+  };
+  renderApp();
+}
+
+function focusSection(selector) {
+  const section = document.querySelector(selector);
+
+  if (section) {
+    section.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
+function setActiveNav(action) {
+  document.querySelectorAll("[data-nav-action]").forEach((control) => {
+    control.classList.toggle("active-link", control.dataset.navAction === action);
+  });
+}
+
+function handleNavigationAction(event) {
+  const control = event.target.closest("[data-nav-action]");
+
+  if (!control) {
+    return;
+  }
+
+  const action = control.dataset.navAction;
+  setActiveNav(action);
+
+  if (action === "dashboard" || action === "analytics" || action === "triage") {
+    if (action === "triage") {
+      setFilters({ status: "Triaged", category: "All", priority: "All" });
+      setSummaryStatus("Triage view applied.");
+    } else {
+      focusSection("#dashboard");
+      setSummaryStatus(action === "analytics" ? "Analytics panel focused." : "Dashboard focused.");
+    }
+    focusSection("#dashboard");
+    return;
+  }
+
+  if (action === "report" || action === "citizens") {
+    focusSection("#report");
+    setSummaryStatus(action === "citizens" ? "Citizen intake form focused. Reporter identity remains local and anonymous." : "Report form focused.");
+    return;
+  }
+
+  if (action === "open") {
+    setFilters({ status: "Open", category: "All", priority: "All" });
+    focusSection("#issues");
+    setSummaryStatus("Open issue queue showing all local reports.");
+    return;
+  }
+
+  if (action === "resolved") {
+    setFilters({ status: "Resolved", category: "All", priority: "All" });
+    focusSection("#issues");
+    setSummaryStatus("Resolved reports filter applied.");
+    return;
+  }
+
+  if (action === "my-tasks") {
+    setFilters({ status: "Open", category: "All", priority: "High" });
+    focusSection("#issues");
+    setSummaryStatus("My Tasks shows high-priority local desk work.");
+    return;
+  }
+
+  if (action === "ward-map") {
+    focusSection("#wardMap");
+    setSummaryStatus("Ward map focused. Markers open local issue details.");
+    return;
+  }
+
+  if (action === "settings" || action === "backup") {
+    focusSection("#summary");
+    setSummaryStatus("Local settings and backup actions focused.");
+    return;
+  }
+
+  if (action === "ward-desk") {
+    setFilters({ status: "All", category: "All", priority: "All" });
+    focusSection("#dashboard");
+    setSummaryStatus("Ward 27 desk context is active for this local demo.");
+    return;
+  }
+
+  if (action === "operator") {
+    setSummaryStatus("Operator mode is local-only; no staff identity or login is attached.");
+  }
+}
+
+function bulkTriageSubmitted() {
+  const submittedIssues = issues.filter((issue) => issue.status === "Submitted");
+
+  if (submittedIssues.length === 0) {
+    setSummaryStatus("No submitted reports need bulk triage.");
+    return;
+  }
+
+  const now = new Date().toISOString();
+  issues = issues.map((issue) =>
+    issue.status === "Submitted"
+      ? applyIssuePatch(issue, { status: "Triaged" }, now)
+      : issue
+  );
+  saveIssues(issues);
+  renderApp();
+  setSummaryStatus(`${submittedIssues.length} submitted report${submittedIssues.length === 1 ? "" : "s"} moved to Triaged.`);
+}
+
+function reassignOpenQueue() {
+  const openIssues = issues.filter((issue) => issue.status !== "Resolved");
+
+  if (openIssues.length === 0) {
+    setSummaryStatus("No open reports need reassignment.");
+    return;
+  }
+
+  const now = new Date().toISOString();
+  issues = issues.map((issue) =>
+    issue.status !== "Resolved" && assignmentLabel(issue) === "Unassigned"
+      ? applyIssuePatch(issue, { assignedTeam: teamForCategory(issue.category) }, now)
+      : issue
+  );
+  saveIssues(issues);
+  renderApp();
+  setSummaryStatus("Unassigned open reports routed to local teams by category.");
+}
+
+function teamForCategory(category) {
+  if (["Road damage", "Footpath obstruction", "Tree hazard", "Park maintenance"].includes(category)) {
+    return "Roads maintenance";
+  }
+
+  if (["Garbage collection", "Illegal dumping", "Public toilet", "Stray animal concern"].includes(category)) {
+    return "Sanitation crew";
+  }
+
+  if (["Drainage", "Water leakage", "Sewage overflow"].includes(category)) {
+    return "Water services";
+  }
+
+  if (["Streetlight", "Traffic signal"].includes(category)) {
+    return "Lighting team";
+  }
+
+  if (category === "Public safety" || category === "Noise complaint") {
+    return "Public safety desk";
+  }
+
+  return "Unassigned";
+}
+
+function addQueueNote() {
+  const targetIssue = issues.find((issue) => issue.status !== "Resolved") || issues[0];
+
+  if (!targetIssue) {
+    setSummaryStatus("No reports are available for a local note.", "error");
+    return;
+  }
+
+  const now = new Date().toISOString();
+  issues = issues.map((issue) =>
+    issue.id === targetIssue.id
+      ? applyIssuePatch(issue, { note: `${DEFAULT_QUEUE_NOTE}: reviewed from quick actions.` }, now)
+      : issue
+  );
+  selectedIssueId = targetIssue.id;
+  saveIssues(issues);
+  renderApp();
+  focusSection("#issueDetail");
+  setSummaryStatus(`Local note added to ${targetIssue.title}.`);
+}
+
+function viewAllIssues() {
+  setFilters({ category: "All", status: "All", priority: "All" });
+  focusSection("#issues");
+  setSummaryStatus("All local reports are visible.");
 }
 
 function printSummary() {
@@ -1558,12 +1848,14 @@ function useBrowserLocation() {
 function toggleNavigation() {
   const sidebar = document.querySelector(".sidebar");
   const menuButton = document.querySelector(".menu-button");
+  const appGrid = document.querySelector(".app-grid");
 
   if (!sidebar || !menuButton) {
     return;
   }
 
   const collapsed = sidebar.classList.toggle("is-collapsed");
+  appGrid?.classList.toggle("nav-collapsed", collapsed);
   menuButton.setAttribute("aria-expanded", String(!collapsed));
   showToast(collapsed ? "Navigation collapsed." : "Navigation expanded.");
 }
@@ -1676,6 +1968,8 @@ function focusLastDetailTrigger() {
 
 if (typeof document !== "undefined") {
   relabelQuickActions();
+  document.querySelector(".topbar").addEventListener("click", handleNavigationAction);
+  document.querySelector("#sidebarNav").addEventListener("click", handleNavigationAction);
   document.querySelector("#reportForm").addEventListener("submit", handleSubmit);
   document.querySelector("#resetDemoData").addEventListener("click", resetDemoData);
   document.querySelector(".menu-button").addEventListener("click", toggleNavigation);
@@ -1684,6 +1978,15 @@ if (typeof document !== "undefined") {
   document.querySelector("#exportSummary").addEventListener("click", exportSummary);
   document.querySelector("#exportBackup").addEventListener("click", exportBackup);
   document.querySelector("#importBackup").addEventListener("click", requestBackupImport);
+  document.querySelector("#bulkTriage").addEventListener("click", bulkTriageSubmitted);
+  document.querySelector("#reassignQueue").addEventListener("click", reassignOpenQueue);
+  document.querySelector("#addQueueNote").addEventListener("click", addQueueNote);
+  document.querySelector("#viewWardMap").addEventListener("click", () => {
+    focusSection("#wardMap");
+    setSummaryStatus("Ward map focused. Click a marker to open issue detail.");
+  });
+  document.querySelector("#viewAllIssues").addEventListener("click", viewAllIssues);
+  document.querySelector("#showAllDashboard").addEventListener("click", viewAllIssues);
   document.querySelector("#backupFileInput").addEventListener("change", handleBackupFileSelected);
   document.querySelector("#issueList").addEventListener("change", handleTriageChange);
   document.querySelector("#issueList").addEventListener("click", handleIssueClick);
@@ -1712,7 +2015,7 @@ if (typeof module !== "undefined") {
     createIssue,
     createMunicipalSummaryFrom(nextIssues) {
       const previousIssues = issues;
-      issues = nextIssues.map(normalizeIssue);
+      issues = nextIssues.map(normalizeIssue).filter(Boolean);
       const summary = createMunicipalSummary();
       issues = previousIssues;
       return summary;
@@ -1723,6 +2026,7 @@ if (typeof module !== "undefined") {
     normalizeIssue,
     parseBackupPayload,
     suggestPriority,
+    teamForCategory,
     validateBackupIssue
   };
 }

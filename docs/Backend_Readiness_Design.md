@@ -274,9 +274,9 @@ Stop before implementation if work involves:
 
 ## Recommended Follow-Up Tickets
 
-- T0021 - Backend Architecture Decision Record
-- T0022 - Citizen Identity Policy Decision
-- T0023 - Staff Role And Permission Model
+- T0022 - Backend Architecture Decision Record
+- T0023 - Citizen Identity Policy Decision
+- T0024 - Staff Role And Permission Model
 - T0024 - Database Selection And Schema Draft
 - T0025 - API Contract And Error Shape
 - T0026 - Audit Log Policy
