@@ -609,6 +609,32 @@ input[type="number"] {
   border-left: 4px solid var(--teal);
 }
 
+.submit-feedback {
+  padding: 12px 14px;
+  border: 1px solid #d8d8d8;
+  border-left: 4px solid var(--blue);
+  border-radius: 8px;
+  background: #f8fbff;
+  color: #24425c;
+  font-size: 13px;
+  font-weight: 850;
+  line-height: 1.4;
+}
+
+.submit-feedback.is-error {
+  border-color: #e5aaa2;
+  border-left-color: var(--red);
+  background: var(--red-soft);
+  color: #8c2f27;
+}
+
+.submit-feedback.is-success {
+  border-color: #99cdb8;
+  border-left-color: var(--green);
+  background: #f3fff9;
+  color: #064734;
+}
+
 .assist-panel:empty {
   display: none;
 }

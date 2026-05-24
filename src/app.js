@@ -1230,8 +1230,14 @@ function clearValidation() {
 
 function setStatus(message, type = "error") {
   const status = document.querySelector("#formStatus");
+  const submitFeedback = document.querySelector("#submitFeedback");
   status.textContent = message;
   status.classList.toggle("is-success", type === "success");
+  if (submitFeedback) {
+    submitFeedback.textContent = message;
+    submitFeedback.classList.toggle("is-success", type === "success");
+    submitFeedback.classList.toggle("is-error", type !== "success");
+  }
   showToast(message, type);
 }
 
@@ -1328,13 +1334,16 @@ function readForm() {
   };
 }
 
-function handleSubmit(event) {
-  event.preventDefault();
-
+function submitReportForm(event = null, options = {}) {
+  event?.preventDefault();
   const formData = readForm();
 
   if (!validateForm(formData)) {
-    setStatus("Please complete the highlighted fields.");
+    const message = "Please complete the highlighted fields before submitting the issue.";
+    setStatus(message);
+    if (options.alertUser) {
+      window.alert(message);
+    }
     focusFirstInvalidField();
     return;
   }
@@ -1348,7 +1357,19 @@ function handleSubmit(event) {
   renderAssistance();
   selectedIssueId = issue.id;
   renderIssueDetail();
-  setStatus("Report submitted and saved in this browser. It is now visible in Open Issues.", "success");
+  const message = "Report submitted and saved in this browser. It is now visible in Open Issues.";
+  setStatus(message, "success");
+  if (options.alertUser) {
+    window.alert(message);
+  }
+}
+
+function handleSubmit(event) {
+  submitReportForm(event);
+}
+
+function handleSubmitButtonClick(event) {
+  submitReportForm(event, { alertUser: true });
 }
 
 function resetDemoData() {
@@ -2003,6 +2024,7 @@ if (typeof document !== "undefined") {
   bind(".topbar", "click", handleNavigationAction);
   bind("#sidebarNav", "click", handleNavigationAction);
   bind("#reportForm", "submit", handleSubmit);
+  bind("#submitIssueButton", "click", handleSubmitButtonClick);
   bind("#resetDemoData", "click", resetDemoData);
   bind(".menu-button", "click", toggleNavigation);
   bind(".compact-button", "click", useBrowserLocation);

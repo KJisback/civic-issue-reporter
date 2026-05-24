@@ -1570,6 +1570,63 @@ Completion notes:
 - Restored `novalidate` on the report form so the JavaScript submit handler can show the app's validation and toast/status feedback.
 - Kept the `javascript:void(0)` action fallback so the form does not navigate to an empty query string if JavaScript is interrupted.
 
+## T0021D - Visible Submit Feedback
+
+Status: Done
+
+Priority: High
+
+Goal:
+
+Make Submit Issue feedback visible and unmistakable in the browser.
+
+Branch:
+
+`feature/t0021d-visible-submit-feedback`
+
+Dependencies:
+
+- T0021C - Submit Feedback Validation Fix
+
+Allowed areas:
+
+- `src/index.html`
+- `src/app.js`
+- `src/styles.css`
+- ticket docs
+
+Do not touch:
+
+- Do not add dependencies, backend, auth, database, deployment, secrets, Google Maps, or external services.
+
+Acceptance criteria:
+
+- Clicking Submit Issue blank shows persistent inline feedback and a browser alert.
+- Clicking Submit Issue with valid data shows persistent inline success feedback and a browser alert.
+- The form still does not navigate to a query-string URL.
+- Existing app validation, toast, issue creation, and local storage behavior continue to work.
+
+Automated checks:
+
+- `node --check src/app.js`
+- `node tests/app.test.js`
+- `git diff --check`
+
+Manual verification:
+
+1. Open `src/index.html`.
+2. Click Submit Issue blank.
+3. Confirm a browser alert and inline feedback appear.
+4. Fill a valid issue and click Submit Issue.
+5. Confirm a browser alert, inline success feedback, and a new Open Issues row.
+
+Completion notes:
+
+- Added a persistent inline submit feedback panel inside the report form.
+- Added a direct click handler for the Submit Issue button.
+- Blank and valid submit clicks now trigger browser alerts in addition to toast/status feedback.
+- Kept the existing submit handler and non-navigating form fallback.
+
 ## T0022 - Backend Architecture Decision Record
 
 Status: Ready for Agent
