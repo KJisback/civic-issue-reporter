@@ -449,6 +449,74 @@ main {
   font-size: 12px;
 }
 
+.demo-mode {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 0.6fr);
+  gap: 16px;
+  align-items: start;
+  padding: clamp(18px, 3vw, 24px);
+  border: 1px solid rgba(199, 106, 0, 0.24);
+  background:
+    linear-gradient(135deg, rgba(255, 240, 216, 0.78), rgba(255, 255, 255, 0.96)),
+    #ffffff;
+  box-shadow: 0 12px 28px rgba(87, 47, 0, 0.08);
+}
+
+.demo-mode h2,
+.demo-mode p {
+  margin: 0;
+}
+
+.demo-mode h2 {
+  font-size: clamp(24px, 3vw, 34px);
+  line-height: 1.08;
+}
+
+.demo-mode p {
+  max-width: 760px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.demo-actions {
+  display: grid;
+  gap: 8px;
+}
+
+.demo-actions button {
+  max-width: none;
+}
+
+.pitch-snapshot {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.pitch-snapshot div {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+}
+
+.pitch-snapshot span {
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.pitch-snapshot strong {
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
 .panel {
   padding: clamp(18px, 3vw, 28px);
   border: 1px solid var(--line);
@@ -1343,6 +1411,7 @@ button:hover {
   .hero-shell,
   .identity-strip,
   .vault-modules,
+  .demo-mode,
   .dashboard-grid,
   .issue-card,
   .detail-grid {
@@ -1378,6 +1447,7 @@ button:hover {
   .report-form,
   .metrics,
   .module-stat-grid,
+  .pitch-snapshot,
   .analytics-board,
   .filter-bar,
   fieldset,

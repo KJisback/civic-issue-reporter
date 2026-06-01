@@ -17,7 +17,7 @@ Primary inferred MVP:
 
 Current next ticket:
 
-T0023 - Pitch and Hackathon Demo Mode.
+T0024 - Search and Retrieve Report Flow.
 
 Completed tickets:
 
@@ -44,6 +44,7 @@ Completed tickets:
 - T0020 - Backend Readiness Design
 - T0021 - Saffron CivicVault Shell
 - T0022 - CivicVault Document Modules Pass
+- T0023 - Pitch and Hackathon Demo Mode
 
 Current implementation state:
 
@@ -63,6 +64,7 @@ Current implementation state:
 - Backend readiness design documented without implementing backend, auth, database, deployment, maps, notifications, or uploads.
 - Saffron CivicVault shell applied with document-vault navigation, local workspace identity, and no DigiLocker branding or impersonation.
 - Local-only CivicVault modules show issued report stats, uploaded evidence placeholders, municipal services workload, latest report retrieval, and recent activity from issue logs.
+- Pitch demo mode provides local Ward operations, Safety sprint, and Sanitation drive scenarios plus pitch snapshot copy derived from local metrics.
 
 Saved UI/UX direction:
 
@@ -78,8 +80,8 @@ Next sequence after T0020:
 
 - T0021 - Saffron CivicVault Shell: Done.
 - T0022 - CivicVault Document Modules Pass: Done.
-- T0023 - Pitch and Hackathon Demo Mode: guided sample scenarios, shareable demo states, and pitch-deck screenshots without external services.
-- T0024 - Search and Retrieve Report Flow: local report lookup by ID, category, location, and status.
+- T0023 - Pitch and Hackathon Demo Mode: Done.
+- T0024 - Search and Retrieve Report Flow: local report lookup by ID, title, category, location, status, priority, and assigned team.
 - T0025 - Backend Pilot Plan or Implementation: only after approval for auth, database, hosting, maps, and uploads.
 
 Human-gated decisions:

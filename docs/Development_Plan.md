@@ -200,7 +200,7 @@ Done. Added local-only modules for issued reports, evidence placeholders, munici
 
 ### T0023 - Pitch and Hackathon Demo Mode
 
-Status: Planned
+Status: Done
 
 Purpose:
 
@@ -208,7 +208,7 @@ Make the product easier to demo in hackathons and pitch decks.
 
 Expected result:
 
-Add a resettable demo scenario set, clearer high-impact metrics, exportable demo summary language, and screenshot-ready states that explain the product without requiring backend access.
+Done. Added resettable local demo scenarios, high-impact pitch snapshot language, and screenshot-ready states that explain the product without requiring backend access.
 
 ### T0024 - Search and Retrieve Report Flow
 
@@ -235,4 +235,4 @@ Add local search by report ID, title, category, location, status, priority, and 
 
 ## Recommended Immediate Action
 
-Run manual browser verification for the saffron CivicVault shell and T0022 modules, then continue with T0023 pitch and hackathon demo mode. Any production phase still requires explicit approval for backend, auth, database, deployment, external maps, and real uploads.
+Run manual browser verification for the saffron CivicVault shell, T0022 modules, and T0023 demo mode, then continue with T0024 search and retrieve flow. Any production phase still requires explicit approval for backend, auth, database, deployment, external maps, and real uploads.

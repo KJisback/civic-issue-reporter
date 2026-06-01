@@ -122,6 +122,247 @@ const sampleIssues = [
   }
 ];
 
+const demoScenarios = {
+  ward: {
+    label: "Ward operations",
+    focus: "Balanced civic operations view for municipal pitch demos.",
+    issues: [
+      {
+        id: "demo-ward-light-001",
+        title: "Streetlight outage beside metro exit",
+        category: "Streetlight",
+        location: "Ward 12, Metro Exit B",
+        ward: "Ward 12",
+        landmark: "Metro Exit B",
+        status: "Triaged",
+        priority: "High",
+        description: "Commuters report unsafe lighting after evening service near the metro exit.",
+        createdAt: "2026-05-29T08:00:00.000Z",
+        updatedAt: "2026-05-29T10:10:00.000Z",
+        coordinates: { latitude: 12.971599, longitude: 77.594566 },
+        assignedTeam: "Lighting Crew",
+        priorityReason: "High because the report mentions unsafe commuter access.",
+        duplicateHints: [],
+        activityLog: [
+          {
+            id: "demo-ward-light-001-a1",
+            label: "Reported",
+            detail: "Citizen submitted the lighting report.",
+            createdAt: "2026-05-29T08:00:00.000Z"
+          },
+          {
+            id: "demo-ward-light-001-a2",
+            label: "Triaged",
+            detail: "Lighting crew assigned from the civic vault.",
+            createdAt: "2026-05-29T10:10:00.000Z"
+          }
+        ]
+      },
+      {
+        id: "demo-ward-road-002",
+        title: "Pothole blocking school pickup lane",
+        category: "Road damage",
+        location: "Ward 12, Lake Road School",
+        ward: "Ward 12",
+        landmark: "Lake Road School gate",
+        status: "In progress",
+        priority: "High",
+        description: "A deep pothole slows buses and creates risk for students during pickup.",
+        createdAt: "2026-05-30T09:30:00.000Z",
+        updatedAt: "2026-05-30T12:00:00.000Z",
+        coordinates: { latitude: 12.975221, longitude: 77.603287 },
+        assignedTeam: "Roads Maintenance",
+        priorityReason: "High because the report mentions school access risk.",
+        duplicateHints: [],
+        activityLog: [
+          {
+            id: "demo-ward-road-002-a1",
+            label: "Reported",
+            detail: "Citizen submitted the road damage report.",
+            createdAt: "2026-05-30T09:30:00.000Z"
+          },
+          {
+            id: "demo-ward-road-002-a2",
+            label: "In progress",
+            detail: "Roads team dispatched for local inspection.",
+            createdAt: "2026-05-30T12:00:00.000Z"
+          }
+        ]
+      },
+      {
+        id: "demo-ward-water-003",
+        title: "Water leakage near clinic lane",
+        category: "Water leakage",
+        location: "Ward 12, Clinic Lane",
+        ward: "Ward 12",
+        landmark: "Primary clinic",
+        status: "Resolved",
+        priority: "Medium",
+        description: "Water seepage reported beside the clinic lane and cleared by Water Works.",
+        createdAt: "2026-05-27T07:10:00.000Z",
+        updatedAt: "2026-05-28T16:45:00.000Z",
+        coordinates: null,
+        assignedTeam: "Water Works",
+        priorityReason: "Medium because water leakage can affect public health or access.",
+        duplicateHints: [],
+        activityLog: [
+          {
+            id: "demo-ward-water-003-a1",
+            label: "Reported",
+            detail: "Citizen submitted the water leakage report.",
+            createdAt: "2026-05-27T07:10:00.000Z"
+          },
+          {
+            id: "demo-ward-water-003-a2",
+            label: "Resolved",
+            detail: "Water Works marked the local record resolved.",
+            createdAt: "2026-05-28T16:45:00.000Z"
+          }
+        ]
+      }
+    ]
+  },
+  safety: {
+    label: "Safety sprint",
+    focus: "High-priority safety queue for rapid-response hackathon demos.",
+    issues: [
+      {
+        id: "demo-safety-drain-001",
+        title: "Open drain near evening market",
+        category: "Drainage",
+        location: "Central Market Road",
+        ward: "Central Market",
+        landmark: "Evening market entrance",
+        status: "Submitted",
+        priority: "High",
+        description: "Open drain is unsafe for pedestrians and blocks a busy market path.",
+        createdAt: "2026-06-01T06:30:00.000Z",
+        updatedAt: "2026-06-01T06:30:00.000Z",
+        coordinates: { latitude: 12.9721, longitude: 77.5992 },
+        assignedTeam: "Drainage Crew",
+        priorityReason: "High because the report mentions unsafe pedestrian access.",
+        duplicateHints: [],
+        activityLog: [
+          {
+            id: "demo-safety-drain-001-a1",
+            label: "Reported",
+            detail: "Citizen submitted the safety report.",
+            createdAt: "2026-06-01T06:30:00.000Z"
+          }
+        ]
+      },
+      {
+        id: "demo-safety-road-002",
+        title: "Loose divider after minor accident",
+        category: "Public safety",
+        location: "Ring Road signal",
+        ward: "Ring Road",
+        landmark: "Northbound signal",
+        status: "Triaged",
+        priority: "High",
+        description: "Loose road divider remains after an accident and narrows the turn lane.",
+        createdAt: "2026-06-01T07:40:00.000Z",
+        updatedAt: "2026-06-01T08:05:00.000Z",
+        coordinates: null,
+        assignedTeam: "Public Safety",
+        priorityReason: "High because the report mentions accident risk.",
+        duplicateHints: [],
+        activityLog: [
+          {
+            id: "demo-safety-road-002-a1",
+            label: "Reported",
+            detail: "Citizen submitted the public safety report.",
+            createdAt: "2026-06-01T07:40:00.000Z"
+          },
+          {
+            id: "demo-safety-road-002-a2",
+            label: "Triaged",
+            detail: "Public Safety team assigned the report.",
+            createdAt: "2026-06-01T08:05:00.000Z"
+          }
+        ]
+      }
+    ]
+  },
+  sanitation: {
+    label: "Sanitation drive",
+    focus: "Clean-city campaign scenario with duplicate review and service load.",
+    issues: [
+      {
+        id: "demo-sanitation-market-001",
+        title: "Garbage overflow near flower market",
+        category: "Garbage collection",
+        location: "Flower Market Lane",
+        ward: "Market Ward",
+        landmark: "Flower market south gate",
+        status: "In progress",
+        priority: "Medium",
+        description: "Bins have overflowed for two days near a busy pedestrian path.",
+        createdAt: "2026-05-31T07:10:00.000Z",
+        updatedAt: "2026-06-01T09:00:00.000Z",
+        coordinates: { latitude: 12.9684, longitude: 77.6011 },
+        assignedTeam: "Sanitation",
+        priorityReason: "Medium because garbage collection issues can affect public health or access.",
+        duplicateHints: [
+          {
+            id: "demo-sanitation-market-002",
+            title: "Waste beside market gate",
+            location: "Flower Market Lane",
+            score: 6,
+            reviewStatus: "Needs review",
+            reviewedAt: null
+          }
+        ],
+        activityLog: [
+          {
+            id: "demo-sanitation-market-001-a1",
+            label: "Reported",
+            detail: "Citizen submitted the sanitation report.",
+            createdAt: "2026-05-31T07:10:00.000Z"
+          },
+          {
+            id: "demo-sanitation-market-001-a2",
+            label: "In progress",
+            detail: "Sanitation team assigned for pickup.",
+            createdAt: "2026-06-01T09:00:00.000Z"
+          }
+        ]
+      },
+      {
+        id: "demo-sanitation-park-002",
+        title: "Overflowing bins at children's park",
+        category: "Garbage collection",
+        location: "Green Park",
+        ward: "Park Ward",
+        landmark: "Children's play area",
+        status: "Triaged",
+        priority: "Medium",
+        description: "Park bins are full after the weekend and need collection before evening use.",
+        createdAt: "2026-06-01T05:30:00.000Z",
+        updatedAt: "2026-06-01T08:30:00.000Z",
+        coordinates: null,
+        assignedTeam: "Sanitation",
+        priorityReason: "Medium because garbage collection issues can affect public health or access.",
+        duplicateHints: [],
+        activityLog: [
+          {
+            id: "demo-sanitation-park-002-a1",
+            label: "Reported",
+            detail: "Citizen submitted the park sanitation report.",
+            createdAt: "2026-06-01T05:30:00.000Z"
+          },
+          {
+            id: "demo-sanitation-park-002-a2",
+            label: "Triaged",
+            detail: "Sanitation team acknowledged the local report.",
+            createdAt: "2026-06-01T08:30:00.000Z"
+          }
+        ]
+      }
+    ]
+  }
+};
+
 let issues = typeof localStorage === "undefined" ? sampleIssues.map(normalizeIssue) : loadIssues();
 let filters = {
   category: "All",
@@ -289,6 +530,19 @@ function normalizeIssue(issue) {
     activityLog: normalizeActivityLog(issue.activityLog, createdAt),
     duplicateHints
   };
+}
+
+function createDemoScenarioIssues(scenarioKey) {
+  const scenario = demoScenarios[scenarioKey] || demoScenarios.ward;
+
+  return scenario.issues.map((issue) =>
+    normalizeIssue({
+      photo: null,
+      reporterContactOptional: null,
+      isSample: false,
+      ...issue
+    })
+  );
 }
 
 function normalizeActivityLog(activityLog, createdAt) {
@@ -905,6 +1159,25 @@ function latestActivities(limit = 5) {
     .slice(0, limit);
 }
 
+function createPitchSnapshot() {
+  const summary = createMunicipalSummary();
+  const resolutionRate = percentOf(
+    summary.statusCounts.find((item) => item.label === "Resolved")?.count || 0,
+    summary.totals.allIssues
+  );
+  const mapReadyRate = percentOf(summary.totals.coordinateReady, summary.totals.allIssues);
+  const topTeam = summary.teamCounts
+    .filter((item) => item.count > 0)
+    .sort((left, right) => right.count - left.count)[0];
+
+  return {
+    headline: `${summary.totals.openIssues} open civic records, ${summary.totals.highPriority} high-priority.`,
+    proof: `${mapReadyRate}% map-ready, ${resolutionRate}% resolved, ${summary.totals.duplicateHintsNeedingReview} duplicate hints awaiting review.`,
+    wedge: `Built for ward teams that need a trusted civic report vault before backend rollout.`,
+    buyer: topTeam ? `${topTeam.label} has the largest current workload.` : "No active team workload yet."
+  };
+}
+
 function moduleStatMarkup(value, label, detail) {
   return `
     <div class="module-stat">
@@ -1004,6 +1277,29 @@ function renderVaultModules() {
   `;
 }
 
+function renderPitchSnapshot() {
+  const snapshot = createPitchSnapshot();
+
+  document.querySelector("#pitchSnapshot").innerHTML = `
+    <div>
+      <span>Pitch line</span>
+      <strong>${escapeHtml(snapshot.headline)}</strong>
+    </div>
+    <div>
+      <span>Demo proof</span>
+      <strong>${escapeHtml(snapshot.proof)}</strong>
+    </div>
+    <div>
+      <span>Market wedge</span>
+      <strong>${escapeHtml(snapshot.wedge)}</strong>
+    </div>
+    <div>
+      <span>Buyer signal</span>
+      <strong>${escapeHtml(snapshot.buyer)}</strong>
+    </div>
+  `;
+}
+
 function renderWorkflowBoard() {
   const board = document.querySelector("#workflowBoard");
 
@@ -1075,6 +1371,7 @@ function renderFilters() {
 function renderApp() {
   renderFilters();
   renderVaultModules();
+  renderPitchSnapshot();
   renderIssues();
   renderMetrics();
   renderLocationPreview();
@@ -1204,6 +1501,24 @@ function resetDemoData() {
   renderAssistance();
   setSummaryStatus("");
   setStatus("Demo data restored.", "success");
+}
+
+function loadDemoScenario(scenarioKey) {
+  const scenario = demoScenarios[scenarioKey] || demoScenarios.ward;
+
+  issues = createDemoScenarioIssues(scenarioKey);
+  selectedIssueId = null;
+  filters = {
+    category: "All",
+    status: "All",
+    priority: "All"
+  };
+  saveIssues(issues);
+  renderApp();
+  clearValidation();
+  renderAssistance();
+  setSummaryStatus("");
+  setStatus(`${scenario.label} scenario loaded for local pitch demo.`, "success");
 }
 
 function activityForPatch(patch) {
@@ -1358,6 +1673,16 @@ function handleDetailClick(event) {
   }
 }
 
+function handleDemoScenarioClick(event) {
+  const control = event.target.closest('[data-action="demo-scenario"]');
+
+  if (!control) {
+    return;
+  }
+
+  loadDemoScenario(control.dataset.scenario);
+}
+
 function handleFilterChange(event) {
   if (event.target.id === "categoryFilter") {
     filters.category = event.target.value;
@@ -1493,6 +1818,7 @@ if (typeof document !== "undefined") {
   document.querySelector("#statusFilter").addEventListener("change", handleFilterChange);
   document.querySelector("#priorityFilter").addEventListener("change", handleFilterChange);
   document.querySelector("#reportForm").addEventListener("input", renderAssistance);
+  document.querySelector("#demoScenarioButtons").addEventListener("click", handleDemoScenarioClick);
 
   renderApp();
 }
@@ -1504,6 +1830,9 @@ if (typeof module !== "undefined") {
     STATUSES,
     TEAMS,
     createMunicipalSummary,
+    createDemoScenarioIssues,
+    createPitchSnapshot,
+    demoScenarios,
     duplicateScore,
     findPotentialDuplicates,
     inferPriority,

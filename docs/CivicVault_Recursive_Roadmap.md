@@ -35,7 +35,9 @@ Added local-only modules for issued reports, uploaded evidence placeholders, mun
 
 ### T0023 - Pitch and Hackathon Demo Mode
 
-Add demo scenarios, demo metrics, screenshot-ready copy, and shareable local summaries that make the product usable in hackathons and pitch decks.
+Status: Done
+
+Added demo scenarios, demo metrics, screenshot-ready copy, and shareable local summaries that make the product usable in hackathons and pitch decks.
 
 ### T0024 - Search and Retrieve Report Flow
 
