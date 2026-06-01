@@ -242,3 +242,16 @@ Use this before larger design, data, or release changes.
 8. Confirm no real file upload, official document issuance, identity collection, or external service is introduced.
 9. Confirm mobile layout stacks without overlap.
 10. Run `npm test` and `npm run check`.
+
+## T0023 - Pitch and Hackathon Demo Mode
+
+1. Open `src/index.html`.
+2. Confirm Pitch demo mode appears below the CivicVault document modules.
+3. Click `Ward operations` and confirm local reports, vault modules, dashboard, and pitch snapshot update.
+4. Click `Safety sprint` and confirm high-priority safety records load.
+5. Click `Sanitation drive` and confirm sanitation service load and duplicate review data load.
+6. Confirm each scenario replaces only browser-stored local reports and does not make network requests.
+7. Confirm pitch snapshot includes Pitch line, Demo proof, Market wedge, and Buyer signal.
+8. Confirm reset demo data still restores the baseline samples.
+9. Confirm mobile layout stacks without overlap.
+10. Run `npm test` and `npm run check`.

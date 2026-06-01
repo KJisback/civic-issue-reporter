@@ -1,7 +1,10 @@
 const assert = require("node:assert/strict");
 
 const {
+  createDemoScenarioIssues,
   createMunicipalSummary,
+  createPitchSnapshot,
+  demoScenarios,
   duplicateScore,
   normalizeIssue,
   suggestPriority,
@@ -62,5 +65,16 @@ assert.throws(() => validateImportedIssues({ issues: [] }), /at least one issue/
 const summary = createMunicipalSummary();
 assert.equal(summary.totals.allIssues > 0, true);
 assert.equal(Array.isArray(summary.teamCounts), true);
+
+const wardScenario = createDemoScenarioIssues("ward");
+assert.equal(wardScenario.length, demoScenarios.ward.issues.length);
+assert.equal(wardScenario.every((issue) => issue.activityLog.length > 0), true);
+
+const fallbackScenario = createDemoScenarioIssues("missing");
+assert.equal(fallbackScenario.length, demoScenarios.ward.issues.length);
+
+const pitchSnapshot = createPitchSnapshot();
+assert.match(pitchSnapshot.headline, /open civic records/);
+assert.match(pitchSnapshot.wedge, /ward teams/);
 
 console.log("local logic checks passed");

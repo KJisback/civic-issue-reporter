@@ -851,3 +851,29 @@ Automated checks:
 
 - Pass, `npm test`.
 - Pass, `npm run check`.
+
+## T0023 - Pitch and Hackathon Demo Mode
+
+Status: Done
+
+Priority: High
+
+Goal:
+
+Make CivicVault easier to present in hackathons, demos, and pitch decks without adding backend services.
+
+Requirements:
+
+- Add resettable local demo scenarios for different civic operating contexts.
+- Add pitch-ready snapshot lines derived from local issue metrics.
+- Keep scenario loading local-only and reversible.
+- Preserve existing reporting, triage, vault module, backup, restore, print, and export workflows.
+
+Result:
+
+Added Pitch demo mode with Ward operations, Safety sprint, and Sanitation drive scenarios. The app now generates deck-ready pitch proof, market wedge, and buyer-signal lines from current local report data.
+
+Automated checks:
+
+- Pass, `npm test`.
+- Pass, `npm run check`.
