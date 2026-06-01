@@ -92,24 +92,6 @@ Before any production reporting workflow, decide export retention, official reco
 
 Status: Open
 
-### F0009 - Run Dedicated Accessibility Pass
-
-Source ticket: T0011
-
-Severity: Medium
-
-Type: accessibility / quality
-
-Description:
-
-The MVP now has forms, filters, detail panels, duplicate review controls, and export/print actions, but keyboard and accessibility behavior has not had a dedicated pass.
-
-Recommended action:
-
-Handle in T0012 before adding heavier workflows.
-
-Status: Open
-
 ### F0010 - Repair Git Repository Initialization
 
 Source ticket: T0011A
@@ -129,6 +111,24 @@ Use `docs/Git_Setup_Recovery.md` for host-specific GitHub CLI and direct Git HTT
 Status: Closed after recovery
 
 ## Closed Followups
+
+### F0009 - Run Dedicated Accessibility Pass
+
+Source ticket: T0011
+
+Severity: Medium
+
+Type: accessibility / quality
+
+Description:
+
+The MVP now has forms, filters, detail panels, duplicate review controls, and export/print actions. T0012 added visible focus coverage, skip navigation, field error associations, live region labels, invalid-field focus, detail focus management, and mobile text containment safeguards.
+
+Recommended action:
+
+Continue manual keyboard and screen-reader spot checks during future UI tickets, especially after T0013 changes the visual rhythm.
+
+Status: Closed in T0012
 
 ### F0007 - Add Issue Detail Timeline
 

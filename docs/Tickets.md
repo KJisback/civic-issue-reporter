@@ -567,7 +567,7 @@ Human review triggers:
 
 ## T0012 - Accessibility and Keyboard Verification Pass
 
-Status: Ready for Agent
+Status: Done
 
 Priority: High
 
@@ -610,14 +610,16 @@ Acceptance criteria:
 
 - All interactive controls are reachable by keyboard in a sensible order.
 - Focus is visible on links, buttons, form fields, and select controls.
-- Dynamic status, validation, summary, and detail updates use understandable accessible labels or live regions where appropriate.
+- Dynamic status, validation, summary, queue, and detail updates use understandable accessible labels or live regions where appropriate.
+- Invalid form submissions focus the first invalid field and expose field-level error messages through `aria-describedby`.
+- Issue detail open/close actions manage keyboard focus.
 - Mobile-width layout avoids text overlap or clipped controls.
 - Existing reporting, triage, duplicate review, detail, export, and print behaviors continue to work.
 - No dependency, backend, auth, deployment, or external service is added.
 
 Automated checks:
 
-- `node --check src/app.js`
+- Pass, `node --check src/app.js`.
 
 Manual verification:
 
@@ -632,7 +634,7 @@ Manual verification:
 
 ## T0013 - UI Snapshot Fidelity Pass
 
-Status: Planned
+Status: Ready for Agent
 
 Priority: High
 

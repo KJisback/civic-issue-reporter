@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
+    <a class="skip-link" href="#report">Skip to report form</a>
     <header class="topbar">
       <div>
         <p class="eyebrow">Civic Issue Reporter</p>
@@ -59,8 +60,8 @@
             <form class="report-form" id="reportForm" novalidate>
               <label>
                 Issue title
-                <input id="issueTitle" name="title" type="text" placeholder="Streetlight not working near bus stop" required>
-                <span class="field-error" id="titleError"></span>
+                <input id="issueTitle" name="title" type="text" placeholder="Streetlight not working near bus stop" required aria-describedby="titleError">
+                <span class="field-error" id="titleError" role="alert"></span>
               </label>
 
               <label>
@@ -77,8 +78,8 @@
 
               <label>
                 Location summary
-                <input id="issueLocation" name="location" type="text" placeholder="Ward 12, MG Road bus stop" required>
-                <span class="field-error" id="locationError"></span>
+                <input id="issueLocation" name="location" type="text" placeholder="Ward 12, MG Road bus stop" required aria-describedby="locationError">
+                <span class="field-error" id="locationError" role="alert"></span>
               </label>
 
               <label>
@@ -93,23 +94,23 @@
 
               <label class="wide">
                 Description
-                <textarea id="issueDescription" name="description" placeholder="Describe what happened, where it is, and why it needs attention." required></textarea>
-                <span class="field-error" id="descriptionError"></span>
+                <textarea id="issueDescription" name="description" placeholder="Describe what happened, where it is, and why it needs attention." required aria-describedby="descriptionError"></textarea>
+                <span class="field-error" id="descriptionError" role="alert"></span>
               </label>
 
               <fieldset class="coordinate-fields wide">
                 <legend>Optional map-ready coordinates</legend>
                 <label>
                   Latitude
-                  <input id="issueLatitude" name="latitude" type="number" min="-90" max="90" step="0.000001" placeholder="12.971599">
-                  <span class="field-error" id="latitudeError"></span>
+                  <input id="issueLatitude" name="latitude" type="number" min="-90" max="90" step="0.000001" placeholder="12.971599" aria-describedby="coordinateHelp latitudeError">
+                  <span class="field-error" id="latitudeError" role="alert"></span>
                 </label>
                 <label>
                   Longitude
-                  <input id="issueLongitude" name="longitude" type="number" min="-180" max="180" step="0.000001" placeholder="77.594566">
-                  <span class="field-error" id="longitudeError"></span>
+                  <input id="issueLongitude" name="longitude" type="number" min="-180" max="180" step="0.000001" placeholder="77.594566" aria-describedby="coordinateHelp longitudeError">
+                  <span class="field-error" id="longitudeError" role="alert"></span>
                 </label>
-                <p>Coordinates are optional and manually entered for now. No map service or device location permission is used.</p>
+                <p id="coordinateHelp">Coordinates are optional and manually entered for now. No map service or device location permission is used.</p>
               </fieldset>
 
               <div class="form-note wide">
@@ -134,7 +135,7 @@
               </div>
               <span class="soft-chip">Local data</span>
             </div>
-            <div class="metrics" id="metrics"></div>
+            <div class="metrics" id="metrics" aria-label="Current issue metrics"></div>
             <div class="dashboard-grid">
               <div class="location-preview" id="locationPreview" aria-label="Location readiness preview"></div>
               <div class="workflow-board" id="workflowBoard" aria-label="Status workflow summary"></div>
@@ -163,7 +164,7 @@
                 <p class="eyebrow">Public queue</p>
                 <h2 id="issues-title">Open reports</h2>
               </div>
-              <span class="queue-count" id="queueCount"></span>
+              <span class="queue-count" id="queueCount" role="status" aria-live="polite"></span>
             </div>
             <div class="filter-bar" aria-label="Issue filters">
               <label>
@@ -185,10 +186,10 @@
                 </select>
               </label>
             </div>
-            <div class="issue-list" id="issueList"></div>
+            <div class="issue-list" id="issueList" aria-live="polite"></div>
           </section>
 
-          <section id="issueDetail" class="panel detail-panel" aria-live="polite" hidden></section>
+          <section id="issueDetail" class="panel detail-panel" aria-live="polite" aria-labelledby="issueDetailTitle" tabindex="-1" hidden></section>
         </div>
       </div>
     </main>

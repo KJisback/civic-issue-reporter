@@ -2,7 +2,7 @@
 
 ## Current Branch
 
-No git branch at workspace root.
+`main`
 
 ## Completed Tickets
 
@@ -18,17 +18,18 @@ No git branch at workspace root.
 - T0010 - Export and Print Summary
 - T0011 - Backlog Refresh and Next Handoff
 - T0011A - Git Repository Initialization and Manual UI Checklist
+- T0012 - Accessibility and Keyboard Verification Pass
 
 ## Current App Status
 
-The project has a no-dependency static app with a refined minimal civic UI, citizen report form, local issue records, browser persistence through `localStorage`, sample issue cards, admin-style metrics, category/status/priority filters, local status and priority controls, map-ready location fields, a non-interactive location readiness preview, explainable local duplicate hints, local duplicate review actions, local priority assistance, a compact workflow summary, a focused issue detail panel with status timeline, and a municipal review summary with print and JSON export actions.
+The project has a no-dependency static app with a refined minimal civic UI, citizen report form, local issue records, browser persistence through `localStorage`, sample issue cards, admin-style metrics, category/status/priority filters, local status and priority controls, map-ready location fields, a non-interactive location readiness preview, explainable local duplicate hints, local duplicate review actions, local priority assistance, a compact workflow summary, a focused issue detail panel with status timeline, a municipal review summary with print and JSON export actions, and T0012 accessibility hardening for focus visibility, skip navigation, validation association, detail focus management, live status regions, and mobile text containment.
 
 A generated UI/UX concept sheet has been saved as the design reference for future UI implementation.
 
 ## Folder Structure Summary
 
 - `src/` contains the static app shell.
-- `src/app.js` defines the local issue object shape, form submission behavior, validation, sample data, map-ready location metadata, filters, triage controls, local duplicate/priority assistance, duplicate review actions, metrics, workflow summary, issue detail panel, export/print summary, and browser storage.
+- `src/app.js` defines the local issue object shape, form submission behavior, validation, invalid-field focus behavior, sample data, map-ready location metadata, filters, triage controls, local duplicate/priority assistance, duplicate review actions, metrics, workflow summary, issue detail focus behavior, export/print summary, and browser storage.
 - `docs/` contains planning, ticket, verification, state, risk, review, manual UI checklist, and development plan documents.
 - `docs/design-references/` contains saved visual references for UI implementation.
 - `README.md`, `AGENTS.md`, and `WORKFLOW.md` define setup and project rules.
@@ -49,7 +50,7 @@ None.
 - Tests: Not run, no test system.
 - Lint: Not run, no lint system.
 - Typecheck: Not run, no type system.
-- Syntax: Pass, `node --check src/app.js`.
+- Syntax: Pass, `node --check src/app.js` on 2026-06-01.
 - Git: Local repository initialized on `main` with initial commit `ed25f63`.
 - GitHub: Remote `origin` points to `https://github.com/KJisback/civic-issue-reporter.git`; GitHub API confirms `main` at commit `ed25f63a4bfa564b52d9664f3cdf4ad79cb6d561`.
 
@@ -61,7 +62,7 @@ None.
 - Visual verification should still be done manually in a browser at desktop and mobile widths.
 - Duplicate review actions are local-only and do not merge records or record real staff identity.
 - JSON export is a browser-generated local file and is not a secure official record.
-- Keyboard and accessibility behavior has not yet had a dedicated pass across all controls.
+- Browser-based keyboard and screen-reader behavior should continue to be spot-checked manually after future UI changes.
 
 ## Current Risks
 
@@ -73,8 +74,8 @@ None.
 
 ## Next Recommended Ticket
 
-T0012 - Accessibility and Keyboard Verification Pass
+T0013 - UI Snapshot Fidelity Pass
 
 ## Last Updated
 
-2026-05-21
+2026-06-01

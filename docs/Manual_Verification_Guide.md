@@ -176,8 +176,12 @@ Use this before larger design, data, or release changes.
 1. Open `src/index.html`.
 2. Use only keyboard navigation from the top of the page through report form, dashboard, summary, issue filters, issue cards, detail panel, duplicate review controls, and export/print actions.
 3. Confirm focus is visible at every step.
-4. Submit invalid form data and confirm validation messages are readable and associated with the affected fields.
-5. Open and close an issue detail panel by keyboard.
-6. At a mobile-width viewport, confirm controls and text do not overlap or clip.
-7. Run the T0010 export/print smoke steps.
-8. Check browser console for errors.
+4. Use the skip link and confirm it moves focus to the report form area.
+5. Submit invalid form data and confirm focus moves to the first invalid field.
+6. Confirm validation messages are readable and associated with the affected fields.
+7. Open and close an issue detail panel by keyboard.
+8. Confirm detail focus moves into the panel on open and returns to the originating `View details` button on close.
+9. Change filters and triage controls, then confirm queue/status updates remain understandable.
+10. At a mobile-width viewport, confirm controls and text do not overlap or clip.
+11. Run the T0010 export/print smoke steps.
+12. Check browser console for errors.

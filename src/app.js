@@ -76,6 +76,7 @@ let filters = {
   priority: "All"
 };
 let selectedIssueId = null;
+let lastDetailTriggerId = null;
 
 function createIssue({ title, category, location, ward, landmark, description, coordinates }) {
   const now = new Date().toISOString();
@@ -471,7 +472,7 @@ function renderIssues() {
             <h3>${escapeHtml(issue.title)}</h3>
             <p>${escapeHtml(issue.description)}</p>
             <time datetime="${issue.createdAt}">Reported ${formatDate(issue.createdAt)}</time>
-            <button class="secondary-button details-button" type="button" data-action="view-detail" data-issue-id="${escapeHtml(issue.id)}">View details</button>
+            <button class="secondary-button details-button" type="button" data-action="view-detail" data-issue-id="${escapeHtml(issue.id)}" aria-controls="issueDetail" aria-expanded="${selectedIssueId === issue.id ? "true" : "false"}">View details</button>
           </div>
           <div class="issue-side">
             <div class="location-block">
@@ -569,14 +570,14 @@ function renderIssueDetail() {
     <div class="detail-header">
       <div>
         <p class="eyebrow">Issue detail</p>
-        <h2>${escapeHtml(issue.title)}</h2>
+        <h2 id="issueDetailTitle">${escapeHtml(issue.title)}</h2>
         <div class="card-meta">
           <span class="tag">${escapeHtml(issue.category)}</span>
           <span class="tag ${priorityClass(issue.priority)}">${escapeHtml(issue.priority)}</span>
           <span class="tag status-${statusClass(issue.status)}">${escapeHtml(issue.status)}</span>
         </div>
       </div>
-      <button class="secondary-button" type="button" data-action="close-detail">Close</button>
+      <button class="secondary-button" type="button" data-action="close-detail" aria-label="Close issue detail">Close</button>
     </div>
 
     <div class="detail-grid">
@@ -791,6 +792,14 @@ function validateForm(formData) {
   return Object.keys(errors).length === 0;
 }
 
+function focusFirstInvalidField() {
+  const invalidField = document.querySelector("[aria-invalid='true']");
+
+  if (invalidField) {
+    invalidField.focus();
+  }
+}
+
 function readForm() {
   const latitude = document.querySelector("#issueLatitude").value.trim();
   const longitude = document.querySelector("#issueLongitude").value.trim();
@@ -815,6 +824,7 @@ function handleSubmit(event) {
 
   if (!validateForm(formData)) {
     setStatus("Please complete the highlighted fields.");
+    focusFirstInvalidField();
     return;
   }
 
@@ -915,8 +925,11 @@ function handleIssueClick(event) {
 
   if (control.dataset.action === "view-detail") {
     selectedIssueId = control.dataset.issueId;
+    lastDetailTriggerId = selectedIssueId;
     renderIssueDetail();
-    document.querySelector("#issueDetail").scrollIntoView({ behavior: "smooth", block: "start" });
+    const detailPanel = document.querySelector("#issueDetail");
+    detailPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+    detailPanel.focus({ preventScroll: true });
   }
 }
 
@@ -928,8 +941,17 @@ function handleDetailClick(event) {
   }
 
   if (control.dataset.action === "close-detail") {
+    const detailTrigger = Array.from(document.querySelectorAll('[data-action="view-detail"]')).find(
+      (button) => button.dataset.issueId === lastDetailTriggerId
+    );
+
     selectedIssueId = null;
     renderIssueDetail();
+    lastDetailTriggerId = null;
+
+    if (detailTrigger) {
+      detailTrigger.focus();
+    }
   }
 }
 
