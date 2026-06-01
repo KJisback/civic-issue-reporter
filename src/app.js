@@ -367,7 +367,8 @@ let issues = typeof localStorage === "undefined" ? sampleIssues.map(normalizeIss
 let filters = {
   category: "All",
   status: "All",
-  priority: "All"
+  priority: "All",
+  query: ""
 };
 let selectedIssueId = null;
 let lastDetailTriggerId = null;
@@ -607,9 +608,40 @@ function getFilteredIssues() {
     const categoryMatches = filters.category === "All" || issue.category === filters.category;
     const statusMatches = filters.status === "All" || issue.status === filters.status;
     const priorityMatches = filters.priority === "All" || issue.priority === filters.priority;
+    const searchMatches = !filters.query || issueSearchText(issue).includes(filters.query);
 
-    return categoryMatches && statusMatches && priorityMatches;
+    return categoryMatches && statusMatches && priorityMatches && searchMatches;
   });
+}
+
+function issueSearchText(issue) {
+  return [
+    issue.id,
+    issue.title,
+    issue.category,
+    issue.location,
+    issue.ward,
+    issue.landmark,
+    issue.status,
+    issue.priority,
+    issue.assignedTeam,
+    issue.description,
+    formatCoordinates(issue.coordinates),
+    duplicateReviewSummary(issue)
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+}
+
+function searchIssues(query, collection = issues) {
+  const normalizedQuery = query.trim().toLowerCase();
+
+  if (!normalizedQuery) {
+    return collection;
+  }
+
+  return collection.filter((issue) => issueSearchText(issue).includes(normalizedQuery));
 }
 
 function optionMarkup(options, selectedValue) {
@@ -828,6 +860,9 @@ function renderIssues() {
   const list = document.querySelector("#issueList");
   const filteredIssues = getFilteredIssues();
   document.querySelector("#queueCount").textContent = `${filteredIssues.length} of ${issues.length} shown`;
+  document.querySelector("#searchSummary").textContent = filters.query
+    ? `${filteredIssues.length} matching local record${filteredIssues.length === 1 ? "" : "s"} for "${filters.query}".`
+    : "Search covers ID, title, location, status, priority, service team, and duplicate review text.";
 
   if (filteredIssues.length === 0) {
     list.innerHTML = `<div class="empty-state">No reports match the current filters.</div>`;
@@ -1493,9 +1528,11 @@ function resetDemoData() {
   filters = {
     category: "All",
     status: "All",
-    priority: "All"
+    priority: "All",
+    query: ""
   };
   saveIssues(issues);
+  document.querySelector("#reportSearch").value = "";
   renderApp();
   clearValidation();
   renderAssistance();
@@ -1511,9 +1548,11 @@ function loadDemoScenario(scenarioKey) {
   filters = {
     category: "All",
     status: "All",
-    priority: "All"
+    priority: "All",
+    query: ""
   };
   saveIssues(issues);
+  document.querySelector("#reportSearch").value = "";
   renderApp();
   clearValidation();
   renderAssistance();
@@ -1699,6 +1738,18 @@ function handleFilterChange(event) {
   renderIssues();
 }
 
+function handleSearchInput(event) {
+  filters.query = event.target.value.trim().toLowerCase();
+  renderIssues();
+}
+
+function clearReportSearch() {
+  filters.query = "";
+  document.querySelector("#reportSearch").value = "";
+  renderIssues();
+  document.querySelector("#reportSearch").focus();
+}
+
 function printSummary() {
   window.print();
   setSummaryStatus("Print dialog opened for the local summary.");
@@ -1817,6 +1868,8 @@ if (typeof document !== "undefined") {
   document.querySelector("#categoryFilter").addEventListener("change", handleFilterChange);
   document.querySelector("#statusFilter").addEventListener("change", handleFilterChange);
   document.querySelector("#priorityFilter").addEventListener("change", handleFilterChange);
+  document.querySelector("#reportSearch").addEventListener("input", handleSearchInput);
+  document.querySelector("#clearReportSearch").addEventListener("click", clearReportSearch);
   document.querySelector("#reportForm").addEventListener("input", renderAssistance);
   document.querySelector("#demoScenarioButtons").addEventListener("click", handleDemoScenarioClick);
 
@@ -1837,6 +1890,7 @@ if (typeof module !== "undefined") {
     findPotentialDuplicates,
     inferPriority,
     normalizeIssue,
+    searchIssues,
     suggestPriority,
     validateImportedIssues
   };

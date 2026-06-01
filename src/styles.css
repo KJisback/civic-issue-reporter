@@ -753,6 +753,34 @@ button:hover {
   margin-bottom: 14px;
 }
 
+.retrieve-bar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(150px, 0.22fr);
+  gap: 12px;
+  align-items: end;
+  margin-bottom: 14px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: var(--surface-soft);
+}
+
+.retrieve-bar label {
+  min-width: 0;
+}
+
+.retrieve-bar button {
+  max-width: none;
+}
+
+.search-summary {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.45;
+}
+
 .issue-list {
   display: grid;
   gap: 10px;
@@ -1450,6 +1478,7 @@ button:hover {
   .pitch-snapshot,
   .analytics-board,
   .filter-bar,
+  .retrieve-bar,
   fieldset,
   .location-preview,
   .workflow-board,

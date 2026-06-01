@@ -17,7 +17,7 @@ Primary inferred MVP:
 
 Current next ticket:
 
-T0024 - Search and Retrieve Report Flow.
+T0025 - Report Detail Vault Page.
 
 Completed tickets:
 
@@ -45,6 +45,7 @@ Completed tickets:
 - T0021 - Saffron CivicVault Shell
 - T0022 - CivicVault Document Modules Pass
 - T0023 - Pitch and Hackathon Demo Mode
+- T0024 - Search and Retrieve Report Flow
 
 Current implementation state:
 
@@ -65,6 +66,7 @@ Current implementation state:
 - Saffron CivicVault shell applied with document-vault navigation, local workspace identity, and no DigiLocker branding or impersonation.
 - Local-only CivicVault modules show issued report stats, uploaded evidence placeholders, municipal services workload, latest report retrieval, and recent activity from issue logs.
 - Pitch demo mode provides local Ward operations, Safety sprint, and Sanitation drive scenarios plus pitch snapshot copy derived from local metrics.
+- Report vault retrieval searches ID, title, category, location, status, priority, assigned team, coordinates, description, and duplicate review summary.
 
 Saved UI/UX direction:
 
@@ -81,8 +83,10 @@ Next sequence after T0020:
 - T0021 - Saffron CivicVault Shell: Done.
 - T0022 - CivicVault Document Modules Pass: Done.
 - T0023 - Pitch and Hackathon Demo Mode: Done.
-- T0024 - Search and Retrieve Report Flow: local report lookup by ID, title, category, location, status, priority, and assigned team.
-- T0025 - Backend Pilot Plan or Implementation: only after approval for auth, database, hosting, maps, and uploads.
+- T0024 - Search and Retrieve Report Flow: Done.
+- T0025 - Report Detail Vault Page: stronger local record dossier with identity, evidence placeholders, workflow audit, duplicate decisions, location metadata, and export actions.
+- T0026 - Release and Pages Automation: repeatable publish flow.
+- T0027 - Backend Pilot Plan or Implementation: only after approval for auth, database, hosting, maps, and uploads.
 
 Human-gated decisions:
 

@@ -212,7 +212,7 @@ Done. Added resettable local demo scenarios, high-impact pitch snapshot language
 
 ### T0024 - Search and Retrieve Report Flow
 
-Status: Planned
+Status: Done
 
 Purpose:
 
@@ -220,7 +220,7 @@ Let users find and inspect local reports as a vault, not only as a queue.
 
 Expected result:
 
-Add local search by report ID, title, category, location, status, priority, and assignment. Add a retrieval-oriented empty state and detail entry point.
+Done. Added local search by report ID, title, category, location, status, priority, assignment, coordinates, description, and duplicate review summary. Search combines with existing filters and includes a clear action plus live summary.
 
 ## Human Decisions Needed Before Later Phases
 
@@ -235,4 +235,4 @@ Add local search by report ID, title, category, location, status, priority, and 
 
 ## Recommended Immediate Action
 
-Run manual browser verification for the saffron CivicVault shell, T0022 modules, and T0023 demo mode, then continue with T0024 search and retrieve flow. Any production phase still requires explicit approval for backend, auth, database, deployment, external maps, and real uploads.
+Run manual browser verification for the saffron CivicVault shell, T0022 modules, T0023 demo mode, and T0024 retrieval flow, then continue with T0025 report detail vault page. Any production phase still requires explicit approval for backend, auth, database, deployment, external maps, and real uploads.

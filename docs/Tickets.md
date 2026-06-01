@@ -877,3 +877,29 @@ Automated checks:
 
 - Pass, `npm test`.
 - Pass, `npm run check`.
+
+## T0024 - Search and Retrieve Report Flow
+
+Status: Done
+
+Priority: High
+
+Goal:
+
+Make the report vault behave like a retrievable record store instead of only a filtered queue.
+
+Requirements:
+
+- Add local search by report ID, title, category, location, status, priority, assigned team, and duplicate review text.
+- Combine search with the existing category, status, and priority filters.
+- Add a clear search control and live search summary.
+- Keep search local-only with no external indexing service.
+
+Result:
+
+Added a vault retrieval bar above the report filters. Users can now search local records by ID, title, location, service team, status, priority, category, coordinates, description, and duplicate review summary.
+
+Automated checks:
+
+- Pass, `npm test`.
+- Pass, `npm run check`.
