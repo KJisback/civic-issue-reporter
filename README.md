@@ -38,6 +38,7 @@ civic-issue-reporter/
 - Use `Export JSON` to download a local summary.
 - Use `Backup data` and `Restore backup` to verify local backup/restore.
 - Use `Print summary` to open the browser print dialog.
+- Run `node checks/static-ui-check.js`.
 - Run `node checks/local-logic-check.js`.
 - Use `docs/Manual_UI_Checks.md` for the full browser/manual UI checklist.
 - Confirm the browser console has no errors.

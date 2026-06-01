@@ -775,12 +775,13 @@ Decide whether to introduce a small test dependency and add first focused tests 
 
 Result:
 
-No dependency was introduced. `src/app.js` now safely exports core local logic for Node, and `checks/local-logic-check.js` verifies priority suggestion, duplicate scoring, issue normalization, backup import validation, and municipal summary generation.
+No dependency was introduced. `src/app.js` now safely exports core local logic for Node, `checks/local-logic-check.js` verifies priority suggestion, duplicate scoring, issue normalization, backup import validation, and municipal summary generation, and `checks/static-ui-check.js` verifies static DOM wiring and local-only assets.
 
 Automated checks:
 
 - Pass, `node --check src/app.js`.
 - Pass, `node checks/local-logic-check.js`.
+- Pass, `node checks/static-ui-check.js`.
 
 ## T0020 - Backend Readiness Design
 

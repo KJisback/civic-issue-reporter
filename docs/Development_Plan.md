@@ -146,7 +146,7 @@ Decide whether to introduce a small test dependency for core logic, or keep no-d
 
 Expected result:
 
-No dependency was introduced. Focused no-dependency checks cover priority suggestion, duplicate scoring, normalization, backup import validation, and summary generation.
+No dependency was introduced. Focused no-dependency checks cover priority suggestion, duplicate scoring, normalization, backup import validation, summary generation, static DOM wiring, and local-only asset loading.
 
 Human review trigger:
 

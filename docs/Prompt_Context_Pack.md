@@ -57,7 +57,7 @@ Current implementation state:
 - Municipal review summary with print and JSON export actions.
 - Accessibility hardening for focus visibility, skip navigation, field error associations, invalid-field focus, detail focus management, live status regions, and mobile text containment.
 - Local team assignment labels, photo-evidence placeholders, admin analytics, local activity timelines, and full backup/restore.
-- No-dependency Node logic checks for priority, duplicate scoring, normalization, backup import validation, and summary generation.
+- No-dependency Node checks for priority, duplicate scoring, normalization, backup import validation, summary generation, static DOM wiring, and local-only assets.
 - Backend readiness design documented without implementing backend, auth, database, deployment, maps, notifications, or uploads.
 - Minimal civic UI direction applied from saved concept sheet.
 

@@ -37,7 +37,7 @@ A generated UI/UX concept sheet has been saved as the design reference for futur
 ## Folder Structure Summary
 
 - `src/` contains the static app shell.
-- `checks/` contains no-dependency Node checks for core local logic.
+- `checks/` contains no-dependency Node checks for core local logic and static UI wiring.
 - `src/app.js` defines the local issue object shape, form submission behavior, validation, invalid-field focus behavior, sample data, map-ready location metadata, filters, triage controls, local duplicate/priority assistance, duplicate review actions, team assignment, activity logging, metrics, workflow summary, analytics snapshot, issue detail focus behavior, export/print summary, full backup/restore, and browser storage.
 - `docs/` contains planning, ticket, verification, state, risk, review, manual UI checklist, development plan, and backend readiness documents.
 - `docs/design-references/` contains saved visual references for UI implementation.
@@ -52,12 +52,14 @@ None.
 - Open `src/index.html` directly in a browser.
 - `node --check src/app.js`
 - `node checks/local-logic-check.js`
+- `node checks/static-ui-check.js`
 - `git status --short`
 
 ## Latest Check Results
 
 - Build: Not run, no build system.
 - Tests: Pass, `node checks/local-logic-check.js` on 2026-06-01.
+- Static UI wiring: Pass, `node checks/static-ui-check.js` on 2026-06-01.
 - Lint: Not run, no lint system.
 - Typecheck: Not run, no type system.
 - Syntax: Pass, `node --check src/app.js` on 2026-06-01.

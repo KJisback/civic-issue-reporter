@@ -205,8 +205,9 @@ Use this before larger design, data, or release changes.
 
 1. Run `node --check src/app.js`.
 2. Run `node checks/local-logic-check.js`.
-3. Confirm the check reports `local logic checks passed`.
-4. Confirm no dependency install is required.
+3. Run `node checks/static-ui-check.js`.
+4. Confirm the checks report `local logic checks passed` and `static ui checks passed`.
+5. Confirm no dependency install is required.
 
 ## T0020 - Backend Readiness Design
 
