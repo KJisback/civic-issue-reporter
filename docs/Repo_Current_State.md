@@ -45,7 +45,7 @@ A generated UI/UX concept sheet has been saved as the design reference for futur
 
 ## Installed Dependencies
 
-None.
+None. `package.json` exists only to provide dependency-free `npm test` and `npm run check` scripts.
 
 ## Available Commands
 
@@ -53,6 +53,8 @@ None.
 - `node --check src/app.js`
 - `node checks/local-logic-check.js`
 - `node checks/static-ui-check.js`
+- `npm test`
+- `npm run check`
 - `git status --short`
 
 ## Latest Check Results

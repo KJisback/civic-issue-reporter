@@ -16,6 +16,13 @@ Open `src/index.html` in a browser.
 
 No install step is required.
 
+Optional command checks use Node only:
+
+```sh
+npm test
+npm run check
+```
+
 ## Project Structure
 
 ```text
@@ -23,6 +30,8 @@ civic-issue-reporter/
   AGENTS.md
   WORKFLOW.md
   README.md
+  package.json
+  checks/
   docs/
   src/
     index.html
@@ -40,6 +49,7 @@ civic-issue-reporter/
 - Use `Print summary` to open the browser print dialog.
 - Run `node checks/static-ui-check.js`.
 - Run `node checks/local-logic-check.js`.
+- Or run `npm test`.
 - Use `docs/Manual_UI_Checks.md` for the full browser/manual UI checklist.
 - Confirm the browser console has no errors.
 
