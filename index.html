@@ -208,6 +208,14 @@
               </div>
               <span class="queue-count" id="queueCount" role="status" aria-live="polite"></span>
             </div>
+            <div class="retrieve-bar" aria-label="Retrieve report from vault">
+              <label>
+                Retrieve by ID, title, location, service, or status
+                <input id="reportSearch" type="search" placeholder="Search sample-road, sanitation, Ward 12, High, resolved">
+              </label>
+              <button class="secondary-button" type="button" id="clearReportSearch">Clear search</button>
+              <p id="searchSummary" class="search-summary" aria-live="polite"></p>
+            </div>
             <div class="filter-bar" aria-label="Issue filters">
               <label>
                 Category
