@@ -442,6 +442,29 @@ button:hover {
   gap: 10px;
 }
 
+.issue-title-row {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+}
+
+.category-mark,
+.photo-slot {
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  color: var(--green);
+  font-weight: 900;
+}
+
+.category-mark {
+  width: 42px;
+  height: 42px;
+  background: var(--green-soft);
+}
+
 .issue-card h3 {
   margin: 0;
   font-size: 19px;
@@ -465,6 +488,29 @@ button:hover {
   padding: 10px;
   border-left: 4px solid var(--teal);
   background: var(--teal-soft);
+}
+
+.photo-strip {
+  display: grid;
+  grid-template-columns: 64px repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.photo-slot {
+  min-height: 58px;
+  padding: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+  background:
+    linear-gradient(135deg, rgba(23, 109, 112, 0.08), rgba(182, 109, 24, 0.08)),
+    #ffffff;
+}
+
+.photo-slot.has-placeholder {
+  color: var(--green);
+  font-size: 20px;
+  background: var(--green-soft);
 }
 
 .location-block p {
@@ -913,6 +959,11 @@ button:hover {
   font-size: 13px;
 }
 
+.activity-timeline {
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
 .detail-list li {
   padding: 10px;
   border: 1px solid var(--line);
@@ -1010,6 +1061,10 @@ button:hover {
   }
 
   .duplicate-review-list li {
+    grid-template-columns: 1fr;
+  }
+
+  .photo-strip {
     grid-template-columns: 1fr;
   }
 }

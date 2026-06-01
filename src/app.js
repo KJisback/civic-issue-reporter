@@ -3,6 +3,7 @@ const STATUSES = ["Submitted", "Triaged", "In progress", "Resolved"];
 const PRIORITIES = ["Low", "Medium", "High"];
 const DUPLICATE_REVIEW_STATUSES = ["Needs review", "Linked", "Dismissed"];
 const DEFAULT_DUPLICATE_REVIEW_STATUS = "Needs review";
+const TEAMS = ["Unassigned", "Lighting Crew", "Roads Maintenance", "Sanitation", "Drainage Crew", "Water Works", "Public Safety"];
 const CATEGORIES = [
   "Streetlight",
   "Road damage",
@@ -11,6 +12,22 @@ const CATEGORIES = [
   "Water leakage",
   "Public safety"
 ];
+const TEAM_BY_CATEGORY = {
+  Streetlight: "Lighting Crew",
+  "Road damage": "Roads Maintenance",
+  "Garbage collection": "Sanitation",
+  Drainage: "Drainage Crew",
+  "Water leakage": "Water Works",
+  "Public safety": "Public Safety"
+};
+const CATEGORY_ICONS = {
+  Streetlight: "L",
+  "Road damage": "R",
+  "Garbage collection": "G",
+  Drainage: "D",
+  "Water leakage": "W",
+  "Public safety": "S"
+};
 
 const sampleIssues = [
   {
@@ -27,7 +44,15 @@ const sampleIssues = [
     updatedAt: "2026-05-20T08:00:00.000Z",
     coordinates: { latitude: 12.971599, longitude: 77.594566 },
     photo: null,
-    assignedTeam: null,
+    assignedTeam: "Lighting Crew",
+    activityLog: [
+      {
+        id: "sample-streetlight-001-activity-1",
+        label: "Reported",
+        detail: "Citizen submitted the outage report.",
+        createdAt: "2026-05-20T08:00:00.000Z"
+      }
+    ],
     reporterContactOptional: null,
     isSample: true
   },
@@ -45,7 +70,21 @@ const sampleIssues = [
     updatedAt: "2026-05-20T09:15:00.000Z",
     coordinates: null,
     photo: null,
-    assignedTeam: null,
+    assignedTeam: "Sanitation",
+    activityLog: [
+      {
+        id: "sample-garbage-002-activity-1",
+        label: "Reported",
+        detail: "Citizen submitted the sanitation report.",
+        createdAt: "2026-05-20T09:15:00.000Z"
+      },
+      {
+        id: "sample-garbage-002-activity-2",
+        label: "Triaged",
+        detail: "Marked for sanitation review.",
+        createdAt: "2026-05-20T09:30:00.000Z"
+      }
+    ],
     reporterContactOptional: null,
     isSample: true
   },
@@ -63,7 +102,21 @@ const sampleIssues = [
     updatedAt: "2026-05-20T10:30:00.000Z",
     coordinates: { latitude: 12.975221, longitude: 77.603287 },
     photo: null,
-    assignedTeam: null,
+    assignedTeam: "Roads Maintenance",
+    activityLog: [
+      {
+        id: "sample-road-003-activity-1",
+        label: "Reported",
+        detail: "Citizen submitted the road damage report.",
+        createdAt: "2026-05-20T10:30:00.000Z"
+      },
+      {
+        id: "sample-road-003-activity-2",
+        label: "In progress",
+        detail: "Roads team dispatched for local inspection.",
+        createdAt: "2026-05-20T11:15:00.000Z"
+      }
+    ],
     reporterContactOptional: null,
     isSample: true
   }
@@ -99,10 +152,26 @@ function createIssue({ title, category, location, ward, landmark, description, c
     updatedAt: now,
     coordinates,
     photo: null,
-    assignedTeam: null,
+    assignedTeam: suggestedTeam(category),
+    activityLog: [
+      {
+        id: `activity-${Date.now()}`,
+        label: "Reported",
+        detail: "Citizen submitted the report in this browser.",
+        createdAt: now
+      }
+    ],
     reporterContactOptional: null,
     isSample: false
   };
+}
+
+function suggestedTeam(category) {
+  return TEAM_BY_CATEGORY[category] || "Unassigned";
+}
+
+function categoryIcon(category) {
+  return CATEGORY_ICONS[category] || "I";
 }
 
 function inferPriority(category, description) {
@@ -203,6 +272,8 @@ function saveIssues(nextIssues) {
 
 function normalizeIssue(issue) {
   const duplicateHints = normalizeDuplicateHints(issue.duplicateHints);
+  const createdAt = issue.createdAt || new Date().toISOString();
+  const assignedTeam = TEAMS.includes(issue.assignedTeam) ? issue.assignedTeam : suggestedTeam(issue.category);
 
   return {
     ward: "",
@@ -210,8 +281,30 @@ function normalizeIssue(issue) {
     coordinates: null,
     priorityReason: "",
     ...issue,
+    assignedTeam,
+    activityLog: normalizeActivityLog(issue.activityLog, createdAt),
     duplicateHints
   };
+}
+
+function normalizeActivityLog(activityLog, createdAt) {
+  if (Array.isArray(activityLog) && activityLog.length > 0) {
+    return activityLog.map((item, index) => ({
+      id: item.id || `activity-${createdAt}-${index}`,
+      label: item.label || "Updated",
+      detail: item.detail || "Local record updated.",
+      createdAt: item.createdAt || createdAt
+    }));
+  }
+
+  return [
+    {
+      id: `activity-${createdAt}`,
+      label: "Reported",
+      detail: "Report created in local browser storage.",
+      createdAt
+    }
+  ];
 }
 
 function normalizeDuplicateHints(duplicateHints) {
@@ -371,6 +464,7 @@ function createMunicipalSummary() {
       landmark: issue.landmark || "Not specified",
       coordinates: formatCoordinates(issue.coordinates),
       duplicateReview: duplicateReviewSummary(issue) || "No duplicate hints",
+      assignedTeam: issue.assignedTeam || "Unassigned",
       reportedAt: issue.createdAt,
       updatedAt: issue.updatedAt
     }))
@@ -463,18 +557,28 @@ function renderIssues() {
       (issue) => `
         <article class="issue-card" data-issue-id="${escapeHtml(issue.id)}">
           <div class="issue-main">
+            <div class="issue-title-row">
+              <span class="category-mark" aria-hidden="true">${escapeHtml(categoryIcon(issue.category))}</span>
+              <div>
+                <h3>${escapeHtml(issue.title)}</h3>
+                <time datetime="${issue.createdAt}">Reported ${formatDate(issue.createdAt)}</time>
+              </div>
+            </div>
             <div class="card-meta">
               <span class="tag">${escapeHtml(issue.category)}</span>
               <span class="tag ${priorityClass(issue.priority)}">${escapeHtml(issue.priority)}</span>
               <span class="tag status-${statusClass(issue.status)}">${escapeHtml(issue.status)}</span>
+              <span class="tag tag-info">${escapeHtml(issue.assignedTeam || "Unassigned")}</span>
               ${issue.duplicateHints.length > 0 ? `<span class="tag tag-warning">${escapeHtml(duplicateReviewSummary(issue))}</span>` : ""}
             </div>
-            <h3>${escapeHtml(issue.title)}</h3>
             <p>${escapeHtml(issue.description)}</p>
-            <time datetime="${issue.createdAt}">Reported ${formatDate(issue.createdAt)}</time>
             <button class="secondary-button details-button" type="button" data-action="view-detail" data-issue-id="${escapeHtml(issue.id)}" aria-controls="issueDetail" aria-expanded="${selectedIssueId === issue.id ? "true" : "false"}">View details</button>
           </div>
           <div class="issue-side">
+            <div class="photo-strip" aria-label="Photo evidence status">
+              <span class="photo-slot has-placeholder">${escapeHtml(categoryIcon(issue.category))}</span>
+              <span class="photo-slot">Photo planned</span>
+            </div>
             <div class="location-block">
               <p><strong>Location:</strong> ${escapeHtml(issue.location)}</p>
               <span class="location-detail">Area: ${escapeHtml(issue.ward || "Not specified")}</span>
@@ -495,6 +599,12 @@ function renderIssues() {
               Priority
               <select data-action="priority" data-issue-id="${escapeHtml(issue.id)}">
                 ${optionMarkup(PRIORITIES, issue.priority)}
+              </select>
+            </label>
+            <label>
+              Team
+              <select data-action="assignment" data-issue-id="${escapeHtml(issue.id)}">
+                ${optionMarkup(TEAMS, issue.assignedTeam || "Unassigned")}
               </select>
             </label>
           </div>
@@ -555,6 +665,28 @@ function duplicateListMarkup(issue) {
   `;
 }
 
+function activityTimelineMarkup(issue) {
+  return `
+    <ol class="timeline activity-timeline">
+      ${issue.activityLog
+        .slice()
+        .sort((left, right) => new Date(left.createdAt) - new Date(right.createdAt))
+        .map(
+          (activity) => `
+            <li class="is-complete">
+              <span></span>
+              <div>
+                <strong>${escapeHtml(activity.label)}</strong>
+                <p>${escapeHtml(activity.detail)} ${formatDate(activity.createdAt)}</p>
+              </div>
+            </li>
+          `
+        )
+        .join("")}
+    </ol>
+  `;
+}
+
 function renderIssueDetail() {
   const panel = document.querySelector("#issueDetail");
   const issue = issues.find((item) => item.id === selectedIssueId);
@@ -575,6 +707,7 @@ function renderIssueDetail() {
           <span class="tag">${escapeHtml(issue.category)}</span>
           <span class="tag ${priorityClass(issue.priority)}">${escapeHtml(issue.priority)}</span>
           <span class="tag status-${statusClass(issue.status)}">${escapeHtml(issue.status)}</span>
+          <span class="tag tag-info">${escapeHtml(issue.assignedTeam || "Unassigned")}</span>
         </div>
       </div>
       <button class="secondary-button" type="button" data-action="close-detail" aria-label="Close issue detail">Close</button>
@@ -583,6 +716,11 @@ function renderIssueDetail() {
     <div class="detail-grid">
       <div class="detail-section">
         <h3>Report context</h3>
+        <div class="photo-strip" aria-label="Photo evidence placeholder">
+          <span class="photo-slot has-placeholder">${escapeHtml(categoryIcon(issue.category))}</span>
+          <span class="photo-slot">Photo evidence planned</span>
+          <span class="photo-slot">Privacy review needed</span>
+        </div>
         <p>${escapeHtml(issue.description)}</p>
         <div class="location-block">
           <p><strong>Location:</strong> ${escapeHtml(issue.location)}</p>
@@ -595,10 +733,11 @@ function renderIssueDetail() {
       </div>
 
       <div class="detail-section">
-        <h3>Status timeline</h3>
+        <h3>Workflow timeline</h3>
         <ol class="timeline">
           ${timelineMarkup(issue)}
         </ol>
+        ${activityTimelineMarkup(issue)}
       </div>
 
       <div class="detail-section">
@@ -620,6 +759,12 @@ function renderIssueDetail() {
           Priority
           <select data-action="priority" data-issue-id="${escapeHtml(issue.id)}">
             ${optionMarkup(PRIORITIES, issue.priority)}
+          </select>
+        </label>
+        <label>
+          Team
+          <select data-action="assignment" data-issue-id="${escapeHtml(issue.id)}">
+            ${optionMarkup(TEAMS, issue.assignedTeam || "Unassigned")}
           </select>
         </label>
       </div>
@@ -854,14 +999,52 @@ function resetDemoData() {
   setStatus("Demo data restored.", "success");
 }
 
+function activityForPatch(patch) {
+  if (patch.status) {
+    return {
+      label: patch.status,
+      detail: `Status changed to ${patch.status}.`
+    };
+  }
+
+  if (patch.priority) {
+    return {
+      label: "Priority updated",
+      detail: `Priority changed to ${patch.priority}.`
+    };
+  }
+
+  if (patch.assignedTeam) {
+    return {
+      label: "Assignment updated",
+      detail: `Assigned to ${patch.assignedTeam}.`
+    };
+  }
+
+  return {
+    label: "Updated",
+    detail: "Local record updated."
+  };
+}
+
 function updateIssue(issueId, patch) {
   const now = new Date().toISOString();
+  const activity = activityForPatch(patch);
+
   issues = issues.map((issue) =>
     issue.id === issueId
       ? {
           ...issue,
           ...patch,
           priorityReason: patch.priority ? "Priority was manually adjusted by staff." : issue.priorityReason,
+          activityLog: [
+            ...issue.activityLog,
+            {
+              id: `activity-${Date.now()}`,
+              ...activity,
+              createdAt: now
+            }
+          ],
           updatedAt: now
         }
       : issue
@@ -886,6 +1069,15 @@ function updateDuplicateHintReview(issueId, duplicateId, reviewStatus) {
                 }
               : hint
           ),
+          activityLog: [
+            ...issue.activityLog,
+            {
+              id: `activity-${Date.now()}`,
+              label: "Duplicate review",
+              detail: `Duplicate hint marked ${reviewStatus}.`,
+              createdAt: now
+            }
+          ],
           updatedAt: now
         }
       : issue
@@ -909,6 +1101,10 @@ function handleTriageChange(event) {
 
   if (action === "priority") {
     updateIssue(issueId, { priority: control.value });
+  }
+
+  if (action === "assignment") {
+    updateIssue(issueId, { assignedTeam: control.value });
   }
 
   if (action === "duplicate-review") {
