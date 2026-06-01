@@ -293,6 +293,162 @@ main {
   border-radius: 999px;
 }
 
+.vault-modules {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) repeat(2, minmax(220px, 0.8fr));
+  gap: 14px;
+}
+
+.vault-card {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  box-shadow: 0 10px 24px rgba(87, 47, 0, 0.05);
+}
+
+.vault-card-primary {
+  grid-row: span 2;
+  background:
+    linear-gradient(135deg, rgba(255, 178, 63, 0.2), rgba(255, 250, 242, 0.94)),
+    #ffffff;
+}
+
+.vault-card h2,
+.vault-card h3,
+.vault-card p {
+  margin: 0;
+}
+
+.vault-card h2 {
+  font-size: clamp(24px, 3vw, 34px);
+  line-height: 1.08;
+}
+
+.vault-card h3 {
+  font-size: 18px;
+}
+
+.vault-card p {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.vault-card p strong {
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+
+.module-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.module-stat {
+  display: grid;
+  gap: 4px;
+  padding: 12px;
+  border: 1px solid rgba(199, 106, 0, 0.2);
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.module-stat strong {
+  font-size: 30px;
+  line-height: 1;
+}
+
+.module-stat span,
+.module-stat small {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.module-link {
+  display: inline-flex;
+  align-items: center;
+  width: max-content;
+  max-width: 100%;
+  min-height: 38px;
+  padding: 8px 11px;
+  color: #ffffff;
+  background: var(--green);
+  font-size: 13px;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.module-link:focus-visible {
+  outline: 3px solid rgba(199, 106, 0, 0.34);
+  outline-offset: 3px;
+}
+
+.evidence-slots {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.evidence-slots span {
+  min-height: 54px;
+  border: 1px dashed rgba(199, 106, 0, 0.45);
+  background:
+    linear-gradient(135deg, rgba(255, 178, 63, 0.2), rgba(199, 106, 0, 0.06)),
+    #ffffff;
+}
+
+.module-list,
+.module-activity {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.module-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.module-list li:last-child {
+  border-bottom: 0;
+}
+
+.module-list strong {
+  color: var(--green);
+}
+
+.activity-module {
+  grid-column: span 2;
+}
+
+.module-activity li {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+}
+
+.module-activity strong,
+.module-activity p {
+  display: block;
+}
+
+.module-activity p {
+  font-size: 12px;
+}
+
 .panel {
   padding: clamp(18px, 3vw, 28px);
   border: 1px solid var(--line);
@@ -1186,6 +1342,7 @@ button:hover {
   .app-grid,
   .hero-shell,
   .identity-strip,
+  .vault-modules,
   .dashboard-grid,
   .issue-card,
   .detail-grid {
@@ -1220,6 +1377,7 @@ button:hover {
 
   .report-form,
   .metrics,
+  .module-stat-grid,
   .analytics-board,
   .filter-bar,
   fieldset,
@@ -1267,6 +1425,10 @@ button:hover {
 
   .photo-strip {
     grid-template-columns: 1fr;
+  }
+
+  .activity-module {
+    grid-column: auto;
   }
 }
 
