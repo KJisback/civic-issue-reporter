@@ -1,6 +1,6 @@
 # Development Plan
 
-Last updated: 2026-05-21
+Last updated: 2026-06-01
 
 ## Process Coverage Review
 
@@ -17,14 +17,14 @@ The project is following the standalone agentic development model:
 
 Current caveats:
 
-- The project folder is not a git repository, so branch-per-ticket workflow is documented but not enforceable locally yet.
+- The project has a local git repository and branch-per-ticket workflow is enforceable locally.
 - Browser-based manual verification is documented but not fully completed for every recent UI ticket.
 - T0003 through T0006 were early concise tickets and do not contain the same full handoff detail as later tickets.
 - Auth, backend, database, external maps, deployment, and real photo storage remain intentionally unapproved and out of scope.
 
 Conclusion:
 
-The project is ready to continue with controlled ticket-by-ticket development. The next stage should not jump to backend, auth, map providers, or deployment. It should first finish quality hardening and deeper UI/UX snapshot fidelity against the saved concept sheet.
+The project now has a finished local-only static MVP shape. The next stage should not jump to backend, auth, map providers, or deployment without explicit approval; it should add no-dependency logic checks and backend-readiness documentation first.
 
 ## UI/UX Snapshot Implementation Direction
 
@@ -41,20 +41,20 @@ The current app already implements the concept direction at a broad level:
 - Issue detail and timeline.
 - Calm civic palette with green, teal, amber, coral, off-white surfaces, and compact controls.
 
-Remaining snapshot-aligned work should be incremental:
+Completed snapshot-aligned work:
 
-1. Confirm keyboard, focus, labels, and responsive behavior before adding more screens.
-2. Tighten the public issue feed toward the concept sheet, including clearer row density and stronger issue metadata.
-3. Improve the admin dashboard toward the concept sheet with richer but still local-only analytics.
-4. Add photo-evidence placeholders and privacy language without storing files.
-5. Add local-only staff/team assignment labels without identity, auth, or backend.
-6. Add a local audit/history surface for status, priority, duplicate review, and assignment changes.
+1. Keyboard, focus, labels, live regions, and responsive behavior were hardened in T0012.
+2. Public issue feed density and metadata were improved in T0013.
+3. Dashboard analytics were expanded in T0016.
+4. Photo-evidence placeholders and privacy language were added in T0014.
+5. Local-only team assignment labels were added in T0015.
+6. Local activity history for workflow changes was added in T0017.
 
 ## Next Development Sequence
 
 ### T0012 - Accessibility and Keyboard Verification Pass
 
-Status: Ready for Agent
+Status: Done
 
 Purpose:
 
@@ -66,7 +66,7 @@ Keyboard navigation, focus states, labels, live regions, and mobile text contain
 
 ### T0013 - UI Snapshot Fidelity Pass
 
-Status: Planned
+Status: Done
 
 Purpose:
 
@@ -78,7 +78,7 @@ The citizen report, public feed, dashboard, and detail views better match the vi
 
 ### T0014 - Photo Evidence Placeholder and Privacy Copy
 
-Status: Planned
+Status: Done
 
 Purpose:
 
@@ -90,7 +90,7 @@ The form and issue detail surfaces explain that photo evidence is planned, priva
 
 ### T0015 - Local Assignment Prototype
 
-Status: Planned
+Status: Done
 
 Purpose:
 
@@ -102,7 +102,7 @@ Issues can be assigned to a small fixed set of municipal teams in local state, w
 
 ### T0016 - Admin Analytics Snapshot
 
-Status: Planned
+Status: Done
 
 Purpose:
 
@@ -114,7 +114,7 @@ Dashboard shows priority queue, status distribution, category distribution, and 
 
 ### T0017 - Local Activity Timeline
 
-Status: Planned
+Status: Done
 
 Purpose:
 
@@ -126,7 +126,7 @@ Status, priority, duplicate review, and assignment changes append local timeline
 
 ### T0018 - Local Backup and Restore
 
-Status: Planned
+Status: Done
 
 Purpose:
 
@@ -138,7 +138,7 @@ Staff can export full local issue data and import it back into the browser with 
 
 ### T0019 - Test Harness Decision and First Logic Tests
 
-Status: Planned
+Status: Done
 
 Purpose:
 
@@ -146,7 +146,7 @@ Decide whether to introduce a small test dependency for core logic, or keep no-d
 
 Expected result:
 
-If approved, add focused tests for priority suggestion, duplicate scoring, normalization, and summary generation. If not approved, document why and keep syntax/manual verification only.
+No dependency was introduced. Focused no-dependency checks cover priority suggestion, duplicate scoring, normalization, backup import validation, summary generation, static DOM wiring, and local-only asset loading.
 
 Human review trigger:
 
@@ -154,7 +154,7 @@ This ticket may require approval for a new dependency.
 
 ### T0020 - Backend Readiness Design
 
-Status: Planned
+Status: Done
 
 Purpose:
 
@@ -162,7 +162,7 @@ Prepare the backend/data plan without implementing it.
 
 Expected result:
 
-Document API boundaries, data ownership, auth assumptions, storage model, audit needs, and migration risks.
+Done in `docs/Backend_Readiness_Design.md`: API boundaries, data ownership, auth assumptions, storage model, audit needs, privacy gates, and migration risks are documented.
 
 Human review trigger:
 
@@ -180,4 +180,4 @@ Backend, database, auth, and deployment decisions require explicit approval befo
 
 ## Recommended Immediate Action
 
-Proceed with T0012 only. After T0012, provide a completion report, update state/follow-ups, then prepare T0013 as the next UI snapshot fidelity ticket.
+Run manual browser verification for the finished local-only MVP. Any production phase now requires explicit approval for backend, auth, database, deployment, external maps, and real uploads.
