@@ -185,3 +185,31 @@ Use this before larger design, data, or release changes.
 10. At a mobile-width viewport, confirm controls and text do not overlap or clip.
 11. Run the T0010 export/print smoke steps.
 12. Check browser console for errors.
+
+## T0013-T0018 - Finished Local MVP Polish
+
+1. Open `src/index.html`.
+2. Confirm the public issue feed uses compact rows with category marks, team labels, photo placeholders, location context, and triage controls.
+3. Open an issue detail panel and confirm report context, photo placeholders, workflow timeline, activity timeline, duplicate review, and team assignment render.
+4. Change status, priority, team assignment, and duplicate review state.
+5. Confirm the issue card, detail panel, analytics snapshot, workflow board, and summary update.
+6. Reload the page and confirm status, priority, team assignment, duplicate review state, and activity timeline persist.
+7. Confirm the dashboard shows priority queue, status mix, team load, stale/open indicators, and location readiness.
+8. Click `Backup data` and confirm a full local backup JSON downloads.
+9. Restore a valid backup JSON and confirm the app replaces the current browser reports after validation.
+10. Try restoring invalid JSON and confirm an understandable error appears without replacing current data.
+11. At desktop and mobile widths, confirm text and controls do not overlap or clip.
+12. Run `node --check src/app.js`.
+
+## T0019 - No-Dependency Logic Checks
+
+1. Run `node --check src/app.js`.
+2. Run `node checks/local-logic-check.js`.
+3. Confirm the check reports `local logic checks passed`.
+4. Confirm no dependency install is required.
+
+## T0020 - Backend Readiness Design
+
+1. Open `docs/Backend_Readiness_Design.md`.
+2. Confirm it documents future API boundaries, storage model, audit expectations, privacy gates, migration notes, and approval requirements.
+3. Confirm no backend, auth, database, deployment, external map, notification, or upload code was added.

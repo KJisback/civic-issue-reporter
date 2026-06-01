@@ -140,6 +140,7 @@
               <div class="location-preview" id="locationPreview" aria-label="Location readiness preview"></div>
               <div class="workflow-board" id="workflowBoard" aria-label="Status workflow summary"></div>
             </div>
+            <div class="analytics-board" id="analyticsBoard" aria-label="Local analytics snapshot"></div>
           </section>
 
           <section id="summary" class="panel summary-panel" aria-labelledby="summary-title">
@@ -153,7 +154,13 @@
             <div class="summary-actions">
               <button type="button" id="printSummary">Print summary</button>
               <button class="secondary-button" type="button" id="exportSummary">Export JSON</button>
+              <button class="secondary-button" type="button" id="exportBackup">Backup data</button>
+              <label class="restore-control">
+                Restore backup
+                <input id="importBackup" type="file" accept="application/json">
+              </label>
             </div>
+            <p class="backup-note">Restoring a backup replaces the current reports in this browser after the JSON file is validated.</p>
             <p class="form-status is-success" id="summaryStatus" role="status" aria-live="polite"></p>
             <div id="summaryPreview" class="summary-preview" aria-label="Printable municipal summary"></div>
           </section>

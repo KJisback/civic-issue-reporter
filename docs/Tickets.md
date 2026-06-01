@@ -634,7 +634,7 @@ Manual verification:
 
 ## T0013 - UI Snapshot Fidelity Pass
 
-Status: Ready for Agent
+Status: Done
 
 Priority: High
 
@@ -683,7 +683,7 @@ Acceptance criteria:
 
 Automated checks:
 
-- `node --check src/app.js`
+- Pass, `node --check src/app.js`.
 
 Manual verification:
 
@@ -695,7 +695,7 @@ Manual verification:
 
 ## T0014 - Photo Evidence Placeholder and Privacy Copy
 
-Status: Planned
+Status: Done
 
 Priority: Medium
 
@@ -703,9 +703,13 @@ Goal:
 
 Clarify the future photo evidence workflow without storing files yet, including privacy-safe copy and report-card placeholders.
 
+Result:
+
+Issue cards and detail views show local photo-evidence placeholders and privacy-state messaging. No files are selected, stored, uploaded, or transmitted.
+
 ## T0015 - Local Assignment Prototype
 
-Status: Planned
+Status: Done
 
 Priority: Medium
 
@@ -713,9 +717,13 @@ Goal:
 
 Add local-only assignment labels for municipal team ownership after staff identity decisions remain explicitly out of scope.
 
+Result:
+
+Reports now normalize to a local municipal team by category, and staff can adjust team assignment from issue cards and detail controls. Assignment changes persist in browser storage.
+
 ## T0016 - Admin Analytics Snapshot
 
-Status: Planned
+Status: Done
 
 Priority: Medium
 
@@ -723,9 +731,13 @@ Goal:
 
 Expand the dashboard toward the concept sheet with local-only operational summaries and no external charting dependency.
 
+Result:
+
+The dashboard now includes priority queue, status mix, team load, stale/open indicators, and richer metric notes using only local issue data and CSS.
+
 ## T0017 - Local Activity Timeline
 
-Status: Planned
+Status: Done
 
 Priority: Medium
 
@@ -733,9 +745,13 @@ Goal:
 
 Append local timeline events for status, priority, duplicate review, and assignment changes.
 
+Result:
+
+Issue records now carry a local activity log. Status, priority, duplicate review, and assignment updates append timeline events visible in issue detail.
+
 ## T0018 - Local Backup and Restore
 
-Status: Planned
+Status: Done
 
 Priority: Medium
 
@@ -743,9 +759,13 @@ Goal:
 
 Add local full-data export and import with validation and clear overwrite warnings.
 
+Result:
+
+The summary section now supports full local backup export and JSON backup restore with basic validation and normalization before replacing browser-stored reports.
+
 ## T0019 - Test Harness Decision and First Logic Tests
 
-Status: Planned
+Status: Done
 
 Priority: Medium
 
@@ -753,12 +773,25 @@ Goal:
 
 Decide whether to introduce a small test dependency and add first focused tests for core local logic if approved.
 
+Result:
+
+No dependency was introduced. `src/app.js` now safely exports core local logic for Node, and `checks/local-logic-check.js` verifies priority suggestion, duplicate scoring, issue normalization, backup import validation, and municipal summary generation.
+
+Automated checks:
+
+- Pass, `node --check src/app.js`.
+- Pass, `node checks/local-logic-check.js`.
+
 ## T0020 - Backend Readiness Design
 
-Status: Planned
+Status: Done
 
 Priority: High
 
 Goal:
 
 Prepare backend, data, audit, auth-assumption, and API boundary design without implementing backend code.
+
+Result:
+
+Added `docs/Backend_Readiness_Design.md` with future API boundaries, storage model, auth and identity assumptions, audit expectations, privacy gates, migration notes, and next-phase approval requirements. No backend, database, auth, deployment, external map, notification, or upload service was implemented.

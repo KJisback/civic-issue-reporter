@@ -56,24 +56,6 @@ Before adding an interactive map, decide provider, API-key handling, privacy lan
 
 Status: Open
 
-### F0004 - Add Staff Assignment Later
-
-Source ticket: T0003
-
-Severity: Low
-
-Type: feature
-
-Description:
-
-Status and priority can now be changed locally, but issues cannot yet be assigned to a team or staff member.
-
-Recommended action:
-
-Add assignment only after the admin workflow and identity policy are clearer.
-
-Status: Open
-
 ### F0008 - Clarify Export Record Policy
 
 Source ticket: T0010
@@ -111,6 +93,24 @@ Use `docs/Git_Setup_Recovery.md` for host-specific GitHub CLI and direct Git HTT
 Status: Closed after recovery
 
 ## Closed Followups
+
+### F0004 - Add Staff Assignment Later
+
+Source ticket: T0003
+
+Severity: Low
+
+Type: feature
+
+Description:
+
+Issues can now be assigned to local municipal team labels without staff identity, auth, backend, or external services.
+
+Recommended action:
+
+Add real staff identity and ownership only after identity policy and backend decisions are approved.
+
+Status: Closed in T0015
 
 ### F0009 - Run Dedicated Accessibility Pass
 

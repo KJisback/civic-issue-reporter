@@ -17,7 +17,7 @@ Primary inferred MVP:
 
 Current next ticket:
 
-T0013 - UI Snapshot Fidelity Pass
+No local-only implementation ticket is currently ready.
 
 Completed tickets:
 
@@ -34,6 +34,14 @@ Completed tickets:
 - T0011 - Backlog Refresh and Next Handoff
 - T0011A - Git Repository Initialization and Manual UI Checklist
 - T0012 - Accessibility and Keyboard Verification Pass
+- T0013 - UI Snapshot Fidelity Pass
+- T0014 - Photo Evidence Placeholder and Privacy Copy
+- T0015 - Local Assignment Prototype
+- T0016 - Admin Analytics Snapshot
+- T0017 - Local Activity Timeline
+- T0018 - Local Backup and Restore
+- T0019 - Test Harness Decision and First Logic Tests
+- T0020 - Backend Readiness Design
 
 Current implementation state:
 
@@ -48,6 +56,9 @@ Current implementation state:
 - Focused issue detail panel with local status timeline.
 - Municipal review summary with print and JSON export actions.
 - Accessibility hardening for focus visibility, skip navigation, field error associations, invalid-field focus, detail focus management, live status regions, and mobile text containment.
+- Local team assignment labels, photo-evidence placeholders, admin analytics, local activity timelines, and full backup/restore.
+- No-dependency Node logic checks for priority, duplicate scoring, normalization, backup import validation, and summary generation.
+- Backend readiness design documented without implementing backend, auth, database, deployment, maps, notifications, or uploads.
 - Minimal civic UI direction applied from saved concept sheet.
 
 Saved UI/UX direction:
@@ -58,17 +69,11 @@ Saved UI/UX direction:
 
 Next handoff focus:
 
-Bring the current UI closer to the saved concept sheet without adding new product behavior.
+Manual browser verification and explicit approval for any non-local production phase.
 
-Next sequence after T0013:
+Next sequence after T0020:
 
-- T0014 - Photo Evidence Placeholder and Privacy Copy
-- T0015 - Local Assignment Prototype
-- T0016 - Admin Analytics Snapshot
-- T0017 - Local Activity Timeline
-- T0018 - Local Backup and Restore
-- T0019 - Test Harness Decision and First Logic Tests
-- T0020 - Backend Readiness Design
+- No further local-only implementation ticket is currently ready.
 
 Human-gated decisions:
 

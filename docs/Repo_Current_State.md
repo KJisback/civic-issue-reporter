@@ -2,7 +2,7 @@
 
 ## Current Branch
 
-`main`
+`feature/t0012-accessibility-keyboard`
 
 ## Completed Tickets
 
@@ -19,18 +19,27 @@
 - T0011 - Backlog Refresh and Next Handoff
 - T0011A - Git Repository Initialization and Manual UI Checklist
 - T0012 - Accessibility and Keyboard Verification Pass
+- T0013 - UI Snapshot Fidelity Pass
+- T0014 - Photo Evidence Placeholder and Privacy Copy
+- T0015 - Local Assignment Prototype
+- T0016 - Admin Analytics Snapshot
+- T0017 - Local Activity Timeline
+- T0018 - Local Backup and Restore
+- T0019 - Test Harness Decision and First Logic Tests
+- T0020 - Backend Readiness Design
 
 ## Current App Status
 
-The project has a no-dependency static app with a refined minimal civic UI, citizen report form, local issue records, browser persistence through `localStorage`, sample issue cards, admin-style metrics, category/status/priority filters, local status and priority controls, map-ready location fields, a non-interactive location readiness preview, explainable local duplicate hints, local duplicate review actions, local priority assistance, a compact workflow summary, a focused issue detail panel with status timeline, a municipal review summary with print and JSON export actions, and T0012 accessibility hardening for focus visibility, skip navigation, validation association, detail focus management, live status regions, and mobile text containment.
+The project has a no-dependency static app with a refined minimal civic UI, citizen report form, local issue records, browser persistence through `localStorage`, sample issue cards, admin-style metrics, category/status/priority filters, local status and priority controls, map-ready location fields, a non-interactive location readiness preview, explainable local duplicate hints, local duplicate review actions, local priority assistance, a compact workflow summary, a focused issue detail panel with status and activity timelines, local team assignment, photo-evidence placeholders, an admin analytics snapshot, a municipal review summary with print and JSON export actions, full local backup/restore, no-dependency logic checks, and T0012 accessibility hardening for focus visibility, skip navigation, validation association, detail focus management, live status regions, and mobile text containment.
 
 A generated UI/UX concept sheet has been saved as the design reference for future UI implementation.
 
 ## Folder Structure Summary
 
 - `src/` contains the static app shell.
-- `src/app.js` defines the local issue object shape, form submission behavior, validation, invalid-field focus behavior, sample data, map-ready location metadata, filters, triage controls, local duplicate/priority assistance, duplicate review actions, metrics, workflow summary, issue detail focus behavior, export/print summary, and browser storage.
-- `docs/` contains planning, ticket, verification, state, risk, review, manual UI checklist, and development plan documents.
+- `checks/` contains no-dependency Node checks for core local logic.
+- `src/app.js` defines the local issue object shape, form submission behavior, validation, invalid-field focus behavior, sample data, map-ready location metadata, filters, triage controls, local duplicate/priority assistance, duplicate review actions, team assignment, activity logging, metrics, workflow summary, analytics snapshot, issue detail focus behavior, export/print summary, full backup/restore, and browser storage.
+- `docs/` contains planning, ticket, verification, state, risk, review, manual UI checklist, development plan, and backend readiness documents.
 - `docs/design-references/` contains saved visual references for UI implementation.
 - `README.md`, `AGENTS.md`, and `WORKFLOW.md` define setup and project rules.
 
@@ -42,12 +51,13 @@ None.
 
 - Open `src/index.html` directly in a browser.
 - `node --check src/app.js`
+- `node checks/local-logic-check.js`
 - `git status --short`
 
 ## Latest Check Results
 
 - Build: Not run, no build system.
-- Tests: Not run, no test system.
+- Tests: Pass, `node checks/local-logic-check.js` on 2026-06-01.
 - Lint: Not run, no lint system.
 - Typecheck: Not run, no type system.
 - Syntax: Pass, `node --check src/app.js` on 2026-06-01.
@@ -57,11 +67,11 @@ None.
 ## Known Issues
 
 - Real map integration and photo upload are placeholders.
-- Triage controls are local-only and do not include real staff identity or assignment.
+- Triage controls are local-only and include team assignment labels, but no real staff identity.
 - Duplicate detection is a simple local heuristic and may miss real duplicates or flag weak matches.
 - Visual verification should still be done manually in a browser at desktop and mobile widths.
 - Duplicate review actions are local-only and do not merge records or record real staff identity.
-- JSON export is a browser-generated local file and is not a secure official record.
+- JSON summary and backup exports are browser-generated local files and are not secure official records.
 - Browser-based keyboard and screen-reader behavior should continue to be spot-checked manually after future UI changes.
 
 ## Current Risks
@@ -74,7 +84,7 @@ None.
 
 ## Next Recommended Ticket
 
-T0013 - UI Snapshot Fidelity Pass
+No further local-only implementation ticket is currently ready. Backend, auth, database, deployment, external maps, and real upload work require explicit approval before implementation.
 
 ## Last Updated
 

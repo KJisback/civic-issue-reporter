@@ -6,15 +6,15 @@ The MVP will let citizens report local issues with category, location, descripti
 
 ## Current Status
 
-T0001 through T0010 are complete.
+T0001 through T0020 are complete locally.
 
-The current version is a no-dependency static prototype with local browser storage, citizen reporting, triage controls, duplicate review actions, issue details, dashboard summaries, and local export/print summary support.
+The current version is a no-dependency static MVP with local browser storage, citizen reporting, triage controls, team assignment labels, duplicate review actions, issue details, activity timelines, photo-evidence placeholders, dashboard analytics, local export/print summary support, full local backup/restore, no-dependency logic checks, and backend readiness documentation.
 
 ## Run Locally
 
 Open `src/index.html` in a browser.
 
-No install step is required for T0001.
+No install step is required.
 
 ## Project Structure
 
@@ -36,13 +36,15 @@ civic-issue-reporter/
 - Confirm the report form, issue cards, and metrics render.
 - Confirm the summary section renders.
 - Use `Export JSON` to download a local summary.
+- Use `Backup data` and `Restore backup` to verify local backup/restore.
 - Use `Print summary` to open the browser print dialog.
+- Run `node checks/local-logic-check.js`.
 - Use `docs/Manual_UI_Checks.md` for the full browser/manual UI checklist.
 - Confirm the browser console has no errors.
 
 ## Next Ticket
 
-T0012 - Accessibility and Keyboard Verification Pass
+No further local-only implementation ticket is currently ready. Backend, auth, database, deployment, external maps, and real uploads require explicit approval before implementation.
 
 ## Development Plan
 

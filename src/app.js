@@ -122,7 +122,7 @@ const sampleIssues = [
   }
 ];
 
-let issues = loadIssues();
+let issues = typeof localStorage === "undefined" ? sampleIssues.map(normalizeIssue) : loadIssues();
 let filters = {
   category: "All",
   status: "All",
@@ -267,6 +267,10 @@ function loadIssues() {
 }
 
 function saveIssues(nextIssues) {
+  if (typeof localStorage === "undefined") {
+    return;
+  }
+
   localStorage.setItem(STORAGE_KEY, JSON.stringify(nextIssues));
 }
 
@@ -428,6 +432,20 @@ function countBy(collection, values, key) {
   }));
 }
 
+function percentOf(count, total) {
+  return total > 0 ? Math.round((count / total) * 100) : 0;
+}
+
+function daysOpen(issue) {
+  const end = issue.status === "Resolved" ? new Date(issue.updatedAt) : new Date();
+  const start = new Date(issue.createdAt);
+  return Math.max(0, Math.floor((end - start) / 86400000));
+}
+
+function staleOpenIssues() {
+  return issues.filter((issue) => issue.status !== "Resolved" && daysOpen(issue) >= 3);
+}
+
 function createMunicipalSummary() {
   const openIssues = issues.filter((issue) => issue.status !== "Resolved");
   const highPriority = issues.filter((issue) => issue.priority === "High");
@@ -438,6 +456,8 @@ function createMunicipalSummary() {
   const statusCounts = countBy(issues, STATUSES, "status");
   const priorityCounts = countBy(issues, PRIORITIES, "priority");
   const categoryCounts = countBy(issues, CATEGORIES, "category");
+  const teamCounts = countBy(issues, TEAMS, "assignedTeam");
+  const staleIssues = staleOpenIssues();
 
   return {
     generatedAt: new Date().toISOString(),
@@ -448,11 +468,13 @@ function createMunicipalSummary() {
       coordinateReady: issuesWithCoordinates.length,
       duplicateHints: duplicateHints.length,
       linkedDuplicates: linkedDuplicates.length,
-      duplicateHintsNeedingReview: needsDuplicateReview.length
+      duplicateHintsNeedingReview: needsDuplicateReview.length,
+      staleOpenIssues: staleIssues.length
     },
     statusCounts,
     priorityCounts,
     categoryCounts,
+    teamCounts,
     issues: issues.map((issue) => ({
       id: issue.id,
       title: issue.title,
@@ -465,6 +487,7 @@ function createMunicipalSummary() {
       coordinates: formatCoordinates(issue.coordinates),
       duplicateReview: duplicateReviewSummary(issue) || "No duplicate hints",
       assignedTeam: issue.assignedTeam || "Unassigned",
+      daysOpen: daysOpen(issue),
       reportedAt: issue.createdAt,
       updatedAt: issue.updatedAt
     }))
@@ -500,6 +523,7 @@ function renderSummaryPreview() {
       <div><strong>${summary.totals.highPriority}</strong><span>High priority</span></div>
       <div><strong>${summary.totals.coordinateReady}</strong><span>Map-ready</span></div>
       <div><strong>${summary.totals.duplicateHintsNeedingReview}</strong><span>Duplicate hints to review</span></div>
+      <div><strong>${summary.totals.staleOpenIssues}</strong><span>Open 3+ days</span></div>
     </div>
     <div class="summary-breakdown">
       <section>
@@ -513,6 +537,10 @@ function renderSummaryPreview() {
       <section>
         <h4>Category</h4>
         ${summaryCountMarkup(summary.categoryCounts)}
+      </section>
+      <section>
+        <h4>Team</h4>
+        ${summaryCountMarkup(summary.teamCounts.filter((item) => item.count > 0))}
       </section>
     </div>
     <div class="summary-issue-table" role="table" aria-label="Priority issue summary">
@@ -782,23 +810,85 @@ function renderMetrics() {
     return created.toDateString() === today.toDateString();
   }).length;
 
+  const staleCount = staleOpenIssues().length;
   const metrics = [
-    [String(openIssues), "Open issues"],
-    [String(highPriority), "High priority"],
-    [String(categories), "Categories"],
-    [String(submittedToday), "Submitted today"]
+    [String(openIssues), "Open issues", `${percentOf(openIssues, issues.length)}% of total`],
+    [String(highPriority), "High priority", `${staleCount} open 3+ days`],
+    [String(categories), "Categories", `${issues.filter((issue) => issue.coordinates).length} map-ready`],
+    [String(submittedToday), "Submitted today", "Local browser data"]
   ];
 
   document.querySelector("#metrics").innerHTML = metrics
     .map(
-      ([value, label]) => `
+      ([value, label, note]) => `
         <div class="metric">
           <strong>${value}</strong>
           <span>${label}</span>
+          <small>${note}</small>
         </div>
       `
     )
     .join("");
+}
+
+function barListMarkup(items, total) {
+  return items
+    .filter((item) => item.count > 0)
+    .map(
+      (item) => `
+        <div class="bar-row">
+          <span>${escapeHtml(item.label)}</span>
+          <div class="bar-track"><span style="width: ${percentOf(item.count, total)}%"></span></div>
+          <strong>${item.count}</strong>
+        </div>
+      `
+    )
+    .join("");
+}
+
+function renderAnalyticsBoard() {
+  const summary = createMunicipalSummary();
+  const priorityQueue = issues
+    .filter((issue) => issue.status !== "Resolved")
+    .sort((left, right) => {
+      const priorityOrder = { High: 0, Medium: 1, Low: 2 };
+      return priorityOrder[left.priority] - priorityOrder[right.priority] || new Date(left.createdAt) - new Date(right.createdAt);
+    })
+    .slice(0, 5);
+
+  document.querySelector("#analyticsBoard").innerHTML = `
+    <section>
+      <h3>Priority queue</h3>
+      <ul class="compact-list">
+        ${
+          priorityQueue.length > 0
+            ? priorityQueue
+                .map(
+                  (issue) => `
+                    <li>
+                      <span class="category-mark small-mark" aria-hidden="true">${escapeHtml(categoryIcon(issue.category))}</span>
+                      <div>
+                        <strong>${escapeHtml(issue.title)}</strong>
+                        <span>${escapeHtml(issue.assignedTeam || "Unassigned")} · ${daysOpen(issue)} days open</span>
+                      </div>
+                      <span class="tag ${priorityClass(issue.priority)}">${escapeHtml(issue.priority)}</span>
+                    </li>
+                  `
+                )
+                .join("")
+            : `<li class="empty-state">No open reports need attention.</li>`
+        }
+      </ul>
+    </section>
+    <section>
+      <h3>Status mix</h3>
+      ${barListMarkup(summary.statusCounts, summary.totals.allIssues)}
+    </section>
+    <section>
+      <h3>Team load</h3>
+      ${barListMarkup(summary.teamCounts, summary.totals.allIssues)}
+    </section>
+  `;
 }
 
 function renderWorkflowBoard() {
@@ -875,6 +965,7 @@ function renderApp() {
   renderMetrics();
   renderLocationPreview();
   renderWorkflowBoard();
+  renderAnalyticsBoard();
   renderIssueDetail();
   renderSummaryPreview();
 }
@@ -895,8 +986,10 @@ function setStatus(message, type = "error") {
   status.classList.toggle("is-success", type === "success");
 }
 
-function setSummaryStatus(message) {
-  document.querySelector("#summaryStatus").textContent = message;
+function setSummaryStatus(message, type = "success") {
+  const status = document.querySelector("#summaryStatus");
+  status.textContent = message;
+  status.classList.toggle("is-success", type === "success");
 }
 
 function validateForm(formData) {
@@ -1175,31 +1268,133 @@ function printSummary() {
 function exportSummary() {
   const summary = createMunicipalSummary();
   const payload = JSON.stringify(summary, null, 2);
+  downloadJson(payload, `civic-issue-summary-${new Date().toISOString().slice(0, 10)}.json`);
+  setSummaryStatus("JSON summary exported from local browser data.");
+}
+
+function downloadJson(payload, filename) {
   const blob = new Blob([payload], { type: "application/json" });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
-  const date = new Date().toISOString().slice(0, 10);
 
   link.href = url;
-  link.download = `civic-issue-summary-${date}.json`;
+  link.download = filename;
   document.body.appendChild(link);
   link.click();
   link.remove();
   URL.revokeObjectURL(url);
-  setSummaryStatus("JSON summary exported from local browser data.");
 }
 
-document.querySelector("#reportForm").addEventListener("submit", handleSubmit);
-document.querySelector("#resetDemoData").addEventListener("click", resetDemoData);
-document.querySelector("#printSummary").addEventListener("click", printSummary);
-document.querySelector("#exportSummary").addEventListener("click", exportSummary);
-document.querySelector("#issueList").addEventListener("change", handleTriageChange);
-document.querySelector("#issueList").addEventListener("click", handleIssueClick);
-document.querySelector("#issueDetail").addEventListener("change", handleTriageChange);
-document.querySelector("#issueDetail").addEventListener("click", handleDetailClick);
-document.querySelector("#categoryFilter").addEventListener("change", handleFilterChange);
-document.querySelector("#statusFilter").addEventListener("change", handleFilterChange);
-document.querySelector("#priorityFilter").addEventListener("change", handleFilterChange);
-document.querySelector("#reportForm").addEventListener("input", renderAssistance);
+function createBackupPayload() {
+  return {
+    app: "civic-issue-reporter",
+    version: 1,
+    exportedAt: new Date().toISOString(),
+    issues
+  };
+}
 
-renderApp();
+function exportBackup() {
+  const payload = JSON.stringify(createBackupPayload(), null, 2);
+  downloadJson(payload, `civic-issue-backup-${new Date().toISOString().slice(0, 10)}.json`);
+  setSummaryStatus("Full local backup exported. This is not an official record.");
+}
+
+function validateImportedIssues(value) {
+  const importedIssues = Array.isArray(value) ? value : value && Array.isArray(value.issues) ? value.issues : null;
+
+  if (!importedIssues || importedIssues.length === 0) {
+    throw new Error("Backup must include at least one issue.");
+  }
+
+  return importedIssues.map((issue) => {
+    if (!issue || typeof issue !== "object") {
+      throw new Error("Every backup issue must be an object.");
+    }
+
+    if (!issue.title || !issue.category || !issue.location || !issue.description) {
+      throw new Error("Every backup issue needs title, category, location, and description.");
+    }
+
+    return normalizeIssue({
+      ...issue,
+      id: issue.id || `issue-${Date.now()}-${Math.random().toString(16).slice(2)}`,
+      status: STATUSES.includes(issue.status) ? issue.status : "Submitted",
+      priority: PRIORITIES.includes(issue.priority) ? issue.priority : inferPriority(issue.category, issue.description),
+      createdAt: issue.createdAt || new Date().toISOString(),
+      updatedAt: issue.updatedAt || issue.createdAt || new Date().toISOString()
+    });
+  });
+}
+
+function importBackup(event) {
+  const [file] = event.target.files;
+
+  if (!file) {
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.addEventListener("load", () => {
+    try {
+      const parsed = JSON.parse(reader.result);
+      issues = validateImportedIssues(parsed);
+      selectedIssueId = null;
+      filters = {
+        category: "All",
+        status: "All",
+        priority: "All"
+      };
+      saveIssues(issues);
+      renderApp();
+      setSummaryStatus(`Restored ${issues.length} local reports from backup.`);
+    } catch (error) {
+      setSummaryStatus(`Backup restore failed: ${error.message}`, "error");
+    } finally {
+      event.target.value = "";
+    }
+  });
+
+  reader.addEventListener("error", () => {
+    setSummaryStatus("Backup restore failed: the selected file could not be read.", "error");
+    event.target.value = "";
+  });
+
+  reader.readAsText(file);
+}
+
+if (typeof document !== "undefined") {
+  document.querySelector("#reportForm").addEventListener("submit", handleSubmit);
+  document.querySelector("#resetDemoData").addEventListener("click", resetDemoData);
+  document.querySelector("#printSummary").addEventListener("click", printSummary);
+  document.querySelector("#exportSummary").addEventListener("click", exportSummary);
+  document.querySelector("#exportBackup").addEventListener("click", exportBackup);
+  document.querySelector("#importBackup").addEventListener("change", importBackup);
+  document.querySelector("#issueList").addEventListener("change", handleTriageChange);
+  document.querySelector("#issueList").addEventListener("click", handleIssueClick);
+  document.querySelector("#issueDetail").addEventListener("change", handleTriageChange);
+  document.querySelector("#issueDetail").addEventListener("click", handleDetailClick);
+  document.querySelector("#categoryFilter").addEventListener("change", handleFilterChange);
+  document.querySelector("#statusFilter").addEventListener("change", handleFilterChange);
+  document.querySelector("#priorityFilter").addEventListener("change", handleFilterChange);
+  document.querySelector("#reportForm").addEventListener("input", renderAssistance);
+
+  renderApp();
+}
+
+if (typeof module !== "undefined") {
+  module.exports = {
+    CATEGORIES,
+    PRIORITIES,
+    STATUSES,
+    TEAMS,
+    createMunicipalSummary,
+    duplicateScore,
+    findPotentialDuplicates,
+    inferPriority,
+    normalizeIssue,
+    suggestPriority,
+    validateImportedIssues
+  };
+}
