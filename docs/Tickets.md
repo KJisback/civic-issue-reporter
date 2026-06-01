@@ -825,3 +825,29 @@ Automated checks:
 
 - Pass, `npm test`.
 - Pass, `npm run check`.
+
+## T0022 - CivicVault Document Modules Pass
+
+Status: Done
+
+Priority: High
+
+Goal:
+
+Make the CivicVault shell feel more functional by adding local-only document-vault modules instead of only navigation labels.
+
+Requirements:
+
+- Add issued report, uploaded evidence, municipal services, retrieve report, and recent activity modules.
+- Compute module contents from the existing local issue records.
+- Keep real uploads, identity, official document issuance, and government integrations out of scope.
+- Preserve the dependency-free static app and existing reporting/triage/export workflows.
+
+Result:
+
+Added a CivicVault module grid with local report counts, resolved/open record stats, evidence placeholders, service workload, latest record retrieval, and recent activity pulled from issue activity logs.
+
+Automated checks:
+
+- Pass, `npm test`.
+- Pass, `npm run check`.

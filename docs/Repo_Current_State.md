@@ -28,12 +28,15 @@
 - T0019 - Test Harness Decision and First Logic Tests
 - T0020 - Backend Readiness Design
 - T0021 - Saffron CivicVault Shell
+- T0022 - CivicVault Document Modules Pass
 
 ## Current App Status
 
 The project has a no-dependency static app with a saffron CivicVault shell, citizen report form, local issue records, browser persistence through `localStorage`, sample issue cards, admin-style metrics, category/status/priority filters, local status and priority controls, map-ready location fields, a non-interactive location readiness preview, explainable local duplicate hints, local duplicate review actions, local priority assistance, a compact workflow summary, a focused issue detail panel with status and activity timelines, local team assignment, photo-evidence placeholders, an admin analytics snapshot, a municipal review summary with print and JSON export actions, full local backup/restore, no-dependency logic checks, and T0012 accessibility hardening for focus visibility, skip navigation, validation association, detail focus management, live status regions, and mobile text containment.
 
 T0021 reframed the UI toward a DigiLocker-inspired civic document vault pattern using CivicVault naming, Home / Report vault / New report / Municipal services / Activity / Backup and exports navigation, a local workspace identity strip, and a saffron-led palette. The app does not use DigiLocker branding, government marks, external assets, or external services.
+
+T0022 added local-only vault modules for issued reports, uploaded evidence placeholders, municipal services, retrieve report, and recent activity. These modules are computed from browser-stored issue records and do not add real uploads, identity collection, official document issuance, or external integrations.
 
 A generated UI/UX concept sheet has been saved as the design reference for future UI implementation.
 
@@ -92,7 +95,7 @@ None. `package.json` exists only to provide dependency-free `npm test` and `npm 
 
 ## Next Recommended Ticket
 
-T0022 - CivicVault Document Modules Pass. Continue local-only fidelity work by expanding document-vault sections for issued reports, uploaded evidence placeholders, municipal services, recent activity, and report detail retrieval. Backend, auth, database, external maps, notifications, and real uploads still require explicit approval before implementation.
+T0023 - Pitch and Hackathon Demo Mode. Add resettable demo scenarios, pitch-ready metric language, and screenshot-ready local states. Backend, auth, database, external maps, notifications, and real uploads still require explicit approval before implementation.
 
 ## Last Updated
 

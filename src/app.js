@@ -891,6 +891,119 @@ function renderAnalyticsBoard() {
   `;
 }
 
+function latestActivities(limit = 5) {
+  return issues
+    .flatMap((issue) =>
+      issue.activityLog.map((activity) => ({
+        ...activity,
+        issueId: issue.id,
+        issueTitle: issue.title,
+        category: issue.category
+      }))
+    )
+    .sort((left, right) => new Date(right.createdAt) - new Date(left.createdAt))
+    .slice(0, limit);
+}
+
+function moduleStatMarkup(value, label, detail) {
+  return `
+    <div class="module-stat">
+      <strong>${escapeHtml(String(value))}</strong>
+      <span>${escapeHtml(label)}</span>
+      <small>${escapeHtml(detail)}</small>
+    </div>
+  `;
+}
+
+function renderVaultModules() {
+  const summary = createMunicipalSummary();
+  const resolvedReports = issues.filter((issue) => issue.status === "Resolved");
+  const evidencePending = issues.filter((issue) => !issue.photo);
+  const newestIssue = issues
+    .slice()
+    .sort((left, right) => new Date(right.createdAt) - new Date(left.createdAt))[0];
+  const activeServices = summary.teamCounts
+    .filter((item) => item.label !== "Unassigned" && item.count > 0)
+    .slice(0, 4);
+  const activities = latestActivities(5);
+
+  document.querySelector("#vaultModules").innerHTML = `
+    <section class="vault-card vault-card-primary" aria-labelledby="issuedReportsTitle">
+      <div>
+        <p class="eyebrow">Issued reports</p>
+        <h2 id="issuedReportsTitle">Civic report vault</h2>
+        <p>Locally stored reports are grouped like records: open, resolved, evidence-ready, and exportable.</p>
+      </div>
+      <div class="module-stat-grid">
+        ${moduleStatMarkup(summary.totals.allIssues, "Total records", "Saved in this browser")}
+        ${moduleStatMarkup(resolvedReports.length, "Resolved", "Issued closure records")}
+        ${moduleStatMarkup(summary.totals.openIssues, "Open", "Awaiting municipal action")}
+      </div>
+      <a class="module-link" href="#issues">Open report vault</a>
+    </section>
+
+    <section class="vault-card" aria-labelledby="evidenceVaultTitle">
+      <p class="eyebrow">Uploaded evidence</p>
+      <h3 id="evidenceVaultTitle">Evidence placeholders</h3>
+      <p>${evidencePending.length} records are ready for future photo slots after privacy approval.</p>
+      <div class="evidence-slots" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </section>
+
+    <section class="vault-card" aria-labelledby="servicesTitle">
+      <p class="eyebrow">Municipal services</p>
+      <h3 id="servicesTitle">Service workload</h3>
+      <ul class="module-list">
+        ${
+          activeServices.length > 0
+            ? activeServices
+                .map((service) => `<li><span>${escapeHtml(service.label)}</span><strong>${service.count}</strong></li>`)
+                .join("")
+            : `<li><span>No active service load</span><strong>0</strong></li>`
+        }
+      </ul>
+    </section>
+
+    <section class="vault-card" aria-labelledby="retrieveTitle">
+      <p class="eyebrow">Retrieve report</p>
+      <h3 id="retrieveTitle">Latest local record</h3>
+      ${
+        newestIssue
+          ? `<p><strong>${escapeHtml(newestIssue.id)}</strong></p><p>${escapeHtml(newestIssue.title)} · ${escapeHtml(newestIssue.status)}</p>`
+          : `<p>No local records available.</p>`
+      }
+      <a class="module-link" href="#issues">Search with filters</a>
+    </section>
+
+    <section class="vault-card activity-module" aria-labelledby="activityTitle">
+      <p class="eyebrow">Activity</p>
+      <h3 id="activityTitle">Recent vault activity</h3>
+      <ol class="module-activity">
+        ${
+          activities.length > 0
+            ? activities
+                .map(
+                  (activity) => `
+                    <li>
+                      <span class="category-mark small-mark" aria-hidden="true">${escapeHtml(categoryIcon(activity.category))}</span>
+                      <div>
+                        <strong>${escapeHtml(activity.label)}</strong>
+                        <p>${escapeHtml(activity.issueTitle)} · ${formatDate(activity.createdAt)}</p>
+                      </div>
+                    </li>
+                  `
+                )
+                .join("")
+            : `<li class="empty-state">No local activity yet.</li>`
+        }
+      </ol>
+    </section>
+  `;
+}
+
 function renderWorkflowBoard() {
   const board = document.querySelector("#workflowBoard");
 
@@ -961,6 +1074,7 @@ function renderFilters() {
 
 function renderApp() {
   renderFilters();
+  renderVaultModules();
   renderIssues();
   renderMetrics();
   renderLocationPreview();

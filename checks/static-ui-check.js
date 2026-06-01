@@ -3,6 +3,7 @@ const fs = require("node:fs");
 
 const html = fs.readFileSync("src/index.html", "utf8");
 const js = fs.readFileSync("src/app.js", "utf8");
+const staticSource = `${html}\n${js}`;
 
 const requiredIds = [
   "analyticsBoard",
@@ -35,6 +36,7 @@ const requiredIds = [
   "summary",
   "summaryPreview",
   "summaryStatus",
+  "vaultModules",
   "workflowBoard"
 ];
 
@@ -55,6 +57,9 @@ queriedIds.forEach((id) => {
   "Skip to report form",
   "Report vault",
   "Municipal services",
+  "Issued reports",
+  "Uploaded evidence",
+  "Retrieve report",
   "Backup and exports",
   "Verified local reports",
   "Backup data",
@@ -63,7 +68,7 @@ queriedIds.forEach((id) => {
   "Export JSON",
   "Reset demo data"
 ].forEach((text) => {
-  assert.match(html, new RegExp(text), `Missing visible control text: ${text}`);
+  assert.match(staticSource, new RegExp(text), `Missing visible control text: ${text}`);
 });
 
 assert.doesNotMatch(html, /https?:\/\//, "Static MVP should not load external network assets");

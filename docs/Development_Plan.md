@@ -188,7 +188,7 @@ Done. The app now presents CivicVault as a local civic report vault with Home, R
 
 ### T0022 - CivicVault Document Modules Pass
 
-Status: Ready
+Status: Done
 
 Purpose:
 
@@ -196,7 +196,7 @@ Make the app feel more like a functional document-vault product without adding e
 
 Expected result:
 
-Add local-only modules for issued reports, evidence placeholders, municipal services, recent activity, and report retrieval. Keep all data in browser storage and keep the implementation dependency-free.
+Done. Added local-only modules for issued reports, evidence placeholders, municipal services, recent activity, and report retrieval. All data remains in browser storage and the implementation remains dependency-free.
 
 ### T0023 - Pitch and Hackathon Demo Mode
 
@@ -235,4 +235,4 @@ Add local search by report ID, title, category, location, status, priority, and 
 
 ## Recommended Immediate Action
 
-Run manual browser verification for the saffron CivicVault shell, then continue with T0022 local-only document modules. Any production phase still requires explicit approval for backend, auth, database, deployment, external maps, and real uploads.
+Run manual browser verification for the saffron CivicVault shell and T0022 modules, then continue with T0023 pitch and hackathon demo mode. Any production phase still requires explicit approval for backend, auth, database, deployment, external maps, and real uploads.
