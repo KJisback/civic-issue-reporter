@@ -2,7 +2,7 @@
 
 ## Current Branch
 
-`feature/t0012-accessibility-keyboard`
+`main`
 
 ## Completed Tickets
 
@@ -27,10 +27,13 @@
 - T0018 - Local Backup and Restore
 - T0019 - Test Harness Decision and First Logic Tests
 - T0020 - Backend Readiness Design
+- T0021 - Saffron CivicVault Shell
 
 ## Current App Status
 
-The project has a no-dependency static app with a refined minimal civic UI, citizen report form, local issue records, browser persistence through `localStorage`, sample issue cards, admin-style metrics, category/status/priority filters, local status and priority controls, map-ready location fields, a non-interactive location readiness preview, explainable local duplicate hints, local duplicate review actions, local priority assistance, a compact workflow summary, a focused issue detail panel with status and activity timelines, local team assignment, photo-evidence placeholders, an admin analytics snapshot, a municipal review summary with print and JSON export actions, full local backup/restore, no-dependency logic checks, and T0012 accessibility hardening for focus visibility, skip navigation, validation association, detail focus management, live status regions, and mobile text containment.
+The project has a no-dependency static app with a saffron CivicVault shell, citizen report form, local issue records, browser persistence through `localStorage`, sample issue cards, admin-style metrics, category/status/priority filters, local status and priority controls, map-ready location fields, a non-interactive location readiness preview, explainable local duplicate hints, local duplicate review actions, local priority assistance, a compact workflow summary, a focused issue detail panel with status and activity timelines, local team assignment, photo-evidence placeholders, an admin analytics snapshot, a municipal review summary with print and JSON export actions, full local backup/restore, no-dependency logic checks, and T0012 accessibility hardening for focus visibility, skip navigation, validation association, detail focus management, live status regions, and mobile text containment.
+
+T0021 reframed the UI toward a DigiLocker-inspired civic document vault pattern using CivicVault naming, Home / Report vault / New report / Municipal services / Activity / Backup and exports navigation, a local workspace identity strip, and a saffron-led palette. The app does not use DigiLocker branding, government marks, external assets, or external services.
 
 A generated UI/UX concept sheet has been saved as the design reference for future UI implementation.
 
@@ -65,8 +68,8 @@ None. `package.json` exists only to provide dependency-free `npm test` and `npm 
 - Lint: Not run, no lint system.
 - Typecheck: Not run, no type system.
 - Syntax: Pass, `node --check src/app.js` on 2026-06-01.
-- Git: Local repository initialized on `main` with initial commit `ed25f63`.
-- GitHub: Remote `origin` points to `https://github.com/KJisback/civic-issue-reporter.git`; GitHub API confirms `main` at commit `ed25f63a4bfa564b52d9664f3cdf4ad79cb6d561`.
+- Git: Local repository is initialized on `main` and connected to GitHub.
+- GitHub: Remote `origin` points to `https://github.com/KJisback/civic-issue-reporter.git`; GitHub Pages serves the static app from the `gh-pages` branch.
 
 ## Known Issues
 
@@ -77,10 +80,11 @@ None. `package.json` exists only to provide dependency-free `npm test` and `npm 
 - Duplicate review actions are local-only and do not merge records or record real staff identity.
 - JSON summary and backup exports are browser-generated local files and are not secure official records.
 - Browser-based keyboard and screen-reader behavior should continue to be spot-checked manually after future UI changes.
+- CivicVault is inspired by document-vault UI patterns, but must not impersonate DigiLocker, claim government affiliation, or reuse protected branding.
 
 ## Current Risks
 
-- Future real map, geolocation, image upload, and notification features may create privacy concerns and need explicit product decisions.
+- Future real map, geolocation, image upload, identity, notification, and official-record features may create privacy concerns and need explicit product decisions.
 - Branch-per-ticket workflow is enforceable locally.
 - GitHub CLI works when the dead proxy environment variables are cleared for network commands.
 - Direct Git HTTPS remote commands may need `GIT_EXEC_PATH=F:\Kuku\Workspace\.codex-tools\mingit\mingw64\bin` and cleared proxy variables in this Codex shell.
@@ -88,7 +92,7 @@ None. `package.json` exists only to provide dependency-free `npm test` and `npm 
 
 ## Next Recommended Ticket
 
-No further local-only implementation ticket is currently ready. Backend, auth, database, deployment, external maps, and real upload work require explicit approval before implementation.
+T0022 - CivicVault Document Modules Pass. Continue local-only fidelity work by expanding document-vault sections for issued reports, uploaded evidence placeholders, municipal services, recent activity, and report detail retrieval. Backend, auth, database, external maps, notifications, and real uploads still require explicit approval before implementation.
 
 ## Last Updated
 

@@ -1,14 +1,14 @@
-# Civic Issue Reporter
+# CivicVault
 
-A civic issue reporting and resolution platform for citizens and municipal teams.
+A saffron civic issue vault for citizens and municipal teams.
 
-The MVP will let citizens report local issues with category, location, description, and photo evidence, then let administrators triage, prioritize, assign, and resolve those reports through a dashboard.
+The MVP lets citizens report local issues with category, location, description, and evidence placeholders, then lets municipal teams triage, prioritize, assign, audit, export, and resolve those reports through a DigiLocker-inspired document-vault interface.
 
 ## Current Status
 
-T0001 through T0020 are complete locally.
+T0001 through T0021 are complete locally.
 
-The current version is a no-dependency static MVP with local browser storage, citizen reporting, triage controls, team assignment labels, duplicate review actions, issue details, activity timelines, photo-evidence placeholders, dashboard analytics, local export/print summary support, full local backup/restore, no-dependency logic checks, and backend readiness documentation.
+The current version is a no-dependency static MVP with saffron CivicVault UI, local browser storage, citizen reporting, triage controls, team assignment labels, duplicate review actions, issue details, activity timelines, photo-evidence placeholders, dashboard analytics, local export/print summary support, full local backup/restore, no-dependency logic checks, and backend readiness documentation.
 
 ## Run Locally
 
@@ -55,7 +55,7 @@ civic-issue-reporter/
 
 ## Next Ticket
 
-No further local-only implementation ticket is currently ready. Backend, auth, database, deployment, external maps, and real uploads require explicit approval before implementation.
+Continue iterative CivicVault fidelity work, then move to backend, auth, database, deployment, external maps, and real uploads only after explicit approval.
 
 ## Development Plan
 

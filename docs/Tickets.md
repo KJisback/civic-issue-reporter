@@ -798,3 +798,30 @@ Prepare backend, data, audit, auth-assumption, and API boundary design without i
 Result:
 
 Added `docs/Backend_Readiness_Design.md` with future API boundaries, storage model, auth and identity assumptions, audit expectations, privacy gates, migration notes, and next-phase approval requirements. No backend, database, auth, deployment, external map, notification, or upload service was implemented.
+
+## T0021 - Saffron CivicVault Shell
+
+Status: Done
+
+Priority: High
+
+Goal:
+
+Transform the static MVP toward a DigiLocker-inspired civic document vault shell while avoiding DigiLocker branding, marks, or government-service impersonation.
+
+Requirements:
+
+- Use a saffron-led palette instead of the prior green-led civic palette.
+- Keep the product clearly named CivicVault / Civic Issue Reporter.
+- Add document-vault navigation language such as Home, Report vault, New report, Municipal services, Activity, and Backup and exports.
+- Preserve the existing local report, triage, duplicate review, activity, backup, export, and analytics workflows.
+- Keep the implementation dependency-free and local-only.
+
+Result:
+
+The app now has a saffron CivicVault shell with compact top identity bar, vault-style sidebar navigation, local workspace identity strip, document-vault hero messaging, and saffron report/dashboard surfaces. No DigiLocker branding or external assets were added.
+
+Automated checks:
+
+- Pass, `npm test`.
+- Pass, `npm run check`.

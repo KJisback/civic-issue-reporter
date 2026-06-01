@@ -1,10 +1,10 @@
 # Prompt Context Pack
 
-Project: Civic Issue Reporter
+Project: CivicVault
 
 Problem statement:
 
-Build a crowdsourced civic issue reporting and resolution system that helps citizens submit local infrastructure or sanitation issues and helps municipal staff triage and resolve them.
+Build a saffron civic issue vault that helps citizens submit local infrastructure or sanitation reports and helps municipal staff triage, assign, audit, export, and resolve them.
 
 Primary inferred MVP:
 
@@ -17,7 +17,7 @@ Primary inferred MVP:
 
 Current next ticket:
 
-No local-only implementation ticket is currently ready.
+T0022 - CivicVault Document Modules Pass.
 
 Completed tickets:
 
@@ -42,6 +42,7 @@ Completed tickets:
 - T0018 - Local Backup and Restore
 - T0019 - Test Harness Decision and First Logic Tests
 - T0020 - Backend Readiness Design
+- T0021 - Saffron CivicVault Shell
 
 Current implementation state:
 
@@ -59,7 +60,7 @@ Current implementation state:
 - Local team assignment labels, photo-evidence placeholders, admin analytics, local activity timelines, and full backup/restore.
 - No-dependency Node checks for priority, duplicate scoring, normalization, backup import validation, summary generation, static DOM wiring, and local-only assets.
 - Backend readiness design documented without implementing backend, auth, database, deployment, maps, notifications, or uploads.
-- Minimal civic UI direction applied from saved concept sheet.
+- Saffron CivicVault shell applied with document-vault navigation, local workspace identity, and no DigiLocker branding or impersonation.
 
 Saved UI/UX direction:
 
@@ -69,11 +70,15 @@ Saved UI/UX direction:
 
 Next handoff focus:
 
-Manual browser verification and explicit approval for any non-local production phase.
+Continue local-only CivicVault fidelity work, then request explicit approval before any non-local production phase.
 
 Next sequence after T0020:
 
-- No further local-only implementation ticket is currently ready.
+- T0021 - Saffron CivicVault Shell: Done.
+- T0022 - CivicVault Document Modules Pass: local-only document-vault sections for issued reports, uploaded evidence placeholders, municipal services, recent activity, and report retrieval.
+- T0023 - Pitch and Hackathon Demo Mode: guided sample scenarios, shareable demo states, and pitch-deck screenshots without external services.
+- T0024 - Search and Retrieve Report Flow: local report lookup by ID, category, location, and status.
+- T0025 - Backend Pilot Plan or Implementation: only after approval for auth, database, hosting, maps, and uploads.
 
 Human-gated decisions:
 
