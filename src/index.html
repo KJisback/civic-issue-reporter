@@ -3,58 +3,73 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Civic Issue Reporter</title>
+    <title>CivicVault</title>
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <a class="skip-link" href="#report">Skip to report form</a>
     <header class="topbar">
-      <div>
-        <p class="eyebrow">Civic Issue Reporter</p>
-        <h1>Report civic issues in minutes. Track resolution without noise.</h1>
+      <div class="brand-locker">
+        <span class="brand-mark" aria-hidden="true">CV</span>
+        <div>
+          <p class="eyebrow">CivicVault</p>
+          <h1>Civic issue vault for citizens and municipal teams.</h1>
+        </div>
       </div>
       <nav aria-label="Primary navigation">
-        <a href="#report">Report</a>
-        <a href="#issues">Issues</a>
-        <a href="#dashboard">Dashboard</a>
-        <a href="#summary">Summary</a>
+        <a href="#dashboard">Home</a>
+        <a href="#issues">Report vault</a>
+        <a href="#report">New report</a>
+        <a href="#summary">Exports</a>
       </nav>
     </header>
 
     <main>
       <section class="hero-shell" aria-labelledby="intro-title">
         <div>
-          <h2 id="intro-title">A month-long build for transparent civic response</h2>
+          <h2 id="intro-title">Store, verify, assign, and resolve civic reports from one local workspace.</h2>
           <p>
-            A calm local-first prototype for citizen reporting, duplicate hints,
-            triage queues, and map-ready issue context.
+            A DigiLocker-inspired civic operations surface with report cards,
+            municipal services, activity history, local backups, and export-ready summaries.
           </p>
         </div>
         <div class="hero-card" aria-label="Project status">
-          <span>Local-first MVP</span>
-          <strong>No backend, no map API, no auth yet.</strong>
-          <p>Every workflow on this page runs in your browser storage.</p>
+          <span>Local civic vault</span>
+          <strong>No impersonation, no external service.</strong>
+          <p>Everything runs in browser storage until backend, auth, maps, and uploads are approved.</p>
         </div>
       </section>
 
       <div class="app-grid">
         <aside class="sidebar" aria-label="Workspace sections">
-          <a href="#report" class="active-link">Report issue</a>
-          <a href="#issues">Open reports</a>
-          <a href="#dashboard">Dashboard</a>
-          <a href="#dashboard">Triage</a>
-          <a href="#issues">Watchlist</a>
-          <a href="#summary">Summary</a>
+          <a href="#dashboard" class="active-link"><span aria-hidden="true">H</span> Home</a>
+          <a href="#issues"><span aria-hidden="true">V</span> Report vault</a>
+          <a href="#report"><span aria-hidden="true">N</span> New report</a>
+          <a href="#dashboard"><span aria-hidden="true">S</span> Municipal services</a>
+          <a href="#issues"><span aria-hidden="true">A</span> Activity</a>
+          <a href="#summary"><span aria-hidden="true">E</span> Backup and exports</a>
         </aside>
 
         <div class="workspace">
+          <section class="identity-strip" aria-label="Civic vault account summary">
+            <div>
+              <span class="status-dot" aria-hidden="true"></span>
+              <strong>Ward 12 civic workspace</strong>
+              <p>Local demo account · citizen reports and municipal triage</p>
+            </div>
+            <div>
+              <strong>Verified local data</strong>
+              <p>No network requests, no identity collection, no official record status.</p>
+            </div>
+          </section>
+
           <section id="report" class="panel report-panel" aria-labelledby="report-title">
             <div class="section-heading">
               <div>
                 <p class="eyebrow">Citizen intake</p>
-                <h2 id="report-title">Report issue</h2>
+                <h2 id="report-title">Add report to vault</h2>
               </div>
-              <span class="soft-chip">Private draft</span>
+              <span class="soft-chip">Local draft</span>
             </div>
 
             <form class="report-form" id="reportForm" novalidate>
@@ -114,7 +129,7 @@
               </fieldset>
 
               <div class="form-note wide">
-                Photo upload and real map pinning are planned for later tickets after privacy decisions.
+                Evidence slots are placeholders. Real uploads and map pinning require privacy approval.
               </div>
 
               <div class="assist-panel wide" id="assistPanel" aria-live="polite"></div>
@@ -130,10 +145,10 @@
           <section id="dashboard" class="panel dashboard" aria-labelledby="dashboard-title">
             <div class="section-heading">
               <div>
-                <p class="eyebrow">Admin overview</p>
-                <h2 id="dashboard-title">Triage snapshot</h2>
+                <p class="eyebrow">Home</p>
+                <h2 id="dashboard-title">Civic vault dashboard</h2>
               </div>
-              <span class="soft-chip">Local data</span>
+              <span class="soft-chip">Saffron mode</span>
             </div>
             <div class="metrics" id="metrics" aria-label="Current issue metrics"></div>
             <div class="dashboard-grid">
@@ -146,8 +161,8 @@
           <section id="summary" class="panel summary-panel" aria-labelledby="summary-title">
             <div class="section-heading">
               <div>
-                <p class="eyebrow">Municipal review</p>
-                <h2 id="summary-title">Export and print summary</h2>
+                <p class="eyebrow">Backup and exports</p>
+                <h2 id="summary-title">Shareable civic summary</h2>
               </div>
               <span class="soft-chip">Local snapshot</span>
             </div>
@@ -168,8 +183,8 @@
           <section id="issues" class="panel" aria-labelledby="issues-title">
             <div class="section-heading">
               <div>
-                <p class="eyebrow">Public queue</p>
-                <h2 id="issues-title">Open reports</h2>
+                <p class="eyebrow">Report vault</p>
+                <h2 id="issues-title">Verified local reports</h2>
               </div>
               <span class="queue-count" id="queueCount" role="status" aria-live="polite"></span>
             </div>

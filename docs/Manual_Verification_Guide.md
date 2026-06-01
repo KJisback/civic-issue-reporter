@@ -216,3 +216,16 @@ Use this before larger design, data, or release changes.
 1. Open `docs/Backend_Readiness_Design.md`.
 2. Confirm it documents future API boundaries, storage model, audit expectations, privacy gates, migration notes, and approval requirements.
 3. Confirm no backend, auth, database, deployment, external map, notification, or upload code was added.
+
+## T0021 - Saffron CivicVault Shell
+
+1. Open `src/index.html`.
+2. Confirm the browser title and top identity use `CivicVault`.
+3. Confirm the first viewport uses a saffron-led palette, compact top bar, and vault-style sidebar.
+4. Confirm navigation labels include Home, Report vault, New report, Municipal services, Activity, and Backup and exports.
+5. Confirm no DigiLocker logo, government seal, or official-service claim appears.
+6. Submit a report and confirm it appears in Verified local reports.
+7. Change status, priority, team assignment, and duplicate review state.
+8. Confirm dashboard, activity timelines, summary, backup, restore, print, and JSON export still work.
+9. Resize to a mobile-width viewport and confirm text and controls do not overlap or clip.
+10. Run `npm test` and `npm run check`.

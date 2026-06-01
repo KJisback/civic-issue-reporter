@@ -51,7 +51,12 @@ queriedIds.forEach((id) => {
 });
 
 [
+  "CivicVault",
   "Skip to report form",
+  "Report vault",
+  "Municipal services",
+  "Backup and exports",
+  "Verified local reports",
   "Backup data",
   "Restore backup",
   "Print summary",

@@ -24,7 +24,7 @@ Current caveats:
 
 Conclusion:
 
-The project now has a finished local-only static MVP shape. The next stage should not jump to backend, auth, map providers, or deployment without explicit approval; it should add no-dependency logic checks and backend-readiness documentation first.
+The project now has a finished local-only static MVP shape and a saffron CivicVault shell. The next stage should keep improving document-vault fidelity locally, while avoiding DigiLocker branding or government-service impersonation. Backend, auth, map providers, uploads, and deployment changes still need explicit approval.
 
 ## UI/UX Snapshot Implementation Direction
 
@@ -40,6 +40,7 @@ The current app already implements the concept direction at a broad level:
 - Admin triage snapshot.
 - Issue detail and timeline.
 - Calm civic palette with green, teal, amber, coral, off-white surfaces, and compact controls.
+- Saffron CivicVault visual system with document-vault navigation and local workspace identity.
 
 Completed snapshot-aligned work:
 
@@ -49,6 +50,11 @@ Completed snapshot-aligned work:
 4. Photo-evidence placeholders and privacy language were added in T0014.
 5. Local-only team assignment labels were added in T0015.
 6. Local activity history for workflow changes was added in T0017.
+7. The app was reframed as a saffron CivicVault shell in T0021.
+
+## CivicVault Iteration Direction
+
+The target is a functional civic vault experience inspired by common document-locker patterns: a home dashboard, report vault, new report intake, municipal services, activity history, and backup/export controls. The product must remain visibly separate from DigiLocker and must not use DigiLocker marks, government seals, or language that implies official integration.
 
 ## Next Development Sequence
 
@@ -168,6 +174,54 @@ Human review trigger:
 
 Backend, database, auth, and deployment decisions require explicit approval before implementation tickets are created.
 
+### T0021 - Saffron CivicVault Shell
+
+Status: Done
+
+Purpose:
+
+Reframe the existing local MVP into a saffron document-vault shell using CivicVault naming and vault-style navigation.
+
+Expected result:
+
+Done. The app now presents CivicVault as a local civic report vault with Home, Report vault, New report, Municipal services, Activity, and Backup and exports navigation while preserving existing local workflows.
+
+### T0022 - CivicVault Document Modules Pass
+
+Status: Ready
+
+Purpose:
+
+Make the app feel more like a functional document-vault product without adding external services.
+
+Expected result:
+
+Add local-only modules for issued reports, evidence placeholders, municipal services, recent activity, and report retrieval. Keep all data in browser storage and keep the implementation dependency-free.
+
+### T0023 - Pitch and Hackathon Demo Mode
+
+Status: Planned
+
+Purpose:
+
+Make the product easier to demo in hackathons and pitch decks.
+
+Expected result:
+
+Add a resettable demo scenario set, clearer high-impact metrics, exportable demo summary language, and screenshot-ready states that explain the product without requiring backend access.
+
+### T0024 - Search and Retrieve Report Flow
+
+Status: Planned
+
+Purpose:
+
+Let users find and inspect local reports as a vault, not only as a queue.
+
+Expected result:
+
+Add local search by report ID, title, category, location, status, priority, and assignment. Add a retrieval-oriented empty state and detail entry point.
+
 ## Human Decisions Needed Before Later Phases
 
 - Citizen identity: anonymous, contact-optional, or account-based.
@@ -177,7 +231,8 @@ Backend, database, auth, and deployment decisions require explicit approval befo
 - Whether local JSON exports can ever become official records.
 - Whether to introduce dependencies for tests or framework migration.
 - Whether and when to initialize this project as a git repository.
+- Whether CivicVault should remain a standalone brand or be positioned as part of a broader software firm product suite.
 
 ## Recommended Immediate Action
 
-Run manual browser verification for the finished local-only MVP. Any production phase now requires explicit approval for backend, auth, database, deployment, external maps, and real uploads.
+Run manual browser verification for the saffron CivicVault shell, then continue with T0022 local-only document modules. Any production phase still requires explicit approval for backend, auth, database, deployment, external maps, and real uploads.
