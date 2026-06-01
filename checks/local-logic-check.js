@@ -2,6 +2,7 @@ const assert = require("node:assert/strict");
 
 const {
   createDemoScenarioIssues,
+  createIssueRecordExport,
   createMunicipalSummary,
   createPitchSnapshot,
   demoScenarios,
@@ -107,5 +108,10 @@ const searchableIssues = [
 assert.equal(searchIssues("drainage crew", searchableIssues).length, 1);
 assert.equal(searchIssues("ward 8", searchableIssues)[0].id, "search-2");
 assert.equal(searchIssues("", searchableIssues).length, 2);
+
+const recordExport = createIssueRecordExport(searchableIssues[0]);
+assert.equal(recordExport.record.id, "search-1");
+assert.equal(recordExport.record.location.ward, "Not specified");
+assert.match(recordExport.disclaimer, /Local browser record/);
 
 console.log("local logic checks passed");

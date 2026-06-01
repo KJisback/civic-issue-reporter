@@ -222,6 +222,18 @@ Expected result:
 
 Done. Added local search by report ID, title, category, location, status, priority, assignment, coordinates, description, and duplicate review summary. Search combines with existing filters and includes a clear action plus live summary.
 
+### T0025 - Report Detail Vault Page
+
+Status: Done
+
+Purpose:
+
+Make the retrieved report detail view feel like a complete vault record dossier.
+
+Expected result:
+
+Done. Added record identity, workflow audit wording, record export language, and local single-record JSON export.
+
 ## Human Decisions Needed Before Later Phases
 
 - Citizen identity: anonymous, contact-optional, or account-based.
@@ -235,4 +247,4 @@ Done. Added local search by report ID, title, category, location, status, priori
 
 ## Recommended Immediate Action
 
-Run manual browser verification for the saffron CivicVault shell, T0022 modules, T0023 demo mode, and T0024 retrieval flow, then continue with T0025 report detail vault page. Any production phase still requires explicit approval for backend, auth, database, deployment, external maps, and real uploads.
+Run manual browser verification for the saffron CivicVault shell, T0022 modules, T0023 demo mode, T0024 retrieval flow, and T0025 record dossier, then continue with T0026 release and Pages automation. Any production phase still requires explicit approval for backend, auth, database, deployment, external maps, and real uploads.

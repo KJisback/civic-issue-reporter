@@ -31,6 +31,7 @@
 - T0022 - CivicVault Document Modules Pass
 - T0023 - Pitch and Hackathon Demo Mode
 - T0024 - Search and Retrieve Report Flow
+- T0025 - Report Detail Vault Page
 
 ## Current App Status
 
@@ -43,6 +44,8 @@ T0022 added local-only vault modules for issued reports, uploaded evidence place
 T0023 added Pitch demo mode with local Ward operations, Safety sprint, and Sanitation drive scenarios plus pitch snapshot lines generated from local metrics. Scenario loading replaces browser-stored demo reports only and does not add network calls or backend dependencies.
 
 T0024 added a local vault retrieval bar that searches report ID, title, category, location, status, priority, assigned team, coordinates, description, and duplicate review summary. Search combines with existing filters and remains local-only.
+
+T0025 upgraded issue detail into a Vault record dossier with record identity, workflow audit wording, review signals, triage controls, and a local single-record JSON export action. The export remains a browser-generated non-official document.
 
 A generated UI/UX concept sheet has been saved as the design reference for future UI implementation.
 
@@ -101,7 +104,7 @@ None. `package.json` exists only to provide dependency-free `npm test` and `npm 
 
 ## Next Recommended Ticket
 
-T0025 - Report Detail Vault Page. Upgrade the detail panel into a stronger record dossier with clearer sections for record identity, evidence placeholders, workflow audit, duplicate decisions, location metadata, and export actions. Backend, auth, database, external maps, notifications, and real uploads still require explicit approval before implementation.
+T0026 - Release and Pages Automation. Document and script the repeatable GitHub Pages publish flow so releases are easier to ship. Backend, auth, database, external maps, notifications, and real uploads still require explicit approval before implementation.
 
 ## Last Updated
 

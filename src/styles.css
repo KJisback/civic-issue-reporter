@@ -1312,6 +1312,43 @@ button:hover {
   margin-bottom: 18px;
 }
 
+.detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.record-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.record-strip div {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  background: var(--surface-soft);
+}
+
+.record-strip span {
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.record-strip strong {
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
 .detail-header h2,
 .detail-section h3 {
   margin: 0;
@@ -1345,6 +1382,11 @@ button:hover {
 
 .detail-controls {
   background: #ffffff;
+}
+
+.record-export-note {
+  background: #ffffff;
+  border-left: 4px solid var(--amber);
 }
 
 .timeline,
@@ -1476,6 +1518,7 @@ button:hover {
   .metrics,
   .module-stat-grid,
   .pitch-snapshot,
+  .record-strip,
   .analytics-board,
   .filter-bar,
   .retrieve-bar,
@@ -1511,6 +1554,10 @@ button:hover {
 
   .form-actions {
     display: grid;
+  }
+
+  .detail-actions {
+    justify-content: stretch;
   }
 
   .restore-control {
