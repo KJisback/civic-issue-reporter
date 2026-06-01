@@ -65,6 +65,24 @@
 
           <section id="vaultModules" class="vault-modules" aria-label="CivicVault document modules"></section>
 
+          <section id="demoMode" class="demo-mode" aria-labelledby="demoModeTitle">
+            <div>
+              <p class="eyebrow">Pitch demo mode</p>
+              <h2 id="demoModeTitle">Load a hackathon-ready civic scenario.</h2>
+              <p>
+                Switch between local demo states for a ward operations pitch, a
+                public safety sprint, or a sanitation drive. These presets only
+                replace browser-stored demo reports.
+              </p>
+            </div>
+            <div class="demo-actions" id="demoScenarioButtons" aria-label="Demo scenario controls">
+              <button type="button" data-action="demo-scenario" data-scenario="ward">Ward operations</button>
+              <button class="secondary-button" type="button" data-action="demo-scenario" data-scenario="safety">Safety sprint</button>
+              <button class="secondary-button" type="button" data-action="demo-scenario" data-scenario="sanitation">Sanitation drive</button>
+            </div>
+            <div id="pitchSnapshot" class="pitch-snapshot" aria-label="Pitch snapshot"></div>
+          </section>
+
           <section id="report" class="panel report-panel" aria-labelledby="report-title">
             <div class="section-heading">
               <div>
