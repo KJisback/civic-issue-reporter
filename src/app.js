@@ -1018,7 +1018,7 @@ function renderIssueDetail() {
   panel.innerHTML = `
     <div class="detail-header">
       <div>
-        <p class="eyebrow">Issue detail</p>
+        <p class="eyebrow">Vault record dossier</p>
         <h2 id="issueDetailTitle">${escapeHtml(issue.title)}</h2>
         <div class="card-meta">
           <span class="tag">${escapeHtml(issue.category)}</span>
@@ -1027,7 +1027,29 @@ function renderIssueDetail() {
           <span class="tag tag-info">${escapeHtml(issue.assignedTeam || "Unassigned")}</span>
         </div>
       </div>
-      <button class="secondary-button" type="button" data-action="close-detail" aria-label="Close issue detail">Close</button>
+      <div class="detail-actions">
+        <button type="button" data-action="export-record" data-issue-id="${escapeHtml(issue.id)}">Export record</button>
+        <button class="secondary-button" type="button" data-action="close-detail" aria-label="Close issue detail">Close</button>
+      </div>
+    </div>
+
+    <div class="record-strip" aria-label="Record identity">
+      <div>
+        <span>Record ID</span>
+        <strong>${escapeHtml(issue.id)}</strong>
+      </div>
+      <div>
+        <span>Owner team</span>
+        <strong>${escapeHtml(issue.assignedTeam || "Unassigned")}</strong>
+      </div>
+      <div>
+        <span>Record state</span>
+        <strong>${escapeHtml(issue.status)}</strong>
+      </div>
+      <div>
+        <span>Last update</span>
+        <strong>${formatDate(issue.updatedAt)}</strong>
+      </div>
     </div>
 
     <div class="detail-grid">
@@ -1050,7 +1072,7 @@ function renderIssueDetail() {
       </div>
 
       <div class="detail-section">
-        <h3>Workflow timeline</h3>
+        <h3>Workflow audit</h3>
         <ol class="timeline">
           ${timelineMarkup(issue)}
         </ol>
@@ -1084,6 +1106,11 @@ function renderIssueDetail() {
             ${optionMarkup(TEAMS, issue.assignedTeam || "Unassigned")}
           </select>
         </label>
+      </div>
+
+      <div class="detail-section record-export-note">
+        <h3>Record export</h3>
+        <p>Export creates a local JSON dossier for this report only. It is not signed, verified by government, or treated as an official municipal document.</p>
       </div>
     </div>
   `;
@@ -1210,6 +1237,36 @@ function createPitchSnapshot() {
     proof: `${mapReadyRate}% map-ready, ${resolutionRate}% resolved, ${summary.totals.duplicateHintsNeedingReview} duplicate hints awaiting review.`,
     wedge: `Built for ward teams that need a trusted civic report vault before backend rollout.`,
     buyer: topTeam ? `${topTeam.label} has the largest current workload.` : "No active team workload yet."
+  };
+}
+
+function createIssueRecordExport(issue) {
+  return {
+    app: "civicvault",
+    recordType: "local-civic-report",
+    exportedAt: new Date().toISOString(),
+    disclaimer: "Local browser record only. Not an official municipal document.",
+    record: {
+      id: issue.id,
+      title: issue.title,
+      category: issue.category,
+      status: issue.status,
+      priority: issue.priority,
+      assignedTeam: issue.assignedTeam || "Unassigned",
+      location: {
+        summary: issue.location,
+        ward: issue.ward || "Not specified",
+        landmark: issue.landmark || "Not specified",
+        coordinates: formatCoordinates(issue.coordinates)
+      },
+      description: issue.description,
+      priorityReason: issue.priorityReason || "Priority can be adjusted by staff.",
+      duplicateReview: duplicateReviewSummary(issue) || "No duplicate hints",
+      duplicateHints: issue.duplicateHints,
+      activityLog: issue.activityLog,
+      reportedAt: issue.createdAt,
+      updatedAt: issue.updatedAt
+    }
   };
 }
 
@@ -1710,6 +1767,18 @@ function handleDetailClick(event) {
       detailTrigger.focus();
     }
   }
+
+  if (control.dataset.action === "export-record") {
+    const issue = issues.find((item) => item.id === control.dataset.issueId);
+
+    if (!issue) {
+      return;
+    }
+
+    const payload = JSON.stringify(createIssueRecordExport(issue), null, 2);
+    downloadJson(payload, `civicvault-record-${issue.id}.json`);
+    setSummaryStatus(`Exported local record ${issue.id}.`);
+  }
 }
 
 function handleDemoScenarioClick(event) {
@@ -1884,6 +1953,7 @@ if (typeof module !== "undefined") {
     TEAMS,
     createMunicipalSummary,
     createDemoScenarioIssues,
+    createIssueRecordExport,
     createPitchSnapshot,
     demoScenarios,
     duplicateScore,

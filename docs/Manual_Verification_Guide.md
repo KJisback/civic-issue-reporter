@@ -268,3 +268,16 @@ Use this before larger design, data, or release changes.
 8. Click `Clear search` and confirm the text search resets while the app remains usable.
 9. Confirm no external search service or network request is used.
 10. Run `npm test` and `npm run check`.
+
+## T0025 - Report Detail Vault Page
+
+1. Open `src/index.html`.
+2. Click `View details` on any report.
+3. Confirm the detail heading says Vault record dossier.
+4. Confirm the record identity strip shows Record ID, Owner team, Record state, and Last update.
+5. Confirm Workflow audit, Review signals, Triage controls, and Record export sections render.
+6. Click `Export record` and confirm a local JSON file downloads for that report.
+7. Confirm the export language says the file is local and not an official municipal document.
+8. Change status, priority, assignment, and duplicate review state, then confirm the dossier updates.
+9. Confirm mobile layout stacks without overlap.
+10. Run `npm test` and `npm run check`.

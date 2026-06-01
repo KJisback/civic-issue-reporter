@@ -47,7 +47,9 @@ Added vault-style search by report ID, title, category, location, status, priori
 
 ### T0025 - Report Detail Vault Page
 
-Upgrade the detail panel into a more complete report record view with timeline, evidence placeholders, duplicate decisions, location metadata, assignment, and export actions grouped like a record dossier.
+Status: Done
+
+Upgraded the detail panel into a more complete report record view with record identity, workflow audit, evidence placeholders, duplicate decisions, location metadata, assignment, and local single-record export.
 
 ### T0026 - Release and Pages Automation
 

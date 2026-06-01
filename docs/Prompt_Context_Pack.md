@@ -17,7 +17,7 @@ Primary inferred MVP:
 
 Current next ticket:
 
-T0025 - Report Detail Vault Page.
+T0026 - Release and Pages Automation.
 
 Completed tickets:
 
@@ -46,6 +46,7 @@ Completed tickets:
 - T0022 - CivicVault Document Modules Pass
 - T0023 - Pitch and Hackathon Demo Mode
 - T0024 - Search and Retrieve Report Flow
+- T0025 - Report Detail Vault Page
 
 Current implementation state:
 
@@ -67,6 +68,7 @@ Current implementation state:
 - Local-only CivicVault modules show issued report stats, uploaded evidence placeholders, municipal services workload, latest report retrieval, and recent activity from issue logs.
 - Pitch demo mode provides local Ward operations, Safety sprint, and Sanitation drive scenarios plus pitch snapshot copy derived from local metrics.
 - Report vault retrieval searches ID, title, category, location, status, priority, assigned team, coordinates, description, and duplicate review summary.
+- Detail view is now a Vault record dossier with record identity, workflow audit, review signals, triage controls, and local single-record JSON export.
 
 Saved UI/UX direction:
 
@@ -84,7 +86,7 @@ Next sequence after T0020:
 - T0022 - CivicVault Document Modules Pass: Done.
 - T0023 - Pitch and Hackathon Demo Mode: Done.
 - T0024 - Search and Retrieve Report Flow: Done.
-- T0025 - Report Detail Vault Page: stronger local record dossier with identity, evidence placeholders, workflow audit, duplicate decisions, location metadata, and export actions.
+- T0025 - Report Detail Vault Page: Done.
 - T0026 - Release and Pages Automation: repeatable publish flow.
 - T0027 - Backend Pilot Plan or Implementation: only after approval for auth, database, hosting, maps, and uploads.
 

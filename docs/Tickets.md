@@ -903,3 +903,29 @@ Automated checks:
 
 - Pass, `npm test`.
 - Pass, `npm run check`.
+
+## T0025 - Report Detail Vault Page
+
+Status: Done
+
+Priority: High
+
+Goal:
+
+Make each report detail view feel like a vault record dossier rather than a generic detail panel.
+
+Requirements:
+
+- Add a record identity strip with report ID, owner team, state, and last update.
+- Rename the timeline area toward workflow audit language.
+- Add a per-record local JSON export action.
+- Keep record export local-only and clearly non-official.
+
+Result:
+
+The detail view now opens as a Vault record dossier with record identity, workflow audit, review signals, triage controls, and a local single-record export action.
+
+Automated checks:
+
+- Pass, `npm test`.
+- Pass, `npm run check`.

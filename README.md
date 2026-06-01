@@ -6,9 +6,9 @@ The MVP lets citizens report local issues with category, location, description, 
 
 ## Current Status
 
-T0001 through T0024 are complete locally.
+T0001 through T0025 are complete locally.
 
-The current version is a no-dependency static MVP with saffron CivicVault UI, local browser storage, citizen reporting, document-vault modules, pitch demo scenarios, vault search and retrieval, triage controls, team assignment labels, duplicate review actions, issue details, activity timelines, photo-evidence placeholders, dashboard analytics, local export/print summary support, full local backup/restore, no-dependency logic checks, and backend readiness documentation.
+The current version is a no-dependency static MVP with saffron CivicVault UI, local browser storage, citizen reporting, document-vault modules, pitch demo scenarios, vault search and retrieval, record dossier details, triage controls, team assignment labels, duplicate review actions, activity timelines, photo-evidence placeholders, dashboard analytics, local export/print summary support, full local backup/restore, no-dependency logic checks, and backend readiness documentation.
 
 ## Run Locally
 
@@ -55,7 +55,7 @@ civic-issue-reporter/
 
 ## Next Ticket
 
-T0025 - Report Detail Vault Page. Backend, auth, database, deployment, external maps, and real uploads require explicit approval.
+T0026 - Release and Pages Automation. Backend, auth, database, deployment, external maps, and real uploads require explicit approval.
 
 ## Development Plan
 
