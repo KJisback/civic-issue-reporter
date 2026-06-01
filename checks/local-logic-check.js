@@ -7,6 +7,7 @@ const {
   demoScenarios,
   duplicateScore,
   normalizeIssue,
+  searchIssues,
   suggestPriority,
   validateImportedIssues
 } = require("../src/app.js");
@@ -76,5 +77,35 @@ assert.equal(fallbackScenario.length, demoScenarios.ward.issues.length);
 const pitchSnapshot = createPitchSnapshot();
 assert.match(pitchSnapshot.headline, /open civic records/);
 assert.match(pitchSnapshot.wedge, /ward teams/);
+
+const searchableIssues = [
+  normalizeIssue({
+    id: "search-1",
+    title: "Drain cover broken",
+    category: "Drainage",
+    location: "Ward 4",
+    description: "Broken cover near clinic",
+    status: "Triaged",
+    priority: "High",
+    assignedTeam: "Drainage Crew",
+    createdAt: "2026-06-01T00:00:00.000Z",
+    updatedAt: "2026-06-01T00:00:00.000Z"
+  }),
+  normalizeIssue({
+    id: "search-2",
+    title: "Streetlight dim",
+    category: "Streetlight",
+    location: "Ward 8",
+    description: "Light flickers",
+    status: "Submitted",
+    priority: "Low",
+    assignedTeam: "Lighting Crew",
+    createdAt: "2026-06-01T00:00:00.000Z",
+    updatedAt: "2026-06-01T00:00:00.000Z"
+  })
+];
+assert.equal(searchIssues("drainage crew", searchableIssues).length, 1);
+assert.equal(searchIssues("ward 8", searchableIssues)[0].id, "search-2");
+assert.equal(searchIssues("", searchableIssues).length, 2);
 
 console.log("local logic checks passed");

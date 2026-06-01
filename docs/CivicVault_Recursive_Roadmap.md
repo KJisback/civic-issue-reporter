@@ -41,7 +41,9 @@ Added demo scenarios, demo metrics, screenshot-ready copy, and shareable local s
 
 ### T0024 - Search and Retrieve Report Flow
 
-Add vault-style search by report ID, title, category, location, status, priority, and assigned team.
+Status: Done
+
+Added vault-style search by report ID, title, category, location, status, priority, assigned team, coordinates, description, and duplicate review summary.
 
 ### T0025 - Report Detail Vault Page
 

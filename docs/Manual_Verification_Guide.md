@@ -255,3 +255,16 @@ Use this before larger design, data, or release changes.
 8. Confirm reset demo data still restores the baseline samples.
 9. Confirm mobile layout stacks without overlap.
 10. Run `npm test` and `npm run check`.
+
+## T0024 - Search and Retrieve Report Flow
+
+1. Open `src/index.html`.
+2. Confirm the report vault includes a retrieve/search bar above category, status, and priority filters.
+3. Search by a sample report ID such as `sample-road`.
+4. Search by service team such as `Sanitation` or `Lighting Crew`.
+5. Search by location such as `Ward 12`.
+6. Combine a text search with category, status, and priority filters.
+7. Confirm the queue count and live search summary update.
+8. Click `Clear search` and confirm the text search resets while the app remains usable.
+9. Confirm no external search service or network request is used.
+10. Run `npm test` and `npm run check`.

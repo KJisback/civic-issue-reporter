@@ -30,6 +30,7 @@
 - T0021 - Saffron CivicVault Shell
 - T0022 - CivicVault Document Modules Pass
 - T0023 - Pitch and Hackathon Demo Mode
+- T0024 - Search and Retrieve Report Flow
 
 ## Current App Status
 
@@ -40,6 +41,8 @@ T0021 reframed the UI toward a DigiLocker-inspired civic document vault pattern 
 T0022 added local-only vault modules for issued reports, uploaded evidence placeholders, municipal services, retrieve report, and recent activity. These modules are computed from browser-stored issue records and do not add real uploads, identity collection, official document issuance, or external integrations.
 
 T0023 added Pitch demo mode with local Ward operations, Safety sprint, and Sanitation drive scenarios plus pitch snapshot lines generated from local metrics. Scenario loading replaces browser-stored demo reports only and does not add network calls or backend dependencies.
+
+T0024 added a local vault retrieval bar that searches report ID, title, category, location, status, priority, assigned team, coordinates, description, and duplicate review summary. Search combines with existing filters and remains local-only.
 
 A generated UI/UX concept sheet has been saved as the design reference for future UI implementation.
 
@@ -98,7 +101,7 @@ None. `package.json` exists only to provide dependency-free `npm test` and `npm 
 
 ## Next Recommended Ticket
 
-T0024 - Search and Retrieve Report Flow. Add a vault-style local search box for report ID, title, category, location, status, priority, and assigned team. Backend, auth, database, external maps, notifications, and real uploads still require explicit approval before implementation.
+T0025 - Report Detail Vault Page. Upgrade the detail panel into a stronger record dossier with clearer sections for record identity, evidence placeholders, workflow audit, duplicate decisions, location metadata, and export actions. Backend, auth, database, external maps, notifications, and real uploads still require explicit approval before implementation.
 
 ## Last Updated
 
