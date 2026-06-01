@@ -229,3 +229,16 @@ Use this before larger design, data, or release changes.
 8. Confirm dashboard, activity timelines, summary, backup, restore, print, and JSON export still work.
 9. Resize to a mobile-width viewport and confirm text and controls do not overlap or clip.
 10. Run `npm test` and `npm run check`.
+
+## T0022 - CivicVault Document Modules Pass
+
+1. Open `src/index.html`.
+2. Confirm the CivicVault module grid appears below the local workspace identity strip.
+3. Confirm modules include Issued reports, Uploaded evidence, Municipal services, Retrieve report, and Activity.
+4. Reset demo data and confirm module counts match the sample reports.
+5. Submit a new report and confirm total/open/latest-record modules update.
+6. Change report status, priority, assignment, and duplicate review state.
+7. Confirm recent activity and service workload update from local records.
+8. Confirm no real file upload, official document issuance, identity collection, or external service is introduced.
+9. Confirm mobile layout stacks without overlap.
+10. Run `npm test` and `npm run check`.
